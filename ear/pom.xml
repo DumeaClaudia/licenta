@@ -7,4 +7,75 @@
   </parent>
   <artifactId>ear</artifactId>
   <name>ear</name>
+  <packaging>ear</packaging>
+  
+    <dependencies>
+        <dependency>
+            <groupId>com.license</groupId>
+            <artifactId>commons</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>com.license</groupId>
+            <artifactId>repository</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <type>ejb</type>
+        </dependency>
+        <dependency>
+            <groupId>com.license</groupId>
+            <artifactId>business</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <type>ejb</type>
+        </dependency>
+        <dependency>
+            <groupId>com.license</groupId>
+            <artifactId>ui</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <type>war</type>
+        </dependency>
+        
+    <!--<dependency>
+            <groupId>javax.ejb</groupId>
+            <artifactId>ejb-api</artifactId>
+            <version>3.0</version>
+        </dependency> -->
+        
+        <dependency>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-ear-plugin</artifactId>
+			<version>2.10.1</version>
+		</dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-ear-plugin</artifactId>
+                <version>2.10.1</version>
+                <configuration>
+                    <finalName>license</finalName>
+                    <version>7</version>
+                    <defaultJavaBundleDir>lib</defaultJavaBundleDir>
+                    <defaultLibBundleDir>lib</defaultLibBundleDir>
+                    <modules>
+                        <ejbModule>
+                            <groupId>com.license</groupId>
+                            <artifactId>repository</artifactId>
+                        </ejbModule>
+                        <ejbModule>
+                            <groupId>com.license</groupId>
+                            <artifactId>business</artifactId>
+                        </ejbModule>
+                        <webModule>
+                            <groupId>com.license</groupId>
+                            <artifactId>ui</artifactId>
+                        </webModule>
+                    </modules>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+  
 </project>
