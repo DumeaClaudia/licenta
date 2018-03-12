@@ -11,7 +11,7 @@
 	
 	<artifactId>ui</artifactId>
 	<packaging>war</packaging>
-	<name>ui</name>
+	<name>test2</name>
 	<url>http://maven.apache.org</url>
 	
 	<dependencies>
@@ -58,7 +58,7 @@
     	</dependency>
 	</dependencies>
 	<build>
-		<finalName>ui</finalName>
+		<finalName>test</finalName>
 	</build>
 	
 </project>

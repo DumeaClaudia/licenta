@@ -54,3 +54,12 @@ commons/target
 business/target
 *.classpath
 */target
+*.component
+ui/.settings/.jsdtscope
+ui/.settings/org.eclipse.wst.jsdt.ui.superType.name
+*.container
+ui/.settings/org.eclipse.wst.common.project.facet.core.xml
+repository/.settings/org.eclipse.wst.common.project.facet.core.xml
+ear/.settings/org.eclipse.wst.common.project.facet.core.xml
+commons/.settings/org.eclipse.wst.common.project.facet.core.xml
+business/.settings/org.eclipse.wst.common.project.facet.core.xml

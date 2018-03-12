@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+    <title>Login Page</title>
+
+</h:head>
+
+<h:body>
+    <ui:composition template="template/template.xhtml">
+
+        <ui:define name="header">
+
+            <h:head> Welcome!
+                <br></br>
+                Please login or sign in if you don't have an account yet</h:head>
+        </ui:define>
+
+        <ui:define name="content">
+            <h:outputStylesheet library="css" name="login.css"></h:outputStylesheet>
+            <p:panelGrid columns="2" layout="grid" columnClasses="label value ui-grid-col-4">
+
+                <h:form id="loginForm">
+                    <p:growl id="growl" sticky="false" showDetail="true"/>
+                    <p:outputLabel type="text" value="Username:" name="username"/>
+                    <p:inputText type="text" name="Username" id="idName" value="#{userBean.name}"/>
+                    <br></br>
+                    <p:outputLabel type="text" value="Password:" name="password"/>
+                    <p:password type="password" name="Password" id="idPass" value="#{userBean.password}"/>
+                    <br></br>
+                    <p:commandButton styleClass="buttons" value="Login" action="#{userBean.login()}" id="loginButton"
+                                     update="loginForm growl"></p:commandButton>
+
+                    <h:outputLink styleClass="buttons" value="register.xhtml" class="sign-up">Sign Up!</h:outputLink>
+                </h:form>
+            </p:panelGrid>
+        </ui:define>
+    </ui:composition>
+
+</h:body>
+
+</html>

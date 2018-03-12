@@ -16,7 +16,7 @@
 	</properties>
 
 	<dependencies>
-
+	
 		<dependency>
 			<groupId>com.license</groupId>
 			<artifactId>commons</artifactId>
@@ -29,7 +29,19 @@
 			<!-- set the version to be the same as the level in your runtime -->
 			<version>2.1.0</version>
 		</dependency>
-
+		
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.38</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.eclipse.persistence</groupId>
+			<artifactId>javax.persistence</artifactId>
+			<version>2.1.0</version>
+		</dependency>
+		
 	</dependencies>
 
 

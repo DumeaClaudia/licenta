@@ -5,11 +5,13 @@ import javax.ejb.Stateless;
 
 import com.license.User;
 import com.license.repository.UserRepository;
+import com.license.services.UserService;
 
+//@Remote(UserService.class)
 @Stateless
-public class UserServiceImplementation  {
+public class UserServiceImplementation implements UserService {
 
-    @EJB
+	@EJB
 	private UserRepository repository;
 
 	public String login(String username, String password) {
