@@ -26,8 +26,7 @@ public class UserRepositoryImplementation implements UserRepository {
 
 		Query query = em.createNamedQuery("user.findUser");
 		query.setParameter("prm1", username);
-		user = (UserEntity) query.getSingleResult();
-
+		query.getResultList();
 		if (user == null) {
 			return "";
 		}
@@ -49,4 +48,3 @@ public class UserRepositoryImplementation implements UserRepository {
 		em.getTransaction().commit();
 	}
 }
-

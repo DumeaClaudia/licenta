@@ -1,48 +1,80 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html
-        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
+<html lang="en" xmlns:h="http://java.sun.com/jsf/html">
 
-<html xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
 
-<h:head>
-    <title>Login Page</title>
+<head>
+<title>Sign in</title>
+<meta charset="utf-8"></meta>
+<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<br></br>
+	<h2>You have to register before to login.</h2>
+	<br></br>
+	<br></br>
+	<br></br>
+	<div class="container">
+		<div class="row" style="margin-top: 25%;">
 
-</h:head>
+			<form action="" method="post" class="form-horizontal">
 
-<h:body>
-    <ui:composition template="../template/template.xhtml">
+				<div class="form-group">
+					<h:outputLabel class="control-label col-sm-2" for="text">Username:</h:outputLabel>
+					<div class="col-sm-2">
+						<h:inputText type="text" class="form-control" id="idUsername"
+							placeholder="Enter username" name="username"
+							value="#{userBean.name}"></h:inputText>
+					</div>
+				</div>
 
-        <ui:define name="header">
+				<div class="form-group">
+					<h:outputLabel class="control-label col-sm-2" for="pwd">Password:</h:outputLabel>
+					<div class="col-sm-2">
+						<h:inputText type="password" class="form-control" id="pwd"
+							placeholder="Enter password" name="pwd"></h:inputText>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-2">
+						<div class="checkbox">
+							<label><input type="checkbox" name="remember"></input>
+								Remember me</label>
+						</div>
+					</div>
+				</div>
 
-            <h:head> Welcome!
-                <br></br>
-                Please login or sign in if you don't have an account yet</h:head>
-        </ui:define>
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<button type="button" class="btn btn-default">Sign In</button>
+					</div>
+				</div>
 
-        <ui:define name="content">
-            <h:outputStylesheet library="css" name="login.css"></h:outputStylesheet>
-            <p:panelGrid columns="2" layout="grid" columnClasses="label value ui-grid-col-4">
+				<div>
+					<h:outputLabel value="Last Name" class="control-label col-sm-2" />
+					<div>
+						<h:inputText value="#{studentBean.lastName}" />
+					</div>
+				</div>
 
-                <h:form id="loginForm">
-                    <p:growl id="growl" sticky="false" showDetail="true"/>
-                    <p:outputLabel type="text" value="Username:" name="username"/>
-                    <p:inputText type="text" name="Username" id="idName" value="#{userBean.name}"/>
-                    <br></br>
-                    <p:outputLabel type="text" value="Password:" name="password"/>
-                    <p:password type="password" name="Password" id="idPass" value="#{userBean.password}"/>
-                    <br></br>
-                    <p:commandButton styleClass="buttons" value="Login" action="#{userBean.login()}" id="loginButton"
-                                     update="loginForm growl"></p:commandButton>
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<h:commandButton value="Create"
+							action="#{studentBean.createStudentForm}" />
+					</div>
+				</div>
 
-                    <h:outputLink styleClass="buttons" value="register.xhtml" class="sign-up">Sign Up!</h:outputLink>
-                </h:form>
-            </p:panelGrid>
-        </ui:define>
-    </ui:composition>
 
-</h:body>
 
+
+			</form>
+		</div>
+	</div>
+
+</body>
 </html>
