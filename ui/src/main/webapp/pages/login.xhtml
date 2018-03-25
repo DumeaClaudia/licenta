@@ -25,17 +25,17 @@
 					<div class="panel-body">
 						<form class="form-horizontal" role="form" jsf:rendered="true">
 							<div class="form-group">
-								<label for="username" class="col-sm-3 control-label">Username:</label>
+								<jsf:outputLabel for="username" class="col-sm-3 control-label">Username:</jsf:outputLabel>
 								<div class="col-sm-9">
-									<input type="text" class="form-control" id="username"
-										placeholder="Enter your username" jsf:value="#{userBean.name}"></input>
+									<jsf:inputText type="text" class="form-control" id="username"
+										placeholder="Enter your username" jsf:value="#{userBean.name}"></jsf:inputText>
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="pwd" class="col-sm-3 control-label">Password:</label>
+								<jsf:outputLabel for="pwd" class="col-sm-3 control-label">Password:</jsf:outputLabel>
 								<div class="col-sm-9">
-									<input type="password" class="form-control" id="pwd"
-										placeholder="Enter password" jsf:value="#{userBean.password}"></input>
+									<jsf:inputSecret type="password" class="form-control" id="pwd"
+										placeholder="Enter password" jsf:value="#{userBean.password}"></jsf:inputSecret>
 								</div>
 							</div>
 							<div class="form-group last">
@@ -44,7 +44,7 @@
 										action="#{userBean.login()}" required="true"></jsf:commandButton>
 								</div>
 							</div>
-							<jsf:outputLink styleClass="buttons" value="PrimeFaces_register.xhtml"
+							<jsf:outputLink styleClass="buttons" value="register.xhtml"
 								class="sign-up">Sign Up!</jsf:outputLink>
 							<h6 class="text-danger">(You have to register first if you don't have an account.)</h6>
 							

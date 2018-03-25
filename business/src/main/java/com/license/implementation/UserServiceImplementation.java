@@ -1,6 +1,7 @@
 package com.license.implementation;
 
 import javax.ejb.EJB;
+//import javax.ejb.Remote;
 import javax.ejb.Stateless;
 
 import com.license.User;
@@ -21,6 +22,8 @@ public class UserServiceImplementation implements UserService {
 	}
 
 	public void register(User user) {
+		System.out.println("am ajuns in metoda asta...");
+		
 		repository.register(user);
 		System.out.println("User");
 	}
