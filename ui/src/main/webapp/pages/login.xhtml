@@ -28,20 +28,20 @@
 								<jsf:outputLabel for="username" class="col-sm-3 control-label">Username:</jsf:outputLabel>
 								<div class="col-sm-9">
 									<jsf:inputText type="text" class="form-control" id="username"
-										placeholder="Enter your username" value="#{userBean.user.username}"></jsf:inputText>
+										placeholder="Enter your username" value="#{userBean.username}"></jsf:inputText>
 								</div>
 							</div>
 							<div class="form-group">
 								<jsf:outputLabel for="pwd" class="col-sm-3 control-label">Password:</jsf:outputLabel>
 								<div class="col-sm-9">
 									<jsf:inputSecret type="password" class="form-control" id="pwd"
-										placeholder="Enter password" value="#{userBean.user.password}"></jsf:inputSecret>
+										placeholder="Enter password" value="#{userBean.password}"></jsf:inputSecret>
 								</div>
 							</div>
 							<div class="form-group last">
 								<div class="col-sm-offset-4 col-sm-10">
 									<jsf:commandButton type="submit" class="btn btn-default" value="Submit"
-										action="#{userBean.login}" required="true"></jsf:commandButton>
+										action="#{userBean.login()}" required="true"></jsf:commandButton>
 								</div>
 							</div>
 							<jsf:outputLink styleClass="buttons" value="register.xhtml"
