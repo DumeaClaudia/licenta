@@ -28,10 +28,14 @@ public class UserRepositoryImplementation implements UserRepository {
 		query.setParameter("prm1", username);
 		query.getResultList();
 		if (user == null) {
+			System.out.println("se pare ca userul cautat nu a fost gasit");
 			return "";
-		}
 
-		return user.getUsername();
+		}
+		System.out.println(user.getUsername());
+
+		// return user.getUsername();
+		return "";
 	}
 
 	public void register(User user) {

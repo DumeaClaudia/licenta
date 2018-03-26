@@ -40,7 +40,7 @@ public class UserBean {
 	public String register() {
 		System.out.println("called register method");
 		userService.register(user);
-		return "register?faces-redirect=true";
+		return "login?faces-redirect=true";
 	}
 
 	public String getUsername() {
