@@ -34,8 +34,8 @@ public class UserRepositoryImplementation implements UserRepository {
 		}
 		System.out.println(user.getUsername());
 
-		// return user.getUsername();
-		return "";
+		return user.getUsername();
+
 	}
 
 	public void register(User user) {

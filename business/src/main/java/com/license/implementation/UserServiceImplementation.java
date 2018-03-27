@@ -18,6 +18,7 @@ public class UserServiceImplementation implements UserService {
 	public String login(String username, String password) {
 		System.out.println("called login service");
 		String user = repository.find(username, password);
+		System.out.println("after find() method");
 		return user;
 	}
 
