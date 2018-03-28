@@ -9,7 +9,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
 @Entity(name = "user")
-@NamedQueries({ @NamedQuery(name = "user.findUser", query = "Select usr FROM user usr WHERE usr.username = :prm1") })
+@NamedQueries({
+		@NamedQuery(name = "user.findUser", query = "Select usr FROM user usr WHERE usr.username = :prm_username and usr.password = :prm_password") })
 public class UserEntity {
 
 	@Id

@@ -1,11 +1,14 @@
 package com.license.services;
 
-import com.license.User;
+import java.util.Map;
+
 import javax.ejb.Remote;
+
+import com.license.User;
 
 
 @Remote
 public interface UserService {
-	String login(String username, String password);
+	Map<String, String> login(String username, String password);
 	void register(User user);
 }
