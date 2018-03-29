@@ -6,14 +6,15 @@ import java.util.Map;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import com.license.User;
 import com.license.services.UserService;
 
 @ManagedBean
-@RequestScoped
+// @RequestScoped
+@SessionScoped
 public class UserBean {
 
 	private String username;
@@ -31,7 +32,7 @@ public class UserBean {
 		userDB = userService.login(username, password);
 
 		if (!userDB.isEmpty()) {
-			return "menu.xhtml?faces-redirect=true";
+			return "login.xhtml?faces-redirect=true";
 		} else {
 			FacesContext context = FacesContext.getCurrentInstance();
 			context.addMessage(null, new FacesMessage("Wrong username/password"));

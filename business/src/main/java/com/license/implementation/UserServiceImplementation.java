@@ -28,7 +28,6 @@ public class UserServiceImplementation implements UserService {
 
 	public void register(User user) {
 		System.out.println("am ajuns in metoda register() din UserServiceImplementation...");
-		
 		repository.register(user);
 		System.out.println("User");
 	}
