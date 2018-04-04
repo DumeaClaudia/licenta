@@ -20,7 +20,7 @@ public class UserRepositoryImplementation implements UserRepository {
 	private EntityManager em = emf.createEntityManager();
 
 	public User find(String username, String password) {
-		System.out.println("in find method");
+		System.out.println("in find method repository");
 
 		UserEntity user = new UserEntity();
 		User userResponse = new User();
