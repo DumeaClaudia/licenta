@@ -1,8 +1,5 @@
 package com.license.repository.implementation;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -22,25 +19,30 @@ public class UserRepositoryImplementation implements UserRepository {
 	private EntityManagerFactory emf = Persistence.createEntityManagerFactory("myPU");
 	private EntityManager em = emf.createEntityManager();
 
-	public Map<String, String> find(String username, String password) {
+	public User find(String username, String password) {
 		System.out.println("in find method");
 
 		UserEntity user = new UserEntity();
-		Map<String, String> response = new HashMap<String, String>();
+		User userResponse = new User();
 		Query query = em.createNamedQuery("user.findUser");
 		query.setParameter("prm_username", username);
 		query.setParameter("prm_password", password);
 
-		user = (UserEntity) query.getResultList();
+		user = (UserEntity) query.getSingleResult();
 		if (user == null) {
 			System.out.println("se pare ca userul cautat nu a fost gasit");
 			// return "";
 		}
-		System.out.println("Username is " + user.getUsername());
-		System.out.println("Password is" + user.getPassword());
-		response.put(user.getUsername(), user.getPassword());
+		System.out.println("Username is: " + user.getUsername());
+		System.out.println("Password is: " + user.getPassword());
 
-		return response;
+		userResponse.setFirstName(user.getFirstName());
+		userResponse.setLastName(user.getLastName());
+		userResponse.setUsername(user.getUsername());
+		userResponse.setEmail(user.getEmail());
+		userResponse.setPassword(user.getPassword());
+
+		return userResponse;
 
 	}
 

@@ -1,8 +1,5 @@
 package com.license.implementation;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.ejb.EJB;
 //import javax.ejb.Remote;
 import javax.ejb.Stateless;
@@ -18,9 +15,9 @@ public class UserServiceImplementation implements UserService {
 	@EJB
 	private UserRepository repository;
 
-	public Map<String, String> login(String username, String password) {
+	public User login(String username, String password) {
 		System.out.println("called login service");
-		Map<String, String> user = new HashMap<String, String>();
+		User user = new User();
 		user = repository.find(username, password);
 		System.out.println("after find() method");
 		return user;

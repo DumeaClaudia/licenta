@@ -1,8 +1,5 @@
 package com.license.beans;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -28,10 +25,10 @@ public class UserBean {
 	public String login() {
 		System.out.println("called login method");
 
-		Map<String, String> userDB = new HashMap<String, String>();
+		User userDB = new User();
 		userDB = userService.login(username, password);
 
-		if (!userDB.isEmpty()) {
+		if (!(userDB == null)) {
 			return "login.xhtml?faces-redirect=true";
 		} else {
 			FacesContext context = FacesContext.getCurrentInstance();
