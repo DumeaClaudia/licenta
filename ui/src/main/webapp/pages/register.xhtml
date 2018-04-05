@@ -9,25 +9,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+<link rel="stylesheet" href="../resources/mycss/default.css"></link>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<style>
-/* Remove the navbar's default margin-bottom and rounded borders */
-.navbar {
-	margin-bottom: 0;
-	border-radius: 0;
-}
-
-/* Add a gray background color and some padding to the footer */
-footer {
-	background-color: #f2f2f2;
-	padding: 25px;
-}
-</style>
-
-
 </head>
 <body>
 
@@ -49,78 +35,82 @@ footer {
 					<li><a href="#">Contact</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li class="active"><a href="register.xhtml"><span class="glyphicon glyphicon-user"></span> Sign Up </a></li>
-					<li><a href="login.xhtml"><span class="glyphicon glyphicon-log-in"></span> Login </a></li>
+					<li class="active"><a href="register.xhtml"><span
+							class="glyphicon glyphicon-user"></span> Sign Up </a></li>
+					<li><a href="login.xhtml"><span
+							class="glyphicon glyphicon-log-in"></span> Login </a></li>
 				</ul>
 			</div>
 		</div>
 	</nav>
+	<div id="alll">
+		<div class="container" id="main">
+			<div class="row" style="margin-top: 20%;">
+				<div class="col-md-5 col-md-offset-3">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<strong class="">Register: </strong>
+						</div>
+						<div class="panel-body">
+							<jsf:form id="registerForm" class="form-horizontal" role="form"
+								jsf:rendered="true">
+								<!--   col-xs- col-sm- col-lg-  -->
 
-	<div class="container">
-		<div class="row" style="margin-top: 20%;">
-			<div class="col-md-5 col-md-offset-3">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<strong class="">Register: </strong>
-					</div>
-					<div class="panel-body">
-						<jsf:form id="registerForm" class="form-horizontal" role="form" jsf:rendered="true">
-							<!--   col-xs- col-sm- col-lg-  -->
-
-							<div class="form-group">
-								<jsf:outputLabel class="control-label col-sm-3" for="text">First
+								<div class="form-group">
+									<jsf:outputLabel class="control-label col-sm-3" for="text">First
 									name:</jsf:outputLabel>
-								<div class="col-sm-8">
-									<jsf:inputText type="text" class="form-control" id="idFirstName"
-										placeholder="Enter first name" name="firstName"
-										value="#{userBean.user.firstName}"></jsf:inputText>
+									<div class="col-sm-8">
+										<jsf:inputText type="text" class="form-control"
+											id="idFirstName" placeholder="Enter first name"
+											name="firstName" value="#{userBean.user.firstName}"></jsf:inputText>
+									</div>
 								</div>
-							</div>
 
-							<div class="form-group">
-								<jsf:outputLabel class="control-label col-sm-3" for="text">Last
+								<div class="form-group">
+									<jsf:outputLabel class="control-label col-sm-3" for="text">Last
 									name:</jsf:outputLabel>
-								<div class="col-sm-8">
-									<jsf:inputText type="text" class="form-control" id="idLastName"
-										placeholder="Enter last name" name="lastName"
-										value="#{userBean.user.lastName}"></jsf:inputText>
+									<div class="col-sm-8">
+										<jsf:inputText type="text" class="form-control"
+											id="idLastName" placeholder="Enter last name" name="lastName"
+											value="#{userBean.user.lastName}"></jsf:inputText>
+									</div>
 								</div>
-							</div>
 
-							<div class="form-group">
-								<jsf:outputLabel class="control-label col-sm-3" for="text">Username:</jsf:outputLabel>
-								<div class="col-sm-8">
-									<jsf:inputText type="text" class="form-control" id="idUsername"
-										placeholder="Enter username" name="username"
-										value="#{userBean.user.username}"></jsf:inputText>
+								<div class="form-group">
+									<jsf:outputLabel class="control-label col-sm-3" for="text">Username:</jsf:outputLabel>
+									<div class="col-sm-8">
+										<jsf:inputText type="text" class="form-control"
+											id="idUsername" placeholder="Enter username" name="username"
+											value="#{userBean.user.username}"></jsf:inputText>
+									</div>
 								</div>
-							</div>
 
-							<div class="form-group">
-								<jsf:outputLabel class="control-label col-sm-3" for="email">Email:</jsf:outputLabel>
-								<div class="col-sm-8">
-									<jsf:inputText type="email" class="form-control" id="email"
-										placeholder="Enter email" name="email"
-										value="#{userBean.user.email}"></jsf:inputText>
+								<div class="form-group">
+									<jsf:outputLabel class="control-label col-sm-3" for="email">Email:</jsf:outputLabel>
+									<div class="col-sm-8">
+										<jsf:inputText type="email" class="form-control" id="email"
+											placeholder="Enter email" name="email"
+											value="#{userBean.user.email}"></jsf:inputText>
+									</div>
 								</div>
-							</div>
-							<div class="form-group">
-								<jsf:outputLabel class="control-label col-sm-3" for="pwd">Password:</jsf:outputLabel>
-								<div class="col-sm-8">
-									<jsf:inputSecret type="password" class="form-control" id="password"
-										placeholder="Enter password" name="pwd"
-										value="#{userBean.user.password}"></jsf:inputSecret>
+								<div class="form-group">
+									<jsf:outputLabel class="control-label col-sm-3" for="pwd">Password:</jsf:outputLabel>
+									<div class="col-sm-8">
+										<jsf:inputSecret type="password" class="form-control"
+											id="password" placeholder="Enter password" name="pwd"
+											value="#{userBean.user.password}"></jsf:inputSecret>
+									</div>
 								</div>
-							</div>
-							<div class="form-group last">
-								<div class="col-sm-offset-4 col-sm-10">
-									<jsf:commandButton type="submit" class="btn btn-default" value="Submit"
-										action="#{userBean.register}" required="true"></jsf:commandButton>
+								<div class="form-group last">
+									<div class="col-sm-offset-4 col-sm-10">
+										<jsf:commandButton type="submit" class="btn btn-default"
+											value="Submit" action="#{userBean.register}" required="true"></jsf:commandButton>
+									</div>
 								</div>
-							</div>
 
-						</jsf:form>
+							</jsf:form>
 
+						</div>
 					</div>
 				</div>
 			</div>

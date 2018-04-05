@@ -1,0 +1,11 @@
+@CHARSET "ISO-8859-1";
+
+#main{
+	width: 70%;
+	height: 1000px;
+	background-color: white;
+}
+
+#alll{
+	background-color: gray;
+}
