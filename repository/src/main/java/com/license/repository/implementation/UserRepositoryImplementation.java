@@ -2,6 +2,7 @@ package com.license.repository.implementation;
 
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
+import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -20,7 +21,7 @@ public class UserRepositoryImplementation implements UserRepository {
 	private EntityManager em = emf.createEntityManager();
 
 	public User find(String username, String password) {
-		System.out.println("in find method repository");
+		//System.out.println("in find method repository");
 
 		UserEntity user = new UserEntity();
 		User userResponse = new User();
@@ -33,8 +34,8 @@ public class UserRepositoryImplementation implements UserRepository {
 			System.out.println("se pare ca userul cautat nu a fost gasit");
 			// return "";
 		}
-		System.out.println("Username is: " + user.getUsername());
-		System.out.println("Password is: " + user.getPassword());
+		//System.out.println("Username is: " + user.getUsername());
+		//System.out.println("Password is: " + user.getPassword());
 
 		userResponse.setFirstName(user.getFirstName());
 		userResponse.setLastName(user.getLastName());
@@ -47,7 +48,7 @@ public class UserRepositoryImplementation implements UserRepository {
 	}
 
 	public void register(User user) {
-		System.out.println("in register method");
+		//System.out.println("in register method");
 
 		UserEntity entity = new UserEntity();
 

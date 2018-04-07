@@ -6,7 +6,28 @@
 }
 
 /* Add a gray background color and some padding to the footer */
-footer {
-	background-color: #f2f2f2;
+#idFooter {
+	background-color: gray;
 	padding: 25px;
+	color: white;
+	width: 80%;
+	max-width: 960px;
+	margin: 0 auto 0;
+	height: 60px;
+}
+body{
+	background-color: #2e3436;
+}
+#map {
+	height: 60%;
+	width: 100%;
+	align: right;
+	padding-right: 10%;
+}
+
+#main {
+	width: 80%;
+	max-width: 960px;
+	height: 600px;
+	background-color: white;
 }

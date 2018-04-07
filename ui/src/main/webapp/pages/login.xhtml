@@ -10,7 +10,7 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
 <link rel="stylesheet" href="../resources/mycss/default.css"></link>
-<link rel="stylesheet" href="../resources/mycss/login.css"></link>
+<link rel="stylesheet" href="../resources/mycss/register.css"></link>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script
@@ -18,7 +18,7 @@
 
 </head>
 <body>
-	<nav class="navbar navbar-inverse">
+	<nav class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle" data-toggle="collapse"
@@ -31,61 +31,64 @@
 			<div class="collapse navbar-collapse" id="myNavbar">
 				<ul class="nav navbar-nav">
 					<li><a href="home.xhtml">Home</a></li>
-					<li><a href="#">About</a></li>
-					<li><a href="#">Gallery</a></li>
-					<li><a href="#">Contact</a></li>
+					<li><a href="about.xhtml">About</a></li>
+					<li><a href="contact.xhtml">Contact</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="register.xhtml"><span
-							class="glyphicon glyphicon-user"></span> Sign Up </a></li>
 					<li class="active"><a href="login.xhtml"><span
 							class="glyphicon glyphicon-log-in"></span> Login </a></li>
+					<li><a href="register.xhtml"><span
+							class="glyphicon glyphicon-user"></span> Sign Up </a></li>
 				</ul>
 			</div>
 		</div>
 	</nav>
-	<div id="alll">
-		<div class="container" id="main">
-			<div class="row" style="margin-top: 20%;">
-				<div class="col-md-4 col-md-offset-3">
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							<strong class="">Login</strong>
-						</div>
-						<div class="panel-body">
-							<jsf:form id="loginForm" class="form-horizontal" role="form"
-								jsf:rendered="true">
-								<div class="form-group">
-									<jsf:outputLabel for="username" class="col-sm-3 control-label">Username:</jsf:outputLabel>
-									<div class="col-sm-9">
-										<jsf:inputText type="text" class="form-control" id="username"
-											placeholder="Enter your username"
-											value="#{userBean.username}"></jsf:inputText>
-									</div>
+
+	<div id="bar"></div>
+
+
+	<div class="container" id="main">
+		<div class="row" style="margin-top: 15%;">
+			<div class="col-md-5 col-md-offset-3">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<strong class="">Login</strong>
+					</div>
+					<div class="panel-body">
+						<jsf:form id="loginForm" class="form-horizontal" role="form"
+							jsf:rendered="true">
+							<div class="form-group">
+								<jsf:outputLabel for="username" class="col-sm-3 control-label">Username:</jsf:outputLabel>
+								<div class="col-sm-9">
+									<jsf:inputText type="text" class="form-control" id="username"
+										placeholder="Enter your username" value="#{userBean.username}"></jsf:inputText>
 								</div>
-								<div class="form-group">
-									<jsf:outputLabel for="pwd" class="col-sm-3 control-label">Password:</jsf:outputLabel>
-									<div class="col-sm-9">
-										<jsf:inputSecret type="password" class="form-control" id="pwd"
-											placeholder="Enter password" value="#{userBean.password}"></jsf:inputSecret>
-									</div>
+							</div>
+							<div class="form-group">
+								<jsf:outputLabel for="pwd" class="col-sm-3 control-label">Password:</jsf:outputLabel>
+								<div class="col-sm-9">
+									<jsf:inputSecret type="password" class="form-control" id="pwd"
+										placeholder="Enter password" value="#{userBean.password}"></jsf:inputSecret>
 								</div>
-								<div class="form-group last">
-									<div class="col-sm-offset-4 col-sm-10">
-										<jsf:commandButton type="submit" class="btn btn-default"
-											value="Submit" action="#{userBean.login()}" required="true"></jsf:commandButton>
-									</div>
+							</div>
+							<div class="form-group last">
+								<div class="col-sm-offset-4 col-sm-10">
+									<jsf:commandButton type="submit" class="btn btn-default"
+										value="Submit" action="#{userBean.login()}" required="true"></jsf:commandButton>
 								</div>
-								<jsf:outputLink styleClass="buttons" value="register.xhtml"
-									class="sign-up">Sign Up!</jsf:outputLink>
-								<h6 class="text-danger">(You have to register first if you
-									don't have an account.)</h6>
-							</jsf:form>
-						</div>
+							</div>
+							<jsf:outputLink styleClass="buttons" value="register.xhtml"
+								class="sign-up">Sign Up!</jsf:outputLink>
+							<h6 class="text-danger">(You have to register first if you
+								don't have an account.)</h6>
+						</jsf:form>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+	<footer class="container-fluid text-center" id="idFooter">
+		<p>Copyright ©2018 -Claudia- All rights reserved.</p>
+	</footer>
 </body>
 </html>

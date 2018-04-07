@@ -21,29 +21,45 @@ public class UserBean {
 
 	@EJB
 	private UserService userService;
-
+	
 	public String login() {
-		System.out.println("called login method");
+		//System.out.println("called login method");
 
 		User userDB = new User();
 		userDB = userService.login(username, password);
-
+		
+		FacesContext context = FacesContext.getCurrentInstance();
+		context.getExternalContext().getSessionMap().put("user", user);
+		
 		if (!(userDB == null)) {
-			return "login.xhtml?faces-redirect=true";
+			return "activity?faces-redirect=true";
 		} else {
-			FacesContext context = FacesContext.getCurrentInstance();
-			context.addMessage(null, new FacesMessage("Wrong username/password"));
-			context.getExternalContext().getFlash().setKeepMessages(true);
+			FacesContext context2 = FacesContext.getCurrentInstance();
+			context2.addMessage(null, new FacesMessage("Wrong username/password"));
+			context2.getExternalContext().getFlash().setKeepMessages(true);
 			return "login?faces-redirect=true";
 		}
 
 	}
 
 	public String register() {
-		System.out.println("called register method");
+		//System.out.println("called register method");
 		userService.register(user);
 		return "login?faces-redirect=true";
 	}
+	
+	public String takeUsername() {
+		FacesContext context = FacesContext.getCurrentInstance();
+		return (String) context.getExternalContext().getSessionMap().get(username);
+	}
+	
+	public void logout(String username, String password) {
+		FacesContext context = FacesContext.getCurrentInstance();
+
+		context = FacesContext.getCurrentInstance();
+		context.getExternalContext().getSessionMap().remove("user");
+	}
+	
 
 	public String getUsername() {
 		return username;
