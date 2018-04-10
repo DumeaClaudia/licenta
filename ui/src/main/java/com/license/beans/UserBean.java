@@ -23,13 +23,13 @@ public class UserBean {
 	private UserService userService;
 	
 	public String login() {
-		//System.out.println("called login method");
+		System.out.println("called login method");
 
 		User userDB = new User();
 		userDB = userService.login(username, password);
 		
-		FacesContext context = FacesContext.getCurrentInstance();
-		context.getExternalContext().getSessionMap().put("user", user);
+		//FacesContext context = FacesContext.getCurrentInstance();
+		//context.getExternalContext().getSessionMap().put("user", user);
 		
 		if (!(userDB == null)) {
 			return "activity?faces-redirect=true";
@@ -43,7 +43,7 @@ public class UserBean {
 	}
 
 	public String register() {
-		//System.out.println("called register method");
+		System.out.println("called register method");
 		userService.register(user);
 		return "login?faces-redirect=true";
 	}

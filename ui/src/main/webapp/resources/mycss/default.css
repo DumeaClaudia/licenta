@@ -25,7 +25,7 @@ body{
 	padding-right: 10%;
 }
 
-#main {
+.main {
 	width: 80%;
 	max-width: 960px;
 	height: 600px;
