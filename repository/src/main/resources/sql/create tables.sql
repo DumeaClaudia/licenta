@@ -1,92 +1,79 @@
 CREATE TABLE `user` (
-  `password` varchar(100) NOT NULL,
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `firstName` varchar(30) NOT NULL,
-  `lastName` varchar(100) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `username` varchar(100),
-    PRIMARY KEY (`id`))
-    
-    
-    
-SELECT * FROM mydatabase.user;
-
-
-CREATE DATABASE `mydatabase` /*!40100 DEFAULT CHARACTER SET utf8 */;
-
-/*
-CREATE TABLE `user` (
-	`password` varchar(100) NOT NULL,
-	`id` bigint(20) NOT NULL AUTO_INCREMENT,
-	`firstName` varchar(30) NOT NULL,
-	`lastName` varchar(100) NOT NULL,
-	`email` varchar(100) NOT NULL,
-	`username` varchar(100) NOT NULL,
-	PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
-
-*/
-
-CREATE TABLE `user` (
-	`idUser` bigint(20) NOT NULL AUTO_INCREMENT,
+	`id` bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	`firstName` varchar(30) NOT NULL,
 	`lastName` varchar(100) NOT NULL,
 	`username` varchar(100) NOT NULL,
     `password` varchar(100) NOT NULL,
-    `email` varchar(100) NOT NULL,
-	PRIMARY KEY (`id`)
+    `email` varchar(100) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 CREATE TABLE `restaurant` (
-	`idRestaurant` bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	`id` bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	`name` varchar(30) NOT NULL,
 	`idAddress` bigint(20) NOT NULL,
-	`idProduct` bigint(20) NOT NULL,
     `stars` int(2),
-    `idComment` bigint(20),
-	FOREIGN KEY idAddress(idAddress) REFERENCES address(idAddress) ON UPDATE CASCADE ON DELETE RESTRICT,
-    FOREIGN KEY idProduct(idProduct) REFERENCES address(idProduct) ON UPDATE CASCADE ON DELETE RESTRICT,
-    FOREIGN KEY idComment(idComment) REFERENCES comment(idComment) ON UPDATE CASCADE ON DELETE RESTRICT
+    `description` varchar(300),
+	FOREIGN KEY fk_idAddress_restaurant(idAddress) REFERENCES address(id) ON UPDATE CASCADE ON DELETE RESTRICT
 );
     
 CREATE TABLE `address` (
-	`idAddress` bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	`id` bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	`city` varchar(30) NOT NULL,
 	`street` varchar(10) NOT NULL,
 	`number` varchar(10) NOT NULL
 );
 
 CREATE TABLE `product` (
-	`idProduct` bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,	
+	`idP` bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,	
     `name` varchar(30) NOT NULL,
 	`description` varchar(10) NOT NULL,
 	`price` varchar(10) NOT NULL,
 	`discount` int(3)
 );
 
+CREATE TABLE 'restaurant_products'(
+	`idRestaurant` bigint(20),
+	`idProduct` bigint(20),
+	FOREIGN KEY fk_idRestaurant_rp(idRestaurant) REFERENCES restaurant(id) ON UPDATE CASCADE ON DELETE RESTRICT
+	FOREIGN KEY fk_idProduct_rp(idProduct) REFERENCES product(id) ON UPDATE CASCADE ON DELETE RESTRICT
+);
+
 CREATE TABLE `shopping_cart` (
-	`idCart` bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	`id` bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	`nrProducts` int(3) NOT NULL,
 	`totalPrice` double(8,3) NOT NULL,
-	`idProduct` bigint(20) NOT NULL,
-	`idUser` bigint(20) NOT NULL,
-  	FOREIGN KEY idProduct(idProduct) REFERENCES product(idProduct) ON UPDATE CASCADE ON DELETE RESTRICT,
-    FOREIGN KEY idUser(idUser) REFERENCES user(idUser) ON UPDATE CASCADE ON DELETE RESTRICT
+	`date` date,
+	`idUser` bigint(20),
+	FOREIGN KEY fk_idUser_cart(idUser) REFERENCES user(id) ON UPDATE CASCADE ON DELETE RESTRICT,
 
+);
 
+CREATE TABLE `shopping_cart_products`(
+	`idProduct` bigint(20),
+	`idCart` bigint(20,
+	FOREIGN KEY fk_idProduct_sc(idProduct) REFERENCES product(id) ON UPDATE CASCADE ON DELETE RESTRICT,
+    FOREIGN KEY fk_idCart_sc(idCart) REFERENCES shopping_cart(id) ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
 CREATE TABLE `order` (
-	`idOrder` bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	`id` bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	`idCart` bigint(20) NOT NULL,
 	`idRestaurant` bigint(20) NOT NULL,
-  	FOREIGN KEY idCart(idCart) REFERENCES shopping_cart(idCart) ON UPDATE CASCADE ON DELETE RESTRICT,
-	FOREIGN KEY idRestaurant(idRestaurant) REFERENCES restaurant(idRestaurant) ON UPDATE CASCADE ON DELETE RESTRICT
+	`date` date,
+  	FOREIGN KEY fk_idCart_order(idCart) REFERENCES shopping_cart(id) ON UPDATE CASCADE ON DELETE RESTRICT,
+	FOREIGN KEY fk_idRestaurant_order(idRestaurant) REFERENCES restaurant(id) ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
 CREATE TABLE `comment` (
-	`idComment` bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,	
+	`id` bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,	
+	`username` varchar(30),
     `description` varchar(300),
-	`idUser` bigint(20),
-	FOREIGN KEY idUser(idUser) REFERENCES user(idUser) ON UPDATE CASCADE ON DELETE RESTRICT
+    `date` date
+);
+
+CREATE TABLE `restaurant_comments`(
+	`idRestaurant` bigint(20),
+	`idComment` bigint(20),
+	FOREIGN KEY fk_idRestaurant_rc(idRestaurant) REFERENCES restaurant(id) ON UPDATE CASCADE ON DELETE RESTRICT,
+	FOREIGN KEY fk_idComment_rc(idComment) REFERENCES comment(id) ON UPDATE CASCADE ON DELETE RESTRICT
 );

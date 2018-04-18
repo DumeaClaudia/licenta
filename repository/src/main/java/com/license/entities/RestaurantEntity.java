@@ -7,31 +7,31 @@ import javax.persistence.Id;
 
 public class RestaurantEntity {
 	@Id
-	@Column(name = "idRestaurant")
+	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long idRestaurant;
+	private long id;
 
 	@Column(name = "name")
 	private String name;
 
-	@Column(name = "idAddress")
-	private long idAddress;
-
-	@Column(name = "idProduct")
-	private long idProduct;
+	@Column(name = "description")
+	private String description;
 
 	@Column(name = "stars")
 	private long stars;
 
-	@Column(name = "idComment")
-	private long idComment;
+	@Column(name = "street")
+	private String street;
 
-	public long getIdRestaurant() {
-		return idRestaurant;
+	@Column(name = "number")
+	private String number;
+
+	public long getId() {
+		return id;
 	}
 
-	public void setIdRestaurant(long idRestaurant) {
-		this.idRestaurant = idRestaurant;
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -42,20 +42,12 @@ public class RestaurantEntity {
 		this.name = name;
 	}
 
-	public long getIdAddress() {
-		return idAddress;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setIdAddress(long idAddress) {
-		this.idAddress = idAddress;
-	}
-
-	public long getIdProduct() {
-		return idProduct;
-	}
-
-	public void setIdProduct(long idProduct) {
-		this.idProduct = idProduct;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public long getStars() {
@@ -66,12 +58,20 @@ public class RestaurantEntity {
 		this.stars = stars;
 	}
 
-	public long getIdComment() {
-		return idComment;
+	public String getStreet() {
+		return street;
 	}
 
-	public void setIdComment(long idComment) {
-		this.idComment = idComment;
+	public void setStreet(String street) {
+		this.street = street;
 	}
 
+	public String getNumber() {
+		return number;
+	}
+
+	public void setNumber(String number) {
+		this.number = number;
+	}
+	
 }
