@@ -73,7 +73,8 @@ div.dropdown {
 }
 
 /* Add a gray background color and some padding to the footer */
-footer {
+#footer-message {
 	background-color: #f2f2f2;
 	padding: 25px;
+	text-align: center;
 }

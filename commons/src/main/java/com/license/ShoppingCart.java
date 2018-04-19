@@ -2,6 +2,7 @@ package com.license;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 public class ShoppingCart implements Serializable {
 
@@ -11,6 +12,7 @@ public class ShoppingCart implements Serializable {
 	private double totalPrice;
 	private Date date;
 	private long idUser;
+	private List<Product> products;
 
 	public int getNrProducts() {
 		return nrProducts;
@@ -43,4 +45,14 @@ public class ShoppingCart implements Serializable {
 	public void setIdUser(long idUser) {
 		this.idUser = idUser;
 	}
+
+	public List<Product> getProducts() {
+		return products;
+	}
+
+	public void setProducts(List<Product> products) {
+		this.products = products;
+	}
+	
+	
 }
