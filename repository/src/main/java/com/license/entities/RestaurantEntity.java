@@ -1,10 +1,16 @@
 package com.license.entities;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
+@Entity(name = "restaurant")
+@NamedQueries({
+		@NamedQuery(name = "restaurant.display", query = "Select restaurant FROM user usr WHERE usr.username = :prm_username and usr.password = :prm_password") })
 public class RestaurantEntity {
 	@Id
 	@Column(name = "id")

@@ -1,4 +1,4 @@
-INSERT INTO `restaurant` (`id`,`name`,`street`,`number`,`stars`,`description`) VALUES (``,``,``,``,``,``);
+INSERT INTO `restaurant` (`name`,`street`,`number`,`stars`,`description`) VALUES (`Mamma mia`,`Nu stiu`,`0`,`2`,`fel1, fel2, fel3`);
 INSERT INTO `restaurant` (`id`,`name`,`street`,`number`,`stars`,`description`) VALUES (``,``,``,``,``,``);
 INSERT INTO `restaurant` (`id`,`name`,`street`,`number`,`stars`,`description`) VALUES (``,``,``,``,``,``);
 

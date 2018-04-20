@@ -12,6 +12,11 @@
 	>
 		<provider>org.apache.openjpa.persistence.PersistenceProviderImpl</provider>
 		<class>com.license.entities.UserEntity</class>
+		<class>com.license.entities.RestaurantEntity</class>
+		<class>com.license.entities.ProductEntity</class>
+		<class>com.license.entities.ShoppingCartEntity</class>
+		<class>com.license.entities.CommentEntity</class>
+
 		<properties>
 			<property
 				name="javax.persistence.jdbc.driver"

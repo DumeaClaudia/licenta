@@ -1,4 +1,4 @@
-package com.license.repository.implementation;
+package com.license.repositories.user.implementation;
 
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
@@ -15,7 +15,7 @@ import com.license.repository.UserRepository;
 @Stateless
 @Remote(UserRepository.class)
 
-public class UserRepositoryImplementation implements UserRepository {
+public class UserRepositoryImpl implements UserRepository {
 
 	private EntityManagerFactory emf = Persistence.createEntityManagerFactory("myPU");
 	private EntityManager em = emf.createEntityManager();
