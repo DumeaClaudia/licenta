@@ -27,17 +27,20 @@
 				</ol>
 				<div class="carousel-inner" role="listbox">
 					<div class="item">
-						<img class="first-slide" src="../resources/images/pizza.jpg"  style="max-height: 250px; width: 100%; object-fit: cover;" alt="First slide"></img>
-							
+						<img class="first-slide" src="../resources/images/pizza.jpg"
+							style="max-height: 250px; width: 100%; object-fit: cover;" alt="First slide"></img>
+
 						<div class="container">
 							<div class="carousel-caption">
 								<h1>Some details</h1>
 								<p>=======================================================================================</p>
+
 							</div>
 						</div>
 					</div>
 					<div class="item active">
-						<img class="second-slide" src="../resources/images/chocolate_cake.png"  style="max-height: 250px; width: 100%; object-fit: cover;" alt="Second slide"></img>
+						<img class="second-slide" src="../resources/images/chocolate_cake.png"
+							style="max-height: 250px; width: 100%; object-fit: cover;" alt="Second slide"></img>
 						<div class="container">
 							<div class="carousel-caption">
 								<h1>Some details</h1>
@@ -65,15 +68,30 @@
 							<img class="img-thumbnail"
 								src="https://d16bcxkz31d65o.cloudfront.net/860x350/v2/Promo/prima%20pagina/Mananci%20pe%20cinste.png"
 								alt="Pizza " width="300" height="200"></img>
-							<h3>Heading</h3>
 							<div class="row">
-
-								<div class=" pull-right">
+								<div class="idTitle">Heading</div>
+								<div class="pull-right" style="position: inherit;">
 									<span class="glyphicon glyphicon-star" aria-hidden="true"></span> <span class="glyphicon glyphicon-star-empty"
 										aria-hidden="true"></span> <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> <span
 										class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> <span class="glyphicon glyphicon-star-empty"
 										aria-hidden="true"></span>
 								</div>
+							</div>
+							<div class="modal-body" style="padding: 40px 30px 5px 30px;">
+								<!--
+								<h:form role="form">
+
+									<div class="form-group">
+										<h:outputLabel for="usrname">
+											<span class="glyphicon"></span> Description</h:outputLabel>
+										<h:inputText type="text" class="form-control" placeholder="Enter username" name="firstName"
+											value="#{restaurantBean.name}"></h:inputText>
+										<h:inputText type="text" class="form-control" placeholder="Enter username" name="firstName"
+											value="#{restaurantBean.description}"></h:inputText>
+									</div>
+
+								</h:form>
+								-->
 							</div>
 
 							<p>
@@ -82,13 +100,44 @@
 							</p>
 							<div class="row">
 								<div class="pull-right">
+									<h:outputFormat class="label label-default" action="#{restaurantBean.init}"></h:outputFormat>
 									<span class=" label label-default">Default</span> <span class=" label label-default">Default</span> <span
-										class=" label label-default">Default</span> <span class=" label label-default">Default</span>
+										class=" label label-default">Default</span>
 								</div>
 							</div>
+
+							<ul>
+								<ui:repeat items="#{restaurantBean.restaurants}" var="r">
+									<li><img src="#{r.title}" alt="#{r.title}" /></li>
+								</ui:repeat>
+							</ul>
 						</div>
 					</div>
 				</div>
+				<!--  <some:tag value="#{restaurantBean.restaurants}"></some:tag> -->
+
+
+				<table class="table">
+					<tr class="tableHeader">
+						<th>#{msgs.id}</th>
+						<th>#{msgs.name}</th>
+						<th>#{msgs.value}</th>
+					</tr>
+					<ui:repeat value="#{restaurantBean.restaurants}" var="entry" varStatus="status">
+						<tr class="#{status.even ? 'tableRow' : 'tableRowAlt'}">
+							<td>#{status.index + 1}</td>
+							<td><h:outputText value="#{entry.name}" /></td>
+							<td><h:outputText value="#{entry.description}" /></td>
+							<f:facet name="caption"></f:facet>
+						</tr>
+					</ui:repeat>
+					<tr class="tableFooter">
+						<td></td>
+						<td>#{msgs.stopDash}</td>
+						<td>#{msgs.stopDash}</td>
+					</tr>
+					<caption class="tableCaption">#{msgs.httpHeadersCaption}</caption>
+				</table>
 			</div>
 		</ui:define>
 

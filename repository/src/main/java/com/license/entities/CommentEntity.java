@@ -3,10 +3,15 @@ package com.license.entities;
 import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+@Entity(name = "comment")
+@NamedQueries({
+		@NamedQuery(name = "comment.display", query = "Select comm FROM comment comm where comm.username=:p1") })
 public class CommentEntity {
 	@Id
 	@Column(name = "id")

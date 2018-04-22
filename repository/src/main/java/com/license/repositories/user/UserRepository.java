@@ -1,4 +1,4 @@
-package com.license.repository;
+package com.license.repositories.user;
 
 import com.license.User;
 

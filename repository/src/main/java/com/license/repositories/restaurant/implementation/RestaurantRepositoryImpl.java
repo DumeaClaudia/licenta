@@ -1,11 +1,17 @@
 package com.license.repositories.restaurant.implementation;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 
+import com.license.Restaurant;
+import com.license.entities.RestaurantEntity;
 import com.license.repositories.restaurant.RestaurantRepository;
 
 @Stateless
@@ -16,32 +22,36 @@ public class RestaurantRepositoryImpl implements RestaurantRepository {
 	private EntityManagerFactory emf = Persistence.createEntityManagerFactory("myPU");
 	private EntityManager em = emf.createEntityManager();
 
-	// public User find(String username, String password) {
-	// System.out.println("in find method repository");
-	//
-	// UserEntity user = new UserEntity();
-	// User userResponse = new User();
-	// Query query = em.createNamedQuery("user.findUser");
-	// query.setParameter("prm_username", username);
-	// query.setParameter("prm_password", password);
-	//
-	// user = (UserEntity) query.getSingleResult();
-	// if (user == null) {
-	// System.out.println("se pare ca userul cautat nu a fost gasit");
-	// // return"";
-	// }
-	// System.out.println("Username is: " + user.getUsername());
-	// System.out.println("Password is: " + user.getPassword());
-	//
-	// userResponse.setFirstName(user.getFirstName());
-	// userResponse.setLastName(user.getLastName());
-	// userResponse.setUsername(user.getUsername());
-	// userResponse.setEmail(user.getEmail());
-	// userResponse.setPassword(user.getPassword());
-	//
-	// return userResponse;
-	//
-	// }
+	public List<Restaurant> display() {
+	
+		System.out.println("in display method repository");
+
+		List<RestaurantEntity> restaurants = new ArrayList<RestaurantEntity>();
+		List<Restaurant> restaurantsResponse = new ArrayList<Restaurant>();
+		
+		Query query = em.createNamedQuery("restaurant.display");
+
+		restaurants = (List<RestaurantEntity>) query.getResultList();
+		
+		if (restaurants == null) {
+			System.out.println("se pare ca nu au fost gasite restaurante in baza de date ha ha ha");
+			// return"";
+		}
+	
+		for(RestaurantEntity r: restaurants) {
+			Restaurant res = new Restaurant();
+		
+			res.setName(r.getName());
+			res.setDescription(r.getDescription());
+			res.setStars(r.getStars());
+			res.setStreet(r.getStreet());
+			
+			restaurantsResponse.add(res);
+		}
+		
+		return restaurantsResponse;
+
+	}
 	//
 	// public void register(User user) {
 	// // System.out.println("in register method");

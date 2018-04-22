@@ -10,7 +10,7 @@ import javax.persistence.Query;
 
 import com.license.User;
 import com.license.entities.UserEntity;
-import com.license.repository.UserRepository;
+import com.license.repositories.user.UserRepository;
 
 @Stateless
 @Remote(UserRepository.class)

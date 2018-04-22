@@ -10,7 +10,7 @@ import javax.persistence.NamedQuery;
 
 @Entity(name = "restaurant")
 @NamedQueries({
-		@NamedQuery(name = "restaurant.display", query = "Select restaurant FROM user usr WHERE usr.username = :prm_username and usr.password = :prm_password") })
+		@NamedQuery(name = "restaurant.display", query = "SELECT r FROM restaurant r") })
 public class RestaurantEntity {
 	@Id
 	@Column(name = "id")
@@ -24,7 +24,7 @@ public class RestaurantEntity {
 	private String description;
 
 	@Column(name = "stars")
-	private long stars;
+	private int stars;
 
 	@Column(name = "street")
 	private String street;
@@ -56,11 +56,11 @@ public class RestaurantEntity {
 		this.description = description;
 	}
 
-	public long getStars() {
+	public int getStars() {
 		return stars;
 	}
 
-	public void setStars(long stars) {
+	public void setStars(int stars) {
 		this.stars = stars;
 	}
 

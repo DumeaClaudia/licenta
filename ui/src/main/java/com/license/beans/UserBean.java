@@ -37,7 +37,7 @@ public class UserBean {
 			FacesContext context2 = FacesContext.getCurrentInstance();
 			context2.addMessage(null, new FacesMessage("Wrong username/password"));
 			context2.getExternalContext().getFlash().setKeepMessages(true);
-			return "login?faces-redirect=true";
+			return "home?faces-redirect=true";
 		}
 
 	}

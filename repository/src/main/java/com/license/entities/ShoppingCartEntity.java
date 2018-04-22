@@ -3,9 +3,15 @@ package com.license.entities;
 import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+@Entity(name = "shoppingCart")
+@NamedQueries({
+		@NamedQuery(name = "shoppingCart.display", query = "Select sc FROM shoppingCart sc where sc.idUser=:p1") })
 
 public class ShoppingCartEntity {
 	@Id

@@ -1,10 +1,16 @@
 package com.license.entities;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
+@Entity(name = "product")
+@NamedQueries({
+		@NamedQuery(name = "product.display", query = "Select p FROM product p where p.name=:p1") })
 public class ProductEntity {
 	@Id
 	@Column(name = "id")

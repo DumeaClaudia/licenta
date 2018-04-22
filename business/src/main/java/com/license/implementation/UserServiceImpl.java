@@ -5,12 +5,12 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import com.license.User;
-import com.license.repository.UserRepository;
+import com.license.repositories.user.UserRepository;
 import com.license.services.UserService;
 
 //@Remote(UserService.class)
 @Stateless
-public class UserServiceImplementation implements UserService {
+public class UserServiceImpl implements UserService {
 
 	@EJB
 	private UserRepository repository;
