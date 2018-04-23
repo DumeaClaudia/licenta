@@ -100,7 +100,7 @@
 							</p>
 							<div class="row">
 								<div class="pull-right">
-									<h:outputFormat class="label label-default" action="#{restaurantBean.init}"></h:outputFormat>
+									<h:outputFormat class="label label-default" action="#{restaurantBean.displayAllRestaurants()}"></h:outputFormat>
 									<span class=" label label-default">Default</span> <span class=" label label-default">Default</span> <span
 										class=" label label-default">Default</span>
 								</div>
@@ -116,7 +116,7 @@
 				</div>
 				<!--  <some:tag value="#{restaurantBean.restaurants}"></some:tag> -->
 
-
+				 
 				<table class="table">
 					<tr class="tableHeader">
 						<th>#{msgs.id}</th>
@@ -138,6 +138,7 @@
 					</tr>
 					<caption class="tableCaption">#{msgs.httpHeadersCaption}</caption>
 				</table>
+				
 			</div>
 		</ui:define>
 

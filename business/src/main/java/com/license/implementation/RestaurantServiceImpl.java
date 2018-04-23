@@ -1,5 +1,7 @@
 package com.license.implementation;
 
+import java.util.List;
+
 import javax.ejb.EJB;
 //import javax.ejb.Remote;
 import javax.ejb.Stateless;
@@ -18,6 +20,11 @@ public class RestaurantServiceImpl implements RestaurantService {
 	@EJB
 	private RestaurantRepository repository;
 	
+	public List<Restaurant> displayRestaurants(){
+		repository.getRestaurants();
+		return null;
+		
+	}
 	
 //	public void shown(String restaurantName) {
 //		System.out.println("am ajuns in metoda register() din RestaurantServiceImplementation...");

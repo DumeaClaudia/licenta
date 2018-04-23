@@ -22,9 +22,7 @@ public class RestaurantRepositoryImpl implements RestaurantRepository {
 	private EntityManagerFactory emf = Persistence.createEntityManagerFactory("myPU");
 	private EntityManager em = emf.createEntityManager();
 
-	public List<Restaurant> display() {
-	
-		System.out.println("in display method repository");
+	public List<Restaurant> getRestaurants() {
 
 		List<RestaurantEntity> restaurants = new ArrayList<RestaurantEntity>();
 		List<Restaurant> restaurantsResponse = new ArrayList<Restaurant>();
@@ -52,21 +50,4 @@ public class RestaurantRepositoryImpl implements RestaurantRepository {
 		return restaurantsResponse;
 
 	}
-	//
-	// public void register(User user) {
-	// // System.out.println("in register method");
-	//
-	// UserEntity entity = new UserEntity();
-	//
-	// entity.setFirstName(user.getFirstName());
-	// entity.setLastName(user.getLastName());
-	// entity.setUsername(user.getUsername());
-	// entity.setPassword(user.getPassword());
-	// entity.setEmail(user.getEmail());
-	//
-	// em.getTransaction().begin();
-	// em.persist(entity);
-	// em.getTransaction().commit();
-	// }
-
 }

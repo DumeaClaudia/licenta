@@ -25,7 +25,7 @@ import com.license.services.UserService;
 @ManagedBean
 @RequestScoped
 // @SessionScoped
-public class RestaurantBean implements Serializable{
+public class RestaurantBean{
 
 	private String name;
 	private String description;
@@ -33,40 +33,16 @@ public class RestaurantBean implements Serializable{
 	private String street;
 	private String number;
 	private List<Restaurant> restaurants; // = new ArrayList<Restaurant>();
-	private EntityManagerFactory emf = Persistence.createEntityManagerFactory("myPU");
-	private EntityManager em = emf.createEntityManager();
-	
+
+	@EJB
+	private RestaurantService restaurantService;
 	@PostConstruct
-	public void init() {
-		//System.out.println("in display method repository");
-
-		List<RestaurantEntity> restaurants = new ArrayList<RestaurantEntity>();
-		List<Restaurant> restaurantsResponse = new ArrayList<Restaurant>();
+	public void displayAllRestaurants() {
+		 restaurants = new ArrayList<Restaurant>();
+		 restaurants = restaurantService.displayRestaurants();
 		
-		Query query = em.createNamedQuery("restaurant.display");
-
-		restaurants = (List<RestaurantEntity>) query.getResultList();
-		
-		if (restaurants == null) {
-			//System.out.println("se pare ca nu au fost gasite restaurante in baza de date ha ha ha");
-			// return"";
-		}
-	
-		for(RestaurantEntity r: restaurants) {
-			Restaurant res = new Restaurant();
-		
-			res.setName(r.getName());
-			res.setDescription(r.getDescription());
-			res.setStars(r.getStars());
-			res.setStreet(r.getStreet());
-			res.setNumber(r.getNumber());
-			restaurantsResponse.add(res);
-		}
-		
-	
-
 	}
-
+	
 	public String getName() {
 		return name;
 	}
