@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+	<link rel="stylesheet" href="../resources/mycss/test.css"></link>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
+	<h:outputScript src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></h:outputScript>
+	<h:outputScript src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></h:outputScript>
+</h:head>
+
+<h:body>
+	<ui:composition template="../template/template.xhtml">
+		<ui:define name="content">
+		outside form
+			<h:form rendered="true" role="form">
+			test
+			<table>
+					<ui:repeat items="#{restaurant.restaurants}" var="r">
+						<tr>
+							<td>#{r.name}</td>
+							<td>#{r.description}</td>
+						</tr>
+					</ui:repeat>
+				</table>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

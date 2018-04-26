@@ -31,3 +31,10 @@ body{
 	height: 600px;
 	background-color: white;
 }
+
+.container {
+
+    border-radius: 5px;
+    background-color: #ff2ff2;
+    margin: 0 auto;
+}

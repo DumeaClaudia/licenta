@@ -1,32 +1,22 @@
 package com.license.beans;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.Query;
 
 import com.license.Restaurant;
-import com.license.User;
-import com.license.entities.RestaurantEntity;
 import com.license.services.RestaurantService;
-import com.license.services.UserService;
 
-@ManagedBean
+@ManagedBean(name = "restaurant")
 @RequestScoped
 // @SessionScoped
-public class RestaurantBean{
+public class RestaurantBean implements Serializable {
 
+	private static final long serialVersionUID = -3003921679735175082L;
 	private String name;
 	private String description;
 	private int stars;
@@ -36,13 +26,14 @@ public class RestaurantBean{
 
 	@EJB
 	private RestaurantService restaurantService;
+
 	@PostConstruct
 	public void displayAllRestaurants() {
-		 restaurants = new ArrayList<Restaurant>();
-		 restaurants = restaurantService.displayRestaurants();
-		
+		restaurants = restaurantService.displayRestaurants();
+		System.out.println("test");
+
 	}
-	
+
 	public String getName() {
 		return name;
 	}

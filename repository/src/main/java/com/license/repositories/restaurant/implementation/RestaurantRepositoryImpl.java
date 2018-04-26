@@ -43,7 +43,7 @@ public class RestaurantRepositoryImpl implements RestaurantRepository {
 			res.setDescription(r.getDescription());
 			res.setStars(r.getStars());
 			res.setStreet(r.getStreet());
-			
+
 			restaurantsResponse.add(res);
 		}
 		

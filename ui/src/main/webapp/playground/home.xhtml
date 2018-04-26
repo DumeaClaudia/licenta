@@ -16,130 +16,97 @@
 <h:body>
 	<ui:composition template="../template/template.xhtml">
 		<ui:define name="content">
+			<h:form rendered="true">
+				<!-- ========================Carousel ============================================== -->
+				<div id="myCarousel" class="carousel slide" data-ride="carousel" style="margin-top: 50px;">
+					<!-- Indicators -->
+					<ol class="carousel-indicators">
+						<li data-target="#myCarousel" data-slide-to="0" class=""></li>
+						<li data-target="#myCarousel" data-slide-to="1" class="active"></li>
+						<li data-target="#myCarousel" data-slide-to="2" class=""></li>
+					</ol>
+					<div class="carousel-inner" role="listbox">
+						<div class="item">
+							<img class="first-slide" src="../resources/images/pizza.jpg"
+								style="max-height: 250px; width: 100%; object-fit: cover;" alt="First slide"></img>
 
-			<!-- ========================Carousel ============================================== -->
-			<div id="myCarousel" class="carousel slide" data-ride="carousel" style="margin-top: 50px;">
-				<!-- Indicators -->
-				<ol class="carousel-indicators">
-					<li data-target="#myCarousel" data-slide-to="0" class=""></li>
-					<li data-target="#myCarousel" data-slide-to="1" class="active"></li>
-					<li data-target="#myCarousel" data-slide-to="2" class=""></li>
-				</ol>
-				<div class="carousel-inner" role="listbox">
-					<div class="item">
-						<img class="first-slide" src="../resources/images/pizza.jpg"
-							style="max-height: 250px; width: 100%; object-fit: cover;" alt="First slide"></img>
+							<div class="container">
+								<div class="carousel-caption">
+									<h1>Some details</h1>
+									<p>=======================================================================================</p>
 
-						<div class="container">
-							<div class="carousel-caption">
-								<h1>Some details</h1>
-								<p>=======================================================================================</p>
-
-							</div>
-						</div>
-					</div>
-					<div class="item active">
-						<img class="second-slide" src="../resources/images/chocolate_cake.png"
-							style="max-height: 250px; width: 100%; object-fit: cover;" alt="Second slide"></img>
-						<div class="container">
-							<div class="carousel-caption">
-								<h1>Some details</h1>
-								<p>=======================================================================================</p>
-							</div>
-						</div>
-					</div>
-					<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev"> <span
-						class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> <span class="sr-only">Previous</span>
-					</a> <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next"> <span
-						class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span> <span class="sr-only">Next</span>
-					</a>
-				</div>
-				<!-- /.carousel -->
-
-
-				<!--================================= Marketing messaging and featurettes =================================== -->
-				<!-- Wrap the rest of the page in another container to center all the content. -->
-
-				<div class="container marketing">
-
-					<!-- Three columns of text below the carousel -->
-					<div class="row">
-						<div class="well col-md-4 col-sm-6 col-xs-12">
-							<img class="img-thumbnail"
-								src="https://d16bcxkz31d65o.cloudfront.net/860x350/v2/Promo/prima%20pagina/Mananci%20pe%20cinste.png"
-								alt="Pizza " width="300" height="200"></img>
-							<div class="row">
-								<div class="idTitle">Heading</div>
-								<div class="pull-right" style="position: inherit;">
-									<span class="glyphicon glyphicon-star" aria-hidden="true"></span> <span class="glyphicon glyphicon-star-empty"
-										aria-hidden="true"></span> <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> <span
-										class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> <span class="glyphicon glyphicon-star-empty"
-										aria-hidden="true"></span>
 								</div>
 							</div>
-							<div class="modal-body" style="padding: 40px 30px 5px 30px;">
-								<!--
-								<h:form role="form">
+						</div>
+						<div class="item active">
+							<img class="second-slide" src="../resources/images/chocolate_cake.png"
+								style="max-height: 250px; width: 100%; object-fit: cover;" alt="Second slide"></img>
+							<div class="container">
+								<div class="carousel-caption">
+									<h1>Some details</h1>
+									<p>=======================================================================================</p>
+								</div>
+							</div>
+						</div>
+						<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev"> <span
+							class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> <span class="sr-only">Previous</span>
+						</a> <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next"> <span
+							class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span> <span class="sr-only">Next</span>
+						</a>
+					</div>
+					<!-- /.carousel -->
 
-									<div class="form-group">
-										<h:outputLabel for="usrname">
-											<span class="glyphicon"></span> Description</h:outputLabel>
-										<h:inputText type="text" class="form-control" placeholder="Enter username" name="firstName"
-											value="#{restaurantBean.name}"></h:inputText>
-										<h:inputText type="text" class="form-control" placeholder="Enter username" name="firstName"
-											value="#{restaurantBean.description}"></h:inputText>
+
+					<!--================================= Marketing messaging and featurettes =================================== -->
+					<!-- Wrap the rest of the page in another container to center all the content. -->
+
+					<div class="container marketing">
+
+						<!-- Three columns of text below the carousel -->
+						<div class="row">
+							<div class="well col-md-4 col-sm-6 col-xs-12">
+								<img class="img-thumbnail"
+									src="https://d16bcxkz31d65o.cloudfront.net/860x350/v2/Promo/prima%20pagina/Mananci%20pe%20cinste.png"
+									alt="Pizza " width="300" height="200"></img>
+								<div class="row">
+									<div class="idTitle">Heading</div>
+									<div class="pull-right" style="position: inherit;">
+										<span class="glyphicon glyphicon-star" aria-hidden="true"></span> <span class="glyphicon glyphicon-star-empty"
+											aria-hidden="true"></span> <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> <span
+											class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> <span
+											class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
 									</div>
-
-								</h:form>
-								-->
-							</div>
-
-							<p>
-								Donec sed odio dui. Etiam porta sem malesuada magna mollis <a class="btn btn-default"
-									href="detailsRestaurants.xhtml" role="button">View details »</a>
-							</p>
-							<div class="row">
-								<div class="pull-right">
-									<h:outputFormat class="label label-default" action="#{restaurantBean.displayAllRestaurants()}"></h:outputFormat>
-									<span class=" label label-default">Default</span> <span class=" label label-default">Default</span> <span
-										class=" label label-default">Default</span>
 								</div>
-							</div>
 
-							<ul>
-								<ui:repeat items="#{restaurantBean.restaurants}" var="r">
-									<li><img src="#{r.title}" alt="#{r.title}" /></li>
-								</ui:repeat>
-							</ul>
+								<p>
+									Donec sed odio dui. Etiam porta sem malesuada magna mollis <a class="btn btn-default"
+										href="detailsRestaurants.xhtml" role="button">View details »</a>
+								</p>
+								<div class="row">
+									<div class="pull-right">
+										<h:outputFormat class="label label-default" action="#{restaurantBean.displayAllRestaurants()}"></h:outputFormat>
+										<span class=" label label-default">Default</span> <span class=" label label-default">Default</span> <span
+											class=" label label-default">Default</span>
+									</div>
+								</div>
+
+								<ul>
+									<ui:repeat items="#{restaurantBean.restaurants}" var="r">
+										<li><h:inputText value="#{r.name}" /></li>
+										<li><h:inputText value="#{r.description}" /></li>
+
+									</ui:repeat>
+								</ul>
+
+
+							</div>
 						</div>
 					</div>
-				</div>
-				<!--  <some:tag value="#{restaurantBean.restaurants}"></some:tag> -->
 
-				 
-				<table class="table">
-					<tr class="tableHeader">
-						<th>#{msgs.id}</th>
-						<th>#{msgs.name}</th>
-						<th>#{msgs.value}</th>
-					</tr>
-					<ui:repeat value="#{restaurantBean.restaurants}" var="entry" varStatus="status">
-						<tr class="#{status.even ? 'tableRow' : 'tableRowAlt'}">
-							<td>#{status.index + 1}</td>
-							<td><h:outputText value="#{entry.name}" /></td>
-							<td><h:outputText value="#{entry.description}" /></td>
-							<f:facet name="caption"></f:facet>
-						</tr>
-					</ui:repeat>
-					<tr class="tableFooter">
-						<td></td>
-						<td>#{msgs.stopDash}</td>
-						<td>#{msgs.stopDash}</td>
-					</tr>
-					<caption class="tableCaption">#{msgs.httpHeadersCaption}</caption>
-				</table>
-				
-			</div>
+
+
+				</div>
+			</h:form>
 		</ui:define>
 
 	</ui:composition>
