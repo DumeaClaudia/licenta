@@ -38,7 +38,7 @@ public class RestaurantRepositoryImpl implements RestaurantRepository {
 	
 		for(RestaurantEntity r: restaurants) {
 			Restaurant res = new Restaurant();
-		
+			res.setId(r.getId());
 			res.setName(r.getName());
 			res.setDescription(r.getDescription());
 			res.setStars(r.getStars());

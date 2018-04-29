@@ -6,33 +6,21 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 
 import com.license.Restaurant;
 import com.license.services.RestaurantService;
 
 @ManagedBean
-@RequestScoped
-//@SessionScoped
-public class RestaurantBean {
+//@RequestScoped
+@SessionScoped
+public class ListOfRestaurantsBean {
 
 /*	private String name;
 	private String description;
 	private int stars;
-	private String street;*/
-	private Restaurant restaurant = null;
-	private String details = "ceva";
-	private long id;
-	
-	public String getDetails() {
-		return details;
-	}
-
-	public void setDetails(String details) {
-		this.details = details;
-	}
-
+	private String street;
+	private String number;*/
 	public List<Restaurant> restaurants  = new ArrayList<Restaurant>();
 
 	@EJB
@@ -56,28 +44,47 @@ public class RestaurantBean {
 	public void setRestaurants(List<Restaurant> restaurants) {
 		this.restaurants = restaurants;
 	}
+/*
 
-	public long getId() {
-		return id;
+	public String getName() {
+		return name;
 	}
 
-	public void setId(long id) {
-		for(Restaurant r:  restaurants) {
-			if(r.getId() == id) {
-				restaurant = r;
-			}
-		}
-		this.id = id;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public Restaurant getRestaurant() {
-		return restaurant;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setRestaurant(Restaurant restaurant) {
-		this.restaurant = restaurant;
+	public void setDescription(String description) {
+		this.description = description;
 	}
+
 	
-	
+	public int getStars() {
+		return stars;
+	}
+
+	public void setStars(int stars) {
+		this.stars = stars;
+	}
+
+	public String getStreet() {
+		return street;
+	}
+
+	public void setStreet(String street) {
+		this.street = street;
+	}
+
+	public String getNumber() {
+		return number;
+	}
+
+	public void setNumber(String number) {
+		this.number = number;
+	}*/
 
 }

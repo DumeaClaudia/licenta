@@ -30,16 +30,28 @@
 	height: 620px;
 }
 
-img {
-	border: 10px solid transparent;
-	width: 20%;
-	height: 15%;
+.restaurant-thumbnail {
+	max-height: 120px;
+	width:100%;
+	max-width: 220px;
+	object-fit: cover;
 	text-align: center;
 }
 
-#myCarousel {
-	margin-top: 25px;
+.top-carousel {
+	margin-top: 50px;
 	position: relative;
+}
+
+.top-carousel-img {
+	max-height: 250px; 
+	width: 100%; 
+	object-fit: cover;
+	border: 0px;
+}
+
+.restaurant-well-content {
+	margin: 10px 0px ;
 }
 
 #searchForm {

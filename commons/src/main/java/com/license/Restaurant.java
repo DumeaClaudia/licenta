@@ -14,6 +14,7 @@ public class Restaurant implements Serializable {
 	private String number;
 	private List<Product> products;
 	private List<Comment> comments;
+	private long id;
 
 	public String getName() {
 		return name;
@@ -69,8 +70,14 @@ public class Restaurant implements Serializable {
 
 	public void setComments(List<Comment> comments) {
 		this.comments = comments;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}	
-	
-	
 	
 }

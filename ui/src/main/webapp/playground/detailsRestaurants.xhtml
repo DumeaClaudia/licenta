@@ -1,36 +1,46 @@
 <!DOCTYPE html 
      PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-     
+
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui"
 	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets">
 
+<f:metadata>
+	<f:viewParam name="id" value="#{restaurantBean.id}">
+	</f:viewParam>
+</f:metadata>
 <h:head>
 	<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
 	<link rel="stylesheet" href="../resources/mycss/test.css"></link>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
-	<h:outputScript  src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></h:outputScript >
-	<h:outputScript  src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></h:outputScript >
+	<h:outputScript src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></h:outputScript>
+	<h:outputScript src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></h:outputScript>
 </h:head>
 
 
 <h:body>
 	<ui:composition template="../template/template.xhtml">
 		<ui:define name="content">
+
+			
 			<div class="container marketing" style="margin-top: 50px;">
 				<div class="well">
 					<div class="row">
-
+						<p>#{restaurantBean.restaurant.description}
+						</p>
+						
 						<div class="col-md-8 col-sm-6 col-xs-12">
-							<img class="img-thumbnail" src="https://d16bcxkz31d65o.cloudfront.net/860x350/v2/Promo/prima%20pagina/Mananci%20pe%20cinste.png" alt="Mamma mia Restaurant " width="100%" height="200"></img>
+							<img class="img-thumbnail"
+								src="https://d16bcxkz31d65o.cloudfront.net/860x350/v2/Promo/prima%20pagina/Mananci%20pe%20cinste.png"
+								alt="Mamma mia Restaurant " width="100%" height="200"></img>
 						</div>
 
 						<div class=" col-md-4 col-sm-6 col-xs-12">
 							<h3>Heading</h3>
 							<p>
-								Donec sed odio dui. Etiam porta sem malesuada magna mollis <a class="btn btn-default"
-									href="home.xhtml" role="button">back to home page »</a>
+								Donec sed odio dui. Etiam porta sem malesuada magna mollis <a class="btn btn-default" href="home.xhtml"
+									role="button">back to home page »</a>
 							</p>
 							<div>
 								<div class="pull-right">

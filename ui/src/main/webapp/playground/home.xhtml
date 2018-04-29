@@ -1,14 +1,14 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html>
 
 <html xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui" xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:head>
 	<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
-	<link rel="stylesheet" href="../resources/mycss/test.css"></link>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
+	<link rel="stylesheet" href="../resources/mycss/test.css"></link>
+
 	<h:outputScript src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></h:outputScript>
 	<h:outputScript src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></h:outputScript>
 </h:head>
@@ -18,17 +18,17 @@
 		<ui:define name="content">
 			<h:form rendered="true">
 				<!-- ========================Carousel ============================================== -->
-				<div id="myCarousel" class="carousel slide" data-ride="carousel" style="margin-top: 50px;">
+				<div id="myCarousel" class="carousel slide top-carousel" data-ride="carousel">
 					<!-- Indicators -->
 					<ol class="carousel-indicators">
 						<li data-target="#myCarousel" data-slide-to="0" class=""></li>
 						<li data-target="#myCarousel" data-slide-to="1" class="active"></li>
 						<li data-target="#myCarousel" data-slide-to="2" class=""></li>
 					</ol>
+
 					<div class="carousel-inner" role="listbox">
 						<div class="item">
-							<img class="first-slide" src="../resources/images/pizza.jpg"
-								style="max-height: 250px; width: 100%; object-fit: cover;" alt="First slide"></img>
+							<img class="first-slide top-carousel-img " src="../resources/images/pizza.jpg" alt="First slide"></img>
 
 							<div class="container">
 								<div class="carousel-caption">
@@ -39,8 +39,7 @@
 							</div>
 						</div>
 						<div class="item active">
-							<img class="second-slide" src="../resources/images/chocolate_cake.png"
-								style="max-height: 250px; width: 100%; object-fit: cover;" alt="Second slide"></img>
+							<img class="second-slide top-carousel-img " src="../resources/images/chocolate_cake.png" alt="Second slide"></img>
 							<div class="container">
 								<div class="carousel-caption">
 									<h1>Some details</h1>
@@ -56,59 +55,40 @@
 					</div>
 					<!-- /.carousel -->
 
-
-					<!--================================= Marketing messaging and featurettes =================================== -->
-					<!-- Wrap the rest of the page in another container to center all the content. -->
-
 					<div class="container marketing">
-
-						<!-- Three columns of text below the carousel -->
-						<div class="row">
-							<div class="well col-md-4 col-sm-6 col-xs-12">
-								<img class="img-thumbnail"
-									src="https://d16bcxkz31d65o.cloudfront.net/860x350/v2/Promo/prima%20pagina/Mananci%20pe%20cinste.png"
-									alt="Pizza " width="300" height="200"></img>
-								<div class="row">
-									<div class="idTitle">Heading</div>
-									<div class="pull-right" style="position: inherit;">
-										<span class="glyphicon glyphicon-star" aria-hidden="true"></span> <span class="glyphicon glyphicon-star-empty"
-											aria-hidden="true"></span> <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> <span
-											class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> <span
-											class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+						<ui:repeat value="#{listOfRestaurantsBean.restaurants}" var="restaurant">
+							<!--  <div class="row">-->
+							<!-- Three columns of text below the carousel -->
+							<div class="col-md-4 col-sm-6 col-xs-12">
+								<div class="well restaurant-well-content ">
+									<img class="img-thumbnail restaurant-thumbnail "
+										src="https://d16bcxkz31d65o.cloudfront.net/860x350/v2/Promo/prima%20pagina/Mananci%20pe%20cinste.png"
+										alt="Pizza "></img>
+									<div>
+										<h:outputText value="#{restaurant.name}" />
+										<div class="pull-right" style="position: inherit;">
+											<span class="glyphicon glyphicon-star" aria-hidden="true"></span> <span
+												class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> <span
+												class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> <span
+												class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> <span
+												class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+										</div>
+										<h:outputText value="#{restaurant.description}" />
 									</div>
+									<p>
+										Donec sed odio dui. Etiam porta sem malesuada magna mollis <a class="btn btn-default"
+											href="detailsRestaurants.xhtml" role="button">View details »</a>
+										<h:link value="View details »" outcome="detailsRestaurants">
+											<f:param name="id" value="#{restaurant.id}" />
+										</h:link>
+									</p>
 								</div>
-
-								<p>
-									Donec sed odio dui. Etiam porta sem malesuada magna mollis <a class="btn btn-default"
-										href="detailsRestaurants.xhtml" role="button">View details »</a>
-								</p>
-								<div class="row">
-									<div class="pull-right">
-										<h:outputFormat class="label label-default" action="#{restaurantBean.displayAllRestaurants()}"></h:outputFormat>
-										<span class=" label label-default">Default</span> <span class=" label label-default">Default</span> <span
-											class=" label label-default">Default</span>
-									</div>
-								</div>
-
-								<ul>
-									<ui:repeat items="#{restaurantBean.restaurants}" var="r">
-										<li><h:inputText value="#{r.name}" /></li>
-										<li><h:inputText value="#{r.description}" /></li>
-
-									</ui:repeat>
-								</ul>
-
-
 							</div>
-						</div>
+						</ui:repeat>
 					</div>
-
-
-
 				</div>
 			</h:form>
 		</ui:define>
-
 	</ui:composition>
 </h:body>
 </html>

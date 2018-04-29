@@ -8,4 +8,5 @@ import com.license.Restaurant;
 @Remote
 public interface RestaurantService {
 	List<Restaurant> displayRestaurants();
+	//getRestaurantById
 }

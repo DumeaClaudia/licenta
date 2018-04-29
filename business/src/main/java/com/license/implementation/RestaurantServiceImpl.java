@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
-//import javax.ejb.Remote;
+import javax.ejb.Remote;
 import javax.ejb.Stateless;
 
 import com.license.Restaurant;
 import com.license.repositories.restaurant.RestaurantRepository;
 import com.license.services.RestaurantService;
 
-//@Remote(UserService.class)
+@Remote(RestaurantService.class)
 @Stateless
 public class RestaurantServiceImpl implements RestaurantService {
 
