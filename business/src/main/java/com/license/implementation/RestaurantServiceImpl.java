@@ -7,6 +7,7 @@ import javax.ejb.EJB;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 
+import com.license.Product;
 import com.license.Restaurant;
 import com.license.repositories.restaurant.RestaurantRepository;
 import com.license.services.RestaurantService;
@@ -17,26 +18,23 @@ public class RestaurantServiceImpl implements RestaurantService {
 
 	@EJB
 	private RestaurantRepository repository;
+	
 	List<Restaurant> restaurants = new ArrayList<Restaurant>();
 
-	public List<Restaurant> displayRestaurants() {
-		return repository.getRestaurants();
+	public List<Restaurant> getRestaurants() {
+		return repository.retrieveRestaurants();
 	}
 
-	// public void shown(String restaurantName) {
-	// System.out.println("am ajuns in metoda register() din
-	// RestaurantServiceImplementation...");
-	// repository.display(restaurantName);
-	// System.out.println("R");
-	// }
-
-	// public User login(String username, String password) {
-	// System.out.println("called login service");
-	// User user = new User();
-	// user = repository.find(username, password);
-	// System.out.println("after find() method");
-	//
-	// return user;
-	// }
+	public Restaurant getRestaurantById(long id) {
+		return repository.retrieveRestaurantById(id);
+	}
+	
+	public List<Product> getAllProductsForRestaurant(long idRestaurant){
+		return repository.retrieveAllProducts(idRestaurant);
+	}
+	
+	public List<Product> getProductsByCategory(String category, long idRestaurant){
+		return repository.retrieveProductsByCategory(category, idRestaurant);
+	}
 
 }

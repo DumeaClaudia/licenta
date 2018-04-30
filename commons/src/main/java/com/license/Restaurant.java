@@ -7,14 +7,14 @@ public class Restaurant implements Serializable {
 
     private static final long serialVersionUID = 8913732065557648340L;
     
+    private long id;
     private String name;
     private String description;
+    private String image;
 	private int stars;
-	private String street;
-	private String number;
+	private String address;
 	private List<Product> products;
 	private List<Comment> comments;
-	private long id;
 
 	public String getName() {
 		return name;
@@ -40,20 +40,12 @@ public class Restaurant implements Serializable {
 		this.stars = stars;
 	}
 
-	public String getStreet() {
-		return street;
+	public String getAddress() {
+		return address;
 	}
 
-	public void setStreet(String street) {
-		this.street = street;
-	}
-
-	public String getNumber() {
-		return number;
-	}
-
-	public void setNumber(String number) {
-		this.number = number;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 	public List<Product> getProducts() {
@@ -78,6 +70,13 @@ public class Restaurant implements Serializable {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}	
-	
 }

@@ -20,7 +20,7 @@
 				<!-- ========================Carousel ============================================== -->
 				<div id="myCarousel" class="carousel slide top-carousel" data-ride="carousel">
 					<!-- Indicators -->
-					<ol class="carousel-indicators">
+					<ol class="carousel-indicators top-carousel-indicators">
 						<li data-target="#myCarousel" data-slide-to="0" class=""></li>
 						<li data-target="#myCarousel" data-slide-to="1" class="active"></li>
 						<li data-target="#myCarousel" data-slide-to="2" class=""></li>
@@ -56,37 +56,42 @@
 					<!-- /.carousel -->
 
 					<div class="container marketing">
-						<ui:repeat value="#{listOfRestaurantsBean.restaurants}" var="restaurant">
-							<!--  <div class="row">-->
+						<ui:repeat value="#{homeRestaurantsListBean.restaurants}" var="restaurant">
 							<!-- Three columns of text below the carousel -->
 							<div class="col-md-4 col-sm-6 col-xs-12">
-								<div class="well restaurant-well-content ">
-									<img class="img-thumbnail restaurant-thumbnail "
-										src="https://d16bcxkz31d65o.cloudfront.net/860x350/v2/Promo/prima%20pagina/Mananci%20pe%20cinste.png"
-										alt="Pizza "></img>
-									<div>
-										<h:outputText value="#{restaurant.name}" />
-										<div class="pull-right" style="position: inherit;">
-											<span class="glyphicon glyphicon-star" aria-hidden="true"></span> <span
-												class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> <span
-												class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> <span
-												class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> <span
-												class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+								<div class="well restaurant-well-content">
+									<div class="row">
+										<div >
+											<img class="img-thumbnail list-restaurant-img-thumbnail" src="#{restaurant.image}" alt="Pizza "></img>
+										</div>
+										<div>
+											<h4><h:outputText class="rest-name" value="#{restaurant.name}" /></h4>
+
+											<div class="pull-right" style="position: inherit;">
+												<span class="glyphicon glyphicon-star" aria-hidden="true"></span> <span
+													class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> <span
+													class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> <span
+													class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> <span
+													class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+											</div>
 										</div>
 										<h:outputText value="#{restaurant.description}" />
+
 									</div>
+									<br></br>
 									<p>
-										Donec sed odio dui. Etiam porta sem malesuada magna mollis <a class="btn btn-default"
-											href="detailsRestaurants.xhtml" role="button">View details »</a>
-										<h:link value="View details »" outcome="detailsRestaurants">
+										<h:link value="View details »" outcome="restaurant" class="position-next-page">
 											<f:param name="id" value="#{restaurant.id}" />
 										</h:link>
 									</p>
+
 								</div>
 							</div>
 						</ui:repeat>
 					</div>
+
 				</div>
+
 			</h:form>
 		</ui:define>
 	</ui:composition>

@@ -9,6 +9,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 
+import com.license.Product;
 import com.license.Restaurant;
 import com.license.services.RestaurantService;
 
@@ -17,58 +18,33 @@ import com.license.services.RestaurantService;
 //@SessionScoped
 public class RestaurantBean {
 
-/*	private String name;
-	private String description;
-	private int stars;
-	private String street;*/
 	private Restaurant restaurant = null;
-	private String details = "ceva";
+	private List<Product> products = new ArrayList<Product>(); 
 	private long id;
-	
-	public String getDetails() {
-		return details;
-	}
-
-	public void setDetails(String details) {
-		this.details = details;
-	}
-
-	public List<Restaurant> restaurants  = new ArrayList<Restaurant>();
 
 	@EJB
 	private RestaurantService restaurantService;
-	
-	@PostConstruct
-	void init() {
-
-		restaurants = restaurantService.displayRestaurants();
-	}
-	
-	public List<Restaurant>  displayAllRestaurants() {
-
-		return this.restaurants;
-	}
-	
-	public List<Restaurant> getRestaurants() {
-		return restaurants;
-	}
-
-	public void setRestaurants(List<Restaurant> restaurants) {
-		this.restaurants = restaurants;
-	}
 
 	public long getId() {
 		return id;
 	}
 
 	public void setId(long id) {
-		for(Restaurant r:  restaurants) {
+/*		for(Restaurant r:  restaurants) {
 			if(r.getId() == id) {
 				restaurant = r;
 			}
-		}
+		}*/
+		restaurant = restaurantService.getRestaurantById(id);
+		products = restaurantService.getAllProductsForRestaurant(id);
 		this.id = id;
 	}
+	
+
+	public List<Product>  displayAllProductsForRestaurant() {
+		return this.products;
+	}
+		
 
 	public Restaurant getRestaurant() {
 		return restaurant;
@@ -77,7 +53,14 @@ public class RestaurantBean {
 	public void setRestaurant(Restaurant restaurant) {
 		this.restaurant = restaurant;
 	}
-	
+
+	public List<Product> getProducts() {
+		return products;
+	}
+
+	public void setProducts(List<Product> products) {
+		this.products = products;
+	}
 	
 
 }

@@ -10,7 +10,9 @@ import javax.persistence.NamedQuery;
 
 @Entity(name = "restaurant")
 @NamedQueries({
-		@NamedQuery(name = "restaurant.display", query = "SELECT r FROM restaurant r") })
+		@NamedQuery(name = "restaurant.display", query = "SELECT r FROM restaurant r"),
+		@NamedQuery(name = "restaurant.searchForRestaurant", query = "SELECT r FROM restaurant r where r.id=:findId") })
+
 public class RestaurantEntity {
 	@Id
 	@Column(name = "id")
@@ -26,11 +28,11 @@ public class RestaurantEntity {
 	@Column(name = "stars")
 	private int stars;
 
-	@Column(name = "street")
-	private String street;
-
-	@Column(name = "number")
-	private String number;
+	@Column(name = "address")
+	private String address;
+	
+	@Column(name = "img")
+	private String image;
 
 	public long getId() {
 		return id;
@@ -64,20 +66,21 @@ public class RestaurantEntity {
 		this.stars = stars;
 	}
 
-	public String getStreet() {
-		return street;
+	public String getAddress() {
+		return address;
 	}
 
-	public void setStreet(String street) {
-		this.street = street;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
-	public String getNumber() {
-		return number;
+	public String getImage() {
+		return image;
 	}
 
-	public void setNumber(String number) {
-		this.number = number;
+	public void setImage(String image) {
+		this.image = image;
 	}
+	
 	
 }

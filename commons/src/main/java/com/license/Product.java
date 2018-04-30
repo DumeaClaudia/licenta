@@ -6,7 +6,11 @@ public class Product implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	private long id;
+	private long idRestaurant;
+	private String image;
 	private String name;
+	private String category;
 	private String description;
 	private double price;
 	private int discount;
@@ -43,4 +47,35 @@ public class Product implements Serializable {
 		this.discount = discount;
 	}
 
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+	public long getIdRestaurant() {
+		return idRestaurant;
+	}
+
+	public void setIdRestaurant(long idRestaurant) {
+		this.idRestaurant = idRestaurant;
+	}
 }

@@ -14,7 +14,7 @@ import com.license.services.RestaurantService;
 @ManagedBean
 //@RequestScoped
 @SessionScoped
-public class ListOfRestaurantsBean {
+public class HomeRestaurantsListBean {
 
 /*	private String name;
 	private String description;
@@ -28,12 +28,10 @@ public class ListOfRestaurantsBean {
 	
 	@PostConstruct
 	void init() {
-
-		restaurants = restaurantService.displayRestaurants();
+		restaurants = restaurantService.getRestaurants();
 	}
 	
 	public List<Restaurant>  displayAllRestaurants() {
-
 		return this.restaurants;
 	}
 	

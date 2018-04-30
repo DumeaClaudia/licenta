@@ -76,7 +76,6 @@ CREATE TABLE `restaurant_products`(
 
 CREATE TABLE `shopping_cart` (
 	`id` bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	`nrProducts` int(3) NOT NULL,
 	`totalPrice` double(8,3) NOT NULL,
 	`date` date,
 	`idUser` bigint(20),
@@ -85,6 +84,7 @@ CREATE TABLE `shopping_cart` (
 );
 
 CREATE TABLE `shopping_cart_products`(
+	`nrProducts` int(3),
 	`idProduct` bigint(20),
 	`idShoppingCart` bigint(20),
 	FOREIGN KEY fk_idProduct_sc(idProduct) REFERENCES product(id) ON UPDATE CASCADE ON DELETE RESTRICT,

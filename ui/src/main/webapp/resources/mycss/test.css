@@ -52,6 +52,7 @@
 
 .restaurant-well-content {
 	margin: 10px 0px ;
+	padding: 10px 50px;
 }
 
 #searchForm {
@@ -128,4 +129,44 @@ div.dropdown {
 li { 
     display: inline;
     list-style-type: none;
+}
+
+.top-carousel-indicators{
+	top: 220px;
+	bottom: auto;
+}
+.list-restaurant-img-thumbnail{
+	width: 100%;
+	 margin-left: auto;
+	 margin-right: auto;
+	 max-height: 160px;
+	 height: 160px;
+}
+.restaurant-img-thumbnail{
+	 width: 90%;
+	 margin-left: auto;
+	 margin-right: auto;
+	 max-height: 250px;
+	
+}
+.glyphicon-plus{
+	margin-right: 50px;
+	
+}
+.product-style{
+	/* border-style:inset;
+    border-width:5px;  */ 
+    border-color: white;
+    border-bottom-style: solid;
+}
+
+.size-description{
+	margin-top: 10px;
+}
+
+.size-plus{
+	margin-top: 30px;
+}
+.position-next-page{
+	text-align:right:
 }
