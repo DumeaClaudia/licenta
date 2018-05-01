@@ -1,6 +1,7 @@
 package com.license.entities;
 
 import java.util.Date;
+import java.util.TimeZone;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,7 +12,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 @Entity(name = "shoppingCart")
 @NamedQueries({
-		@NamedQuery(name = "shoppingCart.display", query = "Select sc FROM shoppingCart sc where sc.idUser=:p1") })
+		@NamedQuery(name = "shoppingCart.getShoppingCart", query = "Select sc FROM shoppingCart sc where sc.id=:idShoppingCart") })
 
 public class ShoppingCartEntity {
 	@Id
@@ -19,32 +20,24 @@ public class ShoppingCartEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
-	@Column(name = "nrProducts")
-	private int nrProducts;
-
 	@Column(name = "totalPrice")
 	private double totalPrice;
 
-	@Column(name = "date")
-	private Date date;
-
-	@Column(name = "idUser")
-	private long idUser;
-
+	@Column(name = "createdDate")
+	private Date createdDate;
+	
+	@Column(name = "sendDate")
+	private Date sendDate;
+	
+	@Column(name = "idRestaurant")
+	private long idRestaurant;
+	
 	public long getId() {
 		return id;
 	}
 
 	public void setId(long id) {
 		this.id = id;
-	}
-
-	public int getNrProducts() {
-		return nrProducts;
-	}
-
-	public void setNrProducts(int nrProducts) {
-		this.nrProducts = nrProducts;
 	}
 
 	public double getTotalPrice() {
@@ -55,20 +48,29 @@ public class ShoppingCartEntity {
 		this.totalPrice = totalPrice;
 	}
 
-	public Date getDate() {
-		return date;
+	public Date getCreatedDate() {
+		return createdDate;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
 	}
 
-	public long getIdUser() {
-		return idUser;
+	public Date getSendDate() {
+		return sendDate;
 	}
 
-	public void setIdUser(long idUser) {
-		this.idUser = idUser;
+	public void setSendDate(Date sendDate) {
+		this.sendDate = sendDate;
 	}
 
+	public long getIdRestaurant() {
+		return idRestaurant;
+	}
+
+	public void setIdRestaurant(long idRestaurant) {
+		this.idRestaurant = idRestaurant;
+	}
+	
+	
 }

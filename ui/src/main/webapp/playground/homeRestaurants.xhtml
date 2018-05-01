@@ -3,97 +3,99 @@
 <html xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui" xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
-<h:head>
-	<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
-	<link rel="stylesheet" href="../resources/mycss/test.css"></link>
+<ui:composition template="../template/template.xhtml">
+	<ui:define name="content">
+		<h:form rendered="true">
+			<!-- ========================Carousel ============================================== -->
+			<div id="myCarousel" class="carousel slide top-carousel" data-ride="carousel">
+				<!-- Indicators -->
+				<ol class="carousel-indicators top-carousel-indicators">
+					<li data-target="#myCarousel" data-slide-to="0" class=""></li>
+					<li data-target="#myCarousel" data-slide-to="1" class="active"></li>
+					<li data-target="#myCarousel" data-slide-to="2" class=""></li>
+				</ol>
 
-	<h:outputScript src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></h:outputScript>
-	<h:outputScript src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></h:outputScript>
-</h:head>
+				<div class="carousel-inner" role="listbox">
+					<div class="item">
+						<img class="first-slide top-carousel-img " src="../resources/images/pizza.jpg" alt="First slide"></img>
 
-<h:body>
-	<ui:composition template="../template/template.xhtml">
-		<ui:define name="content">
-			<h:form rendered="true">
-				<!-- ========================Carousel ============================================== -->
-				<div id="myCarousel" class="carousel slide top-carousel" data-ride="carousel">
-					<!-- Indicators -->
-					<ol class="carousel-indicators top-carousel-indicators">
-						<li data-target="#myCarousel" data-slide-to="0" class=""></li>
-						<li data-target="#myCarousel" data-slide-to="1" class="active"></li>
-						<li data-target="#myCarousel" data-slide-to="2" class=""></li>
-					</ol>
+						<div class="container">
+							<div class="carousel-caption">
+								<h1>Some details</h1>
+								<p>=======================================================================================</p>
 
-					<div class="carousel-inner" role="listbox">
-						<div class="item">
-							<img class="first-slide top-carousel-img " src="../resources/images/pizza.jpg" alt="First slide"></img>
-
-							<div class="container">
-								<div class="carousel-caption">
-									<h1>Some details</h1>
-									<p>=======================================================================================</p>
-
-								</div>
 							</div>
 						</div>
-						<div class="item active">
-							<img class="second-slide top-carousel-img " src="../resources/images/chocolate_cake.png" alt="Second slide"></img>
-							<div class="container">
-								<div class="carousel-caption">
-									<h1>Some details</h1>
-									<p>=======================================================================================</p>
-								</div>
-							</div>
-						</div>
-						<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev"> <span
-							class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> <span class="sr-only">Previous</span>
-						</a> <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next"> <span
-							class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span> <span class="sr-only">Next</span>
-						</a>
 					</div>
-					<!-- /.carousel -->
+					<div class="item active">
+						<img class="second-slide top-carousel-img " src="../resources/images/chocolate_cake.png" alt="Second slide"></img>
+						<div class="container">
+							<div class="carousel-caption">
+								<h1>Some details</h1>
+								<p>=======================================================================================</p>
+							</div>
+						</div>
+					</div>
+					<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev"> <span
+						class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> <span class="sr-only">Previous</span>
+					</a> <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next"> <span
+						class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span> <span class="sr-only">Next</span>
+					</a>
+				</div>
+				<!-- /.carousel -->
 
-					<div class="container marketing">
-						<ui:repeat value="#{homeRestaurantsListBean.restaurants}" var="restaurant">
-							<!-- Three columns of text below the carousel -->
-							<div class="col-md-4 col-sm-6 col-xs-12">
-								<div class="well restaurant-well-content">
-									<div class="row">
-										<div >
+				<div class="container marketing">
+					<!-- Three columns of restaurants below the carousel -->
+					<ui:repeat value="#{homeRestaurantsListBean.restaurants}" var="restaurant" outcome="restaurant">
+						<!--  <h:link outcome="restaurant"> 
+							<f:param name="id" value="#{restaurant.id}" />-->
+
+
+						<div class="col-md-4 col-sm-6 col-xs-12">
+
+							<div class="well restaurant-well-content">
+								<div class="row">
+									<h:link outcome="restaurant" class="position-next-page">
+										<f:param name="id" value="#{restaurant.id}" />
+
+
+										<div>
 											<img class="img-thumbnail list-restaurant-img-thumbnail" src="#{restaurant.image}" alt="Pizza "></img>
 										</div>
-										<div>
-											<h4><h:outputText class="rest-name" value="#{restaurant.name}" /></h4>
+									</h:link>
+									<div>
+										<h4>
+											<h:outputText class="rest-name" value="#{restaurant.name}" />
+										</h4>
 
-											<div class="pull-right" style="position: inherit;">
-												<span class="glyphicon glyphicon-star" aria-hidden="true"></span> <span
-													class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> <span
-													class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> <span
-													class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> <span
-													class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-											</div>
+										<div class="pull-right" style="position: inherit;">
+											<span class="glyphicon glyphicon-star" aria-hidden="true"></span> <span
+												class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> <span
+												class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> <span
+												class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> <span
+												class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
 										</div>
-										<h:outputText value="#{restaurant.description}" />
-
 									</div>
-									<br></br>
-									<p>
-										<h:link value="View details »" outcome="restaurant" class="position-next-page">
-											<f:param name="id" value="#{restaurant.id}" />
-										</h:link>
-									</p>
+									<h:outputText value="#{restaurant.description}" />
 
 								</div>
-							</div>
-						</ui:repeat>
-					</div>
+								<br></br>
+								<p>
+									<h:link value="View details »" outcome="restaurant" class="position-next-page">
+										<f:param name="id" value="#{restaurant.id}" />
 
+									</h:link>
+								</p>
+
+							</div>
+							<!--  </h:link> -->
+						</div>
+					</ui:repeat>
 				</div>
 
-			</h:form>
-		</ui:define>
-	</ui:composition>
-</h:body>
+			</div>
+
+		</h:form>
+	</ui:define>
+</ui:composition>
 </html>

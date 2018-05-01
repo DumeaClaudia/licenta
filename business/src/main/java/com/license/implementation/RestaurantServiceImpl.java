@@ -19,7 +19,7 @@ public class RestaurantServiceImpl implements RestaurantService {
 	@EJB
 	private RestaurantRepository repository;
 	
-	List<Restaurant> restaurants = new ArrayList<Restaurant>();
+	//List<Restaurant> restaurants = new ArrayList<Restaurant>();
 
 	public List<Restaurant> getRestaurants() {
 		return repository.retrieveRestaurants();
