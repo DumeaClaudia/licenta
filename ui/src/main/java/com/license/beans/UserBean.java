@@ -16,6 +16,7 @@ public class UserBean {
 
 	private String username;
 	private String password;
+	private long idUser;
 
 	private User user = new User();
 
@@ -27,9 +28,11 @@ public class UserBean {
 
 		User userDB = new User();
 		userDB = userService.login(username, password);
+		idUser = userDB.getId();
 		
-		//FacesContext context = FacesContext.getCurrentInstance();
-		//context.getExternalContext().getSessionMap().put("user", user);
+		FacesContext context = FacesContext.getCurrentInstance();
+		context.getExternalContext().getSessionMap().put("username", userDB.getUsername());
+		context.getExternalContext().getSessionMap().put("userId", userDB.getId());
 		
 		if (!(userDB == null)) {
 			return "activity?faces-redirect=true";
@@ -48,18 +51,13 @@ public class UserBean {
 		return "login?faces-redirect=true";
 	}
 	
-	public String takeUsername() {
-		FacesContext context = FacesContext.getCurrentInstance();
-		return (String) context.getExternalContext().getSessionMap().get(username);
+	public long getIdUser() {
+		return idUser;
 	}
-	
-	public void logout(String username, String password) {
-		FacesContext context = FacesContext.getCurrentInstance();
 
-		context = FacesContext.getCurrentInstance();
-		context.getExternalContext().getSessionMap().remove("user");
+	public void setIdUser(long idUser) {
+		this.idUser = idUser;
 	}
-	
 
 	public String getUsername() {
 		return username;

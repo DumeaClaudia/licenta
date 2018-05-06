@@ -6,8 +6,7 @@
 	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <f:metadata>
-	<f:viewParam name="id" value="#{shoppingCartBean.id}">
-	</f:viewParam>
+	<f:viewParam name="userId" value="#{shoppingCartBean.userId}"></f:viewParam>
 </f:metadata>
 
 <ui:composition template="../template/template.xhtml">
@@ -21,17 +20,29 @@
             });
         </script>
 	</ui:define>
-	
+
 	<ui:define name="content">
 		<div class="container container-top">
 			<div class="row">
 				<div class="col-sm-6">
 					<input type='text' class="form-control" id='datetimepicker4' />
 				</div>
-
 			</div>
+
+
+			<ui:repeat value="#{shoppingCartBean.shoppingCarts}" var="product">
+				<div class="row product-style">
+					<div class=" col-md-8 col-sm-7 col-xs-8 size-description">
+						<h4>
+							<b>#{product.user}</b>
+						</h4>
+						<p>(#{product.product})</p>
+						<p>(#{product.restaurant})</p>
+					</div>
+				</div>
+			</ui:repeat>
 		</div>
+
 	</ui:define>
-	
 </ui:composition>
 </html>

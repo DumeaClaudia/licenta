@@ -75,17 +75,9 @@
 								<div class="pull-right">
 									#{product.price} RON
 									<h:link class="glyphicon glyphicon-plus size-plus" aria-hidden="true" outcome="shoppingCart">
-										<f:param name="name" value="#{product.name}" />
-										<f:param name="category" value="#{product.category}" />
-										<f:param name="description" value="#{product.description}" />
-										<f:param name="price" value="#{product.price}" />
+										<f:param name="id" value="#{sessionBean.userId}" /> 
 									</h:link>
-									<!-- <p>
-										<h:link value="	#{product.price} RON " outcome="shoppingCart">
-											<f:param name="id" value="#{restaurant.id}" />
-										</h:link>
-									</p> -->
-
+									
 								</div>
 							</div>
 						</div>

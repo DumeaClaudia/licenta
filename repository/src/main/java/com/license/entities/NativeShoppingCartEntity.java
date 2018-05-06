@@ -5,12 +5,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedNativeQueries;
 import javax.persistence.NamedNativeQuery;
 
-/* native query se comporta ca in sql, nu jpsql cum face namedQuery*/
-@Entity(name = "nativeShopingCart")
+/* native query se comporta ca in sql, nu jpql cum face namedQuery*/
+@Entity(name = "shopping_cart_products")
+@NamedNativeQueries({ 
 @NamedNativeQuery(
-		  name="shoppingCartProducts.getNativeShoppingCarInfo",
+		  name="shoppingCartProducts.getNativeShoppingCartInfo",
 		  query="select   scp.idShoppingCart as idShoppingCart ,p.id as idProduct, u.username as user, r.name as restaurant, p.name as product  FROM shopping_cart_products scp \n" + 
 					"	join shopping_cart sc on scp.idShoppingCart=sc.id \n" + 
 					"	join restaurant r on sc.idRestaurant=r.id\n" + 
@@ -18,7 +20,9 @@ import javax.persistence.NamedNativeQuery;
 					"	join product p on scp.idProduct=p.id\n" + 
 					"	where sc.id=?1",
 		  resultClass=NativeShoppingCartEntity.class
-		)
+		)}
+
+)
 
 public class NativeShoppingCartEntity {
 	@Id

@@ -1,8 +1,11 @@
 package com.license.repositories.shoppingCart;
 
-import com.license.Restaurant;
+import java.util.List;
+
 import com.license.ShoppingCart;
 
 public interface ShoppingCartRepository {
-	public ShoppingCart retrieveShoppingCartById(long id);
+	public List<ShoppingCart>  retrieveShoppingCartById(long id);
+
+	public List<Long> retrieveActiveShoppingCartForUserId(long idUser);
 }

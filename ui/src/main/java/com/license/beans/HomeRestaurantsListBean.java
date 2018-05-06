@@ -22,6 +22,7 @@ public class HomeRestaurantsListBean {
 	private String street;
 	private String number;*/
 	public List<Restaurant> restaurants  = new ArrayList<Restaurant>();
+	
 
 	@EJB
 	private RestaurantService restaurantService;

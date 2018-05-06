@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui" xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core" xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:head>
 	<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
@@ -23,19 +23,32 @@
 						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
 							<span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
 						</button>
-						<div class="navbar-brand" >My application name</div>
+						<div class="navbar-brand">My application name</div>
 					</div>
 					<div class="collapse navbar-collapse" id="myNavbar">
 						<ul class="nav navbar-nav">
-							<li class="active"><a href="homeRestaurants.xhtml">Home Restaurants</a></li>
+							<li><a href="homeRestaurants.xhtml">Home Restaurants</a></li>
 							<!-- <li><a href="about.xhtml">About</a></li> -->
 							<li><a href="shoppingCart.xhtml">Shopping Cart</a></li>
 						</ul>
-						<ul class="nav navbar-nav navbar-right">
-							<li><a data-toggle="modal" href="#myLoginModal"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-							<li><a data-toggle="modal" href="#myRegisterModal"><span class="glyphicon glyphicon-user"></span> Sign
-									Up </a></li>
-						</ul>
+						<c:if test="#{not empty sessionBean.username}">
+
+							<ul class="nav navbar-nav navbar-right">
+								<li><a data-toggle="modal" href="#myLoginModal" value="#{sessionBean.username}"><span class="glyphicon glyphicon-log-in"></span> </a> </li>
+								<li><a href="logout.xhtml" >Logout<span class="glyphicon glyphicon-log-in"></span> </a> </li>
+							
+							
+							</ul>
+						</c:if>
+						<c:if test="#{empty sessionBean.username}">
+							<ul class="nav navbar-nav navbar-right">
+								<li><a data-toggle="modal" href="#myLoginModal"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+								<li><a data-toggle="modal" href="#myRegisterModal"><span class="glyphicon glyphicon-user"></span> Sign
+										Up </a></li>
+							</ul>
+
+						</c:if>
+
 						<form class="navbar-form navbar-right" action="/action_page.php">
 							<div class="input-group">
 								<input type="text" class="form-control" placeholder="Search" name="search"></input>

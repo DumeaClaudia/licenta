@@ -1,23 +1,12 @@
 package com.license;
 
-import java.io.Serializable;
-import java.util.Date;
-import java.util.List;
-
-import javax.persistence.Column;
-
-public class ShoppingCart implements Serializable {
-
-	private static final long serialVersionUID = 1L;
-		
+public class ShoppingCart {
 	private long id;
-	private double totalPrice;
-	private Date createdDate;
-	private Date sendDate;
+	private long idProduct;
 	private int nrProducts;
-	private Restaurant restaurant;
-	private List<Product> products;
-	private User user;
+	private String restaurant;
+	private String product;
+	private String user;
 	
 	public long getId() {
 		return id;
@@ -25,23 +14,11 @@ public class ShoppingCart implements Serializable {
 	public void setId(long id) {
 		this.id = id;
 	}
-	public double getTotalPrice() {
-		return totalPrice;
+	public long getIdProduct() {
+		return idProduct;
 	}
-	public void setTotalPrice(double totalPrice) {
-		this.totalPrice = totalPrice;
-	}
-	public Date getCreatedDate() {
-		return createdDate;
-	}
-	public void setCreatedDate(Date createdDate) {
-		this.createdDate = createdDate;
-	}
-	public Date getSendDate() {
-		return sendDate;
-	}
-	public void setSendDate(Date sendDate) {
-		this.sendDate = sendDate;
+	public void setIdProduct(long idProduct) {
+		this.idProduct = idProduct;
 	}
 	public int getNrProducts() {
 		return nrProducts;
@@ -49,22 +26,24 @@ public class ShoppingCart implements Serializable {
 	public void setNrProducts(int nrProducts) {
 		this.nrProducts = nrProducts;
 	}
-	public Restaurant getRestaurant() {
+	public String getRestaurant() {
 		return restaurant;
 	}
-	public void setRestaurant(Restaurant restaurant) {
+	public void setRestaurant(String restaurant) {
 		this.restaurant = restaurant;
 	}
-	public List<Product> getProducts() {
-		return products;
+	public String getProduct() {
+		return product;
 	}
-	public void setProducts(List<Product> products) {
-		this.products = products;
+	public void setProduct(String product) {
+		this.product = product;
 	}
-	public User getUser() {
+	public String getUser() {
 		return user;
 	}
-	public void setUser(User user) {
+	public void setUser(String user) {
 		this.user = user;
 	}
+	
+	
 }
