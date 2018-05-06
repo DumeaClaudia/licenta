@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedNativeQueries;
 import javax.persistence.NamedNativeQuery;
 
-/* native query se comporta ca in sql, nu jpql cum face namedQuery*/
+/* NativeQuery se comporta ca in sql, nu jpql cum face NamedQuery*/
 @Entity(name = "shopping_cart_products")
 @NamedNativeQueries({ 
 @NamedNativeQuery(

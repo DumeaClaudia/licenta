@@ -50,6 +50,8 @@ select * from `restaurant`;
 
 /*------------------------------------------------------------------PRODUCTS-----------------------------------------------------------------------------------------------*/
  
+drop table `product`
+
 CREATE TABLE `product` (
 	`id` bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	`idRestaurant` bigint(20),
@@ -62,16 +64,26 @@ CREATE TABLE `product` (
 	FOREIGN KEY fk_idRestaurant_p(idRestaurant) REFERENCES restaurant(id) ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
-INSERT INTO `product` (`idRestaurant`,`image`,`category`,`name`,`description`,`price`) VALUES (1,'SupaCremaDeCiuperci.jpg','Supe creme', 'Supa crema de ciuperci','250 g', 13.90);
-INSERT INTO `product` (`idRestaurant`,`image`,`category`,`name`,`description`,`price`) VALUES (1,'SupaCremaDeRosii.jpg','Supe creme', 'Supa crema de rosii cu busuioc si crutoane','300 g', 15.50);
-INSERT INTO `product` (`idRestaurant`,`image`,`category`,`name`,`description`,`price`) VALUES (1,'SupaCremaDeDovlecei.jpg','Supe creme', 'Supa crema de dovlecei','250 g', 13.90); 
+INSERT INTO `product` (`idRestaurant`,`image`,`category`,`name`,`description`,`price`) VALUES (1, 'SupaCremaDeCiuperci.jpg','Supe creme', 'Supa crema de ciuperci','250 g', 13.90);
+INSERT INTO `product` (`idRestaurant`,`image`,`category`,`name`,`description`,`price`) VALUES (1, 'SupaCremaDeRosii.jpg','Supe creme', 'Supa crema de rosii cu busuioc si crutoane','300 g', 15.50);
+INSERT INTO `product` (`idRestaurant`,`image`,`category`,`name`,`description`,`price`) VALUES (1, 'SupaCremaDeDovlecei.jpg','Supe creme', 'Supa crema de dovlecei','250 g', 13.90); 
 
-INSERT INTO `product` (`idRestaurant`,`category`,`name`,`description`,`price`) VALUES (1,'Ciorbe', 'Ciorba de legume', '350g - ingrediente:  morcov, ceapa, ardei, rosii, sfecla rosie, patrunjel', 9.50);
-INSERT INTO `product` (`idRestaurant`,`category`,`name`,`description`,`price`) VALUES (1,'Ciorbe', 'Ciorba radauteana', '300g - ingrediente: piept de pui, smantana, usturoi, ou, legume ', 13.90);
-INSERT INTO `product` (`idRestaurant`,`category`,`name`,`description`,`price`) VALUES (1,'Ciorbe', 'Ciorba de vacuta', '350g - ingrediente: carne de vita, morcov, ceapa. ardei, rosii, patrunjel, insotita de ardei iute si smantanta ', 14.90);
+INSERT INTO `product` (`idRestaurant`,`image`,`category`,`name`,`description`,`price`) VALUES (1, 'CiorbaDeLegume.jpg','Ciorbe', 'Ciorba de legume','350g - ingrediente:  morcov, ceapa, ardei, rosii, sfecla rosie, patrunjel', 9.50);
+INSERT INTO `product` (`idRestaurant`,`image`,`category`,`name`,`description`,`price`) VALUES (1, 'CiorbaRadauteana.jpg', 'Ciorbe', 'Ciorba radauteana', '300g - ingrediente: piept de pui, smantana, usturoi, ou, legume ', 13.90);
+INSERT INTO `product` (`idRestaurant`,`image`,`category`,`name`,`description`,`price`) VALUES (1, 'CiorbaDeVacuta.jpg','Ciorbe', 'Ciorba de vacuta', '350g - ingrediente: carne de vita, morcov, ceapa. ardei, rosii, patrunjel, insotita de ardei iute si smantanta ', 14.90);
 
+
+INSERT INTO `product` (`idRestaurant`,`image`,`category`,`name`,`description`,`price`) VALUES (2, 'Pizza_A_La_Chef.jpg','Pizza', 'Pizza a la Chef','ingrediente: mozzarella, sos, roșii cherry, babic, bocconcini de mozzarela, aluat', 25.90);
+INSERT INTO `product` (`idRestaurant`,`image`,`category`,`name`,`description`,`price`) VALUES (2, 'Pizza_Bacon_Cipola.jpg','Pizza', 'Bacon & Cipola','ingrediente: ceapa rosie, kaizer, mozzarella, sos, aluat', 23.80);
+INSERT INTO `product` (`idRestaurant`,`image`,`category`,`name`,`description`,`price`) VALUES (2, 'Pizza_Beef_Deluxe.jpg','Pizza', 'Beef Deluxe','ingrediente: ardei gras, ciuperci, rosii, mozzarella, sos, masline verzi umplute cu gogosari, vrabioara de vita marinata, aluat', 29.70);
+INSERT INTO `product` (`idRestaurant`,`image`,`category`,`name`,`description`,`price`) VALUES (2, 'Pizza_Capriciosa.jpg','Pizza', 'Capriciosa','ingrediente: ciuperci, kaizer, grana padano, sunca, mozzarella, sos, aluat', 26.30);
+INSERT INTO `product` (`idRestaurant`,`image`,`category`,`name`,`description`,`price`) VALUES (2, 'Pizza_Double_Cheese.jpg','Pizza', 'Double Cheese','ingrediente:ciuperci, salam super, sos, mozzarella (portie dubla), aluat', 28.80);
+INSERT INTO `product` (`idRestaurant`,`image`,`category`,`name`,`description`,`price`) VALUES (2, 'Pizza_Espagnola.jpg','Pizza', 'Espagnola','ingrediente: gorgonzola, kaizer, sunca, mozzarella, sos, aluat', 25.90);
+INSERT INTO `product` (`idRestaurant`,`image`,`category`,`name`,`description`,`price`) VALUES (2, 'Pizza_Florenza.jpg','Pizza', 'Florenza','ingrediente: ardei gras, ceapa rosie, ciuperci, kaizer, masline negre, pastrama porc, salam vara, sunca, mozzarella, sos, aluat', 27.30);
+INSERT INTO `product` (`idRestaurant`,`image`,`category`,`name`,`description`,`price`) VALUES (2, 'Pizza_Full_Meat.jpg','Pizza', 'Full Meat','ingrediente: kaizer, pastrama porc, piept de pui, salam super, salam vara, sunca, mozzarella, sos, aluat', 30.70);
 
 select * from `product`;
+delete from product where image is null
 
 
 /*--------------------------------------------------------------------CART--------------------------------------------------------------------------------*/
@@ -100,10 +112,16 @@ CREATE TABLE `shopping_cart_products`(
 INSERT INTO `shopping_cart` (`totalPrice`, `createdDate`, `sendDate`, `idRestaurant`) VALUES (70, '2018-05-01 10:08:45', '2018-05-01 10:08:45', '1');
 INSERT INTO `shopping_cart` (`totalPrice`, `createdDate`, `sendDate`, `idRestaurant`) VALUES (80, '2018-04-21 20:50:09', '2018-04-21 20:50:09', '1');
 INSERT INTO `shopping_cart` (`totalPrice`, `createdDate`, `sendDate`, `idRestaurant`) VALUES (78, '2018-04-23 12:45:30', '2018-04-23 12:45:30', '1');
+INSERT INTO `shopping_cart` (`totalPrice`, `createdDate`, `sendDate`, `idRestaurant`) VALUES (0, '2018-04-23 12:45:30', null, '1');
 
 INSERT INTO `shopping_cart_products` (`nrProducts`, `idUser`, `idProduct`, `idShoppingCart`) VALUES (3, 3, 1, 1);
 INSERT INTO `shopping_cart_products` (`nrProducts`, `idUser`, `idProduct`, `idShoppingCart`) VALUES (3, 3, 2, 1);
 INSERT INTO `shopping_cart_products` (`nrProducts`, `idUser`, `idProduct`, `idShoppingCart`) VALUES (3, 3, 3, 1);
+
+INSERT INTO `shopping_cart_products` (`nrProducts`, `idUser`, `idProduct`, `idShoppingCart`) VALUES (3, 3, 3, 2);
+INSERT INTO `shopping_cart_products` (`nrProducts`, `idUser`, `idProduct`, `idShoppingCart`) VALUES (3, 3, 3, 5);
+
+-- La un shopping cart pot contribui mai multi useri. Aici vad care user a adaugat in cos.
 
 select * from `shopping_cart`;
 select * from `shopping_cart_products`;
@@ -126,9 +144,13 @@ CREATE TABLE `shopping_cart_users` (
     PRIMARY KEY(idUser, idShoppingCart)
 );
 
+-- Un cos apartine unuia sau mai multor useri
 INSERT INTO `shopping_cart_users` (`idUser`, `idShoppingCart`) VALUES (2 , 1);
 INSERT INTO `shopping_cart_users` (`idUser`, `idShoppingCart`) VALUES (3 , 1);
 INSERT INTO `shopping_cart_users` (`idUser`, `idShoppingCart`) VALUES (4 , 1);
+INSERT INTO `shopping_cart_users` (`idUser`, `idShoppingCart`) VALUES (2 , 5);
+
+INSERT INTO `shopping_cart_users` (`idUser`, `idShoppingCart`) VALUES (1 , 2);
 
 
 select * from `shopping_cart_users`;
@@ -138,8 +160,7 @@ select * from `user`;
 SELECT SHA2('abc', 256);
 
 
-
-
+select sc.id, sc. from shopping_cart sc join shopping_cart_users scu on sc.id = scu.idShoppingCart where sc.totalPrice=0 and scu.idUser=2
 
 
 

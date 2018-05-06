@@ -1,6 +1,11 @@
 package com.license;
 
-public class ShoppingCart {
+import java.io.Serializable;
+
+public class ShoppingCart implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+	
 	private long id;
 	private long idProduct;
 	private int nrProducts;
