@@ -13,7 +13,6 @@
 <ui:composition template="../template/template.xhtml">
 	<ui:define name="content">
 
-
 		<div class="container marketing" style="margin-top: 50px;">
 			<div class="well">
 				<div class="row">
@@ -75,9 +74,9 @@
 								<div class="pull-right">
 									#{product.price} RON
 									<h:link class="glyphicon glyphicon-plus size-plus" aria-hidden="true" outcome="shoppingCart">
-										<f:param name="id" value="#{sessionBean.userId}" /> 
+										<f:param name="id" value="#{restaurantBean.id}" />
 									</h:link>
-									
+
 								</div>
 							</div>
 						</div>

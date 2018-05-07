@@ -1,0 +1,53 @@
+@charset "UTF-8";
+
+  html, body {
+	height: 100%;
+} 
+ 
+.jumbotron {
+	margin-top: 20px;
+}
+
+#content, #sidebar {
+	min-height: 500px;
+}
+
+#row-main {
+	overflow-x: hidden; /* necessary to hide collapsed sidebar */
+}
+
+#show-content {
+	background-color: lightyellow;
+	-webkit-transition: width 0.3s ease;
+	-moz-transition: width 0.3s ease;
+	-o-transition: width 0.3s ease;
+	transition: width 0.3s ease;
+}
+
+#content .btn-group {
+	margin-bottom: 10px;
+}
+
+.col-md-9 .width-12, .col-md-12 .width-9 {
+	display: none; /* just hiding labels for demo purposes */
+}
+
+
+#sidebar {
+	background-color: lightgrey;
+	-webkit-transition: margin 0.3s ease;
+	-moz-transition: margin 0.3s ease;
+	-o-transition: margin 0.3s ease;
+	transition: margin 0.3s ease;
+}
+
+.collapsed {
+	display: none; /* hide it for small displays */
+}
+/* 
+@media ( min-width : 992px) {
+	.collapsed {
+		display: block;
+		margin-right: -25%;  
+	}
+} */
