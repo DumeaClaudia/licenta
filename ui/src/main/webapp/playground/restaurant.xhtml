@@ -3,7 +3,8 @@
      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui"
-	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
 <f:metadata>
 	<f:viewParam name="id" value="#{restaurantBean.id}">
@@ -13,7 +14,7 @@
 <ui:composition template="../template/template.xhtml">
 	<ui:define name="content">
 
-		<div class="container marketing" style="margin-top: 50px;">
+		<div class="container marketing" style="margin-top: 50px; font-family: fantasy;">
 			<div class="well">
 				<div class="row">
 					<div class="col-md-8 col-sm-6 col-xs-12">
@@ -55,16 +56,22 @@
 				<ui:repeat value="#{restaurantBean.products}" var="product">
 
 					<div class="row product-style">
-						<div class="col-md-2 col-sm-3 col-xs-4">
-							<img class="img-rounded" src="../resources/images/#{product.image}" alt="#{product.image}" width="100"
-								height="100"></img>
-						</div>
+							
+						<c:if test="#{not empty product.image}">
+							<div class="col-md-2 col-sm-3 col-xs-4">
+								<img class="img-rounded" src="../resources/images/#{product.image}" alt="#{product.image}" width="130"
+									height="100"></img>
+							</div>
+						</c:if>
+						
 						<div class=" col-md-8 col-sm-7 col-xs-8 size-description">
 							<h4>
 								<b>#{product.name}</b>
 							</h4>
 							<p>(#{product.description})</p>
 						</div>
+						
+						<c:if test="#{not empty product.image}">
 						<div class=" col-md-2 col-sm-2 col-xs-12">
 							<div class="row">
 								<!-- <div class="pull-right">
@@ -80,8 +87,29 @@
 								</div>
 							</div>
 						</div>
+						</c:if>
+						
+						<c:if test="#{ empty product.image}">
+							<div class=" col-md-4 col-sm-5 col-xs-12">
+							<div class="row">
+								<!-- <div class="pull-right">
+										#{product.price} RON <span class="glyphicon glyphicon-plus size-plus" aria-hidden="true"></span>
+									</div> -->
+
+								<div class="pull-right">
+									#{product.price} RON
+									<h:link class="glyphicon glyphicon-plus size-plus" aria-hidden="true" outcome="shoppingCart">
+										<f:param name="id" value="#{restaurantBean.id}" />
+									</h:link>
+
+								</div>
+							</div>
+						</div>
+						</c:if>
+						
 					</div>
 				</ui:repeat>
+	
 			</div>
 		</div>
 		<!-- /.container -->

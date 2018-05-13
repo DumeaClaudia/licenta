@@ -171,6 +171,13 @@ li {
 	text-align:right:
 }
 .container-top{
-	margin-top: 200px;
+	margin-top: 10px;
 	
+}
+.marginTop{
+	margin-top: 30px;
+}
+
+.style-font{
+	font-family: fantasy;
 }

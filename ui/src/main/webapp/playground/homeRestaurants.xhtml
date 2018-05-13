@@ -7,7 +7,7 @@
 	<ui:define name="content">
 		<h:form rendered="true">
 			<!-- ========================Carousel ============================================== -->
-			<div id="myCarousel" class="carousel slide top-carousel" data-ride="carousel">
+			<div id="myCarousel" class="carousel slide top-carousel" data-ride="carousel" style="margin-top: 30px; font-family: fantasy;">
 				<!-- Indicators -->
 				<ol class="carousel-indicators top-carousel-indicators">
 					<li data-target="#myCarousel" data-slide-to="0" class=""></li>
@@ -44,7 +44,7 @@
 				</div>
 				<!-- /.carousel -->
 
-				<div class="container marketing">
+				<div class="container marketing" style="font-family: fantasy;">
 					<p>#{sessionBean.username}</p>
 					<!-- Three columns of restaurants below the carousel -->
 					<ui:repeat value="#{homeRestaurantsListBean.restaurants}" var="restaurant" outcome="restaurant">
@@ -60,8 +60,8 @@
 										<f:param name="id" value="#{restaurant.id}" />
 
 
-										<div>
-											<img class="img-thumbnail list-restaurant-img-thumbnail" src="#{restaurant.image}" alt="Pizza "></img>
+										<div class="view zoom">
+											<img class="img-thumbnail list-restaurant-img-thumbnail img-fluid" src="#{restaurant.image}" alt="Pizza "></img>
 										</div>
 									</h:link>
 									<div>
