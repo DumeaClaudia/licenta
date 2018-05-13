@@ -52,65 +52,80 @@
 			</div>
 
 			<!-- Products list -->
-			<div class="well">
-				<ui:repeat value="#{restaurantBean.products}" var="product">
+			<div>
 
-					<div class="row product-style">
-							
-						<c:if test="#{not empty product.image}">
+					<div class="well col-md-12" id="show-content">
+
+						<!-- <h3>
+							<code>#content</code>
+							<code class="width-9">.col-md-9</code>
+							<code class="width-12">.col-md-12</code>
+						</h3> -->
+						<div class="row product-style">
 							<div class="col-md-2 col-sm-3 col-xs-4">
-								<img class="img-rounded" src="../resources/images/#{product.image}" alt="#{product.image}" width="130"
-									height="100"></img>
-							</div>
-						</c:if>
-						
-						<div class=" col-md-8 col-sm-7 col-xs-8 size-description">
-							<h4>
-								<b>#{product.name}</b>
-							</h4>
-							<p>(#{product.description})</p>
-						</div>
-						
-						<c:if test="#{not empty product.image}">
-						<div class=" col-md-2 col-sm-2 col-xs-12">
-							<div class="row">
-								<!-- <div class="pull-right">
-										#{product.price} RON <span class="glyphicon glyphicon-plus size-plus" aria-hidden="true"></span>
-									</div> -->
-
-								<div class="pull-right">
-									#{product.price} RON
-									<h:link class="glyphicon glyphicon-plus size-plus" aria-hidden="true" outcome="shoppingCart">
-										<f:param name="id" value="#{restaurantBean.id}" />
-									</h:link>
-
+								<div class="btn-group" role="group" aria-label="Controls">
+									<button type="button" class="btn btn-default toggle-sidebar">Add to cart</button>
 								</div>
 							</div>
 						</div>
-						</c:if>
-						
-						<c:if test="#{ empty product.image}">
-							<div class=" col-md-4 col-sm-5 col-xs-12">
-							<div class="row">
-								<!-- <div class="pull-right">
+						<ui:repeat value="#{restaurantBean.products}" var="product">
+
+							<div class="row product-style">
+
+								<ui:fragment rendered="#{not empty product.image}">
+									<div class="col-md-2 col-sm-3 col-xs-4">
+										<img class="img-rounded" src="../resources/images/#{product.image}" alt="#{product.image}" width="130"
+											height="100"></img>
+									</div>
+								</ui:fragment>
+
+								<div class=" col-md-8 col-sm-7 col-xs-8 size-description">
+									<h4>
+										<b>#{product.name}</b>
+									</h4>
+									<p>(#{product.description})</p>
+								</div>
+
+								<ui:fragment rendered="#{not empty product.image}">
+									<div class=" col-md-2 col-sm-2 col-xs-12">
+										<div class="row">
+											<!-- <div class="pull-right">
 										#{product.price} RON <span class="glyphicon glyphicon-plus size-plus" aria-hidden="true"></span>
 									</div> -->
 
-								<div class="pull-right">
-									#{product.price} RON
-									<h:link class="glyphicon glyphicon-plus size-plus" aria-hidden="true" outcome="shoppingCart">
-										<f:param name="id" value="#{restaurantBean.id}" />
-									</h:link>
+											<div class="pull-right">
+												#{product.price} RON
+												<h:link class="glyphicon glyphicon-plus size-plus" aria-hidden="true" outcome="shoppingCart">
+													<f:param name="id" value="#{restaurantBean.id}" />
+												</h:link>
 
-								</div>
+											</div>
+										</div>
+									</div>
+								</ui:fragment>
+
+								<ui:fragment rendered="#{empty product.image}">
+									<div class=" col-md-4 col-sm-5 col-xs-12">
+										<div class="row">
+											<!-- <div class="pull-right">
+										#{product.price} RON <span class="glyphicon glyphicon-plus size-plus" aria-hidden="true"></span>
+									</div> -->
+
+											<div class="pull-right">
+												#{product.price} RON
+												<h:link class="glyphicon glyphicon-plus size-plus" aria-hidden="true" outcome="shoppingCart">
+													<f:param name="id" value="#{restaurantBean.id}" />
+												</h:link>
+
+											</div>
+										</div>
+									</div>
+								</ui:fragment>
+
 							</div>
-						</div>
-						</c:if>
-						
+						</ui:repeat>
 					</div>
-				</ui:repeat>
-	
-			</div>
+					</div>
 		</div>
 		<!-- /.container -->
 	</ui:define>

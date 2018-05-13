@@ -3,7 +3,8 @@
      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui"
-	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
 <f:metadata>
 	<f:viewParam name="id" value="#{restaurantBean.id}">
@@ -83,35 +84,40 @@
 
 			<!-- Products list -->
 			<div>
-				<div class="row" id="row-main">
-					<div class="well col-md-12" id="show-content">
 
-						<!-- <h3>
+				<div class="well col-md-12" id="show-content">
+
+					<!-- <h3>
 							<code>#content</code>
 							<code class="width-9">.col-md-9</code>
 							<code class="width-12">.col-md-12</code>
 						</h3> -->
-						<div class="row product-style">
-							<div class="col-md-2 col-sm-3 col-xs-4">
-								<div class="btn-group" role="group" aria-label="Controls">
-									<button type="button" class="btn btn-default toggle-sidebar">Add to cart</button>
-								</div>
+					<div class="row product-style">
+						<div class="col-md-2 col-sm-3 col-xs-4">
+							<div class="btn-group" role="group" aria-label="Controls">
+								<button type="button" class="btn btn-default toggle-sidebar">Add to cart</button>
 							</div>
 						</div>
-						<!-- 					<div class="well"> -->
-						<ui:repeat value="#{restaurantBean.products}" var="product">
+					</div>
+					<ui:repeat value="#{restaurantBean.products}" var="product">
 
-							<div class="row product-style">
+						<div class="row product-style">
+
+							<ui:fragment rendered="#{not empty product.image}">
 								<div class="col-md-2 col-sm-3 col-xs-4">
-									<img class="img-rounded" src="../resources/images/#{product.image}" alt="#{product.image}" width="100"
+									<img class="img-rounded" src="../resources/images/#{product.image}" alt="#{product.image}" width="130"
 										height="100"></img>
 								</div>
-								<div class=" col-md-8 col-sm-7 col-xs-8 size-description">
-									<h4 style="font-family: fantasy;">
-										<b>#{product.name}</b>
-									</h4>
-									<p style="font-family: fantasy;">(#{product.description})</p>
-								</div>
+							</ui:fragment>
+
+							<div class=" col-md-8 col-sm-7 col-xs-8 size-description">
+								<h4>
+									<b>#{product.name}</b>
+								</h4>
+								<p>(#{product.description})</p>
+							</div>
+
+							<ui:fragment rendered="#{not empty product.image}">
 								<div class=" col-md-2 col-sm-2 col-xs-12">
 									<div class="row">
 										<!-- <div class="pull-right">
@@ -121,48 +127,35 @@
 										<div class="pull-right">
 											#{product.price} RON
 											<h:link class="glyphicon glyphicon-plus size-plus" aria-hidden="true" outcome="shoppingCart">
-												<!-- <f:param name="id" value="#{sessionBean.userId}" />  -->
 												<f:param name="id" value="#{restaurantBean.id}" />
 											</h:link>
 
 										</div>
 									</div>
 								</div>
-							</div>
-						</ui:repeat>
-						<!-- </div> -->
-					</div>
-					<div class="collapsed" id="sidebar">
-						<div class="container" style="margin-top: 30px; font-family: fantasy;">
-							<h5 class="marginTop style-font">
-								Comanda ta de la <br></br> <b>#{restaurantBean.restaurant.name}</b>
-							</h5>
-							<br></br>
-							<h5>Din data:</h5>
-							<div class="row">
-								<div class="col-sm-2">
-									<input type='text' class="form-control" id='datetimepicker4' style="height: 25px;" />
-								</div>
-							</div>
-							<br></br>
-							<div class="desktop-cart order subtotal">
-								Subtotal___________________ <span class="desktop-cart order subtotal-price">0,00&nbsp;RON</span>
-							</div>
-							<div class="desktop-cart order delivery">
-								Taxa livrare ________________<span class="desktop-cartorder delivery-price"> 0,00&nbsp;RON </span>
-							</div>
-							<div class="desktop-cart__order__total">
-								<b>Total____________</b> <em class="desktop-cart__order__total-note">(Incl. TVA)</em> <span
-									class="desktop-cart__order__total-price">0,00&nbsp;RON</span>
-							</div>
-							<br></br>
-							<h:commandButton type="submit" class="btn btn-success
-									btn-block" value="CHECKOUT" required="true"
-								style="width: 220px;"></h:commandButton>
-						</div>
-					</div>
-				</div>
+							</ui:fragment>
 
+							<ui:fragment rendered="#{empty product.image}">
+								<div class=" col-md-4 col-sm-5 col-xs-12">
+									<div class="row">
+										<!-- <div class="pull-right">
+										#{product.price} RON <span class="glyphicon glyphicon-plus size-plus" aria-hidden="true"></span>
+									</div> -->
+
+										<div class="pull-right">
+											#{product.price} RON
+											<h:link class="glyphicon glyphicon-plus size-plus" aria-hidden="true" outcome="shoppingCart">
+												<f:param name="id" value="#{restaurantBean.id}" />
+											</h:link>
+
+										</div>
+									</div>
+								</div>
+							</ui:fragment>
+
+						</div>
+					</ui:repeat>
+				</div>
 			</div>
 		</div>
 	</ui:define>

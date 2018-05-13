@@ -158,6 +158,7 @@ li {
     border-width:5px;  */ 
     border-color: white;
     border-bottom-style: solid;
+    font-family: fantasy;
 }
 
 .size-description{
