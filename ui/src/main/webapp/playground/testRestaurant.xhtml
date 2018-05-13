@@ -14,16 +14,21 @@
 <ui:composition template="../template/template.xhtml">
 
 	<ui:define name="head">
-		<link rel="stylesheet" href="../resources/mycss/cart.css"></link>
+
 		<meta charset="utf-8"></meta>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
 		<title>Restaurant</title>
+		
+		
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"></link>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"></link>
+		
+		<link rel="stylesheet" href="../resources/css/cart.css"></link>
+				
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-		<script src="../resources/js/moment.js"></script>
-		<script src="../resources/js/bootstrap-datetimepicker.min.js"></script>
+		<script src="../resources/distribution/datepicker/js/moment.js"></script>
+		<script src="../resources/distribution/datepicker/js/bootstrap-datetimepicker.min.js"></script>
 		<script type="text/javascript">
             $(function () {
                 $('#datetimepicker4').datetimepicker();
@@ -86,12 +91,6 @@
 			<div>
 
 				<div class="well col-md-12" id="show-content">
-
-					<!-- <h3>
-							<code>#content</code>
-							<code class="width-9">.col-md-9</code>
-							<code class="width-12">.col-md-12</code>
-						</h3> -->
 					<div class="row product-style">
 						<div class="col-md-2 col-sm-3 col-xs-4">
 							<div class="btn-group" role="group" aria-label="Controls">
@@ -120,10 +119,6 @@
 							<ui:fragment rendered="#{not empty product.image}">
 								<div class=" col-md-2 col-sm-2 col-xs-12">
 									<div class="row">
-										<!-- <div class="pull-right">
-										#{product.price} RON <span class="glyphicon glyphicon-plus size-plus" aria-hidden="true"></span>
-									</div> -->
-
 										<div class="pull-right">
 											#{product.price} RON
 											<h:link class="glyphicon glyphicon-plus size-plus" aria-hidden="true" outcome="shoppingCart">
@@ -138,10 +133,6 @@
 							<ui:fragment rendered="#{empty product.image}">
 								<div class=" col-md-4 col-sm-5 col-xs-12">
 									<div class="row">
-										<!-- <div class="pull-right">
-										#{product.price} RON <span class="glyphicon glyphicon-plus size-plus" aria-hidden="true"></span>
-									</div> -->
-
 										<div class="pull-right">
 											#{product.price} RON
 											<h:link class="glyphicon glyphicon-plus size-plus" aria-hidden="true" outcome="shoppingCart">

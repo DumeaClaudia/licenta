@@ -64,7 +64,7 @@
     width: 100%;
     top: 50px;
     background:black;                                                                                  
-      z-index: 9999 !important;
+      z-index: 1040 !important;
   }
   .navbar {
       margin-bottom: 0px;

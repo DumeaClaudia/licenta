@@ -63,4 +63,4 @@ repository/.settings/org.eclipse.wst.common.project.facet.core.xml
 ear/.settings/org.eclipse.wst.common.project.facet.core.xml
 commons/.settings/org.eclipse.wst.common.project.facet.core.xml
 business/.settings/org.eclipse.wst.common.project.facet.core.xml
-/repository/src/main/resources/META-INF/persistence.xml
+repository/src/main/resources/META-INF/persistence.xml
