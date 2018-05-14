@@ -10,6 +10,9 @@
 	<f:viewParam name="id" value="#{restaurantBean.id}">
 	</f:viewParam>
 </f:metadata>
+
+
+
 <h:body data-spy="scroll" data-target=".navbar" data-offset="50">
 	<ui:composition template="../template/template.xhtml">
 
@@ -18,6 +21,7 @@
 			<meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
 			<title>Restaurant2</title>
 
+			<link rel="stylesheet" href="../resources/css/cart.css"></link>
 			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"></link>
 			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"></link>
 			<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -25,7 +29,9 @@
 
 			<script src="../resources/distribution/datepicker/js/moment.js"></script>
 			<script src="../resources/distribution/datepicker/js/bootstrap-datetimepicker.min.js"></script>
-			<link rel="stylesheet" href="../resources/css/cart.css"></link>
+			<h:outputScript library="javax.faces" name="jsf.js" />
+			<script src="../resources/js/cart.js"></script>
+
 
 			<script type="text/javascript">
             $(function () {
@@ -89,23 +95,11 @@
 				</div>
 				<!-- categories of products-->
 				<nav class="navbar navbar-restaurant-section" data-spy="affix" data-offset-top="283">
-				<div class="container-fluid">
-					<div class="navbar-header">
-						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-							<span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
-						</button>
-						<a class="navbar-brand" href="#">WebSiteName</a>
-					</div>
-					<div>
-						<div class="collapse navbar-collapse" id="myNavbar">
-							<ul class="nav navbar-nav">
-								<li><a href="#section1">Section 1</a></li>
-								<li><a href="#section2">Section 2</a></li>
-								<li><a href="#section3">Section 3</a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
+				<ul class=" nav navbar-nav">
+					<li><a href="#section1">Section 1</a></li>
+					<li><a href="#section2">Section 2</a></li>
+					<li><a href="#section3">Section 3</a></li>
+				</ul>
 				</nav>
 
 				<!-- Product List -->
@@ -125,6 +119,22 @@
 								</div>
 							</div>
 						</div>
+
+						<h:form>
+							<h:outputScript name="jsf.js" library="javax.faces" target="head" />
+
+							<h:inputText id="inputname" value="#{shoppingCartAjaxBean.name}" />
+							<h:outputText id="outputname" value="#{shoppingCartAjaxBean.output}" />
+							<h:commandButton id="submit" value="Submit"
+								onclick="jsf.ajax.request(this, event, 
+                              {
+			                              render:'outputname'});
+                        return false;" />
+							<h:commandLink id="commandButton" value="Show Message">
+								<f:ajax listener="#{shoppingCartAjaxBean.handleEvent}" execute="inputname" render="outputname"></f:ajax>
+							</h:commandLink>
+						</h:form>
+
 						<ui:repeat value="#{restaurantBean.products}" var="product">
 
 							<div class="row product-style">
@@ -134,7 +144,7 @@
 											height="100"></img>
 									</div>
 								</ui:fragment>
-								
+
 								<div class=" col-md-8 col-sm-7 col-xs-8 size-description">
 									<h4>
 										<b>#{product.name}</b>
@@ -145,15 +155,9 @@
 								<ui:fragment rendered="#{not empty product.image}">
 									<div class=" col-md-2 col-sm-2 col-xs-12">
 										<div class="row">
-											<!-- <div class="pull-right">
-										#{product.price} RON <span class="glyphicon glyphicon-plus size-plus" aria-hidden="true"></span>
-									</div> -->
-
 											<div class="pull-right">
-												#{product.price} RON
-												<h:link class="glyphicon glyphicon-plus size-plus" aria-hidden="true" outcome="shoppingCart">
-													<f:param name="id" value="#{restaurantBean.id}" />
-												</h:link>
+												#{product.price} RON <a class="cart-add-button glyphicon glyphicon-plus size-plus"
+													data-product-id="#{product.id}" data-product-name="#{product.name}"> </a>
 
 											</div>
 										</div>
@@ -167,10 +171,9 @@
 									</div> -->
 
 											<div class="pull-right">
-												#{product.price} RON
-												<h:link class="glyphicon glyphicon-plus size-plus" aria-hidden="true" outcome="shoppingCart">
-													<f:param name="id" value="#{restaurantBean.id}" />
-												</h:link>
+												#{product.price} RON <h:link class="cart-add-button glyphicon glyphicon-plus size-plus"
+													data-product-id="#{product.id}" data-product-name="#{product.name}" outcome="shoppingCart">
+													<f:param name="id" value="#{sessionBean.userId}" /> </h:link>
 
 											</div>
 										</div>

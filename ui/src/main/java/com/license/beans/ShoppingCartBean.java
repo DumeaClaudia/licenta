@@ -8,6 +8,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 
+import com.license.Product;
+import com.license.ProductShoppingCart;
 import com.license.ShoppingCart;
 import com.license.services.ShoppingCartService;
 
@@ -22,6 +24,7 @@ public class ShoppingCartBean {
 	private String product;
 	private String user;
 	private List<ShoppingCart> shoppingCarts = null;
+	private List<Product> products = null;
 	List<Long> ids;
 	
 	@EJB
@@ -32,6 +35,10 @@ public class ShoppingCartBean {
 		this.userId = userId;
 		ids = shoppingCartService.getActiveShoppingCartForUser(userId);
 		shoppingCarts = shoppingCartService.getShoppingCart(ids.get(0));
+		products.add(shoppingCartService.addProductToShoppigCart(idProduct));
+	}
+	public void addProductToCart( long idProduct) {
+		products.add(shoppingCartService.addProductToShoppigCart(idProduct));
 	}
 
 	public List<ShoppingCart> getShoppingCarts() {

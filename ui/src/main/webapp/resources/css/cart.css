@@ -1,9 +1,9 @@
 @charset "UTF-8";
 
-  html, body {
+html, body {
 	height: 100%;
-} 
- 
+}
+
 .jumbotron {
 	margin-top: 20px;
 }
@@ -32,7 +32,6 @@
 	display: none; /* just hiding labels for demo purposes */
 }
 
-
 #sidebar {
 	background-color: lightgrey;
 	-webkit-transition: margin 0.3s ease;
@@ -51,29 +50,60 @@
 		margin-right: -25%;  
 	}
 } */
+body {
+	position: relative;
+}
 
+.affix {
+	top: 0;
+	width: 100%;
+	top: 50px;
+	background: #ddd; 
+	z-index: 500 !important;
+	opacity: 0.90;
+}
 
+.navbar {
+	margin-bottom: 0px;
+}
 
+.affix ~ .container-fluid {
+	position: relative;
+	top: 50px;
+}
 
+.affix>ul>li>a {
+	color: #555;
+	font-weight: bold;
+}
 
- body {                                                                                          
-      position: relative; 
-  }
-  .affix {
-      top:0;
-    width: 100%;
-    top: 50px;
-    background:black;                                                                                  
-      z-index: 1040 !important;
-  }
-  .navbar {
-      margin-bottom: 0px;
-  }
+.navbar-restaurant-section>ul>li>a {
+	padding: 5px;
+}
 
-  .affix ~ .container-fluid {
-     position: relative;
-     top: 50px;
-  }
-   #section1 {padding-top:50px;height:500px;color: #fff; background-color: #1E88E5;}
-  #section2 {padding-top:50px;height:500px;color: #fff; background-color: #673ab7;}
-  #section3 {padding-top:50px;height:500px;color: #fff; background-color: #ff9800;}
+.navbar-restaurant-section {
+	padding: 0px;
+	min-height: auto;
+	max-width: 720px;
+}
+
+#section1 {
+	padding-top: 50px;
+	height: 500px;
+	color: #fff;
+	background-color: #1E88E5;
+}
+
+#section2 {
+	padding-top: 50px;
+	height: 500px;
+	color: #fff;
+	background-color: #673ab7;
+}
+
+#section3 {
+	padding-top: 50px;
+	height: 500px;
+	color: #fff;
+	background-color: #ff9800;
+}

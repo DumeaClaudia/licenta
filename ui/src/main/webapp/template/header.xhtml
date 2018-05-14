@@ -3,6 +3,9 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui" xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core" xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title>Restaurant Project</title>
+</h:head>
 <h:body>
 	<ui:composition>
 		<div id="header">
@@ -25,10 +28,12 @@
 						<c:if test="#{not empty sessionBean.username}">
 
 							<ul class="nav navbar-nav navbar-right">
-								<li><a data-toggle="modal" href="#myLoginModal" value="#{sessionBean.username}"><span class="glyphicon glyphicon-log-in"></span> </a> </li>
-								<li><a href="logout.xhtml" >Logout<span class="glyphicon glyphicon-log-in"></span> </a> </li>
-							
-							
+								<li><a data-toggle="modal" href="#myLoginModal" value="#{sessionBean.username}"><span
+										class="glyphicon glyphicon-log-in"></span> </a></li>
+								<li><a href="logout.xhtml">Logout<span class="glyphicon glyphicon-log-in"></span>
+								</a></li>
+
+
 							</ul>
 						</c:if>
 						<c:if test="#{empty sessionBean.username}">
@@ -40,7 +45,7 @@
 							</ul>
 
 						</c:if>
-					<!--
+						<!--
 							<form action="/action_page.php">
 									<div class="input-group">
 										<input type="text" class="form-control" placeholder="Search" name="search"></input>
@@ -56,7 +61,7 @@
 				</nav>
 
 				<!-- Login Menu  -->
-				<div class="container"  style="font-family: fantasy;">
+				<div class="container" style="font-family: fantasy;">
 
 					<!-- Trigger the modal with a button -->
 					<!-- Modal -->
@@ -113,7 +118,7 @@
 
 
 					<!-- Register Menu  -->
-					<div class="container"  style="font-family: fantasy;">
+					<div class="container" style="font-family: fantasy;">
 						<div class="modal fade" id="myRegisterModal" role="dialog">
 							<div class="modal-dialog">
 
