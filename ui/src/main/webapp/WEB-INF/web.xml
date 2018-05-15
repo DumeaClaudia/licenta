@@ -5,4 +5,23 @@
     <param-name>com.sun.faces.enableRestoreView11Compatibility</param-name>
     <param-value>true</param-value>
   </context-param>
+  
+  <servlet>
+    <servlet-name>jsonservlet</servlet-name>            
+    <servlet-class>other.JSONServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>jsonservlet</servlet-name>
+    <url-pattern>/jsonservlet</url-pattern>
+  </servlet-mapping>
+  
+  
+  <servlet>
+    <servlet-name>Faces Servlet</servlet-name>
+    <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  
+  
+  
 </web-app>
