@@ -9,7 +9,7 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 
 import com.license.Product;
-import com.license.ProductShoppingCart;
+//import com.license.ProductShoppingCart;
 import com.license.ShoppingCart;
 import com.license.services.ShoppingCartService;
 

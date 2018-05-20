@@ -3,7 +3,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -14,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.license.AddProductRequest;
-import com.license.Article;
 import com.license.Product;
 import com.license.ShoppingCart;
 import com.license.ShoppingCartResponse;
@@ -43,7 +41,8 @@ public class CartServlet extends HttpServlet {
 			json = br.readLine();
 		}
 		
-		// 2. initiate jackson mapper
+		//un fel de deserializare
+		// 2. initiate jackson mapper // librarie pt a transforma json-ul in clase de tipul ala..
     	ObjectMapper mapper = new ObjectMapper();
     	
     	// 3. Convert received JSON to Article
@@ -59,7 +58,7 @@ public class CartServlet extends HttpServlet {
 		List<ShoppingCart> cart = shoppingCartService.getShoppingCart(1);
 		jsonResponse.setShoppingCart(cart.get(0));
 
-		
+		//serializare
 
 		// 6. Send List<Article> as JSON to client
     	mapper.writeValue(response.getOutputStream(), jsonResponse);

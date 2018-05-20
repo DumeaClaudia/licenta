@@ -10,6 +10,14 @@ function addProductToCartAjaxRequest(request) {
 		
 		success: function (data) {
 			toastr.info("Added to cart: " + data.shoppingCart.product + ".");
+			var div1 = $("<div/>");
+			
+			var span = $("<span class='label' style='margin:4px;padding:4px' />");
+        	span.text(data.shoppingCart.product);
+        	div1.append(span);
+        	$("#card-products-list").empty();
+        	$("#card-products-list").append(div1);
+			
 			console.log(data);
         },
 		error:function(data,status,er) {
@@ -23,7 +31,6 @@ function addProductToCartAjaxRequest(request) {
 }
 $(document).ready(function() {	
 	$(".cart-add-button").click(function() {
-		var baseUrl = "";
 		var productId = this.dataset.productId;
 		var productName = this.dataset.productName;
 		var addProductRequest = new Object();
