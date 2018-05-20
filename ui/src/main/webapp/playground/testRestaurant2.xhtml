@@ -29,8 +29,7 @@
 
 			<script src="../resources/distribution/datepicker/js/moment.js"></script>
 			<script src="../resources/distribution/datepicker/js/bootstrap-datetimepicker.min.js"></script>
-			<h:outputScript library="javax.faces" name="jsf.js" />
-			<script src="../resources/js/cart.js"></script>
+			<script src="../resources/js/cart.js"></script> 
 
 
 			<script type="text/javascript">
@@ -64,10 +63,9 @@
 
 							<div class=" col-md-4 col-sm-6 col-xs-12">
 								<div class="row">
-									<div>
-										<h3>
-											<b>#{restaurantBean.restaurant.name}</b>
-										</h3>
+									<div id="idRestaurantName">
+
+										<h3>#{restaurantBean.restaurant.name}</h3>
 									</div>
 
 									<div class="pull-left">
@@ -119,22 +117,7 @@
 								</div>
 							</div>
 						</div>
-
-						<h:form>
-							<h:outputScript name="jsf.js" library="javax.faces" target="head" />
-
-							<h:inputText id="inputname" value="#{shoppingCartAjaxBean.name}" />
-							<h:outputText id="outputname" value="#{shoppingCartAjaxBean.output}" />
-							<h:commandButton id="submit" value="Submit"
-								onclick="jsf.ajax.request(this, event, 
-                              {
-			                              render:'outputname'});
-                        return false;" />
-							<h:commandLink id="commandButton" value="Show Message">
-								<f:ajax listener="#{shoppingCartAjaxBean.handleEvent}" execute="inputname" render="outputname"></f:ajax>
-							</h:commandLink>
-						</h:form>
-
+						
 						<ui:repeat value="#{restaurantBean.products}" var="product">
 
 							<div class="row product-style">
@@ -146,36 +129,50 @@
 								</ui:fragment>
 
 								<div class=" col-md-8 col-sm-7 col-xs-8 size-description">
-									<h4>
-										<b>#{product.name}</b>
-									</h4>
-									<p>(#{product.description})</p>
+									<div id="idProductName">
+										<h4>
+											<b>#{product.name}</b>
+										</h4>
+									</div>
+									<div id="idProductDescription">
+										<p>(#{product.description})</p>
+									</div>
 								</div>
 
 								<ui:fragment rendered="#{not empty product.image}">
 									<div class=" col-md-2 col-sm-2 col-xs-12">
 										<div class="row">
 											<div class="pull-right">
-												#{product.price} RON <a class="cart-add-button glyphicon glyphicon-plus size-plus"
-													data-product-id="#{product.id}" data-product-name="#{product.name}"> </a>
+												#{product.price} RON
+												<a class="cart-add-button glyphicon glyphicon-plus size-plus" data-product-id="#{product.id}"
+													data-product-name="#{product.name}" >
+													
+												</a>
 
 											</div>
+
 										</div>
 									</div>
 								</ui:fragment>
 								<ui:fragment rendered="#{empty product.image}">
 									<div class=" col-md-4 col-sm-5 col-xs-12">
 										<div class="row">
-											<!-- <div class="pull-right">
-										#{product.price} RON <span class="glyphicon glyphicon-plus size-plus" aria-hidden="true"></span>
-									</div> -->
-
+										
 											<div class="pull-right">
-												#{product.price} RON <h:link class="cart-add-button glyphicon glyphicon-plus size-plus"
-													data-product-id="#{product.id}" data-product-name="#{product.name}" outcome="shoppingCart">
-													<f:param name="id" value="#{sessionBean.userId}" /> </h:link>
+												#{product.price} RON
+												<a class="cart-add-button glyphicon glyphicon-plus size-plus" data-product-id="#{product.id}"
+													data-product-name="#{product.name}" outcome="shoppingCart">
+												
+												</a>
 
 											</div>
+
+											<!-- <h:commandButton id="idProductPrice2" type="button" class="" value="#{product.price} RON" required="true">
+
+												<h:link class="cart-add-button glyphicon glyphicon-plus size-plus" aria-hidden="true" outcome="shoppingCart">
+													<f:param name="id" value="#{restaurantBean.id}" />
+												</h:link>
+											</h:commandButton> -->
 										</div>
 									</div>
 								</ui:fragment>
