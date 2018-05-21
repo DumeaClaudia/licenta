@@ -1,3 +1,21 @@
+$(document).ready(function() {	
+	$(".cart-add-button").click(function() {
+		
+		var productId = this.dataset.productId;
+		var productName = this.dataset.productName;
+		
+		var addProductRequest = new Object();
+		
+		addProductRequest.idProduct = productId;
+		addProductRequest.idCart = 1;
+		
+		addProductToCartAjaxRequest(addProductRequest);
+		
+		return false;
+	});
+});
+
+
 function addProductToCartAjaxRequest(request) {
 	
 	$.ajax({
@@ -15,7 +33,9 @@ function addProductToCartAjaxRequest(request) {
 			var span = $("<span class='label' style='margin:4px;padding:4px' />");
         	span.text(data.shoppingCart.product);
         	div1.append(span);
-        	$("#card-products-list").empty();
+        	
+        	/*$("#card-products-list").empty();*/
+        	
         	$("#card-products-list").append(div1);
 			
 			console.log(data);
@@ -29,14 +49,3 @@ function addProductToCartAjaxRequest(request) {
 		}
 	});
 }
-$(document).ready(function() {	
-	$(".cart-add-button").click(function() {
-		var productId = this.dataset.productId;
-		var productName = this.dataset.productName;
-		var addProductRequest = new Object();
-		addProductRequest.idProduct = productId;
-		addProductRequest.idCart = 0;
-		addProductToCartAjaxRequest(addProductRequest);
-		return false;
-	});
-});

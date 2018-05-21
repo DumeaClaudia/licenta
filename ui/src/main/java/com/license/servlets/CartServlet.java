@@ -3,7 +3,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -14,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.license.AddProductRequest;
 import com.license.Product;
-import com.license.ShoppingCart;
 import com.license.ShoppingCartResponse;
 import com.license.services.ShoppingCartService;
 
@@ -42,7 +40,9 @@ public class CartServlet extends HttpServlet {
 		}
 		
 		//un fel de deserializare
-		// 2. initiate jackson mapper // librarie pt a transforma json-ul in clase de tipul ala..
+
+		// 2. initiate jackson mapper // librarie pt a transforma json-ul in
+		// clase de tipul ala..
     	ObjectMapper mapper = new ObjectMapper();
     	
     	// 3. Convert received JSON to Article
@@ -53,10 +53,17 @@ public class CartServlet extends HttpServlet {
     	
     	// 5. Add article to List<Article>
 		//articles.add(article);
+
 		ShoppingCartResponse jsonResponse = new ShoppingCartResponse();
 		jsonResponse.setProducts( new ArrayList<Product>());
-		List<ShoppingCart> cart = shoppingCartService.getShoppingCart(1);
-		jsonResponse.setShoppingCart(cart.get(0));
+
+		/*
+		 * List<ShoppingCart> cart = shoppingCartService.getShoppingCart(1);
+		 * jsonResponse.setShoppingCart(cart.get(0));
+		 */ // ce era inainte de afisa doar un rand.....
+
+		Product product = shoppingCartService.addProductToShoppigCart(3);
+		jsonResponse.setProduct(product);
 
 		//serializare
 
