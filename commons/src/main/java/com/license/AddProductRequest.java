@@ -1,12 +1,11 @@
 package com.license;
 
-import java.util.LinkedList;
-import java.util.List;
 
 public class AddProductRequest {
 
 	private long idCart;
 	private long idProduct;
+	
 	public long getIdCart() {
 		return idCart;
 	}

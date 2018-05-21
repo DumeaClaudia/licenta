@@ -14,6 +14,7 @@ function addProductToCartAjaxRequest(request) {
 			
 			var span = $("<span class='label' style='margin:4px;padding:4px' />");
         	span.text(data.shoppingCart.product);
+			//span.text(data.product.name);
         	div1.append(span);
         	$("#card-products-list").empty();
         	$("#card-products-list").append(div1);
@@ -35,7 +36,7 @@ $(document).ready(function() {
 		var productName = this.dataset.productName;
 		var addProductRequest = new Object();
 		addProductRequest.idProduct = productId;
-		addProductRequest.idCart = 0;
+		addProductRequest.idCart = 2;
 		addProductToCartAjaxRequest(addProductRequest);
 		return false;
 	});

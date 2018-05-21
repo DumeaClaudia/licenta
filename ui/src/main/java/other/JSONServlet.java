@@ -1,4 +1,4 @@
-package other;
+/*package other;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -19,10 +19,10 @@ public class JSONServlet extends HttpServlet {
 	// This will store all received articles
 	List<Article> articles = new LinkedList<Article>();
 	
-	/***************************************************
+	*//***************************************************
 	 * URL: /jsonservlet
 	 * doPost(): receives JSON data, parse it, map it and send back as JSON
-	 ****************************************************/
+	 ****************************************************//*
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 	        throws ServletException, IOException{
 	    
@@ -49,3 +49,4 @@ public class JSONServlet extends HttpServlet {
     	mapper.writeValue(response.getOutputStream(), articles);
 	}
 }
+*/

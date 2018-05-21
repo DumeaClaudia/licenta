@@ -8,5 +8,5 @@ import com.license.ShoppingCart;
 public interface ShoppingCartService {
 	List<ShoppingCart>  getShoppingCart(long idShoppingCart);
 	List<Long> getActiveShoppingCartForUser(long idUser);
-	Product addProductToShoppigCart(long idUser);	
+	Product addProductToShoppigCart(long idProduct);	
 }

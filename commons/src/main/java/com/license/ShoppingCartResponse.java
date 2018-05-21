@@ -6,6 +6,7 @@ public class ShoppingCartResponse {
 
 	private ShoppingCart shoppingCart;
 	private List<Product> products;
+	private Product product;
 	
 	public ShoppingCart getShoppingCart() {
 		return shoppingCart;
@@ -18,6 +19,12 @@ public class ShoppingCartResponse {
 	}
 	public void setProducts(List<Product> products) {
 		this.products = products;
+	}
+	public Product getProduct() {
+		return product;
+	}
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 	
 	
