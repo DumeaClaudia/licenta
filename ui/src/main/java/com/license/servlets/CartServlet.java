@@ -3,6 +3,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.license.AddProductRequest;
 import com.license.Product;
+import com.license.ShoppingCart;
 import com.license.ShoppingCartResponse;
 import com.license.services.ShoppingCartService;
 
@@ -56,7 +58,7 @@ public class CartServlet extends HttpServlet {
 
 		ShoppingCartResponse jsonResponse = new ShoppingCartResponse();
 		jsonResponse.setProducts( new ArrayList<Product>());
-<<<<<<< HEAD
+
 		
 		List<ShoppingCart> cart = shoppingCartService.getShoppingCart(1);
 		jsonResponse.setShoppingCart(cart.get(0));
@@ -65,7 +67,7 @@ public class CartServlet extends HttpServlet {
 		
 		/*Product product = shoppingCartService.addProductToShoppigCart(3);
 		jsonResponse.setProduct(product);*/
-=======
+
 
 		/*
 		 * List<ShoppingCart> cart = shoppingCartService.getShoppingCart(1);
@@ -74,7 +76,7 @@ public class CartServlet extends HttpServlet {
 
 		Product product = shoppingCartService.addProductToShoppigCart(3);
 		jsonResponse.setProduct(product);
->>>>>>> branch 'master' of https://github.com/DumeaClaudia/licenta.git
+
 
 		//serializare
 

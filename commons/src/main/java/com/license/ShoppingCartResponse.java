@@ -20,16 +20,8 @@ public class ShoppingCartResponse {
 	public void setProducts(List<Product> products) {
 		this.products = products;
 	}
-<<<<<<< HEAD
-	public Product getProduct() {
-		return product;
-	}
-	public void setProduct(Product product) {
-		this.product = product;
-	}
-	
-	
-=======
+
+
 
 	public Product getProduct() {
 		return product;
@@ -38,5 +30,5 @@ public class ShoppingCartResponse {
 	public void setProduct(Product product) {
 		this.product = product;
 	}
->>>>>>> branch 'master' of https://github.com/DumeaClaudia/licenta.git
+
 }

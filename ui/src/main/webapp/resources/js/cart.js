@@ -50,7 +50,7 @@ function addProductToCartAjaxRequest(request) {
 		}
 	});
 }
-<<<<<<< HEAD
+
 $(document).ready(function() {	
 	$(".cart-add-button").click(function() {
 		var productId = this.dataset.productId;
@@ -62,5 +62,4 @@ $(document).ready(function() {
 		return false;
 	});
 });
-=======
->>>>>>> branch 'master' of https://github.com/DumeaClaudia/licenta.git
+
