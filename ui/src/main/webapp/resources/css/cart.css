@@ -74,7 +74,7 @@ body {
 
 .affix>ul>li>a {
 	color: #555;
-	font-weight: bold;
+	/* font-weight: bold; */
 }
 
 .navbar-restaurant-section>ul>li>a {

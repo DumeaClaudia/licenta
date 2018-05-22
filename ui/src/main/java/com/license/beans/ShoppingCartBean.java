@@ -2,11 +2,9 @@ package com.license.beans;
 
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.bean.SessionScoped;
 
 import com.license.Product;
 //import com.license.ProductShoppingCart;
@@ -30,13 +28,18 @@ public class ShoppingCartBean {
 	@EJB
 	private ShoppingCartService shoppingCartService;
 
+	// o metoda pt a afisa produsul in functie de id.. gen cand apas pe plus...
 
 	public void setUserId(Long userId) {
 		this.userId = userId;
+		
+		// nu e ok...
 		ids = shoppingCartService.getActiveShoppingCartForUser(userId);
 		shoppingCarts = shoppingCartService.getShoppingCart(ids.get(0));
+		
 		products.add(shoppingCartService.addProductToShoppigCart(idProduct));
 	}
+	
 	public void addProductToCart( long idProduct) {
 		products.add(shoppingCartService.addProductToShoppigCart(idProduct));
 	}

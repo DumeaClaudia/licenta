@@ -1,3 +1,21 @@
+$(document).ready(function() {	
+	$(".cart-add-button").click(function() {
+		
+		var productId = this.dataset.productId;
+		var productName = this.dataset.productName;
+		
+		var addProductRequest = new Object();
+		
+		addProductRequest.idProduct = productId;
+		addProductRequest.idCart = 1;
+		
+		addProductToCartAjaxRequest(addProductRequest);
+		
+		return false;
+	});
+});
+
+
 function addProductToCartAjaxRequest(request) {
 	
 	$.ajax({
@@ -16,7 +34,9 @@ function addProductToCartAjaxRequest(request) {
         	span.text(data.shoppingCart.product);
 			//span.text(data.product.name);
         	div1.append(span);
-        	$("#card-products-list").empty();
+        	
+        	/*$("#card-products-list").empty();*/
+        	
         	$("#card-products-list").append(div1);
 			
 			console.log(data);
@@ -30,6 +50,7 @@ function addProductToCartAjaxRequest(request) {
 		}
 	});
 }
+<<<<<<< HEAD
 $(document).ready(function() {	
 	$(".cart-add-button").click(function() {
 		var productId = this.dataset.productId;
@@ -41,3 +62,5 @@ $(document).ready(function() {
 		return false;
 	});
 });
+=======
+>>>>>>> branch 'master' of https://github.com/DumeaClaudia/licenta.git
