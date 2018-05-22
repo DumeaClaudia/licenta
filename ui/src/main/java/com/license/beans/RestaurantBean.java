@@ -3,11 +3,10 @@ package com.license.beans;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 import com.license.Product;
 import com.license.Restaurant;
@@ -21,6 +20,8 @@ public class RestaurantBean {
 	private Restaurant restaurant = null;
 	private List<Product> products = new ArrayList<Product>(); 
 	private long id;
+	private long productId;
+	Product product = new Product();
 
 	@EJB
 	private RestaurantService restaurantService;
@@ -40,6 +41,10 @@ public class RestaurantBean {
 		this.id = id;
 	}
 	
+	public void addProduct() {
+		FacesContext context = FacesContext.getCurrentInstance();
+		context.getExternalContext().getSessionMap().put("productId", productId);
+	}
 
 	public List<Product>  displayAllProductsForRestaurant() {
 		return this.products;
@@ -61,6 +66,21 @@ public class RestaurantBean {
 	public void setProducts(List<Product> products) {
 		this.products = products;
 	}
-	
 
+	public long getProductId() {
+		return productId;
+	}
+
+	public void setProductId(long productId) {
+		this.productId = productId;
+	}
+
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+	
 }

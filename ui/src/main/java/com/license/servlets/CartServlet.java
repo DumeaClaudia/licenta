@@ -2,8 +2,6 @@ package com.license.servlets;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -14,13 +12,13 @@ import javax.servlet.http.HttpServletResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.license.AddProductRequest;
 import com.license.Product;
-import com.license.ShoppingCart;
 import com.license.ShoppingCartResponse;
 import com.license.services.ShoppingCartService;
 
 public class CartServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
+	private long idProduct;
 	
 	@EJB
 	private ShoppingCartService shoppingCartService;
@@ -57,26 +55,22 @@ public class CartServlet extends HttpServlet {
 		//articles.add(article);
 
 		ShoppingCartResponse jsonResponse = new ShoppingCartResponse();
-		jsonResponse.setProducts( new ArrayList<Product>());
-
-		
-		List<ShoppingCart> cart = shoppingCartService.getShoppingCart(1);
-		jsonResponse.setShoppingCart(cart.get(0));
-		
-		// id-ul produsului ar cam trebui 
-		
-		/*Product product = shoppingCartService.addProductToShoppigCart(3);
-		jsonResponse.setProduct(product);*/
-
-
 		/*
+		 * jsonResponse.setProducts( new ArrayList<Product>());
 		 * List<ShoppingCart> cart = shoppingCartService.getShoppingCart(1);
 		 * jsonResponse.setShoppingCart(cart.get(0));
-		 */ // ce era inainte de afisa doar un rand.....
+		 */
+		
+		// id-ul produsului ar cam trebui 
+		/*
+		 * FacesContext context = FacesContext.getCurrentInstance(); idProduct =
+		 * (Long) context.getExternalContext().getSessionMap().get("productId");
+		 */
 
-		Product product = shoppingCartService.addProductToShoppigCart(3);
+		idProduct = 9;
+
+		Product product = shoppingCartService.addProductToShoppigCart(idProduct);
 		jsonResponse.setProduct(product);
-
 
 		//serializare
 

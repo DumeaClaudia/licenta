@@ -54,13 +54,13 @@
 
 				<div class="container marketing" style="margin-top: 50px;">
 					<div class="well row">
-						<div class="col-md-12" style="margin-top: 30px;">
+						<div class="col-md-12" style="margin-top: 10px;">
 							<div class="col-md-8 col-sm-6 col-xs-12">
 								<a class="btn glyphicon glyphicon-chevron-left" href="homeRestaurants.xhtml"> BackToHomePage</a> <img
 									class="img-thumbnail restaurant-img-thumbnail" src="#{restaurantBean.restaurant.image}"
 									alt="#{restaurantBean.restaurant.name}"></img>
+							<br></br>
 							</div>
-
 							<div class=" col-md-4 col-sm-6 col-xs-12">
 								<div class="row">
 									<div id="idRestaurantName">
@@ -138,7 +138,8 @@
 										<div class="row">
 											<div class="pull-right">
 												#{product.price} RON <a class="cart-add-button glyphicon glyphicon-plus size-plus"
-													data-product-id="#{product.id}" data-product-name="#{product.name}"> </a>
+													data-product-id="#{product.id}" data-product-name="#{product.name}" action="#{restaurantBean.addProduct()}"
+													value="#{addToCartBean.productId}"> </a>
 
 											</div>
 										</div>
@@ -151,10 +152,10 @@
 
 											<div class="pull-right">
 												#{product.price} RON <a class="cart-add-button glyphicon glyphicon-plus size-plus"
-													data-product-id="#{product.id}" data-product-name="#{product.name}"> </a>
+													data-product-id="#{product.id}" data-product-name="#{product.name}" action="#{restaurantBean.addProduct()}"
+													value="#{addToCartBean.productId}" onclick=""> </a>
 
 											</div>
-
 										</div>
 									</div>
 								</ui:fragment>
@@ -163,43 +164,10 @@
 						</ui:repeat>
 					</div>
 
-					<div class="collapsed" id="sidebar">
-
-						<div class="container" style="margin-top: 30px;">
+					<div class="collapsed" id="sidebar" >
+						<div class="container" style="margin-top: 20px;">
 							<h5 class="marginTop style-font">
-								Comanda ta de la <br></br> <b>#{restaurantBean.restaurant.name}</b>
-							</h5>
-							<br></br>
-							
-							<!-- <h5>Din data:</h5>
-							<div class="row">
-								<div class="col-sm-2">
-									<input type='text' class="form-control" id='datetimepicker4' style="height: 25px;" />
-								</div>
-							</div> -->
-							
-							<div id="card-products-list"></div>
-							<br></br>
-							<div class="desktop-cart order subtotal">
-								Subtotal______________ <span class="desktop-cart order subtotal-price">0,00&nbsp;RON</span>
-							</div>
-							<div class="desktop-cart order delivery">
-								Taxa livrare ____________<span class="desktop-cartorder delivery-price"> 0,00&nbsp;RON </span>
-							</div>
-							<div class="desktop-cart__order__total">
-								<b>Total________</b> <em class="desktop-cart__order__total-note">(Incl. TVA)</em> <span
-									class="desktop-cart__order__total-price">0,00&nbsp;RON</span>
-							</div>
-							<br></br>
-							<h:commandButton type="submit" class="btn btn-success
-									btn-block" value="CHECKOUT" required="true"
-								style="width: 220px;"></h:commandButton>
-						</div>
-					</div>
-
-						<div class="container" style="margin-top: 20px; font-family: fantasy;">
-							<h5 class="marginTop style-font">
-								Comanda ta de la <br /> <b>#{restaurantBean.restaurant.name}</b>
+								Comanda ta de la <br></br><i><b>#{restaurantBean.restaurant.name}:</b></i>
 							</h5>
 							<br />
 							<!-- <h5>Din data:</h5>
@@ -210,25 +178,30 @@
 							</div> -->
 							<div id="card-products-list"></div>
 							<br />
-							<div class="desktop-cart order subtotal">
-								Subtotal___________________ <span class="desktop-cart order subtotal-price">0,00&nbsp;RON</span>
-							</div>
+							
+							<!-- <div class="desktop-cart order subtotal">
+								Subtotal______________ <span class="desktop-cart order subtotal-price">0,00&nbsp;RON</span>
+							</div> -->
+							<br></br><br></br>
+							<br>
+							</br>
+							<br></br>
 							<div class="desktop-cart order delivery">
-								Taxa livrare ________________<span class="desktop-cartorder delivery-price"> 0,00&nbsp;RON </span>
+								<i>Taxa livrare</i>____________<span class="desktop-cartorder delivery-price"> 0,00&nbsp;RON </span>
 							</div>
 							<div class="desktop-cart__order__total">
-								<b>Total____________</b> <em class="desktop-cart__order__total-note">(Incl. TVA)</em> <span
+							 <b>Total_________________</b> <em class="desktop-cart__order__total-note"></em> <span
 									class="desktop-cart__order__total-price">0,00&nbsp;RON</span>
 							</div>
-							<br />
+							<br/>
+							
 							<h:commandButton type="submit" class="btn btn-success
 									btn-block" value="CHECKOUT" required="true"
 								style="width: 220px;"></h:commandButton>
 						</div>
-
 					</div>
 				</div>
-
+			</div>
 		</ui:define>
 
 	</ui:composition>
