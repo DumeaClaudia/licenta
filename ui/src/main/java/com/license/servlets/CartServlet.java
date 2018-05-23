@@ -55,19 +55,17 @@ public class CartServlet extends HttpServlet {
 		//articles.add(article);
 
 		ShoppingCartResponse jsonResponse = new ShoppingCartResponse();
+		
 		/*
-		 * jsonResponse.setProducts( new ArrayList<Product>());
+		 * jsonResponse.setProducts(new ArrayList<Product>());
 		 * List<ShoppingCart> cart = shoppingCartService.getShoppingCart(1);
 		 * jsonResponse.setShoppingCart(cart.get(0));
 		 */
-		
-		// id-ul produsului ar cam trebui 
-		/*
-		 * FacesContext context = FacesContext.getCurrentInstance(); idProduct =
-		 * (Long) context.getExternalContext().getSessionMap().get("productId");
-		 */
 
-		idProduct = 9;
+		// id-ul produsului ar cam trebui 
+
+		idProduct = jsonRequest.getIdProduct();
+		// idProduct = 9;
 
 		Product product = shoppingCartService.addProductToShoppigCart(idProduct);
 		jsonResponse.setProduct(product);

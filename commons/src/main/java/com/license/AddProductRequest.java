@@ -1,6 +1,5 @@
 package com.license;
 
-
 public class AddProductRequest {
 
 	private long idCart;
@@ -13,6 +12,9 @@ public class AddProductRequest {
 		this.idCart = idCart;
 	}
 	public long getIdProduct() {
+		// FacesContext context = FacesContext.getCurrentInstance();
+		// idProduct = (long)
+		// context.getExternalContext().getSessionMap().get("productId");
 		return idProduct;
 	}
 	public void setIdProduct(long idProduct) {

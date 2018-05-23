@@ -6,7 +6,6 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.context.FacesContext;
 
 import com.license.Product;
 import com.license.Restaurant;
@@ -41,10 +40,12 @@ public class RestaurantBean {
 		this.id = id;
 	}
 	
-	public void addProduct() {
-		FacesContext context = FacesContext.getCurrentInstance();
-		context.getExternalContext().getSessionMap().put("productId", productId);
-	}
+	/*
+	 * public void addProduct() { FacesContext context =
+	 * FacesContext.getCurrentInstance();
+	 * context.getExternalContext().getSessionMap().put("productId", productId);
+	 * }
+	 */
 
 	public List<Product>  displayAllProductsForRestaurant() {
 		return this.products;
