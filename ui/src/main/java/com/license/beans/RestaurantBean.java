@@ -40,12 +40,6 @@ public class RestaurantBean {
 		this.id = id;
 	}
 	
-	/*
-	 * public void addProduct() { FacesContext context =
-	 * FacesContext.getCurrentInstance();
-	 * context.getExternalContext().getSessionMap().put("productId", productId);
-	 * }
-	 */
 
 	public List<Product>  displayAllProductsForRestaurant() {
 		return this.products;

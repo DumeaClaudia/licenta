@@ -182,3 +182,17 @@ li {
 .style-font{
 	font-family: fantasy;
 }
+
+.product-list-name{
+	color:black; 
+}
+
+.product-list-price{
+	color:black; 
+	float: right;
+}
+
+.product-list-delete{ 
+	color:black; 
+	float: right;
+}
