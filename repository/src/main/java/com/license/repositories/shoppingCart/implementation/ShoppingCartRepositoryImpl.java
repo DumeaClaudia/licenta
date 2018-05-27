@@ -18,7 +18,6 @@ import javax.swing.event.ListSelectionEvent;
 
 import com.license.Product;
 import com.license.Restaurant;
-import com.license.ShoppingCart;
 import com.license.User;
 import com.license.entities.CartForUserEntity;
 import com.license.entities.NativeShoppingCartEntity;
@@ -39,9 +38,10 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 	private EntityManagerFactory emf = Persistence.createEntityManagerFactory("myPU");
 	private EntityManager em = emf.createEntityManager();
 
-	public List<ShoppingCart> retrieveShoppingCartById(long id) {
+	public List<Product> retrieveShoppingCartById(long id) {
 
-		List<ShoppingCart> scList = new ArrayList<>();
+		List<Product> scList = new ArrayList<>();
+		/*
 		Query query = em.createNamedQuery("shopping_cart_products_native.getNativeShoppingCartInfo");
 		query.setParameter(1, id);
 
@@ -49,17 +49,21 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 
 		if (qResult == null) {
 			System.out.println("se pare ca nu au fost gasite sc in baza de date ha ha ha");
+		}*/
+		
+		
+		
+		Query query = em.createNamedQuery("shopping_cart_products.getProductsForCart");
+		query.setParameter("idShoppingCart", id);
+
+		List<ShoppingCartProductsEntity> qResult = query.getResultList();
+
+		if (qResult == null) {
+			System.out.println("se pare ca nu au fost gasite sc in baza de date ha ha ha");
 		}
-		for (NativeShoppingCartEntity e : qResult) {
-			ShoppingCart shoppingCart = new ShoppingCart();
-
-			shoppingCart.setId(e.getId());
-			shoppingCart.setProduct(e.getProduct());
-			shoppingCart.setUser(e.getUser());
-			shoppingCart.setRestaurant(e.getRestaurant());
-			shoppingCart.setNrProducts(e.getNrProducts());
-
-			scList.add(shoppingCart);
+		for (ShoppingCartProductsEntity e : qResult) {
+			Product product = this.getProductById(e.getIdProduct());
+			scList.add(product);
 		}
 		return scList;
 	}

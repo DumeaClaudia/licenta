@@ -11,12 +11,29 @@
 		<param-value>true</param-value>
 	</context-param>
 	<servlet>
-		<servlet-name>jsonservlet_cart</servlet-name>
-		<servlet-class>com.license.servlets.CartServlet</servlet-class>
+		<servlet-name>jsonservlet_add_product_to_cart</servlet-name>
+		<servlet-class>com.license.servlets.AddProductToCartServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>jsonservlet_cart</servlet-name>
-		<url-pattern>/jsonservlet/cart</url-pattern>
+		<servlet-name>jsonservlet_add_product_to_cart</servlet-name>
+		<url-pattern>/jsonservlet/add_product_to_cart</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>jsonservlet_remove_product_from_cart</servlet-name>
+		<servlet-class>com.license.servlets.RemoveProductFromCartServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>jsonservlet_remove_product_from_cart</servlet-name>
+		<url-pattern>/jsonservlet/remove_product_from_cart</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>jsonservlet_get_cart_products</servlet-name>
+		<servlet-class>com.license.servlets.GetCartProductsServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>jsonservlet_get_cart_products</servlet-name>
+		<url-pattern>/jsonservlet/get_cart_products</url-pattern>
 	</servlet-mapping>
 	<!-- <servlet> <servlet-name>Faces Servlet</servlet-name> <servlet-class>javax.faces.webapp.FacesServlet</servlet-class> <load-on-startup>1</load-on-startup> </servlet> <servlet-mapping> <servlet-name>Faces Servlet</servlet-name> <url-pattern>*.xhtml</url-pattern> </servlet-mapping> -->
 </web-app>

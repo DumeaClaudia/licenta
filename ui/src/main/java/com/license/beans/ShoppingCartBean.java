@@ -8,7 +8,6 @@ import javax.faces.bean.RequestScoped;
 
 import com.license.Product;
 //import com.license.ProductShoppingCart;
-import com.license.ShoppingCart;
 import com.license.services.ShoppingCartService;
 
 @ManagedBean
@@ -21,7 +20,7 @@ public class ShoppingCartBean {
 	private String restaurant;
 	private String product;
 	private String user;
-	private List<ShoppingCart> shoppingCarts = null;
+	private List<Product> shoppingCarts = null;
 	private List<Product> products = null;
 	List<Long> ids;
 	
@@ -42,11 +41,11 @@ public class ShoppingCartBean {
 		products.add(shoppingCartService.getProduct(idProduct));
 	}
 
-	public List<ShoppingCart> getShoppingCarts() {
+	public List<Product> getShoppingCarts() {
 		return shoppingCarts;
 	}
 
-	public void setShoppingCarts(List<ShoppingCart> shoppingCart) {
+	public void setShoppingCarts(List<Product> shoppingCart) {
 		this.shoppingCarts = shoppingCart;
 	}
 

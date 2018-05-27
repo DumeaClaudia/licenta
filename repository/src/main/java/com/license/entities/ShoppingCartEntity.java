@@ -1,8 +1,6 @@
 package com.license.entities;
 
 import java.util.Date;
-import java.util.TimeZone;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

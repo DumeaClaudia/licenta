@@ -3,10 +3,10 @@ package com.license.servlets;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
-import javax.faces.context.FacesContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,9 +16,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.license.AddProductRequest;
 import com.license.Product;
 import com.license.ShoppingCartResponse;
+import com.license.UserIdRequest;
 import com.license.services.ShoppingCartService;
 
-public class CartServlet extends HttpServlet {
+public class GetCartProductsServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	private long idProduct;
@@ -49,7 +50,7 @@ public class CartServlet extends HttpServlet {
 		ObjectMapper mapper = new ObjectMapper();
 
 		// 3. Convert received JSON to Article
-		AddProductRequest jsonRequest = mapper.readValue(json, AddProductRequest.class);
+		UserIdRequest jsonRequest = mapper.readValue(json, UserIdRequest.class);
 
 		// 4. Set response type to JSON
 		response.setContentType("application/json");
@@ -57,7 +58,7 @@ public class CartServlet extends HttpServlet {
 		// 5. Add article to List<Article>
 		// articles.add(article);
 
-		ShoppingCartResponse jsonResponse = new ShoppingCartResponse();
+		List<Product> jsonResponse = new ArrayList<Product>();
 
 		// idProduct = jsonRequest.getIdProduct();
 		// idProduct = 9;
@@ -66,18 +67,13 @@ public class CartServlet extends HttpServlet {
 		// insert into shoopping cart
 
 		List<Long> activeCartList = shoppingCartService.getActiveShoppingCartForUser(jsonRequest.getIdUser());
-		Product product = shoppingCartService.getProduct(jsonRequest.getIdProduct());
 		long activeCart = 0;
 		if (activeCartList.size() != 0) {
 			activeCart = activeCartList.get(0);
+			jsonResponse = shoppingCartService.getShoppingCart(activeCart);
 		} else {
-
-			activeCart = shoppingCartService.createShoppingCartService(jsonRequest.getIdUser(),
-					product.getIdRestaurant());
+			
 		}
-		shoppingCartService.addProductToCart(jsonRequest.getIdUser(), jsonRequest.getIdProduct(), activeCart);
-		jsonResponse.setProduct(product);
-
 		// serializare
 
 		// 6. Send List<Article> as JSON to client

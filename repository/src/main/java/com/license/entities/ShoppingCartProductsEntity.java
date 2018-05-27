@@ -5,7 +5,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
+import javax.persistence.NamedQuery;
 @Entity(name = "shopping_cart_products")
+@NamedQuery(name = "shopping_cart_products.getProductsForCart", query = "Select p FROM shopping_cart_products p where p.idShoppingCart = :idShoppingCart")
 
 public class ShoppingCartProductsEntity {
 	@Id
