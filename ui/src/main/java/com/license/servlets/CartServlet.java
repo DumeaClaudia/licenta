@@ -56,13 +56,6 @@ public class CartServlet extends HttpServlet {
 
 		ShoppingCartResponse jsonResponse = new ShoppingCartResponse();
 		
-		/*
-		 * jsonResponse.setProducts(new ArrayList<Product>());
-		 * List<ShoppingCart> cart = shoppingCartService.getShoppingCart(1);
-		 * jsonResponse.setShoppingCart(cart.get(0));
-		 */
-
-		// id-ul produsului ar cam trebui 
 
 		idProduct = jsonRequest.getIdProduct();
 		// idProduct = 9;

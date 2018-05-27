@@ -40,7 +40,7 @@ function addProductToCartAjaxRequest(request) {
         	div1.append(span1);
         	div1.append(span2);
         	
-        	$("#card-products-list").empty();
+        	//$("#card-products-list").empty();
         	
         	$("#card-products-list").append(div1);
 			
