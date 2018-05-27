@@ -7,10 +7,14 @@ $(document).ready(function() {
 		var addProductRequest = new Object();
 		
 		addProductRequest.idProduct = productId;
-		addProductRequest.idCart = 1;
+		addProductRequest.idUser = 1;
 		
 		addProductToCartAjaxRequest(addProductRequest);
 		
+		return false;
+	});
+	$(".cart-add-error").click(function(){
+		toastr.error("You have to login before added to cart...");
 		return false;
 	});
 });

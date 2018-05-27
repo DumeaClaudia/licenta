@@ -2,15 +2,10 @@ package com.license;
 
 public class AddProductRequest {
 
-	private long idCart;
+	
 	private long idProduct;
+	private long idUser;
 
-	public long getIdCart() {
-		return idCart;
-	}
-	public void setIdCart(long idCart) {
-		this.idCart = idCart;
-	}
 	public long getIdProduct() {
 		// FacesContext context = FacesContext.getCurrentInstance();
 		// idProduct = (long)
@@ -19,6 +14,12 @@ public class AddProductRequest {
 	}
 	public void setIdProduct(long idProduct) {
 		this.idProduct = idProduct;
+	}
+	public long getIdUser() {
+		return idUser;
+	}
+	public void setIdUser(long idUser) {
+		this.idUser = idUser;
 	}
 	
 	

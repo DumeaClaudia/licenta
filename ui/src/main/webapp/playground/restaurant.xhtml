@@ -128,10 +128,14 @@
 									<div class=" col-md-2 col-sm-2 col-xs-12">
 										<div class="row">
 											<div class="pull-right">
-												#{product.price} RON <a class="cart-add-button glyphicon glyphicon-plus size-plus"
-													data-product-id="#{product.id}" data-product-name="#{product.name}" value="#{restaurantBean.productId}">
-												</a>
-
+												#{product.price} RON
+												<ui:fragment rendered="#{not empty sessionBean.username}">
+													<a class="cart-add-button glyphicon glyphicon-plus size-plus" data-product-id="#{product.id}"
+														data-product-name="#{product.name}" value="#{restaurantBean.productId}"> </a>
+												</ui:fragment>
+												<ui:fragment rendered="#{empty sessionBean.username}">
+													<a class="cart-add-error glyphicon glyphicon-plus size-plus"> </a>
+												</ui:fragment>
 											</div>
 										</div>
 									</div>
@@ -142,10 +146,14 @@
 										<div class="row">
 
 											<div class="pull-right">
-												#{product.price} RON <a class="cart-add-button glyphicon glyphicon-plus size-plus"
-													data-product-id="#{product.id}" data-product-name="#{product.name}" value="#{restaurantBean.productId}">
-												</a>
-
+												#{product.price} RON
+												<ui:fragment rendered="#{not empty sessionBean.username}">
+													<a class="cart-add-button glyphicon glyphicon-plus size-plus" data-product-id="#{product.id}"
+														data-product-name="#{product.name}" value="#{restaurantBean.productId}"> </a>
+												</ui:fragment>
+												<ui:fragment rendered="#{empty sessionBean.username}">
+													<a class="cart-add-error glyphicon glyphicon-plus size-plus"> </a>
+												</ui:fragment>
 											</div>
 										</div>
 									</div>

@@ -10,9 +10,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-@Entity(name = "shoppingCart")
+@Entity(name = "shopping_cart")
 @NamedQueries({
-		@NamedQuery(name = "shoppingCart.getShoppingCart", query = "Select sc FROM shoppingCart sc where sc.id=:idShoppingCart") })
+		@NamedQuery(name = "shopping_cart.getShoppingCart", query = "Select sc FROM shopping_cart sc where sc.id=:idShoppingCart" )})
 
 public class ShoppingCartEntity {
 	@Id

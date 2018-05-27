@@ -28,8 +28,6 @@ public class ShoppingCartBean {
 	@EJB
 	private ShoppingCartService shoppingCartService;
 
-	// o metoda pt a afisa produsul in functie de id.. gen cand apas pe plus...
-
 	public void setUserId(Long userId) {
 		this.userId = userId;
 		
@@ -37,11 +35,11 @@ public class ShoppingCartBean {
 		ids = shoppingCartService.getActiveShoppingCartForUser(userId);
 		shoppingCarts = shoppingCartService.getShoppingCart(ids.get(0));
 		
-		products.add(shoppingCartService.addProductToShoppigCart(idProduct));
+		products.add(shoppingCartService.getProduct(idProduct)); // ? de 2 ori
 	}
 	
-	public void addProductToCart( long idProduct) {
-		products.add(shoppingCartService.addProductToShoppigCart(idProduct));
+	public void getProducts( long idProduct) {
+		products.add(shoppingCartService.getProduct(idProduct));
 	}
 
 	public List<ShoppingCart> getShoppingCarts() {

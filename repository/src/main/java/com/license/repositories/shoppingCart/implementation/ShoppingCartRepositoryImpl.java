@@ -3,7 +3,9 @@ package com.license.repositories.shoppingCart.implementation;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.Remote;
@@ -23,6 +25,8 @@ import com.license.entities.NativeShoppingCartEntity;
 import com.license.entities.ProductEntity;
 import com.license.entities.RestaurantEntity;
 import com.license.entities.ShoppingCartEntity;
+import com.license.entities.ShoppingCartProductsEntity;
+import com.license.entities.ShoppingCartUserEntity;
 import com.license.entities.UserEntity;
 import com.license.repositories.restaurant.RestaurantRepository;
 import com.license.repositories.shoppingCart.ShoppingCartRepository;
@@ -38,7 +42,7 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 	public List<ShoppingCart> retrieveShoppingCartById(long id) {
 
 		List<ShoppingCart> scList = new ArrayList<>();
-		Query query = em.createNamedQuery("shoppingCartProducts.getNativeShoppingCartInfo");
+		Query query = em.createNamedQuery("shopping_cart_products_native.getNativeShoppingCartInfo");
 		query.setParameter(1, id);
 
 		List<NativeShoppingCartEntity> qResult = query.getResultList();
@@ -104,4 +108,44 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 
 			return productResponse;
 	 }
+
+	public long createShoppingCart(long idUser, long idRestaurant) {
+		
+		ShoppingCartEntity entity = new ShoppingCartEntity();
+
+		entity.setIdRestaurant(idRestaurant);
+		entity.setCreatedDate(Date.from(Instant.now()));
+		
+		em.getTransaction().begin();
+		em.persist(entity);
+		em.getTransaction().commit();
+		
+		long idCart = entity.getId();
+		
+		ShoppingCartUserEntity userCartEntity = new ShoppingCartUserEntity();
+		userCartEntity.setIdShoppingCart(idCart);
+		userCartEntity.setIdUser(idUser);
+		
+		em.getTransaction().begin();
+		em.persist(userCartEntity);
+		em.getTransaction().commit();
+		return idCart;	
+	}
+
+	
+	public long addProductToCart(long idUser, long idProduct, long idShoppingCart) {
+		ShoppingCartProductsEntity cartProductsEntity = new ShoppingCartProductsEntity();
+		cartProductsEntity.setNrProducts(1);
+		cartProductsEntity.setIdUser(idUser);
+		cartProductsEntity.setIdProduct(idProduct);
+		cartProductsEntity.setIdShoppingCart(idShoppingCart);
+		
+		em.getTransaction().begin();
+		em.persist(cartProductsEntity);
+		em.getTransaction().commit();
+		
+		long id = cartProductsEntity.getId(); 
+		return id;
+	}
+	
 }

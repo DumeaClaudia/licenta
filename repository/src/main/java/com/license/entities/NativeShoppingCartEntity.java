@@ -9,10 +9,10 @@ import javax.persistence.NamedNativeQueries;
 import javax.persistence.NamedNativeQuery;
 
 /* NativeQuery se comporta ca in sql, nu jpql cum face NamedQuery*/
-@Entity(name = "shopping_cart_products")
+@Entity(name = "shopping_cart_products_native")
 @NamedNativeQueries({ 
 @NamedNativeQuery(
-		  name="shoppingCartProducts.getNativeShoppingCartInfo",
+		  name="shopping_cart_products_native.getNativeShoppingCartInfo",
 		  query="select   scp.idShoppingCart as idShoppingCart ,p.id as idProduct, u.username as user, r.name as restaurant, p.name as product  FROM shopping_cart_products scp \n" + 
 					"	join shopping_cart sc on scp.idShoppingCart=sc.id \n" + 
 					"	join restaurant r on sc.idRestaurant=r.id\n" + 
