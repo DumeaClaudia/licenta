@@ -70,7 +70,7 @@ public class GetCartProductsServlet extends HttpServlet {
 		long activeCart = 0;
 		if (activeCartList.size() != 0) {
 			activeCart = activeCartList.get(0);
-			jsonResponse = shoppingCartService.getShoppingCart(activeCart);
+			jsonResponse = shoppingCartService.getShoppingCartProducts(activeCart);
 		} else {
 			
 		}

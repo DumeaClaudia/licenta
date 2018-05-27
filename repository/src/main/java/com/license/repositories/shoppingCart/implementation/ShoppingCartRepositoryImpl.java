@@ -38,20 +38,9 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 	private EntityManagerFactory emf = Persistence.createEntityManagerFactory("myPU");
 	private EntityManager em = emf.createEntityManager();
 
-	public List<Product> retrieveShoppingCartById(long id) {
+	public List<Product> retrieveShoppingCartProductsById(long id) {
 
 		List<Product> scList = new ArrayList<>();
-		/*
-		Query query = em.createNamedQuery("shopping_cart_products_native.getNativeShoppingCartInfo");
-		query.setParameter(1, id);
-
-		List<NativeShoppingCartEntity> qResult = query.getResultList();
-
-		if (qResult == null) {
-			System.out.println("se pare ca nu au fost gasite sc in baza de date ha ha ha");
-		}*/
-		
-		
 		
 		Query query = em.createNamedQuery("shopping_cart_products.getProductsForCart");
 		query.setParameter("idShoppingCart", id);

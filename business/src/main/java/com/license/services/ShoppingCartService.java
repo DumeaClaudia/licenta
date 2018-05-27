@@ -5,7 +5,7 @@ import java.util.List;
 import com.license.Product;
 
 public interface ShoppingCartService {
-	List<Product> getShoppingCart(long idShoppingCart);
+	List<Product> getShoppingCartProducts(long idShoppingCart);
 
 	List<Long> getActiveShoppingCartForUser(long idUser);
 

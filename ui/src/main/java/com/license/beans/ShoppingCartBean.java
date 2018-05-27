@@ -32,7 +32,7 @@ public class ShoppingCartBean {
 		
 		// nu e ok...
 		ids = shoppingCartService.getActiveShoppingCartForUser(userId);
-		shoppingCarts = shoppingCartService.getShoppingCart(ids.get(0));
+		shoppingCarts = shoppingCartService.getShoppingCartProducts(ids.get(0));
 		
 		products.add(shoppingCartService.getProduct(idProduct)); // ? de 2 ori
 	}

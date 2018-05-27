@@ -19,8 +19,8 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
 	@EJB
 	private ShoppingCartRepository repository;
 	
-	public List<Product> getShoppingCart(long idShoppingCart) {
-		return repository.retrieveShoppingCartById(idShoppingCart);
+	public List<Product> getShoppingCartProducts(long idShoppingCart) {
+		return repository.retrieveShoppingCartProductsById(idShoppingCart);
 	}
 
 	public List<Long> getActiveShoppingCartForUser(long idUser) {

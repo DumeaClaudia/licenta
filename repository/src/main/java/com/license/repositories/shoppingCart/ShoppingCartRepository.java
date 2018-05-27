@@ -7,7 +7,7 @@ import com.license.Product;
 
 
 public interface ShoppingCartRepository {
-	public List<Product> retrieveShoppingCartById(long id);
+	public List<Product> retrieveShoppingCartProductsById(long id);
 
 	public List<Long> retrieveActiveShoppingCartForUserId(long idUser);
 
