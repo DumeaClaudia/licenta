@@ -20,7 +20,7 @@ public class ShoppingCartBean {
 	private String restaurant;
 	private String product;
 	private String user;
-	private List<Product> shoppingCarts = null;
+	private List<Product> shoppingCart = null;
 	private List<Product> products = null;
 	List<Long> ids;
 	
@@ -32,7 +32,7 @@ public class ShoppingCartBean {
 		
 		// nu e ok...
 		ids = shoppingCartService.getActiveShoppingCartForUser(userId);
-		shoppingCarts = shoppingCartService.getShoppingCartProducts(ids.get(0));
+		shoppingCart = shoppingCartService.getShoppingCartProducts(ids.get(0));
 		
 		products.add(shoppingCartService.getProduct(idProduct)); // ? de 2 ori
 	}
@@ -41,12 +41,12 @@ public class ShoppingCartBean {
 		products.add(shoppingCartService.getProduct(idProduct));
 	}
 
-	public List<Product> getShoppingCarts() {
-		return shoppingCarts;
+	public List<Product> getShoppingCart() {
+		return shoppingCart;
 	}
 
-	public void setShoppingCarts(List<Product> shoppingCart) {
-		this.shoppingCarts = shoppingCart;
+	public void setShoppingCart(List<Product> shoppingCart) {
+		this.shoppingCart = shoppingCart;
 	}
 
 	public Long getIdProduct() {

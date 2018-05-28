@@ -5,11 +5,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedNativeQueries;
-import javax.persistence.NamedNativeQuery;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+
 @Entity(name = "shopping_cart_products")
-@NamedQuery(name = "shopping_cart_products.getProductsForCart", query = "Select p FROM shopping_cart_products p where p.idShoppingCart = :idShoppingCart")
+@NamedQueries({
+		@NamedQuery(name = "shopping_cart_products.getProductsForCart", query = "Select p FROM shopping_cart_products p where p.idShoppingCart = :idShoppingCart"),
+		@NamedQuery(name = "shopping_cart_products.selectForDeleteProductForCart", query = "select p FROM shopping_cart_products p where p.idUser=:idUser and p.idProduct = :idProduct and p.idShoppingCart = :idShoppingCart") })
 
 public class ShoppingCartProductsEntity {
 	@Id
@@ -22,13 +24,13 @@ public class ShoppingCartProductsEntity {
 
 	@Column(name = "idUser")
 	private long idUser;
-	
+
 	@Column(name = "idProduct")
 	private long idProduct;
-	
+
 	@Column(name = "idShoppingCart")
 	private long idShoppingCart;
-	
+
 	public long getId() {
 		return id;
 	}
@@ -68,6 +70,5 @@ public class ShoppingCartProductsEntity {
 	public void setIdShoppingCart(long idShoppingCart) {
 		this.idShoppingCart = idShoppingCart;
 	}
-	
-	
+
 }

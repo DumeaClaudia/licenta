@@ -2,7 +2,6 @@ package com.license;
 
 public class AddProductRequest {
 
-	
 	private long idProduct;
 	private long idUser;
 

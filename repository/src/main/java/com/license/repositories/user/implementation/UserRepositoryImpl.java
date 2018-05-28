@@ -1,13 +1,11 @@
 package com.license.repositories.user.implementation;
 
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
-import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -16,7 +14,6 @@ import javax.persistence.Query;
 import com.license.User;
 import com.license.entities.UserEntity;
 import com.license.repositories.user.UserRepository;
-import com.mysql.jdbc.authentication.Sha256PasswordPlugin;
 
 @Stateless
 @Remote(UserRepository.class)

@@ -1,8 +1,5 @@
 package com.license.repositories.shoppingCart.implementation;
 
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
@@ -14,20 +11,12 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
-import javax.swing.event.ListSelectionEvent;
-
 import com.license.Product;
-import com.license.Restaurant;
-import com.license.User;
 import com.license.entities.CartForUserEntity;
-import com.license.entities.NativeShoppingCartEntity;
 import com.license.entities.ProductEntity;
-import com.license.entities.RestaurantEntity;
 import com.license.entities.ShoppingCartEntity;
 import com.license.entities.ShoppingCartProductsEntity;
 import com.license.entities.ShoppingCartUserEntity;
-import com.license.entities.UserEntity;
-import com.license.repositories.restaurant.RestaurantRepository;
 import com.license.repositories.shoppingCart.ShoppingCartRepository;
 
 @Stateless
@@ -38,17 +27,15 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 	private EntityManagerFactory emf = Persistence.createEntityManagerFactory("myPU");
 	private EntityManager em = emf.createEntityManager();
 
+	
 	public List<Product> retrieveShoppingCartProductsById(long id) {
 
 		List<Product> scList = new ArrayList<>();
-		
 		Query query = em.createNamedQuery("shopping_cart_products.getProductsForCart");
 		query.setParameter("idShoppingCart", id);
-
 		List<ShoppingCartProductsEntity> qResult = query.getResultList();
-
 		if (qResult == null) {
-			System.out.println("se pare ca nu au fost gasite sc in baza de date ha ha ha");
+			System.out.println("nu au fost gasite produse pt shopping cart-ul ales");
 		}
 		for (ShoppingCartProductsEntity e : qResult) {
 			Product product = this.getProductById(e.getIdProduct());
@@ -57,23 +44,19 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 		return scList;
 	}
 
+	
 	public List<Long> retrieveActiveShoppingCartForUserId(long idUser) {
 
 		List<Long> idSc = new ArrayList<Long>();
-
 		Query query = em.createNamedQuery("shoppingCartProducts.getNativeShoppingCartForUser");
 		query.setParameter(1, idUser);
-
 		List<CartForUserEntity> shoppingCartIdUsers = query.getResultList();
-
 		if (shoppingCartIdUsers == null) {
 			System.out.println("se pare ca nu au fost gasite sc in baza de date ha ha ha");
 		}
-
 		for (CartForUserEntity e : shoppingCartIdUsers) {
 			idSc.add(e.getIdShoppingCart());
 		}
-
 		return idSc;
 	}
 
@@ -82,15 +65,12 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 			ProductEntity product = new ProductEntity();
 			Product productResponse = new Product();
 			Query query = em.createNamedQuery("product.getProductById");
-
-			query.setParameter("idProduct", idProduct);
-				
+			query.setParameter("idProduct", idProduct);				
 			product = (ProductEntity) query.getSingleResult();
 			
 			if (product == null) {
 				// return "";
-			}
-			
+			}			
 			productResponse.setIdRestaurant(product.getIdRestaurant());
 			productResponse.setImage(product.getImage());
 			productResponse.setName(product.getName());
@@ -98,6 +78,7 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 			productResponse.setDescription(product.getDescription());
 			productResponse.setPrice(product.getPrice());
 			productResponse.setDiscount(product.getDiscount());
+			productResponse.setId(product.getId());
 
 			return productResponse;
 	 }
@@ -128,6 +109,7 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 	
 	public long addProductToCart(long idUser, long idProduct, long idShoppingCart) {
 		ShoppingCartProductsEntity cartProductsEntity = new ShoppingCartProductsEntity();
+		
 		cartProductsEntity.setNrProducts(1);
 		cartProductsEntity.setIdUser(idUser);
 		cartProductsEntity.setIdProduct(idProduct);
@@ -140,5 +122,27 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 		long id = cartProductsEntity.getId(); 
 		return id;
 	}
-	
+
+	public void removeProductFromCart(long idUser, long idProduct, long idShoppingCart) {
+		
+		List<ShoppingCartProductsEntity> shoppingCartProductsEntity = new ArrayList<ShoppingCartProductsEntity>();		
+		
+		Query query = em.createNamedQuery("shopping_cart_products.selectForDeleteProductForCart");
+		query.setParameter("idUser", idUser);		
+		query.setParameter("idProduct", idProduct);	
+		query.setParameter("idShoppingCart", idShoppingCart);
+		
+		shoppingCartProductsEntity = query.getResultList();
+		
+		
+		for( ShoppingCartProductsEntity product: shoppingCartProductsEntity ) {
+			em.getTransaction().begin();
+			em.remove(product);	
+			em.getTransaction().commit();
+			// sterge doar un produs
+			break;
+		}
+		//em.persist(shoppingCartProductsEntity);
+		
+	}	
 }

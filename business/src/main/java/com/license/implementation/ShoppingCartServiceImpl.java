@@ -10,11 +10,9 @@ import com.license.Product;
 import com.license.repositories.shoppingCart.ShoppingCartRepository;
 import com.license.services.ShoppingCartService;
 
-
 @Remote(ShoppingCartService.class)
 @Stateless
 public class ShoppingCartServiceImpl implements ShoppingCartService{
-	
 
 	@EJB
 	private ShoppingCartRepository repository;
@@ -37,5 +35,9 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
 
 	public long addProductToCart(long idUser, long idProduct, long idShoppingCart) {
 		return repository.addProductToCart(idUser, idProduct, idShoppingCart);
+	}
+
+	public void removeProductFromCart(long idUser, long idProduct, long idShoppingCart) {
+		repository.removeProductFromCart(idUser, idProduct, idShoppingCart);		
 	}
 }

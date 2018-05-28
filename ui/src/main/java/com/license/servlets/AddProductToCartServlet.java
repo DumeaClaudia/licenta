@@ -24,9 +24,7 @@ public class AddProductToCartServlet extends HttpServlet {
 
 	@EJB
 	private ShoppingCartService shoppingCartService;
-
-	// This will store all received articles
-
+	
 	/***************************************************
 	 * URL: /jsonservlet doPost(): receives JSON data, parse it, map it and send
 	 * back as JSON
@@ -47,24 +45,20 @@ public class AddProductToCartServlet extends HttpServlet {
 		// clase de tipul ala..
 		ObjectMapper mapper = new ObjectMapper();
 
-		// 3. Convert received JSON to Article
+		// 3. Convert received JSON to AddProductRequest
 		AddProductRequest jsonRequest = mapper.readValue(json, AddProductRequest.class);
 
 		// 4. Set response type to JSON
 		response.setContentType("application/json");
-
-		// 5. Add article to List<Article>
-		// articles.add(article);
-
+		
 		ShoppingCartResponse jsonResponse = new ShoppingCartResponse();
 
-		// idProduct = jsonRequest.getIdProduct();
-		// idProduct = 9;
 		// get actie shopping cart for user
 		// if not active shopping cart create shopping cart
 		// insert into shoopping cart
 
 		List<Long> activeCartList = shoppingCartService.getActiveShoppingCartForUser(jsonRequest.getIdUser());
+		
 		Product product = shoppingCartService.getProduct(jsonRequest.getIdProduct());
 		long activeCart = 0;
 		if (activeCartList.size() != 0) {

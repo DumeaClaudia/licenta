@@ -14,5 +14,6 @@ public interface ShoppingCartService {
 	long createShoppingCartService(long idUser, long idRestaurant);
 
 	long addProductToCart(long idUser, long idProduct, long idShoppingCart);
-
+	
+	void removeProductFromCart(long idUser, long idProduct, long idShoppingCart);
 }
