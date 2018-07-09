@@ -6,82 +6,139 @@
 	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
-
-
-
 <h:body data-spy="scroll" data-target=".navbar" data-offset="50">
 	<ui:composition template="../template/template.xhtml">
+		<ui:define name="content">
 
-	<div class="container main">
-		<div class="row" style="margin-top: 15%;">
-			<div class="col-md-6 col-md-offset-3">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<strong class="">Register: </strong>
-					</div>
-					<div class="panel-body">
-						<h:form id="registerForm" class="form-horizontal" role="form"
-							h:rendered="true">
-							
-							<div class="form-group">
-								<h:outputLabel class="control-label col-sm-3" for="text">First
-									name:</h:outputLabel>
-								<div class="col-sm-8">
-									<h:inputText type="text" class="form-control"
-										id="idFirstName" placeholder="Enter first name"
-										name="firstName" value="#{Bean.user.firstName}"></h:inputText>
-								</div>
-							</div>
+			<div class="container">
+				<h2>Add bla bla....</h2>
+				<!-- Trigger the modal with a button -->
+				<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#addRestaurant">Add a
+					restaurant</button>
+				
+				<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#addProduct">Add a
+					product</button>
 
-							<div class="form-group">
-								<h:outputLabel class="control-label col-sm-3" for="text">Last
-									name:</h:outputLabel>
-								<div class="col-sm-8">
-									<h:inputText type="text" class="form-control" id="idLastName"
-										placeholder="Enter last name" name="lastName"
-										value="#{Bean.user.lastName}"></h:inputText>
-								</div>
+				<!-- Add restaurant modal -->
+				<div class="modal fade" id="addRestaurant" role="dialog">
+					<div class="modal-dialog">
+						<!-- Modal content-->
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h4 class="modal-title">Add a restaurant:</h4>
 							</div>
+							<div class="modal-body">
 
-							<div class="form-group">
-								<h:outputLabel class="control-label col-sm-3" for="text">Username:</h:outputLabel>
-								<div class="col-sm-8">
-									<h:inputText type="text" class="form-control" id="idUsername"
-										placeholder="Enter username" name="username"
-										value="#{Bean.user.username}"></h:inputText>
-								</div>
-							</div>
+								<div class="row">
+									<!-- <div class="col-md-12 col-md-offset-3"> -->
+									<div class="col-md-10">
+										<div class="panel-body">
+											<h:form id="addRestaurantForm" class="form-horizontal" role="form" h:rendered="true">
+												<div class="form-group">
+													<h:outputLabel class="control-label col-sm-4" for="text">Name:</h:outputLabel>
+													<div class="col-sm-8">
+														<h:inputText type="text" class="form-control" id="idName" placeholder="Enter restaurant's name"
+															name="name" value="#{BeanName.name}"></h:inputText>
+													</div>
+												</div>
 
-							<div class="form-group">
-								<h:outputLabel class="control-label col-sm-3" for="email">Email:</h:outputLabel>
-								<div class="col-sm-8">
-									<h:inputText type="email" class="form-control" id="email"
-										placeholder="Enter email" name="email"
-										value="#{Bean.user.email}"></h:inputText>
+												<div class="form-group">
+													<h:outputLabel class="control-label col-sm-4" for="text">Address:</h:outputLabel>
+													<div class="col-sm-8">
+														<h:inputText type="text" class="form-control" id="idAddress" placeholder="Enter restaurant's address"
+															name="address" value="#{BeanName.address}"></h:inputText>
+													</div>
+												</div>
+												<div class="form-group">
+													<h:outputLabel class="control-label col-sm-4" for="text">Description:</h:outputLabel>
+													<div class="col-sm-8">
+														<h:inputText type="text" class="form-control" id="idDescription" placeholder="Enter a description"
+															name="description" value="#{BeanName.description}"></h:inputText>
+													</div>
+												</div>
+											</h:form>
+										</div>
+									</div>
 								</div>
 							</div>
-							<div class="form-group">
-								<h:outputLabel class="control-label col-sm-3" for="pwd">Password:</h:outputLabel>
-								<div class="col-sm-8">
-									<h:inputSecret type="password" class="form-control"
-										id="password" placeholder="Enter password" name="pwd"
-										value="#{Bean.user.password}"></h:inputSecret>
-								</div>
+							<div class="modal-footer">
+								<span class="form-group last"> <h:commandButton type="submit" class="btn btn-default" value="Submit"
+										action="#{BeanName.register}" required="true"></h:commandButton>
+								</span>
+								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 							</div>
-							<div class="form-group last">
-								<div class="col-sm-offset-4 col-sm-10">
-									<h:commandButton type="submit" class="btn btn-default"
-										value="Submit" action="#{Bean.register}" required="true"></h:commandButton>
-								</div>
-							</div>
-
-						</h:form>
+						</div>
 
 					</div>
 				</div>
+
+				<!-- Add car modal -->
+				<div class="modal fade" id="addProduct" role="dialog">
+					<div class="modal-dialog">
+						<!-- Modal content-->
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h4 class="modal-title">Add a product:</h4>
+							</div>
+							<div class="modal-body">
+
+								<div class="row">
+									<!-- <div class="col-md-12 col-md-offset-3"> -->
+									<div class="col-md-10">
+										<div class="panel-body">
+											<h:form id="addProductForm" class="form-horizontal" role="form" h:rendered="true">
+												<div class="form-group">
+													<h:outputLabel class="control-label col-sm-4" for="text">Name:</h:outputLabel>
+													<div class="col-sm-8">
+														<h:inputText type="text" class="form-control" id="idProductName" placeholder="Enter product's name"
+															name="name" value="#{BeanName.name}"></h:inputText>
+													</div>
+												</div>
+
+												<div class="form-group">
+													<h:outputLabel class="control-label col-sm-4" for="text">Category:</h:outputLabel>
+													<div class="col-sm-8">
+														<h:inputText type="text" class="form-control" id="idCategory" placeholder="Enter product's category"
+															name="category" value="#{BeanName.category}"></h:inputText>
+													</div>
+												</div>
+												<div class="form-group">
+													<h:outputLabel class="control-label col-sm-4" for="text">Description:</h:outputLabel>
+													<div class="col-sm-8">
+														<h:inputText type="password" class="form-control" id="idProdDesc" placeholder="Enter the description"
+															name="pwd" value="#{BeanName.description}"></h:inputText>
+													</div>
+												</div>
+
+												<div class="form-group">
+													<h:outputLabel class="control-label col-sm-4" for="number">Price:</h:outputLabel>
+													<div class="col-sm-8">
+														<h:inputText type="number" class="form-control" id="password" placeholder="Enter the price" name="price"
+															value="#{BeanName.price}"></h:inputText>
+													</div>
+												</div>
+											</h:form>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<span class="form-group last"> <h:commandButton type="submit" class="btn btn-default" value="Submit"
+										action="#{Bean.register}" required="true"></h:commandButton>
+								</span>
+								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							</div>
+						</div>
+
+					</div>
+				</div>
+
+
 			</div>
-		</div>
-	</div>
-</ui:composition>
+
+		</ui:define>
+	</ui:composition>
 </h:body>
 </html>

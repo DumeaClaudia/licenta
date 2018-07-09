@@ -34,4 +34,8 @@ public class RestaurantServiceImpl implements RestaurantService {
 		return repository.retrieveProductsByCategory(category, idRestaurant);
 	}
 
+	public List<String> getCategoriesOfProducts(long idRestaurant) {
+		return repository.retrieveCategories(idRestaurant);
+	}
+
 }

@@ -20,6 +20,7 @@ public class RestaurantBean {
 	private List<Product> products = new ArrayList<Product>(); 
 	private long id;
 	private long productId;
+	private List<String> categories;
 	Product product = new Product();
 
 	@EJB
@@ -37,6 +38,7 @@ public class RestaurantBean {
 		}*/
 		restaurant = restaurantService.getRestaurantById(id);
 		products = restaurantService.getAllProductsForRestaurant(id);
+		categories = restaurantService.getCategoriesOfProducts(id);
 		this.id = id;
 	}
 	
@@ -77,5 +79,12 @@ public class RestaurantBean {
 	public void setProduct(Product product) {
 		this.product = product;
 	}
-	
+
+	public List<String> getCategories() {
+		return categories;
+	}
+
+	public void setCategories(List<String> categories) {
+		this.categories = categories;
+	}
 }

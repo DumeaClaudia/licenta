@@ -89,77 +89,81 @@
 					</div>
 
 				</div>
+
 				<!-- categories of products-->
-				<nav class="navbar navbar-restaurant-section" data-spy="affix" data-offset-top="283">
-				<ul class=" nav navbar-nav">
-					<li><a href="#section1">Section 1</a></li>
-					<li><a href="#section2">Section 2</a></li>
-					<li><a href="#section3">Section 3</a></li>
-				</ul>
-				</nav>
+				<nav class="navbar navbar-restaurant-section" data-spy="affix" data-offset-top="283"> <ui:repeat
+					value="#{restaurantBean.categories}" var="category">
+					<b><a href="#{category}" class="category-style" /> #{category}</b>
+				</ui:repeat> </nav>
 
 				<!-- Product List -->
-				<div>
 
+				<div>
 					<div class="well col-md-12" id="show-content">
 
-						<ui:repeat value="#{restaurantBean.products}" var="product">
+						<ui:repeat value="#{restaurantBean.categories}" var="category">
+							<b><a href="#{category}" class="category-style" id="content-category" /> #{category}</b>
 
-							<div class="row product-style">
-								<ui:fragment rendered="#{not empty product.image}">
-									<div class="col-md-2 col-sm-3 col-xs-4">
-										<img class="img-rounded" src="../resources/images/#{product.image}" alt="#{product.image}" width="130"
-											height="100"></img>
-									</div>
-								</ui:fragment>
+							<ui:repeat value="#{restaurantBean.products}" var="product">
+								<ui:fragment rendered="#{product.category == category}">
+									<div class="row product-style" id="category">
+										<ui:fragment rendered="#{not empty product.image}">
+											<div class="col-md-2 col-sm-3 col-xs-4">
+												<img class="img-rounded" src="../resources/images/#{product.image}" alt="#{product.image}" width="130"
+													height="100"></img>
+											</div>
+										</ui:fragment>
 
-								<div class=" col-md-8 col-sm-7 col-xs-8 size-description">
-									<div id="idProductName">
-										<h4>
-											<b>#{product.name}</b>
-										</h4>
-									</div>
-									<div id="idProductDescription">
-										<p>(#{product.description})</p>
-									</div>
-								</div>
-
-								<ui:fragment rendered="#{not empty product.image}">
-									<div class=" col-md-2 col-sm-2 col-xs-12">
-										<div class="row">
-											<div class="pull-right">
-												#{product.price} RON
-												<ui:fragment rendered="#{not empty sessionBean.username}">
-													<a class="cart-add-button glyphicon glyphicon-plus size-plus" data-product-id="#{product.id}"
-														data-product-name="#{product.name}" value="#{restaurantBean.productId}"> </a>
-												</ui:fragment>
-												<ui:fragment rendered="#{empty sessionBean.username}">
-													<a class="cart-add-error glyphicon glyphicon-plus size-plus"> </a>
-												</ui:fragment>
+										<div class=" col-md-8 col-sm-7 col-xs-8 size-description">
+											<div id="idProductName">
+												<h4>
+													<b>#{product.name}</b>
+												</h4>
+											</div>
+											<div id="idProductDescription">
+												<p>(#{product.description})</p>
 											</div>
 										</div>
-									</div>
-								</ui:fragment>
 
-								<ui:fragment rendered="#{empty product.image}">
-									<div class=" col-md-4 col-sm-5 col-xs-12">
-										<div class="row">
-
-											<div class="pull-right">
-												#{product.price} RON
-												<ui:fragment rendered="#{not empty sessionBean.username}">
-													<a class="cart-add-button glyphicon glyphicon-plus size-plus" data-product-id="#{product.id}"
-														data-product-name="#{product.name}" value="#{restaurantBean.productId}"> </a>
-												</ui:fragment>
-												<ui:fragment rendered="#{empty sessionBean.username}">
-													<a class="cart-add-error glyphicon glyphicon-plus size-plus"> </a>
-												</ui:fragment>
+										<ui:fragment rendered="#{not empty product.image}">
+											<div class=" col-md-2 col-sm-2 col-xs-12">
+												<div class="row">
+													<div class="pull-right">
+														#{product.price} RON
+														<ui:fragment rendered="#{not empty sessionBean.username}">
+															<a class="cart-add-button glyphicon glyphicon-plus size-plus" data-product-id="#{product.id}"
+																data-product-name="#{product.name}" value="#{restaurantBean.productId}"> </a>
+														</ui:fragment>
+														<ui:fragment rendered="#{empty sessionBean.username}">
+															<a class="cart-add-error glyphicon glyphicon-plus size-plus"> </a>
+														</ui:fragment>
+													</div>
+												</div>
 											</div>
-										</div>
+										</ui:fragment>
+
+										<ui:fragment rendered="#{empty product.image}">
+											<div class=" col-md-4 col-sm-5 col-xs-12">
+												<div class="row">
+
+													<div class="pull-right">
+														#{product.price} RON
+														<ui:fragment rendered="#{not empty sessionBean.username}">
+															<a class="cart-add-button glyphicon glyphicon-plus size-plus" data-product-id="#{product.id}"
+																data-product-name="#{product.name}" value="#{restaurantBean.productId}"> </a>
+														</ui:fragment>
+														<ui:fragment rendered="#{empty sessionBean.username}">
+															<a class="cart-add-error glyphicon glyphicon-plus size-plus"> </a>
+														</ui:fragment>
+													</div>
+												</div>
+											</div>
+										</ui:fragment>
+
 									</div>
 								</ui:fragment>
+							</ui:repeat>
 
-							</div>
 						</ui:repeat>
 					</div>
 

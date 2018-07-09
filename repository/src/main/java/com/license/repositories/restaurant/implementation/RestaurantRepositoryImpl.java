@@ -131,4 +131,27 @@ public class RestaurantRepositoryImpl implements RestaurantRepository {
 		}
 		return productsResponse;
 	}
+
+	public List<String> retrieveCategories(long idRestaurant) {
+
+		List<ProductEntity> products = new ArrayList<ProductEntity>();
+		List<String> categoriesResponse = new ArrayList<String>();
+
+		Query query = em.createNamedQuery("product.getAllProducts");
+		query.setParameter("idRestaurant", idRestaurant);
+		products = (List<ProductEntity>) query.getResultList();
+
+		if (products == null) {
+			System.out.println("se pare ca nu au fost gasite produse in baza de date ha ha ha");
+			// return "";
+		}
+
+		for (ProductEntity p : products) {
+			if (!categoriesResponse.contains(p.getCategory())) {
+				categoriesResponse.add(p.getCategory());
+			}
+		}
+		System.out.println("Categoriile filtrate sunt =" + categoriesResponse);
+		return categoriesResponse;
+	}
 }

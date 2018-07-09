@@ -10,5 +10,7 @@ public interface RestaurantRepository {
 	public Restaurant retrieveRestaurantById(long id);
 	public List<Product> retrieveAllProducts(long idRestaurant);
 	public List<Product> retrieveProductsByCategory(String category, long idRestaurant);
+
+	public List<String> retrieveCategories(long idRestaurant);
 }
 

@@ -180,7 +180,7 @@ li {
 }
 
 .style-font{
-	font-family: fantasy;
+	/* font-family: fantasy; */
 }
 
 .product-list-name{
@@ -195,4 +195,19 @@ li {
 .product-list-delete{ 
 	color:black; 
 	float: right;
+}
+
+a.category-style{
+	padding: 20px;
+	margin-left: 10px;
+	font-size: 40px;
+	text-align: center;
+}
+
+#content-category{
+	background-color: white;
+	-webkit-transition: width 0.3s ease;
+	-moz-transition: width 0.3s ease;
+	-o-transition: width 0.3s ease;
+	transition: width 0.3s ease;
 }
