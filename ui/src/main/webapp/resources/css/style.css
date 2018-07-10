@@ -197,14 +197,22 @@ li {
 	float: right;
 }
 
+span.category-style{
+	padding: 20px;
+	margin-left: 10px;
+	font-size: 15px;
+	text-align: center;
+}
+
 a.category-style{
 	padding: 20px;
 	margin-left: 10px;
-	font-size: 40px;
+	font-size: 15px;
 	text-align: center;
 }
 
 #content-category{
+	margin-left: 10px;
 	background-color: white;
 	-webkit-transition: width 0.3s ease;
 	-moz-transition: width 0.3s ease;

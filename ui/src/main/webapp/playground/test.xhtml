@@ -13,7 +13,7 @@
 body {
 	position: relative;
 }
-
+/* 
 #section1 {
 	padding-top: 50px;
 	height: 500px;
@@ -47,7 +47,7 @@ body {
 	height: 500px;
 	color: #fff;
 	background-color: #009688;
-}
+} */
 </style>
 </head>
 <body data-spy="scroll" data-target=".navbar" data-offset="50">
@@ -62,13 +62,9 @@ body {
 			</div>
 			<div>
 				<div class="collapse navbar-collapse" id="myNavbar">
-					<ul class="nav navbar-nav">
-						<nav class="navbar navbar-restaurant-section" data-spy="affix" data-offset-top="283">
-							<ui:repeat value="#{restaurantBean.categories}" var="category">
-								<b><a href="#{category}" class="category-style" /> #{category}</b>
-							</ui:repeat>
-						</nav>
-					</ul>
+					<ui:repeat value="#{restaurantBean.categories}" var="category">
+						<b><a href="#{category}" class="category-style" /> #{category}</b>
+					</ui:repeat>
 				</div>
 			</div>
 		</div>
