@@ -93,7 +93,7 @@
 				<!-- categories of products-->
 				<nav class="navbar navbar-restaurant-section" data-spy="affix" data-offset-top="283"> <ui:repeat
 					value="#{restaurantBean.categories}" var="category">
-					<b><a href="#{category}" /> <span class="category-style" >#{category}</span></b>
+					<span><b><a href="##{category}" class="category-style"> #{category}</a></b></span>
 				</ui:repeat> </nav>
 
 				<!-- Product List -->
@@ -102,7 +102,7 @@
 					<div class="well col-md-12" id="show-content">
 
 						<ui:repeat value="#{restaurantBean.categories}" var="category">
-							<b><a href="#{category}" /> <span class="category-style" id="content-category" style="margin-left: 100px;">#{category}</span></b>
+							<b> <span class="container col-xs-12 category-style content-category" id="#{category}">--- #{category} ---</span></b>
 						
 							<ui:repeat value="#{restaurantBean.products}" var="product">
 								<ui:fragment rendered="#{product.category == category}">

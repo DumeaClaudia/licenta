@@ -54,7 +54,7 @@
 	margin: 10px 0px ;
 	padding: 10px 50px;
 }
-
+/* 
 #searchForm {
 	border: 4 px solid black;
 	height: 100px;
@@ -67,7 +67,7 @@
 	padding: 20px;
 	size: 10px;
 	margin-right: 20px;
-}
+} 
 
 div.dropdown {
 	position: sticky;
@@ -78,6 +78,7 @@ div.dropdown {
 	position: sticky;
 	margin-top: 200px;
 }
+*/
 
 /* Remove the navbar's default margin-bottom and rounded borders */
 .navbar {
@@ -86,7 +87,7 @@ div.dropdown {
 }
 
 /* Add a gray background color and some padding to the footer */
-#footer-message {
+/* #footer-message {
 	background-color: #f2f2f2;
 	padding: 25px;
 	text-align: center;
@@ -124,7 +125,7 @@ div.dropdown {
 	margin-left: 10px;
 	padding: 20px;
 	display: inline; 
-}
+} */
 
 li { 
     display: inline;
@@ -180,7 +181,8 @@ li {
 }
 
 .style-font{
-	/* font-family: fantasy; */
+	font-family: fantasy; 
+	font-family: serif;
 }
 
 .product-list-name{
@@ -197,25 +199,98 @@ li {
 	float: right;
 }
 
+.affix {
+	top: 0;
+	width: 100%;
+	top: 50px;
+	background: #ddd; 
+	z-index: 500 !important;
+	opacity: 0.90;
+}
+
+.navbar {
+	margin-bottom: 0px;
+}
+
+.affix ~ .container-fluid {
+	position: relative;
+	top: 50px;
+}
+
+.affix>ul>li>a {
+	color: #555;
+	/* font-weight: bold; */
+}
+
+.navbar-restaurant-section>ul>li>a {
+	padding: 5px;
+}
+
+.navbar-restaurant-section {
+	padding: 0px;
+	min-height: auto;
+	max-width: 960px;
+}
+
 span.category-style{
-	padding: 20px;
-	margin-left: 10px;
-	font-size: 15px;
+	padding: 5px 20px;
+	/* margin-left: 10px; */
+	font-size: 18px;
 	text-align: center;
 }
 
 a.category-style{
-	padding: 20px;
-	margin-left: 10px;
-	font-size: 15px;
+	/*  padding: 20px;
+	margin-left: 10px; */
+	font-size: 18px;
 	text-align: center;
 }
 
-#content-category{
-	margin-left: 10px;
+.content-category{
+	/* margin-left: 10px; */
+	min-height: auto;
+	max-width: 1150px;
+	padding: 0px 5px;
 	background-color: white;
 	-webkit-transition: width 0.3s ease;
 	-moz-transition: width 0.3s ease;
 	-o-transition: width 0.3s ease;
 	transition: width 0.3s ease;
+	margin-top: 0px;
+}
+
+
+a:link {
+    background-color: transparent; 
+    text-decoration: none;
+    font-size: 18px;
+    font-family: fantasy; 
+	font-family: serif;
+	padding: 0px 20px;
+}
+
+a:visited {   
+    background-color: transparent;
+    text-decoration: none;
+    font-size: 18px;
+    font-family: fantasy; 
+	font-family: serif;
+	padding: 0px 20px;
+}
+
+a:hover {
+    text-decoration: none;
+    font-size: 18px;
+    font-family: fantasy; 
+	font-family: serif;
+	padding: 0px 20px;
+}
+
+a:active {  
+    background-color: transparent;
+    text-decoration: underline;
+    font-size: 18px;
+    font-family: fantasy; 
+	font-family: serif;
+	padding: 0px 20px;
 }
