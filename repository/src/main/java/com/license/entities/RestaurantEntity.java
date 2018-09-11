@@ -1,5 +1,7 @@
 package com.license.entities;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,7 +15,7 @@ import javax.persistence.NamedQuery;
 		@NamedQuery(name = "restaurant.display", query = "SELECT r FROM restaurant r"),
 		@NamedQuery(name = "restaurant.searchForRestaurant", query = "SELECT r FROM restaurant r where r.id=:findId") })
 
-public class RestaurantEntity {
+public class RestaurantEntity implements Serializable{
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

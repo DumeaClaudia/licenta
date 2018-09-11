@@ -1,5 +1,7 @@
 package com.license.entities;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,10 +12,15 @@ import javax.persistence.NamedNativeQuery;
 @Entity(name = "CartForUserEntity")
 @NamedNativeQuery(
 		  name="shoppingCartProducts.getNativeShoppingCartForUser",
-		  query="select sc.id as idShoppingCart from shopping_cart sc join shopping_cart_users scu on sc.id = scu.idShoppingCart where sc.totalPrice=0 and scu.idUser=?1",
+		  query="select sc.id as idShoppingCart from shopping_cart sc join shopping_cart_users scu on"
+		  		+ " sc.id = scu.idShoppingCart where sc.totalPrice=0 and scu.idUser=?1",
 		  resultClass=CartForUserEntity.class
 		)
-public class CartForUserEntity {
+public class CartForUserEntity implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@Column(name = "idShoppingCart")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

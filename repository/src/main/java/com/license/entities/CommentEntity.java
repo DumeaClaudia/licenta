@@ -1,5 +1,6 @@
 package com.license.entities;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -12,7 +13,12 @@ import javax.persistence.NamedQuery;
 @Entity(name = "comment")
 @NamedQueries({
 		@NamedQuery(name = "comment.display", query = "Select comm FROM comment comm where comm.username=:p1") })
-public class CommentEntity {
+public class CommentEntity implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

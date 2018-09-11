@@ -1,5 +1,7 @@
 package com.license.entities;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -8,7 +10,12 @@ import javax.persistence.IdClass;
 @Entity(name = "shopping_cart_users")
 @IdClass(ShoppingCartUserEntityId.class)
 
-public class ShoppingCartUserEntity {
+public class ShoppingCartUserEntity implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id @Column(name = "idUser")
 	private long idUser;
 	

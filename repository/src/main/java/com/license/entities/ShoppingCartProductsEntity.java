@@ -1,5 +1,7 @@
 package com.license.entities;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,7 +15,12 @@ import javax.persistence.NamedQuery;
 		@NamedQuery(name = "shopping_cart_products.getProductsForCart", query = "Select p FROM shopping_cart_products p where p.idShoppingCart = :idShoppingCart"),
 		@NamedQuery(name = "shopping_cart_products.selectForDeleteProductForCart", query = "select p FROM shopping_cart_products p where p.idUser=:idUser and p.idProduct = :idProduct and p.idShoppingCart = :idShoppingCart") })
 
-public class ShoppingCartProductsEntity {
+public class ShoppingCartProductsEntity implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

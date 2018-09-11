@@ -258,8 +258,13 @@ a.category-style{
 	transition: width 0.3s ease;
 	margin-top: 0px;
 }
+a:hover {
+    text-decoration: none;
+    text-color: black;
+}
 
 
+/* 
 a:link {
     background-color: transparent; 
     text-decoration: none;
@@ -293,4 +298,4 @@ a:active {
     font-family: fantasy; 
 	font-family: serif;
 	padding: 0px 20px;
-}
+} */

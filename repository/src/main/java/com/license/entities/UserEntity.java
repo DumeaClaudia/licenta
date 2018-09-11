@@ -1,5 +1,7 @@
 package com.license.entities;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,7 +13,12 @@ import javax.persistence.NamedQuery;
 @Entity(name = "user")
 @NamedQueries({
 		@NamedQuery(name = "user.findUser", query = "Select usr FROM user usr WHERE usr.username = :prm_username and usr.password = :prm_password") })
-public class UserEntity {
+public class UserEntity implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@Column(name = "id")

@@ -1,5 +1,7 @@
 package com.license.entities;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,7 +26,12 @@ import javax.persistence.NamedNativeQuery;
 
 )
 
-public class NativeShoppingCartEntity {
+public class NativeShoppingCartEntity implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@Column(name = "idShoppingCart")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

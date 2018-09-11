@@ -65,6 +65,11 @@
 											<b>#{restaurantBean.restaurant.name}</b>
 										</h3>
 									</div>
+									<!-- <% for(int i = 0; i < #{restaurantBean.restaurant.stars; i+=1) { %>
+									<tr>
+										<span> class="glyphicon glyphicon-star-empty"</span>
+									</tr>
+									<% } %> -->
 
 									<div class="pull-left">
 										<span class="glyphicon glyphicon-star" aria-hidden="true"></span> <span class="glyphicon glyphicon-star-empty"
@@ -102,8 +107,9 @@
 					<div class="well col-md-12" id="show-content">
 
 						<ui:repeat value="#{restaurantBean.categories}" var="category">
-							<b> <span class="container col-xs-12 category-style content-category" id="#{category}">--- #{category} ---</span></b>
-						
+							<b> <span class="container col-xs-12 category-style content-category" id="#{category}">--- #{category}
+									---</span></b>
+
 							<ui:repeat value="#{restaurantBean.products}" var="product">
 								<ui:fragment rendered="#{product.category == category}">
 									<div class="row product-style" id="category">

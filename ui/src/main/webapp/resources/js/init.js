@@ -24,58 +24,65 @@ $(document).ready(function() {
 
 function getCartProductsAjaxRequest(request) {
 
-	$
-			.ajax({
-				url : "../jsonservlet/get_cart_products",
-				type : 'POST',
-				dataType : 'json',
-				data : JSON.stringify(request),
-				contentType : 'application/json',
-				mimeType : 'application/json',
+	$.ajax({
+			url : "../jsonservlet/get_cart_products",
+			type : 'POST',
+			dataType : 'json',
+			data : JSON.stringify(request),
+			contentType : 'application/json',
+			mimeType : 'application/json',
 
-				success : function(data) {
-					$("#cart-products-list").empty();
-					var total = 0;
-					$
-							.each(
-									data,
-									function(index, product) {
+			success : function(data) {
+				$("#cart-products-list").empty();
+				var total = 0;
+				$.each(
+						data,
+						function(index, product) {
+							var div1 = $("<div/>");
+							var span1 = $("<span class='product-list-name  ' />");
+							var span2 = $("<span class='product-list-price  ' />");
 
-										var div1 = $("<div/>");
-										var span1 = $("<span class='product-list-name  ' />");
-										var span2 = $("<span class='product-list-price  ' />");
+							span1.text(product.name);
+							span2.text(product.price + " RON");
+							total = total + +product.price;
+							
+							var minus = $("<a class='glyphicon glyphicon-minus product-list-delete'  data-product-id='" + product.id
+										+ "' data-product-name='" + product.name + "' />");
 
-										span1.text(product.name);
-										span2.text(product.price + " RON");
-										total = total + +product.price;
-										var minus = $("<a class='glyphicon glyphicon-minus product-list-delete'  data-product-id='"
-												+ product.id
-												+ "' data-product-name='"
-												+ product.name + "' />");
+							div1.append(span1);
+							div1.append(minus);
+							div1.append(span2);
 
-										div1.append(span1);
-
-										div1.append(minus);
-										div1.append(span2);
-
-										$("#cart-products-list").append(div1);
-									});
+							$("#cart-products-list").append(div1);
+						});
+					
+					var minSum = 15;
+					var zero = 0;
+					if(total<30 && total!=0){
+						$("#delivery-price").text(minSum + " RON");
+						total = total + 15;
+					}
+					else{
+						$("#delivery-price").text(zero + " RON");
+					}
 					$("#total-price").text(total + " RON");
 					$("#nr-products-cart").text(data.length);
-					
-					$(".product-list-delete").click(function() {
 
-						var productId = this.dataset.productId;
-						var productName = this.dataset.productName;
-						var removedProductRequest = new Object();
+					$(".product-list-delete").click(
+							function() {
 
-						removedProductRequest.idProduct = productId;
-						removedProductRequest.idUser = 1;
-						
-						removeProductFromCartAjaxRequest(removedProductRequest, productName );
+								var productId = this.dataset.productId;
+								var productName = this.dataset.productName;
+								var removedProductRequest = new Object();
 
-						return false;
-					});
+								removedProductRequest.idProduct = productId;
+								removedProductRequest.idUser = 1;
+
+								removeProductFromCartAjaxRequest(
+										removedProductRequest, productName);
+
+								return false;
+							});
 
 					// console.log(data);
 				},
@@ -87,8 +94,6 @@ function getCartProductsAjaxRequest(request) {
 				}
 			});
 }
-
-
 
 function removeProductFromCartAjaxRequest(request, product_name) {
 	var cartProductsRequest = new Object();
