@@ -263,7 +263,7 @@ a:hover {
     text-color: black;
 }
 
-
+/*----bla bla... suprascriere*/
 /* 
 a:link {
     background-color: transparent; 
@@ -298,4 +298,16 @@ a:active {
     font-family: fantasy; 
 	font-family: serif;
 	padding: 0px 20px;
-} */
+}  */
+
+
+#idCategory {
+	background-color: transparent;
+    text-decoration: underline;
+    text-decoration: none;
+    font-size: 18px;
+    /* color: black; */
+    font-family: fantasy; 
+	font-family: serif;
+	padding: 0px 20px;
+}
