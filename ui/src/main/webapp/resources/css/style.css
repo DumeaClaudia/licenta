@@ -54,78 +54,12 @@
 	margin: 10px 0px ;
 	padding: 10px 50px;
 }
-/* 
-#searchForm {
-	border: 4 px solid black;
-	height: 100px;
-	width: 600px;
-	margin-left: 200px;
-	padding: 30px;
-}
-
-#searchLocation {
-	padding: 20px;
-	size: 10px;
-	margin-right: 20px;
-} 
-
-div.dropdown {
-	position: sticky;
-	margin-top: 20px;
-}
-
-#menuRest {
-	position: sticky;
-	margin-top: 200px;
-}
-*/
 
 /* Remove the navbar's default margin-bottom and rounded borders */
 .navbar {
 	margin-bottom: 0;
 	border-radius: 0;
 }
-
-/* Add a gray background color and some padding to the footer */
-/* #footer-message {
-	background-color: #f2f2f2;
-	padding: 25px;
-	text-align: center;
-	background-color: gray;
-	padding: 25px;
-	color: white;
-	width: 80%;
-	max-width: 960px;
-	margin: 0 auto 0;
-	height: 60px;
-}
-.myf {
-	background-color: #f2f2f2;
-	padding: 25px;
-	text-align: center;
-	background-color: gray;
-	padding: 25px;
-	color: white;
-	width: 80%;
-	max-width: 960px;
-	margin: 0 auto 0;
-	height: 60px;
-}
-
-
-#imgStyle{
-	max-height: 80px; 
-	width: 100%; 
-	object-fit: cover;
-}
-
-.idTitle{
-	font-size: 100px;
-	margin-top: 10px;
-	margin-left: 10px;
-	padding: 20px;
-	display: inline; 
-} */
 
 li { 
     display: inline;
@@ -262,44 +196,6 @@ a:hover {
     text-decoration: none;
     text-color: black;
 }
-
-/*----bla bla... suprascriere*/
-/* 
-a:link {
-    background-color: transparent; 
-    text-decoration: none;
-    font-size: 18px;
-    font-family: fantasy; 
-	font-family: serif;
-	padding: 0px 20px;
-}
-
-a:visited {   
-    background-color: transparent;
-    text-decoration: none;
-    font-size: 18px;
-    font-family: fantasy; 
-	font-family: serif;
-	padding: 0px 20px;
-}
-
-a:hover {
-    text-decoration: none;
-    font-size: 18px;
-    font-family: fantasy; 
-	font-family: serif;
-	padding: 0px 20px;
-}
-
-a:active {  
-    background-color: transparent;
-    text-decoration: underline;
-    font-size: 18px;
-    font-family: fantasy; 
-	font-family: serif;
-	padding: 0px 20px;
-}  */
-
 
 #idCategory {
 	background-color: transparent;

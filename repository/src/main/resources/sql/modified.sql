@@ -47,19 +47,18 @@ INSERT INTO `user` (`firstName`,`lastName`,`username`,`password`,`email`) VALUES
     PRIMARY KEY (`id`)
 );
 
-INSERT INTO `restaurant` (`img`,`name`,`address`,`stars`,`description`) VALUES ('https://images.deliveryhero.io/image/fd-ro/LH/v4gc-listing.jpg','Pizzeria di Mattia','Strada Latcu Voda, Valea Adanca 707317',4,'Pizza, Meniuri, Ciorbe, Paste, Tea, Coffee and more');
-INSERT INTO `restaurant` (`img`,`name`,`address`,`stars`,`description`) VALUES ('https://d16bcxkz31d65o.cloudfront.net/860x350/v2/Promo/prima%20pagina/Mananci%20pe%20cinste.png','Restaurant Mamma Mia','Iasi, bd. Stefan cel Mare si Sfant, nr. 10-12, la Casa Modei',2,'Pizza, Preparate, Platouri, Cofetarie & Patiserie');
-INSERT INTO `restaurant` (`img`,`name`,`address`,`stars`,`description`) VALUES ('https://images.deliveryhero.io/image/fd-ro/LH/v1lt-listing.jpg','Times','Strada Codrescu, nr 6', 3,'Carne, Burgeri, Pizza, Vegetariana, Bucatarie Internationala');
-INSERT INTO `restaurant` (`img`,`name`,`address`,`stars`,`description`) VALUES ('https://images.deliveryhero.io/image/fd-ro/LH/v1ur-listing.jpg','BigBur',' Aleea Nicolina, nr. 13, Iași 700259', 4,'Burgeri, Mâncare Romaneasca, Pizza, Bucătarie internațională');
-INSERT INTO `restaurant` (`img`,`name`,`address`,`stars`,`description`) VALUES ('https://images.deliveryhero.io/image/fd-ro/LH/v4ri-listing.jpg','Restaurant Bavaria','Bulevardul Nicolae Iorga, nr.2A, Iasi', 5 ,'Bucatarie Internationala, Gratar, Pui, Vegetariana, Vita');
-INSERT INTO `restaurant` (`img`,`name`,`address`,`stars`,`description`) VALUES ('https://images.deliveryhero.io/image/fd-ro/LH/v8vy-listing.jpg','Pizzeria Mady s',' Strada Petre Tutea, nr. 913, Iasi',6 ,'Quick Service Restaurant, Mancare Romaneasca, Pizza, Bucatarie Internationala, Gratar');
-
-INSERT INTO `restaurant` (`img`,`name`,`address`,`stars`,`description`) VALUES ('https://images.deliveryhero.io/image/fd-ro/LH/v5go-listing.jpg','Pizzeria Golfo di Napoli','Soseaua Valea Rediului, nr.259, Iasi',4,'Pizza, Bucatarie Italiana, Carne, Paste, Salate');
+INSERT INTO `restaurant` (`img`,`name`,`address`,`stars`,`description`) VALUES ('PizzeriadiMattia.jpg','Pizzeria di Mattia','Strada Latcu Voda, Valea Adanca 707317',4,'Pizza, Meniuri, Ciorbe, Paste, Tea, Coffee and more');
+INSERT INTO `restaurant` (`img`,`name`,`address`,`stars`,`description`) VALUES ('MammaMia.png','Restaurant Mamma Mia','Iasi, bd. Stefan cel Mare si Sfant, nr. 10-12, la Casa Modei',2,'Pizza, Preparate, Platouri, Cofetarie & Patiserie');
+INSERT INTO `restaurant` (`img`,`name`,`address`,`stars`,`description`) VALUES ('Times.jpg','Times','Strada Codrescu, nr 6', 3,'Carne, Burgeri, Pizza, Vegetariana, Bucatarie Internationala');
+INSERT INTO `restaurant` (`img`,`name`,`address`,`stars`,`description`) VALUES ('BigBur.jpg','BigBur',' Aleea Nicolina, nr. 13, Iași 700259', 4,'Burgeri, Mâncare Romaneasca, Pizza, Bucătarie internațională');
+INSERT INTO `restaurant` (`img`,`name`,`address`,`stars`,`description`) VALUES ('RestaurantBavaria.jpg','Restaurant Bavaria','Bulevardul Nicolae Iorga, nr.2A, Iasi', 5 ,'Bucatarie Internationala, Gratar, Pui, Vegetariana, Vita');
+INSERT INTO `restaurant` (`img`,`name`,`address`,`stars`,`description`) VALUES ('PizzeriaMadys.jpg','Pizzeria Mady\'s',' Strada Petre Tutea, nr. 913, Iasi',6 ,'Quick Service Restaurant, Mancare Romaneasca, Pizza, Bucatarie Internationala, Gratar');
+INSERT INTO `restaurant` (`img`,`name`,`address`,`stars`,`description`) VALUES ('PizzeriaGolfoDiNapoli.jpg','Pizzeria Golfo di Napoli','Soseaua Valea Rediului, nr.259, Iasi',4,'Pizza, Bucatarie Italiana, Carne, Paste, Salate');
 
 -- https://images.deliveryhero.io/image/fd-ro/LH/v7hs-listing.jpg
-INSERT INTO `restaurant` (`img`,`name`,`address`,`stars`,`description`) VALUES ('https://images.deliveryhero.io/image/fd-ro/LH/v7hs-listing.jpg','Aroma Zen','Strada Pacurari, nr.79, Iasi',4,'Salate, Paste, Carne, Bucatarie Internationala, Vegetariana');
+INSERT INTO `restaurant` (`img`,`name`,`address`,`stars`,`description`) VALUES ('AromaZen.jpg','Aroma Zen','Strada Pacurari, nr.79, Iasi',4,'Salate, Paste, Carne, Bucatarie Internationala, Vegetariana');
 -- https://images.deliveryhero.io/image/fd-ro/LH/v4ek-listing.jpg
-INSERT INTO `restaurant` (`img`,`name`,`address`,`stars`,`description`) VALUES ('https://images.deliveryhero.io/image/fd-ro/LH/v4ek-listing.jpg','Take & Eat','Strada Otilia Cazimir, nr.18, Iasi', 4, 'Meniuri, Salate, Sandwich-uri, Pizza, Desert');
+INSERT INTO `restaurant` (`img`,`name`,`address`,`stars`,`description`) VALUES ('TakeAndEat.jpg','Take & Eat','Strada Otilia Cazimir, nr.18, Iasi', 4, 'Meniuri, Salate, Sandwich-uri, Pizza, Desert');
 
 
 /*Pizzeria Mady
@@ -393,33 +392,8 @@ INSERT INTO `product` (`idRestaurant`,`image`,`category`,`name`,`description`,`p
 
 
 INSERT INTO `product` (`idRestaurant`,`image`,`category`,`name`,`description`,`price`) VALUES (9, '','Meniuri', 'Meniu 1: Piept de pui la gratar cu orez cu legume',' Piept de pui la gratar, orez cu legume, gogosari in otet, paine', 15.00);
-INSERT INTO `product` (`idRestaurant`,`image`,`category`,`name`,`description`,`price`) VALUES (9, 'https://images.deliveryhero.io/image/fd-ro/Products/62092.jpg','Meniuri', 'Meniu 2: Aripi de pui picante','Aripi de pui picante, cartofi pai, salata de castraveti murati, paine', 15.00);
-INSERT INTO `product` (`idRestaurant`,`image`,`category`,`name`,`description`,`price`) VALUES (9, 'https://images.deliveryhero.io/image/fd-ro/Products/62093.jpg','Meniuri', 'Meniu 3: Pulpe de pui dezosate la gratar','Pulpe de pui dezosate la gratar, orez cu legume, salata de varza, paine', 15.00);
-INSERT INTO `product` (`idRestaurant`,`image`,`category`,`name`,`description`,`price`) VALUES (9, 'https://images.deliveryhero.io/image/fd-ro/Products/62094.jpg','Meniuri', 'Meniu 4: Copanele de pui la ceaun',' Copanele de pui la ceaun, cartofi picanti, salata de rosii, castraveti, paine', 15.00);
-INSERT INTO `product` (`idRestaurant`,`image`,`category`,`name`,`description`,`price`) VALUES (9, 'https://images.deliveryhero.io/image/fd-ro/Products/62095.jpg','Meniuri', 'Meniu 5: Snitel din piept de pui',' Snitel din piept de pui, piure de cartofi, salata de varza alba cu morcovi, paine', 15.00);
-INSERT INTO `product` (`idRestaurant`,`image`,`category`,`name`,`description`,`price`) VALUES (9, 'https://images.deliveryhero.io/image/fd-ro/Products/62096.jpg','Meniuri', 'Meniu 6: Krispy din piept de pui','Krispy din piept de pui, cartofi prajiti, salata de varza, paine', 15.00);
-INSERT INTO `product` (`idRestaurant`,`image`,`category`,`name`,`description`,`price`) VALUES (9, 'https://images.deliveryhero.io/image/fd-ro/Products/62097.jpg','Meniuri', 'Meniu 7: Parjolute din piept de pui','Parjolute din piept de pui, piure de cartofi, salata de castraveti murati, paine', 15.00);
-INSERT INTO `product` (`idRestaurant`,`image`,`category`,`name`,`description`,`price`) VALUES (9, 'https://images.deliveryhero.io/image/fd-ro/Products/62098.jpg','Meniuri', 'Meniu 8: Cotlet de porc la gratar','Cotlet de porc la gratar, cartofi pai, salata de rosii si castraveti, paine', 15.00);
-INSERT INTO `product` (`idRestaurant`,`image`,`category`,`name`,`description`,`price`) VALUES (9, 'https://images.deliveryhero.io/image/fd-ro/Products/62099.jpg','Meniuri', 'Meniu 9: Ceafa de porc la gratar','Ceafa de porc la gratar, cartofi pai, salata de castraveti murati, paine', 15.00);
-INSERT INTO `product` (`idRestaurant`,`image`,`category`,`name`,`description`,`price`) VALUES (9, 'https://images.deliveryhero.io/image/fd-ro/Products/62100.jpg','Meniuri', 'Meniu 10: Mici la gratar','Mici la gratar, cartofi pai, mustar, paine', 15.00);
-INSERT INTO `product` (`idRestaurant`,`image`,`category`,`name`,`description`,`price`) VALUES (9, 'https://images.deliveryhero.io/image/fd-ro/Products/62101.jpg','Meniuri', 'Meniu 11: Carnaciori proaspeti la gratar','Carnaciori proaspeti la gratar, piure de cartofi, salata de gogosari in otet, paine', 15.00);
-INSERT INTO `product` (`idRestaurant`,`image`,`category`,`name`,`description`,`price`) VALUES (9, 'https://images.deliveryhero.io/image/fd-ro/Products/62102.jpg','Meniuri', 'Meniu 12: Carnati traditionali la gratar','Carnati traditionali la gratar, piure de cartofi, salata de gogosari in otet, paine', 15.00);
-INSERT INTO `product` (`idRestaurant`,`image`,`category`,`name`,`description`,`price`) VALUES (9, 'https://images.deliveryhero.io/image/fd-ro/Products/77207.jpg','Meniuri', 'Meniu 13: Piept de pui la gratar cu cartofi pai','Piept de pui la gratar, cartofi pai, salata asortata, paine', 15.00);
-INSERT INTO `product` (`idRestaurant`,`image`,`category`,`name`,`description`,`price`) VALUES (9, 'https://images.deliveryhero.io/image/fd-ro/Products/77208.jpg','Meniuri', 'Meniu 14: Piept de pui la gratar cu amestec mexican','Piept de pui la gratar, amestec mexican, salata de varza, paine', 15.00);
-INSERT INTO `product` (`idRestaurant`,`image`,`category`,`name`,`description`,`price`) VALUES (9, 'https://images.deliveryhero.io/image/fd-ro/Products/62135.jpg','Salate', 'Salata piept de pui','Salata asortata 200gr, piept de pui 80gr, masline 50gr, branza feta 50gr, porumb 30gr, lamaie 20gr, maioneza de casa 50gr + o bautura Somersby la 330 ml din partea casei', 15.00);
-INSERT INTO `product` (`idRestaurant`,`image`,`category`,`name`,`description`,`price`) VALUES (9, 'https://images.deliveryhero.io/image/fd-ro/Products/62136.jpg','Salate', 'Salata ton','Salata asortata 200gr, ton 80gr, masline 50gr, ceapa rosie 30gr, porumb 30gr, lamaie 20gr, maioneza de casa 50gr + o bautura Somersby la 330 ml din partea casei', 15.00);
-INSERT INTO `product` (`idRestaurant`,`image`,`category`,`name`,`description`,`price`) VALUES (9, 'https://images.deliveryhero.io/image/fd-ro/Products/62137.jpg','Salate', 'Salata bulgareasca','Salata asortata 200gr, sunca 80gr, masline 50gr, branza feta 50gr, ou, maioneza casa 50gr + o bautura Somersby la 330 ml din partea casei', 15.00);
-INSERT INTO `product` (`idRestaurant`,`image`,`category`,`name`,`description`,`price`) VALUES (9, 'https://images.deliveryhero.io/image/fd-ro/Products/62138.jpg','Salate', 'Salata greceasca','Salata asortata 200gr, ceapa rosie 30gr, ardei gras 30gr, masline 50gr, branza feta 50gr, sos tzatiky 50gr + o bautura Somersby la 330 ml din partea casei', 15.00);
-INSERT INTO `product` (`idRestaurant`,`image`,`category`,`name`,`description`,`price`) VALUES (9, 'https://images.deliveryhero.io/image/fd-ro/Products/62139.jpg','Salate', 'Salata crispy','Salata asortata 200gr, crispy 80gr, masline 50gr, branza feta 50gr, maioneza casa 50gr + o bautura Somersby la 330 ml din partea casei', 15.00);
-INSERT INTO `product` (`idRestaurant`,`image`,`category`,`name`,`description`,`price`) VALUES (9, 'https://images.deliveryhero.io/image/fd-ro/Products/62127.jpg','Sandvisuri', 'Sandvis piept de pui','Piept de pui, cartofi pai, salata asortata, paine, sosuri', 8.00);
-INSERT INTO `product` (`idRestaurant`,`image`,`category`,`name`,`description`,`price`) VALUES (9, 'https://images.deliveryhero.io/image/fd-ro/Products/62128.jpg','Sandvisuri', 'Sandvis sunca','Sunca, cascaval, cartofi pai, salata asortata, paine, sosuri', 8.00);
-INSERT INTO `product` (`idRestaurant`,`image`,`category`,`name`,`description`,`price`) VALUES (9, 'https://images.deliveryhero.io/image/fd-ro/Products/62129.jpg','Sandvisuri', 'Sandvis pastrama','Muschi de porc, cascaval, cartofi pai, salata asortata, paine, sosuri', 8.00);
-INSERT INTO `product` (`idRestaurant`,`image`,`category`,`name`,`description`,`price`) VALUES (9, 'https://images.deliveryhero.io/image/fd-ro/Products/62130.jpg','Sandvisuri', 'Sandvis ton','Ton, ceapa rosie, lamaie, salata asortata, paine, sosuri', 8.00);
-INSERT INTO `product` (`idRestaurant`,`image`,`category`,`name`,`description`,`price`) VALUES (9, 'https://images.deliveryhero.io/image/fd-ro/Products/62131.jpg','Sandvisuri', 'Sandvis crispy',' Crispy, cartofi pai, salata sortata, paine, sosuri', 8.00);
-INSERT INTO `product` (`idRestaurant`,`image`,`category`,`name`,`description`,`price`) VALUES (9, 'https://images.deliveryhero.io/image/fd-ro/Products/62132.jpg','Sandvisuri', 'Sandvis snitel','Snitel piept de pui, cartofi pai, salata asortata, paine, sosuri', .00);
-INSERT INTO `product` (`idRestaurant`,`image`,`category`,`name`,`description`,`price`) VALUES (9, 'https://images.deliveryhero.io/image/fd-ro/Products/62133.jpg','Sandvisuri', 'Super Sandvis','Ceafa de porc, carnati, cartofi pai, salata asortata, paine, sosuri', 10.00);
-INSERT INTO `product` (`idRestaurant`,`image`,`category`,`name`,`description`,`price`) VALUES (9, 'https://images.deliveryhero.io/image/fd-ro/Products/62134.jpg','Sandvisuri', 'Crispy lipie','Crispy, cartofi pai, salata, lipie, sosuri', 12.00);
-INSERT INTO `product` (`idRestaurant`,`image`,`category`,`name`,`description`,`price`) VALUES (9, 'https://images.deliveryhero.io/image/fd-ro/Products/194312.jpg','Sandvisuri', 'Sandvis Take&amp;eat','Prosciuto crudo, rosii cherry, salata verde, gorgonzola, mozarella, turta de casa', 14.00);
+INSERT INTO `product` (`idRestaurant`,`image`,`category`,`name`,`description`,`price`) VALUES (9, '','Meniuri', 'Meniu 2: Aripi de pui picante','Aripi de pui picante, cartofi pai, salata de castraveti murati, paine', 15.00);
+INSERT INTO `product` (`idRestaurant`,`image`,`category`,`name`,`description`,`price`) VALUES (9, '','Meniuri', 'Meniu 3: Pulpe de pui dezosate la gratar','Pulpe de pui dezosate la gratar, orez cu legume, salata de varza, paine', 15.00);
 INSERT INTO `product` (`idRestaurant`,`image`,`category`,`name`,`description`,`price`) VALUES (9, '','Pizza', 'Pizza Crudo e rucola','sos pizza, mozarella bufala, prosciutto crudo, rosii cherry, rucola, parmezan', 30.00);
 INSERT INTO `product` (`idRestaurant`,`image`,`category`,`name`,`description`,`price`) VALUES (9, '','Pizza', 'Pizza Rimini','sos pizza, mozzarella, bufala, ansoa, oregnao', 30.00);
 INSERT INTO `product` (`idRestaurant`,`image`,`category`,`name`,`description`,`price`) VALUES (9, '','Pizza', 'Pizza Romana','sos pizza, mozzarella, ansoa, masline, capere, oregano', 27.00);
@@ -535,7 +509,6 @@ SELECT SHA2('abc', 256);
 
 
 select sc.id from shopping_cart sc join shopping_cart_users scu on sc.id = scu.idShoppingCart where sc.totalPrice=0 and scu.idUser=2
-
 
 
 
