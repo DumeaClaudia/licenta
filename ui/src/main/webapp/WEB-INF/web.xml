@@ -37,12 +37,12 @@
 	</servlet-mapping>
 	
 	<servlet>
-		<servlet-name>jsonservlet_get_cart_example</servlet-name>
-		<servlet-class>com.license.servlets.GetCartServlet1</servlet-class>
+		<servlet-name>jsonservlet_get_cart_list</servlet-name>
+		<servlet-class>com.license.servlets.GetCartListServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>jsonservlet_get_cart_example</servlet-name>
-		<url-pattern>/jsonservlet/get_cart_example</url-pattern>
+		<servlet-name>jsonservlet_get_cart_list</servlet-name>
+		<url-pattern>/jsonservlet/get_cart_list</url-pattern>
 	</servlet-mapping>
 	
 	<servlet>
@@ -51,7 +51,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>jsonservlet_get_cart_info</servlet-name>
-		<url-pattern>/jsonservlet/get_cart_example</url-pattern>
+		<url-pattern>/jsonservlet/get_cart_info</url-pattern>
 	</servlet-mapping>
 	<!-- <servlet> <servlet-name>Faces Servlet</servlet-name> <servlet-class>javax.faces.webapp.FacesServlet</servlet-class> <load-on-startup>1</load-on-startup> </servlet> <servlet-mapping> <servlet-name>Faces Servlet</servlet-name> <url-pattern>*.xhtml</url-pattern> </servlet-mapping> -->
 </web-app>

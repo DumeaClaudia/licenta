@@ -1,6 +1,8 @@
 package com.license.servlets;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -8,18 +10,27 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class GetCartServlet2 extends HttpServlet {
-	 /**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1115909816033418452L;
 
-
+	// get_cart_info
+	// http://localhost:8080/ui/jsonservlet/get_cart_example?id=1
+	
+	
+	@SuppressWarnings("unchecked")
 	@Override
 	   public void doGet(HttpServletRequest request, HttpServletResponse response)
 	               throws IOException, ServletException {
-		String s = request.getQueryString();
+		List<String> result = new ArrayList<String>();
 		
-		System.out.println("ID = " + s + " + " + request.getParameter("id"));
+		//request.getQueryString();
+		result = (List<String>) request.getParameterNames();
+		
+		String[] result2 = request.getParameterValues(null);
+				
+		
+		
+		// System.out.println("ID = " + s + " + " + request.getParameter("id"));
 		
 		// nume restaurant
 		// imaginea restaurant
