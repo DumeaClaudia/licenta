@@ -17,7 +17,7 @@ import com.license.AddProductRequest;
 import com.license.Product;
 import com.license.ShoppingCartResponse;
 import com.license.UserIdRequest;
-import com.license.services.ShoppingCartService;
+import com.license.shoppingCart.ShoppingCartService;
 
 public class GetCartProductsServlet extends HttpServlet {
 

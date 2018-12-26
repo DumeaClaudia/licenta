@@ -7,8 +7,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
 import com.license.Product;
-//import com.license.ProductShoppingCart;
-import com.license.services.ShoppingCartService;
+import com.license.shoppingCart.ShoppingCartService;
 
 @ManagedBean
 @RequestScoped

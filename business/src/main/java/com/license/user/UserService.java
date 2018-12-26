@@ -1,4 +1,4 @@
-package com.license.services;
+package com.license.user;
 
 import javax.ejb.Remote;
 

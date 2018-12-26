@@ -1,4 +1,4 @@
-package com.license.repositories.user.implementation;
+package com.license.repositories.user;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -13,7 +13,6 @@ import javax.persistence.Query;
 
 import com.license.User;
 import com.license.entities.UserEntity;
-import com.license.repositories.user.UserRepository;
 
 @Stateless
 @Remote(UserRepository.class)

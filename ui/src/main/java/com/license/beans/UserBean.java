@@ -7,7 +7,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import com.license.User;
-import com.license.services.UserService;
+import com.license.user.UserService;
 
 @ManagedBean
 // @RequestScoped

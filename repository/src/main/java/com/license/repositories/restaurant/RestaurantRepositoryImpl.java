@@ -1,4 +1,4 @@
-package com.license.repositories.restaurant.implementation;
+package com.license.repositories.restaurant;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +14,6 @@ import com.license.Product;
 import com.license.Restaurant;
 import com.license.entities.ProductEntity;
 import com.license.entities.RestaurantEntity;
-import com.license.repositories.restaurant.RestaurantRepository;
 
 @Stateless
 @Remote(RestaurantRepository.class)

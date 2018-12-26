@@ -1,4 +1,4 @@
-package com.license.implementation;
+package com.license.shoppingCart;
 
 import java.util.List;
 
@@ -8,7 +8,6 @@ import javax.ejb.Stateless;
 
 import com.license.Product;
 import com.license.repositories.shoppingCart.ShoppingCartRepository;
-import com.license.services.ShoppingCartService;
 
 @Remote(ShoppingCartService.class)
 @Stateless
@@ -39,5 +38,9 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
 
 	public void removeProductFromCart(long idUser, long idProduct, long idShoppingCart) {
 		repository.removeProductFromCart(idUser, idProduct, idShoppingCart);		
+	}
+
+	public List<Long> getAllShoppingCartsForUser(long idUser) {
+		return repository.retrieveAllShoppingCartForUser(idUser);
 	}
 }

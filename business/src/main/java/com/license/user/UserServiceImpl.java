@@ -1,4 +1,4 @@
-package com.license.implementation;
+package com.license.user;
 
 import javax.ejb.EJB;
 //import javax.ejb.Remote;
@@ -6,7 +6,6 @@ import javax.ejb.Stateless;
 
 import com.license.User;
 import com.license.repositories.user.UserRepository;
-import com.license.services.UserService;
 
 //@Remote(UserService.class)
 @Stateless

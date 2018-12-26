@@ -9,7 +9,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 import com.license.Restaurant;
-import com.license.services.RestaurantService;
+import com.license.restaurant.RestaurantService;
 
 @ManagedBean
 //@RequestScoped

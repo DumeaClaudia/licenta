@@ -8,7 +8,9 @@ public interface ShoppingCartRepository {
 	public List<Product> retrieveShoppingCartProductsById(long id);
 
 	public List<Long> retrieveActiveShoppingCartForUserId(long idUser);
-
+	
+	public List<Long> retrieveAllShoppingCartForUser(long idUser);
+ 
 	public Product getProductById(long idProduct);
 
 	public long createShoppingCart(long idUser, long idRestaurant);

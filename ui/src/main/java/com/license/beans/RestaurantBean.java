@@ -12,7 +12,7 @@ import javax.faces.event.AjaxBehaviorEvent;
 
 import com.license.Product;
 import com.license.Restaurant;
-import com.license.services.RestaurantService;
+import com.license.restaurant.RestaurantService;
 
 @ManagedBean
 @RequestScoped

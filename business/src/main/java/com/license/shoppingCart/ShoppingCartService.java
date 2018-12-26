@@ -1,4 +1,4 @@
-package com.license.services;
+package com.license.shoppingCart;
 
 import java.util.List;
 
@@ -8,6 +8,8 @@ public interface ShoppingCartService {
 	List<Product> getShoppingCartProducts(long idShoppingCart);
 
 	List<Long> getActiveShoppingCartForUser(long idUser);
+	
+	List<Long> getAllShoppingCartsForUser(long idUser);
 
 	Product getProduct(long idProduct);
 

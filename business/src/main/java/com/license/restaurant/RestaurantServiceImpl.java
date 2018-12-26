@@ -1,4 +1,4 @@
-package com.license.implementation;
+package com.license.restaurant;
 
 import java.util.List;
 
@@ -9,7 +9,6 @@ import javax.ejb.Stateless;
 import com.license.Product;
 import com.license.Restaurant;
 import com.license.repositories.restaurant.RestaurantRepository;
-import com.license.services.RestaurantService;
 
 @Remote(RestaurantService.class)
 @Stateless

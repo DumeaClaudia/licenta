@@ -1,4 +1,4 @@
-package com.license.repositories.shoppingCart.implementation;
+package com.license.repositories.shoppingCart;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -17,7 +17,6 @@ import com.license.entities.ProductEntity;
 import com.license.entities.ShoppingCartEntity;
 import com.license.entities.ShoppingCartProductsEntity;
 import com.license.entities.ShoppingCartUserEntity;
-import com.license.repositories.shoppingCart.ShoppingCartRepository;
 
 @Stateless
 @Remote(ShoppingCartRepository.class)
@@ -144,5 +143,24 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 		}
 		//em.persist(shoppingCartProductsEntity);
 		
+	}
+
+	public List<Long> retrieveAllShoppingCartForUser(long idUser) {
+		
+		List<ShoppingCartUserEntity> shoppingCartsUsersEntity = new ArrayList<ShoppingCartUserEntity>();		
+		
+		Query query = em.createNamedQuery("shopping_cart_users.getAllShoppingCartsForUser");
+		query.setParameter("idUser", idUser);		
+		
+		shoppingCartsUsersEntity = query.getResultList();
+		
+		List<Long> cartIds = new ArrayList<Long>();
+		
+		for( ShoppingCartUserEntity cart: shoppingCartsUsersEntity ) {
+			cartIds.add(cart.getIdShoppingCart());
+		}
+		System.out.println("cart id-urile gasite sunt: "+cartIds);
+		
+		return cartIds;
 	}	
 }
