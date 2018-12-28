@@ -1,9 +1,12 @@
 package com.license.repositories.shoppingCart;
 
 import java.util.List;
+
+import com.license.Cart;
 import com.license.Product;
 
 public interface ShoppingCartRepository {
+	public Cart retrieveCartById(long idCart);
 	
 	public List<Product> retrieveShoppingCartProductsById(long id);
 

@@ -6,6 +6,7 @@ import javax.ejb.EJB;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 
+import com.license.Cart;
 import com.license.Product;
 import com.license.repositories.shoppingCart.ShoppingCartRepository;
 
@@ -42,5 +43,9 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
 
 	public List<Long> getAllShoppingCartsForUser(long idUser) {
 		return repository.retrieveAllShoppingCartForUser(idUser);
+	}
+
+	public Cart getCartById(long idCart) {
+		return repository.retrieveCartById(idCart);
 	}
 }

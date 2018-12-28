@@ -13,9 +13,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.license.Cart;
 import com.license.Product;
 import com.license.Restaurant;
 import com.license.shoppingCart.ShoppingCartService;
+import com.license.data.CartSummaryItem;
 import com.license.data.ProductDetailsItem;
 import com.license.restaurant.RestaurantService;
 
@@ -33,16 +35,16 @@ public class GetCartListServlet extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
 		int userId = 1;
-
-		List<ProductDetailsItem> productItems = new ArrayList<ProductDetailsItem>();
-		List<Product> products = new ArrayList<Product>();
+		List<CartSummaryItem> carts = new ArrayList<CartSummaryItem>();;
 		List<Long> allCartList = shoppingCartService.getAllShoppingCartsForUser(userId);
-		String description = new String();
-		Set<Long> restaurantsIds = new HashSet<Long>();
-
-		for (Long cartId : allCartList) {
+		
+		for (long idCart : allCartList) {
+			List<ProductDetailsItem> productItems = new ArrayList<ProductDetailsItem>();
+			List<Product> products = new ArrayList<Product>();
+			String description = new String();
+			Set<Long> restaurantsIds = new HashSet<Long>();
 			
-			products = shoppingCartService.getShoppingCartProducts(cartId);		
+			products = shoppingCartService.getShoppingCartProducts(idCart);		
 			for (Product product : products) {
 
 				ProductDetailsItem item = new ProductDetailsItem();
@@ -56,39 +58,35 @@ public class GetCartListServlet extends HttpServlet {
 				restaurantsIds.add(product.getIdRestaurant());
 				productItems.add(item);
 			}
+			
+			List<Restaurant> restaurants = new ArrayList<Restaurant>();
+
+			for (Long idRestaurant : restaurantsIds) {
+				Restaurant restaurant = restaurantService.getRestaurantById(idRestaurant);
+				restaurants.add(restaurant);
+			}
+
+			int nrProducts = products.size(); 
+			int nrRestaurants = restaurantsIds.size(); 
+			
+			if (nrRestaurants == 1) {
+				Restaurant restaurant = restaurants.get(0);
+				description = restaurant.getName();
+			} else {
+				description = "";
+			}
+
+			Cart cart = new Cart();
+			cart = shoppingCartService.getCartById(idCart);
+					
+			CartSummaryItem item = new CartSummaryItem(cart.getIdCart(), cart.isActive(), cart.getCreatedDate(), description);
+			carts.add(item);
 		}
 
-		List<Restaurant> restaurants = new ArrayList<Restaurant>();
-
-		for (Long idRestaurant : restaurantsIds) {
-			Restaurant restaurant = restaurantService.getRestaurantById(idRestaurant);
-			restaurants.add(restaurant);
-		}
-
-		int nrProducts = products.size(); 
-		int nrRestaurants = restaurantsIds.size(); 
-		
-		if (nrRestaurants == 1) {
-			Restaurant restaurant = restaurants.get(0);
-			description = restaurant.getName() + " " + restaurant.getImage() + ' ' + restaurant.getProducts();
-		} else {
-			description = "Cart-ul are " + nrProducts + " produse.";
-		}
-
-		// get all restaurants id
-		// if one restaurant id:
-		// description = get restaurant name from restaurant id
-		// else
-		// description = count(distinct restaurant ids)
-
-		// get_cart_example e apelat din android....
-		System.out.println("Count = " + productItems.size());
-
-		// Set the response message's MIME type
 		response.setContentType("application/json");
 		ObjectMapper write_mapper = new ObjectMapper();
 
-		write_mapper.writeValue(response.getOutputStream(), description);
+		write_mapper.writeValue(response.getOutputStream(), carts);
 
 	}
 }

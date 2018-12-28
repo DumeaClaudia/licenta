@@ -14,9 +14,6 @@ import javax.persistence.NamedQuery;
 		@NamedQuery(name = "shopping_cart.getShoppingCart", query = "Select sc FROM shopping_cart sc where sc.id=:idShoppingCart" )})
 
 public class ShoppingCartEntity implements Serializable{
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -74,7 +71,5 @@ public class ShoppingCartEntity implements Serializable{
 
 	public void setIdRestaurant(long idRestaurant) {
 		this.idRestaurant = idRestaurant;
-	}
-	
-	
+	}	
 }

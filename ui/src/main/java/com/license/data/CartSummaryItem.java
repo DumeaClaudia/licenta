@@ -2,28 +2,31 @@ package com.license.data;
 
 public class CartSummaryItem {
 	
-	String idCart;
+	long idCart;
 	boolean cartActive;
 	String createdDate;
     String cartDescription; // un restaurant => restaurant name, mai multe restaurant -> nr produse cart
     
-	public CartSummaryItem(String idCart, String restaurantName, String createdDate) {
+	public CartSummaryItem(long idCart, boolean cartActive, String createdDate, String cartDescription) {		
 		this.idCart = idCart;
+		this.cartActive = cartActive;
 		this.createdDate = createdDate;
-		this.cartDescription = restaurantName;
+		this.cartDescription = cartDescription;
+	}
+	
+	public boolean getCartActive() {
+		return cartActive;
 	}
 
 	public String getCreatedDate() {
 		return createdDate;
 	}
 
-	public String getRestaurantName() {
+	public String getCartDescription() {
 		return cartDescription;
 	}
 
-	public String getIdCart() {
+	public long getIdCart() {
 		return idCart;
 	}
-
-
 }

@@ -1,5 +1,8 @@
-package com.license.repositories.shoppingCart;
+	package com.license.repositories.shoppingCart;
 
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
@@ -11,6 +14,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+
+import com.license.Cart;
 import com.license.Product;
 import com.license.entities.CartForUserEntity;
 import com.license.entities.ProductEntity;
@@ -162,5 +167,32 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 		System.out.println("cart id-urile gasite sunt: "+cartIds);
 		
 		return cartIds;
+	}
+
+	public Cart retrieveCartById(long idCart) {
+		Cart cart = new Cart();
+		
+		Query query = em.createNamedQuery("shopping_cart.getShoppingCart");
+		query.setParameter("idShoppingCart", idCart);		
+		
+		ShoppingCartEntity shoppingCartEntity = (ShoppingCartEntity) query.getSingleResult();
+		
+		DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
+		cart.setIdCart(idCart);	
+		cart.setCreatedDate(df.format(shoppingCartEntity.getCreatedDate()));
+		if(shoppingCartEntity.getSendDate() != null) {
+			cart.setSendDate(df.format(shoppingCartEntity.getSendDate()));
+		}
+		cart.setTotalPrice(shoppingCartEntity.getTotalPrice());			
+		cart.setIdRestaurant(shoppingCartEntity.getIdRestaurant());
+		if(shoppingCartEntity.getSendDate() == null ) {
+			cart.setActive(true);
+		}else {
+			if(shoppingCartEntity.getSendDate().before(new Date())) {
+				cart.setActive(false);			
+			}			
+		}
+			 
+		return cart;
 	}	
 }
