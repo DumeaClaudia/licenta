@@ -5,7 +5,7 @@ public class CartSummaryItem {
 	long idCart;
 	boolean cartActive;
 	String createdDate;
-    String cartDescription; // un restaurant => restaurant name, mai multe restaurant -> nr produse cart
+    String cartDescription;
     
 	public CartSummaryItem(long idCart, boolean cartActive, String createdDate, String cartDescription) {		
 		this.idCart = idCart;

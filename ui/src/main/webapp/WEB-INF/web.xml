@@ -10,15 +10,17 @@
 		<param-name>com.sun.faces.enableRestoreViewCompatibility</param-name>
 		<param-value>true</param-value>
 	</context-param>
+	
 	<servlet>
 		<servlet-name>jsonservlet_add_product_to_cart</servlet-name>
 		<servlet-class>com.license.servlets.AddProductToCartServlet</servlet-class>
-	</servlet>
+	</servlet>	
 	<servlet-mapping>
 		<servlet-name>jsonservlet_add_product_to_cart</servlet-name>
 		<url-pattern>/jsonservlet/add_product_to_cart</url-pattern>
 	</servlet-mapping>
 	<servlet>
+	
 		<servlet-name>jsonservlet_remove_product_from_cart</servlet-name>
 		<servlet-class>com.license.servlets.RemoveProductFromCartServlet</servlet-class>
 	</servlet>
@@ -38,11 +40,21 @@
 	
 	<servlet>
 		<servlet-name>jsonservlet_get_cart_list</servlet-name>
-		<servlet-class>com.license.servlets.GetCartListServlet</servlet-class>
+		<servlet-class>com.license.servlets.GetCartSummaryListServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>jsonservlet_get_cart_list</servlet-name>
 		<url-pattern>/jsonservlet/get_cart_list</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>jsonservlet_get_cart_details</servlet-name>
+		<servlet-class>com.license.servlets.GetCartDetailsServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>jsonservlet_get_cart_details</servlet-name>
+		<url-pattern>/jsonservlet/get_cart_details</url-pattern>
+	</servlet-mapping>
+	
 	<!-- <servlet> <servlet-name>Faces Servlet</servlet-name> <servlet-class>javax.faces.webapp.FacesServlet</servlet-class> <load-on-startup>1</load-on-startup> </servlet> <servlet-mapping> <servlet-name>Faces Servlet</servlet-name> <url-pattern>*.xhtml</url-pattern> </servlet-mapping> -->
 </web-app>

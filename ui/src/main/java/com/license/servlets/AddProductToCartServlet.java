@@ -53,9 +53,9 @@ public class AddProductToCartServlet extends HttpServlet {
 		
 		ShoppingCartResponse jsonResponse = new ShoppingCartResponse();
 
-		// get actie shopping cart for user
+		// get active shopping cart for user
 		// if not active shopping cart create shopping cart
-		// insert into shoopping cart
+		// insert into shopping cart
 
 		List<Long> activeCartList = shoppingCartService.getActiveShoppingCartForUser(jsonRequest.getIdUser());
 		

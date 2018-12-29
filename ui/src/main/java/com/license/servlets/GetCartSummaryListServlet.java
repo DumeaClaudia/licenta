@@ -21,30 +21,27 @@ import com.license.data.CartSummaryItem;
 import com.license.data.ProductDetailsItem;
 import com.license.restaurant.RestaurantService;
 
-public class GetCartListServlet extends HttpServlet {
+public class GetCartSummaryListServlet extends HttpServlet {
+	private static final long serialVersionUID = 1115909816033418452L;
 
 	@EJB
 	private ShoppingCartService shoppingCartService;
-	
 	@EJB
 	private RestaurantService restaurantService;
-
-	private static final long serialVersionUID = 1115909816033418452L;
 
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
 		int userId = 1;
-		List<CartSummaryItem> carts = new ArrayList<CartSummaryItem>();;
+		List<CartSummaryItem> carts = new ArrayList<CartSummaryItem>();
 		List<Long> allCartList = shoppingCartService.getAllShoppingCartsForUser(userId);
 		
 		for (long idCart : allCartList) {
 			List<ProductDetailsItem> productItems = new ArrayList<ProductDetailsItem>();
-			List<Product> products = new ArrayList<Product>();
 			String description = new String();
-			Set<Long> restaurantsIds = new HashSet<Long>();
+			Set<Long> restaurantsIds = new HashSet<Long>();		
+			List<Product> products = shoppingCartService.getShoppingCartProducts(idCart);
 			
-			products = shoppingCartService.getShoppingCartProducts(idCart);		
 			for (Product product : products) {
 
 				ProductDetailsItem item = new ProductDetailsItem();
@@ -64,21 +61,16 @@ public class GetCartListServlet extends HttpServlet {
 			for (Long idRestaurant : restaurantsIds) {
 				Restaurant restaurant = restaurantService.getRestaurantById(idRestaurant);
 				restaurants.add(restaurant);
-			}
-
-			int nrProducts = products.size(); 
-			int nrRestaurants = restaurantsIds.size(); 
+			}	
 			
-			if (nrRestaurants == 1) {
+			if (restaurantsIds.size() == 1) {
 				Restaurant restaurant = restaurants.get(0);
-				description = restaurant.getName();
+				description = "Cosul contine " + products.size() + " produse, de la restaurantul " + restaurant.getName();
 			} else {
-				description = "";
+				description = "Cosul contine " + products.size() + " produse, de la " + restaurantsIds.size() + "restaurante.";
 			}
 
-			Cart cart = new Cart();
-			cart = shoppingCartService.getCartById(idCart);
-					
+			Cart cart = shoppingCartService.getCartById(idCart);				
 			CartSummaryItem item = new CartSummaryItem(cart.getIdCart(), cart.isActive(), cart.getCreatedDate(), description);
 			carts.add(item);
 		}

@@ -7,6 +7,7 @@ public class ProductDetailsItem {
 	private String description;
 	private double price;
 	private int discount;
+	
 	public String getImage() {
 		return image;
 	}
