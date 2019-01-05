@@ -11,6 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.license.Cart;
@@ -32,7 +33,9 @@ public class GetCartSummaryListServlet extends HttpServlet {
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
-		int userId = 1;
+		HttpSession session = request.getSession(false); 
+		int userId = Integer.parseInt((String) session.getAttribute("userId"));
+		
 		List<CartSummaryItem> carts = new ArrayList<CartSummaryItem>();
 		List<Long> allCartList = shoppingCartService.getAllShoppingCartsForUser(userId);
 		

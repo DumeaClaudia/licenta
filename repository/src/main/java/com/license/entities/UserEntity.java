@@ -12,12 +12,9 @@ import javax.persistence.NamedQuery;
 
 @Entity(name = "user")
 @NamedQueries({
-		@NamedQuery(name = "user.findUser", query = "Select usr FROM user usr WHERE usr.username = :prm_username and usr.password = :prm_password") })
+		@NamedQuery(name = "user.findUser", query = "Select usr FROM user usr WHERE usr.username = :prm_username and usr.password = :prm_password"),
+		@NamedQuery(name = "user.getUsers", query = "Select usr FROM user usr")})
 public class UserEntity implements Serializable{
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	@Id

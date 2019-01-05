@@ -164,7 +164,7 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 		for( ShoppingCartUserEntity cart: shoppingCartsUsersEntity ) {
 			cartIds.add(cart.getIdShoppingCart());
 		}
-		System.out.println("cart id-urile gasite sunt: "+cartIds);
+		// System.out.println("cart id-urile gasite sunt: "+cartIds);
 		
 		return cartIds;
 	}

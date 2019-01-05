@@ -35,9 +35,9 @@ function getCartProductsAjaxRequest(request) {
 			success : function(data) {
 				$("#cart-products-list").empty();
 				var total = 0;
-				$.each(
-						data,
+				$.each(	data,
 						function(index, product) {
+						
 							var div1 = $("<div/>");
 							var span1 = $("<span class='product-list-name  ' />");
 							var span2 = $("<span class='product-list-price  ' />");
@@ -65,7 +65,8 @@ function getCartProductsAjaxRequest(request) {
 					else{
 						$("#delivery-price").text(zero + " RON");
 					}
-					$("#total-price").text(total + " RON");
+					// $("#total-price").text( Number.parseFloat(total).toFixed(2) + " RON");
+					$("#total-price").text(total.toFixed(2) + " RON");
 					$("#nr-products-cart").text(data.length);
 
 					$(".product-list-delete").click(

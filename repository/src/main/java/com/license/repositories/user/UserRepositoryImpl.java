@@ -3,9 +3,13 @@ package com.license.repositories.user;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -34,8 +38,6 @@ public class UserRepositoryImpl implements UserRepository {
 	}
 	
 	public User find(String username, String password) {
-		System.out.println("in find method repository");
-
 		UserEntity user = new UserEntity();
 		User userResponse = new User();
 		Query query = em.createNamedQuery("user.findUser");
@@ -48,27 +50,27 @@ public class UserRepositoryImpl implements UserRepository {
 			
 			query.setParameter("prm_username", username);
 			query.setParameter("prm_password", bytesToHex(encodedhash));
+			
+			List<UserEntity> results = query.getResultList();
+	        if (results.isEmpty()) 
+	        	return null;
+	        else if (results.size() == 1) 	
+	        	user = results.get(0);
+			
 
-			user = (UserEntity) query.getSingleResult();
 		} catch (NoSuchAlgorithmException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		if (user == null) {
-			System.out.println("se pare ca userul cautat nu a fost gasit");
-			// return "";
-		}
-		System.out.println("Username is: " + user.getUsername());
-		System.out.println("Password is: " + user.getPassword());
-		
+
 		userResponse.setId(user.getId());
 		userResponse.setFirstName(user.getFirstName());
 		userResponse.setLastName(user.getLastName());
 		userResponse.setUsername(user.getUsername());
 		userResponse.setEmail(user.getEmail());
 		userResponse.setPassword(user.getPassword().toString());
-
+		
 		return userResponse;
 
 	}
@@ -82,7 +84,6 @@ public class UserRepositoryImpl implements UserRepository {
 			byte[] encodedhash = digest.digest(user.getPassword().getBytes(StandardCharsets.UTF_8));
 			entity.setPassword(bytesToHex(encodedhash));
 		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -96,5 +97,27 @@ public class UserRepositoryImpl implements UserRepository {
 		em.getTransaction().begin();
 		em.persist(entity);
 		em.getTransaction().commit();
+		
+	}
+
+	
+	public List<User> retrieveUsers() {
+		
+		Query query = em.createNamedQuery("user.getUsers");
+		List<UserEntity> users = query.getResultList();
+		
+		List<User> usersResponse = new ArrayList<User>();
+		for(UserEntity userEntity: users) {
+			User user = new User();
+			user.setId(userEntity.getId());
+			user.setEmail(userEntity.getEmail());
+			user.setFirstName(userEntity.getFirstName());
+			user.setLastName(userEntity.getLastName());
+			user.setPassword(userEntity.getPassword());
+			user.setUsername(userEntity.getUsername());
+			
+			usersResponse.add(user);	
+		}	
+		return usersResponse;
 	}
 }
