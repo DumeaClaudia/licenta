@@ -14,4 +14,5 @@ public interface RestaurantService {
 	List<Product> getAllProductsForRestaurant(long idRestaurant);
 	List<Product> getProductsByCategory(String category, long idRestaurant);
 	List<String> getCategoriesOfProducts(long idRestaurant);
+	Product getProductById(long idProduct);
 }

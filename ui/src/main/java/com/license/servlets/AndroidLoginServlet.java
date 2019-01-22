@@ -17,8 +17,9 @@ import com.license.User;
 import com.license.user.UserService;
 
 public class AndroidLoginServlet extends HttpServlet {
-    
-    @EJB
+	private static final long serialVersionUID = 1L;
+	
+	@EJB
     private UserService userService;
 
     protected void doGet(HttpServletRequest request,
@@ -28,13 +29,10 @@ public class AndroidLoginServlet extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("pwd");
         
-        
         User userDB = new User();
 		userDB = userService.login(username, password);
 		
-        if (userDB!=null) {
-        	
-        	
+        if (userDB!=null) {          	
             //get the old session and invalidate
             HttpSession oldSession = request.getSession(false);
             if (oldSession != null) {
@@ -47,7 +45,6 @@ public class AndroidLoginServlet extends HttpServlet {
             newSession.setAttribute("username", userDB.getUsername());
             newSession.setAttribute("userId", userDB.getId());
             
-        
             //setting session to expiry in 5 mins
             newSession.setMaxInactiveInterval(5*60);
           	response.sendError(response.SC_OK);

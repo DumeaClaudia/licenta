@@ -19,6 +19,10 @@ import com.license.restaurant.RestaurantService;
 // @SessionScoped
 public class RestaurantBean implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Restaurant restaurant = null;
 	private List<Product> products = new ArrayList<Product>();
 	private long id;
@@ -45,6 +49,9 @@ public class RestaurantBean implements Serializable {
 		products = restaurantService.getAllProductsForRestaurant(id);
 		categories = restaurantService.getCategoriesOfProducts(id);
 		this.id = id;
+		
+		productId = products.get(1).getId();
+		product = products.get(1);
 	}
 
 	public List<Product> displayAllProductsForRestaurant() {

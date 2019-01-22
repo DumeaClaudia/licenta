@@ -1,0 +1,73 @@
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+<f:metadata>
+	<f:viewParam name="id" value="#{restaurantBean.id}">
+	</f:viewParam>
+</f:metadata>
+
+
+<h:body data-spy="scroll" data-target=".navbar" data-offset="50">
+	<ui:composition template="../template/template.xhtml">
+
+		<ui:define name="head">
+			<meta property="og:image"
+				content="http://192.168.43.12:8080/ui/resources/images/#{restaurantBean.restaurant.name}/#{restaurantBean.restaurant.image}" />
+			<meta property="og:title" content="#{restaurantBean.restaurant.name}" />
+			<meta property="og:description" content="#{restaurantBean.restaurant.description}" />
+		</ui:define>
+
+		<ui:define name="content">
+			<div class="container style-font">
+
+				<div class="container marketing" style="margin-top: 50px;">
+					<div class="well row">
+						<div class="col-md-12" style="margin-top: 10px;">
+							<div class="col-md-8 col-sm-6 col-xs-12">
+								<a class="btn glyphicon glyphicon-chevron-left" href="homeRestaurants.xhtml"> BackToHomePage</a> <img
+									class="img-thumbnail restaurant-img-thumbnail"
+									src="../resources/images/#{restaurantBean.restaurant.name}/#{restaurantBean.restaurant.image}"
+									alt="#{restaurantBean.restaurant.name}"></img> <br></br>
+							</div>
+							<div class=" col-md-4 col-sm-6 col-xs-12">
+								<div class="row">
+									<div id="idRestaurantName">
+										<h3>
+											<b>#{restaurantBean.restaurant.name}</b>
+										</h3>
+									</div>
+
+									<div class="pull-left">
+
+										<span class="glyphicon glyphicon-star" aria-hidden="true" /> <span class="glyphicon glyphicon-star-empty"
+											aria-hidden="true" /> <span class="glyphicon glyphicon-star-empty" aria-hidden="true" /> <span
+											class="glyphicon glyphicon-star-empty" aria-hidden="true" /> <span class="glyphicon glyphicon-star-empty"
+											aria-hidden="true" />
+									</div>
+									<div>
+										<div>
+											<br></br> <br></br> <b><h:outputText value="Principalele feluri de mancare:" /></b><br></br>
+											<h:outputText value="    #{restaurantBean.restaurant.description}" />
+										</div>
+									</div>
+									<div>
+										<br></br> <b><h:outputText value="Adresa: "></h:outputText></b> <br></br> <i><h:outputText
+												value="#{restaurantBean.restaurant.address}" /></i>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</ui:define>
+
+	</ui:composition>
+</h:body>
+</html>

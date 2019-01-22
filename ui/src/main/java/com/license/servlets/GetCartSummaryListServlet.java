@@ -34,7 +34,8 @@ public class GetCartSummaryListServlet extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
 		HttpSession session = request.getSession(false); 
-		int userId = Integer.parseInt((String) session.getAttribute("userId"));
+		Long s = (Long) session.getAttribute("userId");
+		int userId = s.intValue();
 		
 		List<CartSummaryItem> carts = new ArrayList<CartSummaryItem>();
 		List<Long> allCartList = shoppingCartService.getAllShoppingCartsForUser(userId);

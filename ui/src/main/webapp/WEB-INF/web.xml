@@ -7,7 +7,6 @@
 >
 	<display-name>Servlet 3.0 Web Application</display-name>
 	
-	
 	<context-param>
 		<param-name>com.sun.faces.enableRestoreViewCompatibility</param-name>
 		<param-value>true</param-value>

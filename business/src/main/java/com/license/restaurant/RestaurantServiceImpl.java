@@ -37,4 +37,9 @@ public class RestaurantServiceImpl implements RestaurantService {
 		return repository.retrieveCategories(idRestaurant);
 	}
 
+	@Override
+	public Product getProductById(long idProduct) {
+		return repository.retrieveProductById(idProduct);
+	}
+
 }

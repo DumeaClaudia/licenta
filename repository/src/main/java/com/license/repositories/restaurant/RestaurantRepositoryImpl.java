@@ -153,4 +153,28 @@ public class RestaurantRepositoryImpl implements RestaurantRepository {
 		System.out.println("Categoriile filtrate sunt =" + categoriesResponse);
 		return categoriesResponse;
 	}
+	
+	public Product retrieveProductById(long idProduct) {
+		ProductEntity productEntity = new ProductEntity();
+		
+		Query query = em.createNamedQuery("product.getProductById");
+		query.setParameter("findId", idProduct);
+		
+		Product productResponse = new Product();
+		productEntity = (ProductEntity) query.getSingleResult();
+		
+		productResponse.setId(productEntity.getId());
+		productResponse.setName(productEntity.getName());
+		productResponse.setDescription(productEntity.getDescription());
+		productResponse.setImage(productEntity.getImage());
+		productResponse.setCategory(productEntity.getCategory());
+		productResponse.setPrice(productEntity.getPrice());
+		productResponse.setIdRestaurant(productEntity.getIdRestaurant());
+		productResponse.setDiscount(productEntity.getDiscount());
+		
+		return productResponse;
+		
+		
+		
+	}
 }

@@ -9,11 +9,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class AndroidLogoutServlet extends HttpServlet {
+	private static final long serialVersionUID = 8592753007465287356L;
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         //invalidate the session if exists
         HttpSession session = request.getSession(false);
+        
         if(session != null){
             session.invalidate();
         }

@@ -8,8 +8,6 @@ import java.util.List;
 
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -46,7 +44,6 @@ public class UserRepositoryImpl implements UserRepository {
 		try {
 			digest = MessageDigest.getInstance("SHA-256");
 			byte[] encodedhash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
-
 			
 			query.setParameter("prm_username", username);
 			query.setParameter("prm_password", bytesToHex(encodedhash));
@@ -56,10 +53,8 @@ public class UserRepositoryImpl implements UserRepository {
 	        	return null;
 	        else if (results.size() == 1) 	
 	        	user = results.get(0);
-			
-
+		
 		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
