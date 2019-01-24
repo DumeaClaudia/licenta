@@ -37,14 +37,14 @@ public class RestaurantRepositoryImpl implements RestaurantRepository {
 			// return "";
 		}
 		
-		for(RestaurantEntity r: restaurants) {
+		for(RestaurantEntity restaurantEntity: restaurants) {
 			Restaurant res = new Restaurant();
-			res.setId(r.getId());
-			res.setName(r.getName());
-			res.setDescription(r.getDescription());
-			res.setAddress(r.getAddress());
-			res.setStars(r.getStars());
-			res.setImage(r.getImage());
+			res.setId(restaurantEntity.getId());
+			res.setName(restaurantEntity.getName());
+			res.setDescription(restaurantEntity.getDescription());
+			res.setAddress(restaurantEntity.getAddress());
+			res.setStars(restaurantEntity.getStars());
+			res.setImage(restaurantEntity.getImage());
 
 			restaurantsResponse.add(res);
 		}
@@ -62,7 +62,6 @@ public class RestaurantRepositoryImpl implements RestaurantRepository {
 		restaurantResponse.setId(restaurant.getId());
 		restaurantResponse.setName(restaurant.getName());
 		restaurantResponse.setDescription(restaurant.getDescription());
-		//restaurantResponse.setProducts(restaurant.);
 		restaurantResponse.setAddress(restaurant.getAddress());
 		restaurantResponse.setStars(restaurant.getStars());
 		restaurantResponse.setImage(restaurant.getImage());
@@ -84,18 +83,18 @@ public class RestaurantRepositoryImpl implements RestaurantRepository {
 			// return "";
 		}
 		
-		for(ProductEntity p: products) {
-			Product prod = new Product();
-			prod.setId(p.getId());
-			prod.setIdRestaurant(p.getIdRestaurant());
-			prod.setImage(p.getImage());
-			prod.setCategory(p.getCategory());
-			prod.setName(p.getName());
-			prod.setDescription(p.getDescription());
-			prod.setPrice(p.getPrice());
-			prod.setDiscount(p.getDiscount());
+		for(ProductEntity productEntity: products) {
+			Product product = new Product();
+			product.setId(productEntity.getId());
+			product.setIdRestaurant(productEntity.getIdRestaurant());
+			product.setImage(productEntity.getImage());
+			product.setCategory(productEntity.getCategory());
+			product.setName(productEntity.getName());
+			product.setDescription(productEntity.getDescription());
+			product.setPrice(productEntity.getPrice());
+			product.setDiscount(productEntity.getDiscount());
 
-			productsResponse.add(prod);
+			productsResponse.add(product);
 		}
 		return productsResponse;
 	}
@@ -115,18 +114,19 @@ public class RestaurantRepositoryImpl implements RestaurantRepository {
 			// return "";
 		}
 		
-		for(ProductEntity p: products) {
-			Product prod = new Product();
-			prod.setId(p.getId());
-			prod.setIdRestaurant(p.getIdRestaurant());
-			prod.setImage(p.getImage());
-			prod.setCategory(p.getCategory());
-			prod.setName(p.getName());
-			prod.setDescription(p.getDescription());
-			prod.setPrice(p.getPrice());
-			prod.setDiscount(p.getDiscount());
+		for(ProductEntity productEntity: products) {
+			Product product = new Product();
+			product.setId(productEntity.getId());
+			product.setIdRestaurant(productEntity.getIdRestaurant());
+			
+			product.setImage(productEntity.getImage());
+			product.setCategory(productEntity.getCategory());
+			product.setName(productEntity.getName());
+			product.setDescription(productEntity.getDescription());
+			product.setPrice(productEntity.getPrice());
+			product.setDiscount(productEntity.getDiscount());
 
-			productsResponse.add(prod);
+			productsResponse.add(product);
 		}
 		return productsResponse;
 	}
@@ -155,10 +155,10 @@ public class RestaurantRepositoryImpl implements RestaurantRepository {
 	}
 	
 	public Product retrieveProductById(long idProduct) {
-		ProductEntity productEntity = new ProductEntity();
-		
+			
+		ProductEntity productEntity = new ProductEntity();		
 		Query query = em.createNamedQuery("product.getProductById");
-		query.setParameter("findId", idProduct);
+		query.setParameter("idProduct", idProduct);
 		
 		Product productResponse = new Product();
 		productEntity = (ProductEntity) query.getSingleResult();

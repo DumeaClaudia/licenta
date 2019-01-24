@@ -1,75 +1,35 @@
 package com.license.beans;
 
 import java.io.Serializable;
-
+import javax.ejb.EJB;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
+import com.license.Product;
+import com.license.restaurant.RestaurantService;
+@ManagedBean
+@RequestScoped
 public class ProductBean implements Serializable{
 
-	/**
-	 * 
-	 */
+	@EJB
+	private RestaurantService restaurantService;
+
 	private static final long serialVersionUID = 1L;
-	private long id;
-	private long idRestaurant; 
-	private String nameRestaurant;
-	private String image;
-	private String name;
-	private String category;
-	private String description;
-	private double price;
-	private int discount;
+	private long idProduct=1;	
+	private Product product;
 	
-	public long getId() {
-		return id;
+	
+	public long getIdProduct() {
+		return idProduct;
 	}
-	public void setId(long id) {
-		this.id = id;
+	public void setIdProduct(long idProduct) {
+		this.product = restaurantService.getProductById(this.idProduct);
 	}
-	public long getIdRestaurant() {
-		return idRestaurant;
+
+	public Product getProduct() {
+		return product;
 	}
-	public void setIdRestaurant(long idRestaurant) {
-		this.idRestaurant = idRestaurant;
+	public void setProduct(Product product) {
+		this.product = product;
 	}
-	public String getImage() {
-		return image;
-	}
-	public void setImage(String image) {
-		this.image = image;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getCategory() {
-		return category;
-	}
-	public void setCategory(String category) {
-		this.category = category;
-	}
-	public String getDescription() {
-		return description;
-	}
-	public void setDescription(String description) {
-		this.description = description;
-	}
-	public double getPrice() {
-		return price;
-	}
-	public void setPrice(double price) {
-		this.price = price;
-	}
-	public int getDiscount() {
-		return discount;
-	}
-	public void setDiscount(int discount) {
-		this.discount = discount;
-	}
-	public String getNameRestaurant() {
-		return nameRestaurant;
-	}
-	public void setNameRestaurant(String nameRestaurant) {
-		this.nameRestaurant = nameRestaurant;
-	}
+	
 }

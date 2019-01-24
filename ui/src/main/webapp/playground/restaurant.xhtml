@@ -55,7 +55,7 @@
 						<div class="col-md-12" style="margin-top: 10px;">
 							<div class="col-md-8 col-sm-6 col-xs-12">
 								<a class="btn glyphicon glyphicon-chevron-left" href="homeRestaurants.xhtml"> BackToHomePage</a> <img
-									class="img-thumbnail restaurant-img-thumbnail" src="../resources/images/#{restaurantBean.restaurant.name}/#{restaurantBean.restaurant.image}"
+									class="img-thumbnail restaurant-img-thumbnail" src="../resources/images/#{restaurantBean.restaurant.id}/#{restaurantBean.restaurant.image}"
 									alt="#{restaurantBean.restaurant.name}"></img> <br></br>
 							</div>
 							<div class=" col-md-4 col-sm-6 col-xs-12">
@@ -112,7 +112,7 @@
 									<div class="row product-style" id="category">
 										<ui:fragment rendered="#{not empty product.image}">
 											<div class="col-md-2 col-sm-3 col-xs-4">
-												<img class="img-rounded" src="../resources/images/#{restaurantBean.restaurant.name}/#{product.image}" alt="#{product.image}" width="130"
+												<img class="img-rounded" src="../resources/images/#{restaurantBean.restaurant.id}/#{product.image}" alt="#{product.image}" width="130"
 													height="100"></img>
 											</div>
 										</ui:fragment>

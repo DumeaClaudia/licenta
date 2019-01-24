@@ -5,13 +5,12 @@ import java.io.Serializable;
 public class Product implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
-	private long id;
-	private long idRestaurant; 
-	//TODO add restaurantName
-	// Product Bean
-	// in android am de trimis id-urile, gen cand dau click.
+	//TODO in android:
+	// am de trimis id-urile, gen cand dau click.
 	// de adaugat idRestaurant in restaurantDetails..sau cum era.. si in Product
+	
+	private long id;
+	private long idRestaurant;
 	private String image;
 	private String name;
 	private String category;
@@ -81,5 +80,5 @@ public class Product implements Serializable {
 
 	public void setIdRestaurant(long idRestaurant) {
 		this.idRestaurant = idRestaurant;
-	}
+	}	
 }

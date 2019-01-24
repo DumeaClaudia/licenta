@@ -17,7 +17,7 @@
 
 		<ui:define name="head">
 			<meta property="og:image"
-				content="http://192.168.43.12:8080/ui/resources/images/#{restaurantBean.restaurant.name}/#{restaurantBean.restaurant.image}" />
+				content="http://192.168.43.12:8080/ui/resources/images/#{restaurantBean.restaurant.id}/#{restaurantBean.restaurant.image}" />
 			<meta property="og:title" content="#{restaurantBean.restaurant.name}" />
 			<meta property="og:description" content="#{restaurantBean.restaurant.description}" />
 		</ui:define>
@@ -31,7 +31,7 @@
 							<div class="col-md-8 col-sm-6 col-xs-12">
 								<a class="btn glyphicon glyphicon-chevron-left" href="homeRestaurants.xhtml"> BackToHomePage</a> <img
 									class="img-thumbnail restaurant-img-thumbnail"
-									src="../resources/images/#{restaurantBean.restaurant.name}/#{restaurantBean.restaurant.image}"
+									src="../resources/images/#{restaurantBean.restaurant.id}/#{restaurantBean.restaurant.image}"
 									alt="#{restaurantBean.restaurant.name}"></img> <br></br>
 							</div>
 							<div class=" col-md-4 col-sm-6 col-xs-12">

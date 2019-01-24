@@ -7,7 +7,7 @@
 	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
 <f:metadata>
-	<f:viewParam name="id" value="#{restaurantBean.id}">
+	<f:viewParam name="id" value="#{productBean.idProduct}">
 	</f:viewParam>
 </f:metadata>
 
@@ -17,9 +17,9 @@
 	<ui:composition template="../template/template.xhtml">
 
 		<ui:define name="head">
-			<meta property="og:image" content="http://192.168.43.12:8080/ui/resources/images/#{restaurantBean.restaurant.name}/#{restaurantBean.product.image}" />
-			<meta property="og:title" content="#{restaurantBean.product.name}" />
-			<meta property="og:description" content="#{restaurantBean.product.description}" />
+			<meta property="og:image" content="http://192.168.43.12:8080/ui/resources/images/#{productBean.product.idRestaurant}/#{productBean.product.image}" />
+			<meta property="og:title" content="#{productBean.product.name}" />
+			<meta property="og:description" content="#{productBean.product.description}" />
 		</ui:define>
 
 		<ui:define name="content">
@@ -31,14 +31,14 @@
 							<div class="col-md-8 col-sm-6 col-xs-12">
 								<a class="btn glyphicon glyphicon-chevron-left" href="homeRestaurants.xhtml"> BackToHomePage</a> <img
 									class="img-thumbnail restaurant-img-thumbnail"
-									src="../resources/images/#{restaurantBean.restaurant.name}/#{restaurantBean.product.image}"
-									alt="#{restaurantBean.product.name}"></img> <br></br>
+									src="../resources/images/#{productBean.product.idRestaurant}/#{productBean.product.image}"
+									alt="#{productBean.product.name}"></img> <br></br>
 							</div>
 							<div class=" col-md-4 col-sm-6 col-xs-12">
 								<div class="row">
 									<div id="idRestaurantName">
 										<h3>
-											<b>#{restaurantBean.product.name}</b>
+											<b>#{productBean.product.name}</b>
 										</h3>
 									</div>
 
@@ -46,12 +46,12 @@
 									<div>
 										<div>
 											<br></br> <br></br> <b><h:outputText value="Descriere" /></b><br></br>
-											<h:outputText value="    #{restaurantBean.product.description}" />
+											<h:outputText value="    #{productBean.product.description}" />
 										</div>
 									</div>
 									<div>
 										<br></br> <b><h:outputText value="Pret: "></h:outputText></b> <br></br> <i><h:outputText
-												value="#{restaurantBean.product.price}" /> lei</i>
+												value="#{productBean.product.price}" /> lei</i>
 									</div>
 								</div>
 							</div>
