@@ -31,6 +31,14 @@
 		<servlet-name>jsonservlet_remove_product_from_cart</servlet-name>
 		<url-pattern>/jsonservlet/remove_product_from_cart</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>jsonservlet_get_cart_products</servlet-name>
+		<servlet-class>com.license.servlets.GetCartProductsServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>jsonservlet_get_cart_products</servlet-name>
+		<url-pattern>/jsonservlet/get_cart_products</url-pattern>
+	</servlet-mapping>
 	
 	<!-- Android authenticated -->
 	
@@ -42,14 +50,7 @@
         <filter-name>AndroidAuthenticationFilter</filter-name>
         <url-pattern>/android_auth/*</url-pattern>
     </filter-mapping>
-	<servlet>
-		<servlet-name>androidservlet_get_cart_products</servlet-name>
-		<servlet-class>com.license.servlets.GetCartProductsServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>android_get_cart_products</servlet-name>
-		<url-pattern>/android_auth/get_cart_products</url-pattern>
-	</servlet-mapping>
+	
 	
 	<servlet>
 		<servlet-name>androidservlet_get_cart_list</servlet-name>

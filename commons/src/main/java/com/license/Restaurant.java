@@ -5,14 +5,15 @@ import java.util.List;
 
 public class Restaurant implements Serializable {
 
-    private static final long serialVersionUID = 8913732065557648340L;
-    
-    private long id;
-    private String name;
-    private String description;
-    private String image;
+	private static final long serialVersionUID = 8913732065557648340L;
+
+	private long id;
+	private String name;
+	private String description;
+	private String image;
 	private int stars;
 	private String address;
+	private String geolocation;
 	private List<Product> products;
 	private List<Comment> comments;
 
@@ -48,6 +49,14 @@ public class Restaurant implements Serializable {
 		this.address = address;
 	}
 
+	public String getGeolocation() {
+		return geolocation;
+	}
+
+	public void setGeolocation(String geolocation) {
+		this.geolocation = geolocation;
+	}
+
 	public List<Product> getProducts() {
 		return products;
 	}
@@ -78,5 +87,5 @@ public class Restaurant implements Serializable {
 
 	public void setImage(String image) {
 		this.image = image;
-	}	
+	}
 }

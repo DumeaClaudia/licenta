@@ -16,6 +16,9 @@ import javax.persistence.NamedQuery;
 		@NamedQuery(name = "restaurant.searchForRestaurant", query = "SELECT r FROM restaurant r where r.id=:findId") })
 
 public class RestaurantEntity implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,6 +35,9 @@ public class RestaurantEntity implements Serializable{
 
 	@Column(name = "address")
 	private String address;
+	
+	@Column(name = "geolocation")
+	private String geolocation;
 	
 	@Column(name = "img")
 	private String image;
@@ -82,6 +88,14 @@ public class RestaurantEntity implements Serializable{
 
 	public void setImage(String image) {
 		this.image = image;
+	}
+
+	public String getGeolocation() {
+		return geolocation;
+	}
+
+	public void setGeolocation(String geolocation) {
+		this.geolocation = geolocation;
 	}
 	
 	

@@ -33,7 +33,8 @@ public class GetCartDetailsServlet extends HttpServlet {
 
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-		int cartId = 1;
+		
+        long cartId =Long.parseLong(request.getParameter("cartId"));
 		
 		List<RestaurantProductsItem> cartItemsGrouped = new ArrayList<RestaurantProductsItem>();
 		Map<Long, List<ProductDetailsItem>> restaurantProductsMap = new HashMap<Long, List<ProductDetailsItem>>();
@@ -69,7 +70,7 @@ public class GetCartDetailsServlet extends HttpServlet {
 			Restaurant restaurant = restaurantService.getRestaurantById(idRestaurant);
 			
 			cartItemsGrouped.add(new RestaurantProductsItem(restaurant.getId(), restaurant.getName(), restaurant.getImage(),
-					restaurant.getAddress(), restaurantProducts));
+					restaurant.getAddress(), restaurant.getGeolocation(), restaurantProducts));
 		}
 
 		response.setContentType("application/json");

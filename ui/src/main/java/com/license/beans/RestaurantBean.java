@@ -24,6 +24,7 @@ public class RestaurantBean implements Serializable {
 	private long id;
 	private long productId;
 	private List<String> categories;
+	
 	Product product = new Product();
 	private int totalStars = 5;
 	private double step = 1;

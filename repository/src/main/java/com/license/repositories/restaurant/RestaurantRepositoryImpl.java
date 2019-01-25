@@ -43,6 +43,7 @@ public class RestaurantRepositoryImpl implements RestaurantRepository {
 			res.setName(restaurantEntity.getName());
 			res.setDescription(restaurantEntity.getDescription());
 			res.setAddress(restaurantEntity.getAddress());
+			res.setGeolocation(restaurantEntity.getGeolocation());
 			res.setStars(restaurantEntity.getStars());
 			res.setImage(restaurantEntity.getImage());
 
@@ -63,6 +64,7 @@ public class RestaurantRepositoryImpl implements RestaurantRepository {
 		restaurantResponse.setName(restaurant.getName());
 		restaurantResponse.setDescription(restaurant.getDescription());
 		restaurantResponse.setAddress(restaurant.getAddress());
+		restaurantResponse.setGeolocation(restaurant.getGeolocation());
 		restaurantResponse.setStars(restaurant.getStars());
 		restaurantResponse.setImage(restaurant.getImage());
 		

@@ -135,7 +135,7 @@
 														#{product.price} RON
 														<ui:fragment rendered="#{not empty sessionBean.username}">
 															<a class="cart-add-button glyphicon glyphicon-plus size-plus" data-product-id="#{product.id}"
-																data-product-name="#{product.name}" value="#{restaurantBean.productId}"> </a>
+																data-product-name="#{product.name}" value="#{product.id}"> </a>
 														</ui:fragment>
 														<ui:fragment rendered="#{empty sessionBean.username}">
 															<a class="cart-add-error glyphicon glyphicon-plus size-plus"> </a>

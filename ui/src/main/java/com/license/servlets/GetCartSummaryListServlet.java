@@ -71,9 +71,10 @@ public class GetCartSummaryListServlet extends HttpServlet {
 			
 			if (restaurantsIds.size() == 1) {
 				Restaurant restaurant = restaurants.get(0);
-				description = "Cosul contine " + products.size() + " produse, de la restaurantul " + restaurant.getName();
+				description = products.size() + " produs" + (products.size() == 1? "": "e" ) + " de la " + restaurant.getName() ;
+			
 			} else {
-				description = "Cosul contine " + products.size() + " produse, de la " + restaurantsIds.size() + "restaurante.";
+				description =  products.size() + " produs" + (products.size() == 1? "": "e" )+ " de la " + restaurantsIds.size() + " restaurante";
 			}
 
 			Cart cart = shoppingCartService.getCartById(idCart);				
