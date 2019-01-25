@@ -1,6 +1,8 @@
 package com.license.data;
 
 public class ProductDetailsItem {
+	private long idRestaurant;
+	private long idProduct;
 	private String image;
 	private String name;
 	private String category;
@@ -44,4 +46,17 @@ public class ProductDetailsItem {
 	public void setDiscount(int discount) {
 		this.discount = discount;
 	}
+	public long getIdRestaurant() {
+		return idRestaurant;
+	}
+	public void setIdRestaurant(long idRestaurant) {
+		this.idRestaurant = idRestaurant;
+	}
+	public long getIdProduct() {
+		return idProduct;
+	}
+	public void setIdProduct(long idProduct) {
+		this.idProduct = idProduct;
+	}
+	
 }

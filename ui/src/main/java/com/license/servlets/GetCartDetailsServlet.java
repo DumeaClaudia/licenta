@@ -42,7 +42,9 @@ public class GetCartDetailsServlet extends HttpServlet {
 		
 		for (Product product : products) {
 			ProductDetailsItem item = new ProductDetailsItem();
-
+			
+			item.setIdRestaurant(product.getIdRestaurant());
+			item.setIdProduct(product.getId());
 			item.setCategory(product.getCategory());
 			item.setDescription(product.getDescription());
 			item.setDiscount(product.getDiscount());
@@ -66,7 +68,7 @@ public class GetCartDetailsServlet extends HttpServlet {
 			List<ProductDetailsItem> restaurantProducts = restaurantProductsMap.get(idRestaurant);
 			Restaurant restaurant = restaurantService.getRestaurantById(idRestaurant);
 			
-			cartItemsGrouped.add(new RestaurantProductsItem(restaurant.getName(), restaurant.getImage(),
+			cartItemsGrouped.add(new RestaurantProductsItem(restaurant.getId(), restaurant.getName(), restaurant.getImage(),
 					restaurant.getAddress(), restaurantProducts));
 		}
 

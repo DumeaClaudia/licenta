@@ -3,19 +3,24 @@ package com.license.data;
 import java.util.List;
 
 public class RestaurantProductsItem {
+	long restaurantId;
 	String restaurantName;
 	String restaurantImage;
 	String restaurantAddress;
-	
+
 	List<ProductDetailsItem> products;
 
-	public RestaurantProductsItem(String restaurantName, String restaurantImage, String restaurantAddress,
-			List<ProductDetailsItem> products) {
-		
+	public RestaurantProductsItem(long restaurantId, String restaurantName, String restaurantImage,
+			String restaurantAddress, List<ProductDetailsItem> products) {
+		this.restaurantId = restaurantId;
 		this.restaurantName = restaurantName;
 		this.restaurantImage = restaurantImage;
 		this.restaurantAddress = restaurantAddress;
 		this.products = products;
+	}
+
+	public long getRestaurantId() {
+		return restaurantId;
 	}
 
 	public String getRestaurantName() {
@@ -33,6 +38,5 @@ public class RestaurantProductsItem {
 	public List<ProductDetailsItem> getProducts() {
 		return products;
 	}
-	
-	
+
 }

@@ -50,6 +50,8 @@ public class GetCartSummaryListServlet extends HttpServlet {
 
 				ProductDetailsItem item = new ProductDetailsItem();
 
+				item.setIdRestaurant(product.getIdRestaurant());
+				item.setIdProduct(product.getId());
 				item.setCategory(product.getCategory());
 				item.setDescription(product.getDescription());
 				item.setDiscount(product.getDiscount());
