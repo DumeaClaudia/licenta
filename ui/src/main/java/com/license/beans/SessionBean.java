@@ -9,7 +9,6 @@ import javax.faces.context.FacesContext;
 public class SessionBean {
 	Long userId;
 	String username = "";
-	//FacesContext context;
 	
 	public String getUsername() {	
 		FacesContext context = FacesContext.getCurrentInstance();
@@ -34,12 +33,6 @@ public class SessionBean {
 	public String logout() {
 		FacesContext context = FacesContext.getCurrentInstance();
 		context.getExternalContext().getSessionMap().clear();
-		return "home?faces-redirect=true";
+		return "homeRestaurants.xhtml?faces-redirect=true";
 	}
-	
-//	@PostConstruct
-//	public void init() {
-//		context = FacesContext.getCurrentInstance();
-//	}
-
 }

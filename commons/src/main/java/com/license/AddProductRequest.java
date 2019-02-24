@@ -1,7 +1,6 @@
 package com.license;
 
 public class AddProductRequest {
-
 	private long idProduct;
 	private long idUser;
 
@@ -20,6 +19,5 @@ public class AddProductRequest {
 	public void setIdUser(long idUser) {
 		this.idUser = idUser;
 	}
-	
 	
 }

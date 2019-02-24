@@ -15,10 +15,7 @@ $(document).ready(function() {
 	$(".cart-add-error").click(function() {
 		toastr.error("You have to login before added to cart...");
 		return false;
-	});
-	
-	
-
+	});	
 });
 
 

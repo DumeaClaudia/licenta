@@ -50,7 +50,7 @@
 				</nav>
 
 				<!-- Login Menu  -->
-				<div class="container style-font" >
+				<div class="container style-font">
 
 					<!-- Trigger the modal with a button -->
 					<!-- Modal -->
@@ -66,30 +66,31 @@
 									</h4>
 								</div>
 								<div class="modal-body" style="padding: 40px 30px 5px 30px;">
-									<h:form role="form">
+									<h:form role="form" id="login-form" >
 										<div class="form-group">
 											<h:outputLabel for="usrname">
 												<span class="glyphicon glyphicon-user"></span> Username</h:outputLabel>
-											<h:inputText type="text" class="form-control" id="idUsername" placeholder="Enter username" name="firstName"
+											<h:inputText type="text" class="form-control login-username" id="idUsername" placeholder="Enter username" name="firstName"
 												value="#{userBean.username}"></h:inputText>
 										</div>
 										<div class="form-group">
 											<h:outputLabel for="psw">
 												<span class="glyphicon glyphicon-eye-open"></span> Password</h:outputLabel>
-											<h:inputSecret type="password" class="form-control" id="pwd" placeholder="Enter password"
+											<h:inputSecret type="password" class="form-control login-password" id="pwd" placeholder="Enter password"
 												value="#{userBean.password}"></h:inputSecret>
 										</div>
-
-										<div class="form-group last">
-											<h:commandButton type="submit" class="btn btn-success
-									btn-block" value="Submit"
-												action="#{userBean.login()}" required="true"></h:commandButton>
+										
+										<div class="form-group last" >
+											<a class="btn btn-success btn-block" id="login-button"> Login </a>									
+											<h:commandLink type="submit" class="hidden btn btn-success btn-block submit-link" value="Submit"
+												action="#{userBean.login()}" required="true"></h:commandLink>
 										</div>
-
+											<p id="validation-message" style="color:#FF0000"></p>
 									</h:form>
 								</div>
 
 								<div class="modal-footer">
+
 									<button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal">
 										<span class="glyphicon glyphicon-remove"></span> Cancel
 									</button>
@@ -170,9 +171,9 @@
 						</div>
 
 					</div>
-					
+
 					<!-- Shopping Cart -->
-					
+
 					<div class="container style-font">
 						<div class="modal fade" id="myCartModal" role="dialog">
 							<div class="modal-dialog">
@@ -190,7 +191,7 @@
 									<div class="modal-body">
 
 										<div id="cart-products-list"></div>
-										<hr/>
+										<hr />
 
 										<div>
 											<span><i>*Taxa livrare*</i></span> <span id="delivery-price" class="product-list-price"> </span>

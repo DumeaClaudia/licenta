@@ -1,18 +1,14 @@
 package com.license.beans;
 
 import javax.ejb.EJB;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import com.license.User;
 import com.license.user.UserService;
-import com.license.utils.constants.EnumLogin;
-import com.license.utils.exceptions.UserException;
 
 @ManagedBean
-// @RequestScoped
 @SessionScoped
 public class UserBean {
 
@@ -26,17 +22,7 @@ public class UserBean {
 	private UserService userService;
 	
 	public String login(){
-		FacesMessage error = new FacesMessage(FacesMessage.SEVERITY_WARN, EnumLogin.LOGIN_ERROR.getConstant(),
-				EnumLogin.INVALID_CREDENTIALS.getConstant()),
-				success = new FacesMessage(FacesMessage.SEVERITY_INFO, EnumLogin.WELCOME.getConstant(), username);
-
-
 		user = userService.login(username, password);		
-		
-		if(user==null) {
-			FacesContext.getCurrentInstance().addMessage(null, error);
-			return null;
-		}
 		idUser = user.getId();
 			
 		FacesContext context = FacesContext.getCurrentInstance();

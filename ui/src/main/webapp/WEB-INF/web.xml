@@ -13,6 +13,14 @@
 	</context-param>
 	
 	<!-- AJAX -->
+	<servlet>
+		<servlet-name>jsonservlet_login</servlet-name>
+		<servlet-class>com.license.servlets.CheckLoginServlet</servlet-class>
+	</servlet>	
+	<servlet-mapping>
+		<servlet-name>jsonservlet_login</servlet-name>
+		<url-pattern>/jsonservlet/login_servlet</url-pattern>
+	</servlet-mapping>
 	
 	<servlet>
 		<servlet-name>jsonservlet_add_product_to_cart</servlet-name>
@@ -22,8 +30,8 @@
 		<servlet-name>jsonservlet_add_product_to_cart</servlet-name>
 		<url-pattern>/jsonservlet/add_product_to_cart</url-pattern>
 	</servlet-mapping>
-	<servlet>
 	
+	<servlet>	
 		<servlet-name>jsonservlet_remove_product_from_cart</servlet-name>
 		<servlet-class>com.license.servlets.RemoveProductFromCartServlet</servlet-class>
 	</servlet>
