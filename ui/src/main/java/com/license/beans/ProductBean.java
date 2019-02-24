@@ -10,19 +10,18 @@ import com.license.restaurant.RestaurantService;
 @RequestScoped
 public class ProductBean implements Serializable{
 
-	@EJB
-	private RestaurantService restaurantService;
-
 	private static final long serialVersionUID = 1L;
-	private long idProduct=1;	
+	private long id;	
 	private Product product;
 	
+	@EJB
+	private RestaurantService restaurantService;
 	
-	public long getIdProduct() {
-		return idProduct;
+	public long getId() {
+		return id;
 	}
-	public void setIdProduct(long idProduct) {
-		this.product = restaurantService.getProductById(this.idProduct);
+	public void setId(long id) {
+		this.product = restaurantService.getProductById(id);
 	}
 
 	public Product getProduct() {

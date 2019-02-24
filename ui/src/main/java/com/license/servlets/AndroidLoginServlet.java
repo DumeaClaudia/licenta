@@ -1,13 +1,8 @@
 package com.license.servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-
 import javax.ejb.EJB;
-import javax.faces.context.FacesContext;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -40,17 +35,17 @@ public class AndroidLoginServlet extends HttpServlet {
             }
             //generate a new session
             HttpSession newSession = request.getSession(true);
-            System.out.println("Session = "+newSession.getId());
+            System.out.println("Session = " + newSession.getId());
             
             newSession.setAttribute("username", userDB.getUsername());
             newSession.setAttribute("userId", userDB.getId());
             
             //setting session to expiry in 5 mins
             newSession.setMaxInactiveInterval(5*60);
-          	response.sendError(response.SC_OK);
+          	response.sendError(HttpServletResponse.SC_OK);
             
         } else {
-        	response.sendError(response.SC_UNAUTHORIZED);
+        	response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
         }
     }
 } 

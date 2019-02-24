@@ -8,6 +8,8 @@ import javax.faces.context.FacesContext;
 
 import com.license.User;
 import com.license.user.UserService;
+import com.license.utils.constants.EnumLogin;
+import com.license.utils.exceptions.UserException;
 
 @ManagedBean
 // @RequestScoped
@@ -23,26 +25,25 @@ public class UserBean {
 	@EJB
 	private UserService userService;
 	
-	public String login() {
-		System.out.println("called login method");
+	public String login(){
+		FacesMessage error = new FacesMessage(FacesMessage.SEVERITY_WARN, EnumLogin.LOGIN_ERROR.getConstant(),
+				EnumLogin.INVALID_CREDENTIALS.getConstant()),
+				success = new FacesMessage(FacesMessage.SEVERITY_INFO, EnumLogin.WELCOME.getConstant(), username);
 
-		User userDB = new User();
-		userDB = userService.login(username, password);
-		idUser = userDB.getId();
+
+		user = userService.login(username, password);		
 		
-		FacesContext context = FacesContext.getCurrentInstance();
-		context.getExternalContext().getSessionMap().put("username", userDB.getUsername());
-		context.getExternalContext().getSessionMap().put("userId", userDB.getId());
-		
-		if (!(userDB == null)) {
-			return "activity?faces-redirect=true";
-		} else {
-			FacesContext context2 = FacesContext.getCurrentInstance();
-			context2.addMessage(null, new FacesMessage("Wrong username/password"));
-			context2.getExternalContext().getFlash().setKeepMessages(true);
-			return "home?faces-redirect=true";
+		if(user==null) {
+			FacesContext.getCurrentInstance().addMessage(null, error);
+			return null;
 		}
-
+		idUser = user.getId();
+			
+		FacesContext context = FacesContext.getCurrentInstance();
+		context.getExternalContext().getSessionMap().put("username", user.getUsername());
+		context.getExternalContext().getSessionMap().put("userId", user.getId());
+		
+		return null;
 	}
 
 	public String register() {

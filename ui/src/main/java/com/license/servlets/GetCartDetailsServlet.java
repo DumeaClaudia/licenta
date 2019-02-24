@@ -34,7 +34,7 @@ public class GetCartDetailsServlet extends HttpServlet {
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		
-        long cartId =Long.parseLong(request.getParameter("cartId"));
+        long cartId = Long.parseLong(request.getParameter("cartId"));
 		
 		List<RestaurantProductsItem> cartItemsGrouped = new ArrayList<RestaurantProductsItem>();
 		Map<Long, List<ProductDetailsItem>> restaurantProductsMap = new HashMap<Long, List<ProductDetailsItem>>();

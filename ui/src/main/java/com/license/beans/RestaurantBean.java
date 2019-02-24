@@ -1,5 +1,6 @@
 package com.license.beans;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +9,9 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
+import javax.servlet.http.HttpServletResponse;
 
 import com.license.Product;
 import com.license.Restaurant;
@@ -27,6 +30,7 @@ public class RestaurantBean implements Serializable {
 	
 	Product product = new Product();
 	private int totalStars = 5;
+	
 	private double step = 1;
 	private boolean disabled = false;
 	private Double rating1 = new Double(2.2);
@@ -39,23 +43,27 @@ public class RestaurantBean implements Serializable {
 	}
 
 	public void setId(long id) {
-		/*
-		 * for(Restaurant r: restaurants) { if(r.getId() == id) { restaurant = r; } }
-		 */
+		
 		restaurant = restaurantService.getRestaurantById(id);
 		products = restaurantService.getAllProductsForRestaurant(id);
 		categories = restaurantService.getCategoriesOfProducts(id);
 		this.id = id;
 		
-		productId = products.get(1).getId();
-		product = products.get(1);
-	}
-
-	public List<Product> displayAllProductsForRestaurant() {
-		return this.products;
+		//productId = products.get(1).getId();
+		//product = products.get(1);
 	}
 
 	public Restaurant getRestaurant() {
+		if (this.restaurant == null)
+		{
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+			HttpServletResponse response = (HttpServletResponse) facesContext.getExternalContext().getResponse();
+			try {
+				response.sendRedirect("homeRestaurants.xhtml");
+			} catch (IOException e) {
+			}
+
+		}
 		return restaurant;
 	}
 
@@ -64,6 +72,8 @@ public class RestaurantBean implements Serializable {
 	}
 
 	public List<Product> getProducts() {
+		
+	
 		return products;
 	}
 
