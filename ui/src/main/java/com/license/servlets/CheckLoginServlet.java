@@ -38,7 +38,7 @@ public class CheckLoginServlet extends HttpServlet {
 		
 		ValidationResponse jsonResponse = new ValidationResponse();
 		if(user==null) {
-			jsonResponse.setMessage("Username or password is not valid.");
+			jsonResponse.setMessage("Username or password is not valid. Please try again.");
 			jsonResponse.setValid(false);
 		}else {
 			jsonResponse.setMessage("Logged in");

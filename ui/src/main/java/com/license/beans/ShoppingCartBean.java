@@ -119,6 +119,4 @@ public class ShoppingCartBean {
 	public void setNrProducts(int nrProducts) {
 		this.nrProducts = nrProducts;
 	}
-	
-
 }

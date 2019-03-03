@@ -17,13 +17,15 @@
 						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
 							<span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
 						</button>
-						<div class="navbar-brand">My application name</div>
+						<div class="navbar-brand">Restaurante online</div>
 					</div>
 					<div class="collapse navbar-collapse" id="myNavbar">
 						<ul class="nav navbar-nav">
-							<li><a href="homeRestaurants.xhtml">Home Restaurants</a></li>
-							<li><a href="adminPage.xhtml">AdminPage</a></li>
-							<li><a href="shoppingCart.xhtml">Shopping Cart</a></li>
+							<li><a href="homeRestaurants.xhtml">Oferte restaurante</a></li>
+							<!-- <li><a href="adminPage.xhtml">AdminPage</a></li> -->
+							<c:if test="#{not empty sessionBean.username}">
+								<li><a href="shoppingCart.xhtml">Comenzi</a></li>
+							</c:if>
 						</ul>
 						<c:if test="#{not empty sessionBean.username}">
 							<h:form>
@@ -69,21 +71,21 @@
 									<h:form role="form" id="login-form" >
 										<div class="form-group">
 											<h:outputLabel for="usrname">
-												<span class="glyphicon glyphicon-user"></span> Username</h:outputLabel>
+												<span class="glyphicon glyphicon-user"></span> Nume utilizator</h:outputLabel>
 											<h:inputText type="text" class="form-control login-username" id="idUsername" placeholder="Enter username" name="firstName"
 												value="#{userBean.username}"></h:inputText>
 										</div>
 										<div class="form-group">
 											<h:outputLabel for="psw">
-												<span class="glyphicon glyphicon-eye-open"></span> Password</h:outputLabel>
+												<span class="glyphicon glyphicon-eye-open"></span> Parola</h:outputLabel>
 											<h:inputSecret type="password" class="form-control login-password" id="pwd" placeholder="Enter password"
 												value="#{userBean.password}"></h:inputSecret>
 										</div>
 										
 										<div class="form-group last" >
 											<a class="btn btn-success btn-block" id="login-button"> Login </a>									
-											<h:commandLink type="submit" class="hidden btn btn-success btn-block submit-link" value="Submit"
-												action="#{userBean.login()}" required="true"></h:commandLink>
+											<h:commandLink type="submit" class="hidden submit-link" action="#{userBean.login()}"
+												 required="true"></h:commandLink>
 										</div>
 											<p id="validation-message" style="color:#FF0000"></p>
 									</h:form>
@@ -95,12 +97,12 @@
 										<span class="glyphicon glyphicon-remove"></span> Cancel
 									</button>
 									<p>
-										Not a member? <a href="#">Sign Up</a>
+										Nu ai cont inca? <a href="#">Sign Up</a>
 									</p>
-									<p>
-										Forgot <a href="#">Password?</a>
+								<!-- 	<p>
+										Ai uitat parola <a href="#">Password?</a>
 									</p>
-								</div>
+								 --></div>
 							</div>
 
 						</div>
