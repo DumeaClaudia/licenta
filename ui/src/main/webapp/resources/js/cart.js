@@ -1,4 +1,6 @@
 $(document).ready(function() {
+	toastr.options = { onclick: function () { $("#myCartModal").modal() } }
+	
 	$(".cart-add-button").click(function() {
 
 		var productId = this.dataset.productId;
@@ -37,6 +39,7 @@ function addProductToCartAjaxRequest(request) {
 
 			getCartProductsAjaxRequest(cartProductsRequest);
 			console.log(data);
+		
 		},
 		error : function(data, status, er) {
 			console.log(data);

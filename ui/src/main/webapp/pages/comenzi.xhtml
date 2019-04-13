@@ -1,0 +1,178 @@
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<f:metadata>
+	<f:viewParam name="userId" value="#{shoppingCartBean.userId}"></f:viewParam>
+</f:metadata>
+
+<ui:composition template="../template/template.xhtml">
+
+
+
+	<ui:define name="content">
+
+
+		<div class="container" style="margin-top: 50px;">
+
+			<!-- Content row -->
+			<div class="row">
+				<!-- SIDEBAR Open -->
+				<div id="sidebar-left" class="col-3  col-lg-3 col-md-3 col-sm-12 col-xs-12">
+					<ul class="nav">
+						<li><a href="#dropdowns-example"> <big>3 restaurante, 2 produse </big> <small>21.54.4564</small></a></li>
+						<li><a href="#dropdowns-example"><big>restaurant 1 fasdfasdf asdfas dfas df </big> <small>21.54.4564</small></a></li>
+						<li class="active"><a href="#dropdowns-headers">Headers</a></li>
+						<li><a href="#dropdowns-divider">Divider</a></li>
+						<li><a href="#dropdowns-disabled">Disabled menu items</a></li>
+					</ul>
+				</div>
+				<!-- right content box -->
+				<div id="content-right" class="col-9 col-lg-9 col-md-9 col-sm-12 col-xs-12 container">
+					<div class="marketing">
+						<div class="well row">
+							<div class="col-md-12" >
+								<h3>Comanda din data de</h3>
+								<h3>pret</h3>
+								<h3>status</h3>
+								<h3>Adresa livrare</h3>
+								sau 
+								<h3>Adresa restaurant</h3>
+							</div>
+
+						</div>
+
+					</div>
+
+					<div class="well restaurant-well-content">
+						<div class="row">
+
+							<div class="col-12">
+								<h4>
+									<b><span class="rest-name">Pizzeria di Mattia</span></b>
+								</h4>
+
+								<div class="pull-right" style="position: inherit;">
+									<span class="glyphicon glyphicon-star" aria-hidden="true"></span> <span class="glyphicon glyphicon-star-empty"
+										aria-hidden="true"></span> <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> <span
+										class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> <span class="glyphicon glyphicon-star-empty"
+										aria-hidden="true"></span>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-1 col-sm-3 col-xs-4">
+									<img class="img-rounded" src="../resources/images/1/SupaCremaDeCiuperci.jpg" alt="SupaCremaDeCiuperci.jpg"
+										width="50" height="50" />
+								</div>
+
+								<div class=" col-md-8 col-sm-7 col-xs-8 size-description">
+									<div>
+										<b>Supa crema de ciuperci</b>
+										<p>(250 g)</p>
+									</div>
+								</div>
+								<div class=" col-md-2 col-sm-2 col-xs-12">
+									<div class="row">
+										<div class="pull-right">13.9 RON</div>
+									</div>
+								</div>
+
+							</div>
+							<div class="row">
+								<div class="col-md-1 col-sm-3 col-xs-4">
+									<img class="img-rounded" src="../resources/images/1/SupaCremaDeCiuperci.jpg" alt="SupaCremaDeCiuperci.jpg"
+										width="50" height="50" />
+								</div>
+
+								<div class=" col-md-8 col-sm-7 col-xs-8 size-description">
+									<div id="idProductName">
+										<h5>
+											<b>Supa crema de ciuperci</b>
+										</h5>
+									</div>
+									<div id="idProductDescription">
+										<p>(250 g)</p>
+									</div>
+								</div>
+								<div class=" col-md-2 col-sm-2 col-xs-12">
+									<div class="row">
+										<div class="pull-right">13.9 RON</div>
+									</div>
+								</div>
+
+							</div>
+
+
+						</div>
+					</div>
+					<div class="well restaurant-well-content">
+						<div class="row">
+
+							<div class="col-12">
+								<h4>
+									<b><span class="rest-name">Pizzeria di Mattia</span></b>
+								</h4>
+
+								<div class="pull-right" style="position: inherit;">
+									<span class="glyphicon glyphicon-star" aria-hidden="true"></span> <span class="glyphicon glyphicon-star-empty"
+										aria-hidden="true"></span> <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> <span
+										class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> <span class="glyphicon glyphicon-star-empty"
+										aria-hidden="true"></span>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-1 col-sm-3 col-xs-4">
+									<img class="img-rounded" src="../resources/images/1/SupaCremaDeCiuperci.jpg" alt="SupaCremaDeCiuperci.jpg"
+										width="50" height="50" />
+								</div>
+
+								<div class=" col-md-8 col-sm-7 col-xs-8 size-description">
+									<div>
+										<b>Supa crema de ciuperci</b>
+										<p>(250 g)</p>
+									</div>
+								</div>
+								<div class=" col-md-2 col-sm-2 col-xs-12">
+									<div class="row">
+										<div class="pull-right">13.9 RON</div>
+									</div>
+								</div>
+
+							</div>
+							<div class="row">
+								<div class="col-md-1 col-sm-3 col-xs-4">
+									<img class="img-rounded" src="../resources/images/1/SupaCremaDeCiuperci.jpg" alt="SupaCremaDeCiuperci.jpg"
+										width="50" height="50" />
+								</div>
+
+								<div class=" col-md-8 col-sm-7 col-xs-8 size-description">
+									<div id="idProductName">
+										<h5>
+											<b>Supa crema de ciuperci</b>
+										</h5>
+									</div>
+									<div id="idProductDescription">
+										<p>(250 g)</p>
+									</div>
+								</div>
+								<div class=" col-md-2 col-sm-2 col-xs-12">
+									<div class="row">
+										<div class="pull-right">13.9 RON</div>
+									</div>
+								</div>
+
+							</div>
+
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

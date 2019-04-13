@@ -64,11 +64,12 @@ public class GetCartDetailsServlet extends HttpServlet {
 		}
 
 		Set<Long> restaurantsIds = restaurantProductsMap.keySet();
+		String image = "";
 		
 		for (Long idRestaurant : restaurantsIds) {
 			List<ProductDetailsItem> restaurantProducts = restaurantProductsMap.get(idRestaurant);
 			Restaurant restaurant = restaurantService.getRestaurantById(idRestaurant);
-			
+			image = restaurant.getImage();
 			cartItemsGrouped.add(new RestaurantProductsItem(restaurant.getId(), restaurant.getName(), restaurant.getImage(),
 					restaurant.getAddress(), restaurant.getGeolocation(), restaurantProducts));
 		}
@@ -77,9 +78,13 @@ public class GetCartDetailsServlet extends HttpServlet {
 		ObjectMapper write_mapper = new ObjectMapper();
 		
 		Cart cart = shoppingCartService.getCartById(cartId);
-		String description = restaurantsIds.size() + " restaurante si " + products.size() + " produse";
-		
-		CartSummaryItem item = new CartSummaryItem(cart.getIdCart(), cart.isActive(), cart.getCreatedDate(), description);
+		String description = restaurantsIds.size() + " restaurante ";
+		String nrProducts = products.size() + " produs";
+		if(products.size()>1) {
+			nrProducts=nrProducts+"e";
+		}
+	
+		CartSummaryItem item = new CartSummaryItem(cart.getIdCart(), cart.isActive(), cart.getCreatedDate(), description, nrProducts, image);
 		CartDetailsItem cartDetailsItem = new CartDetailsItem(item, cartItemsGrouped);
 
 		write_mapper.writeValue(response.getOutputStream(), cartDetailsItem);

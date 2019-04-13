@@ -7,6 +7,21 @@
 >
 	<display-name>Servlet 3.0 Web Application</display-name>
 	
+	<error-page>
+       <exception-type>java.lang.Exception</exception-type>
+       <location>/ui/pages/home.xhtml</location>
+     </error-page>
+     
+     <error-page>
+        <error-code>404</error-code>
+       <location>/ui/pages/home.xhtml</location>
+     </error-page>
+     
+     
+	<welcome-file-list>
+        <welcome-file>home.xhtml</welcome-file>
+	</welcome-file-list>
+	
 	<context-param>
 		<param-name>com.sun.faces.enableRestoreViewCompatibility</param-name>
 		<param-value>true</param-value>

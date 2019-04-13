@@ -24,7 +24,7 @@ public class RestaurantBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Restaurant restaurant = null;
 	private List<Product> products = new ArrayList<Product>();
-	private long id;
+	private long id;	
 	private long productId;
 	private List<String> categories;
 	
@@ -54,12 +54,13 @@ public class RestaurantBean implements Serializable {
 	}
 
 	public Restaurant getRestaurant() {
-		if (this.restaurant == null)
+		if (this.restaurant == null )
 		{
 			FacesContext facesContext = FacesContext.getCurrentInstance();
 			HttpServletResponse response = (HttpServletResponse) facesContext.getExternalContext().getResponse();
 			try {
-				response.sendRedirect("homeRestaurants.xhtml");
+				response.sendRedirect("home.xhtml");
+				
 			} catch (IOException e) {
 			}
 

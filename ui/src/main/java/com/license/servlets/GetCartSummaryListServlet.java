@@ -1,7 +1,11 @@
 package com.license.servlets;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -39,6 +43,7 @@ public class GetCartSummaryListServlet extends HttpServlet {
 		
 		List<CartSummaryItem> carts = new ArrayList<CartSummaryItem>();
 		List<Long> allCartList = shoppingCartService.getAllShoppingCartsForUser(userId);
+
 		
 		for (long idCart : allCartList) {
 			List<ProductDetailsItem> productItems = new ArrayList<ProductDetailsItem>();
@@ -63,25 +68,49 @@ public class GetCartSummaryListServlet extends HttpServlet {
 			}
 			
 			List<Restaurant> restaurants = new ArrayList<Restaurant>();
-
+		
+			
+			String image = new String(), nrProducts;
+			
 			for (Long idRestaurant : restaurantsIds) {
 				Restaurant restaurant = restaurantService.getRestaurantById(idRestaurant);
 				restaurants.add(restaurant);
+				image = restaurant.getId()+"/"+ restaurant.getImage();
 			}	
 			
 			if (restaurantsIds.size() == 1) {
 				Restaurant restaurant = restaurants.get(0);
-				description = products.size() + " produs" + (products.size() == 1? "": "e" ) + " de la " + restaurant.getName() ;
+				description = restaurant.getName() ;
+				nrProducts =  products.size() + " produs" + (products.size() == 1? "": "e" );
 			
 			} else {
-				description =  products.size() + " produs" + (products.size() == 1? "": "e" )+ " de la " + restaurantsIds.size() + " restaurante";
+				description =  "De la " + restaurantsIds.size() + " restaurante";
+				nrProducts =  products.size() + " produs" + (products.size() == 1? "": "e" );
 			}
 
 			Cart cart = shoppingCartService.getCartById(idCart);				
-			CartSummaryItem item = new CartSummaryItem(cart.getIdCart(), cart.isActive(), cart.getCreatedDate(), description);
+			CartSummaryItem item = new CartSummaryItem(cart.getIdCart(), cart.isActive(), cart.getCreatedDate(), description, nrProducts, image);
 			carts.add(item);
 		}
 
+		carts.sort(new Comparator<CartSummaryItem>() {
+
+			@Override
+			public int compare(CartSummaryItem o1, CartSummaryItem o2) {
+				
+				Date d1;
+				Date d2;
+				try {
+					d1 = new SimpleDateFormat("dd.MM.yyyy").parse(o1.getCreatedDate());
+					d2 = new SimpleDateFormat("dd.MM.yyyy").parse(o2.getCreatedDate());
+				} catch (ParseException e) {
+					return 0;
+				}  
+				
+				return d2.compareTo(d1);
+			}
+			
+		});
 		response.setContentType("application/json");
 		ObjectMapper write_mapper = new ObjectMapper();
 

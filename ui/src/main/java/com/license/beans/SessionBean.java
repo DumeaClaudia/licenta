@@ -33,6 +33,6 @@ public class SessionBean {
 	public String logout() {
 		FacesContext context = FacesContext.getCurrentInstance();
 		context.getExternalContext().getSessionMap().clear();
-		return "homeRestaurants.xhtml?faces-redirect=true";
+		return "home.xhtml?faces-redirect=true";
 	}
 }
