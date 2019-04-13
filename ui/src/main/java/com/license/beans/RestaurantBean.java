@@ -49,8 +49,6 @@ public class RestaurantBean implements Serializable {
 		categories = restaurantService.getCategoriesOfProducts(id);
 		this.id = id;
 		
-		//productId = products.get(1).getId();
-		//product = products.get(1);
 	}
 
 	public Restaurant getRestaurant() {
@@ -73,8 +71,6 @@ public class RestaurantBean implements Serializable {
 	}
 
 	public List<Product> getProducts() {
-		
-	
 		return products;
 	}
 

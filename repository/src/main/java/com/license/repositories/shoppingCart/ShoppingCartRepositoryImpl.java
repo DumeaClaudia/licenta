@@ -166,21 +166,23 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 		Query query = em.createNamedQuery("shopping_cart.getShoppingCart");
 		query.setParameter("idShoppingCart", idCart);
 
-		ShoppingCartEntity shoppingCartEntity = (ShoppingCartEntity) query.getSingleResult();
+		List<ShoppingCartEntity> shoppingCartEntities = (List<ShoppingCartEntity>) query.getResultList();
+		if (shoppingCartEntities.size() > 0) {
+			ShoppingCartEntity shoppingCartEntity = shoppingCartEntities.get(0);
+			DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
+			cart.setIdCart(idCart);
+			cart.setCreatedDate(df.format(shoppingCartEntity.getCreatedDate()));
+			if (shoppingCartEntity.getSendDate() != null) {
+				cart.setSendDate(df.format(shoppingCartEntity.getSendDate()));
+			}
+			cart.setTotalPrice(shoppingCartEntity.getTotalPrice());
+			cart.setIdRestaurant(shoppingCartEntity.getIdRestaurant());
 
-		DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
-		cart.setIdCart(idCart);
-		cart.setCreatedDate(df.format(shoppingCartEntity.getCreatedDate()));
-		if (shoppingCartEntity.getSendDate() != null) {
-			cart.setSendDate(df.format(shoppingCartEntity.getSendDate()));
-		}
-		cart.setTotalPrice(shoppingCartEntity.getTotalPrice());
-		cart.setIdRestaurant(shoppingCartEntity.getIdRestaurant());
-
-		if (shoppingCartEntity.getSendDate() == null) {
-			cart.setActive(true);
-		} else if (shoppingCartEntity.getSendDate().before(new Date())) {
-			cart.setActive(false);
+			if (shoppingCartEntity.getSendDate() == null) {
+				cart.setActive(true);
+			} else if (shoppingCartEntity.getSendDate().before(new Date())) {
+				cart.setActive(false);
+			}
 		}
 
 		return cart;
