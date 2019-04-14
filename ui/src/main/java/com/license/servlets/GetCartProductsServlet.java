@@ -7,10 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
+import javax.faces.context.FacesContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.license.AddProductRequest;
@@ -34,19 +36,27 @@ public class GetCartProductsServlet extends HttpServlet {
 		if (br != null) {
 			json = br.readLine();
 		}
+		
 		ObjectMapper mapper = new ObjectMapper();
-		UserIdRequest jsonRequest = mapper.readValue(json, UserIdRequest.class);
 
 		response.setContentType("application/json");
-
 		List<Product> jsonResponse = new ArrayList<Product>();
-		List<Long> activeCartList = shoppingCartService.getActiveShoppingCartForUser(jsonRequest.getIdUser());
-		long activeCart = 0;
-		if (activeCartList.size() != 0) {
-			activeCart = activeCartList.get(0);
-			jsonResponse = shoppingCartService.getShoppingCartProducts(activeCart);
-		} else {
-			
+		
+
+		HttpSession session = request.getSession(false);
+		Object idObj = session.getAttribute("userId");
+
+		if (idObj != null) {
+			long idUser = (Long) idObj;
+
+			List<Long> activeCartList = shoppingCartService.getActiveShoppingCartForUser(idUser);
+			long activeCart = 0;
+			if (activeCartList.size() != 0) {
+				activeCart = activeCartList.get(0);
+				jsonResponse = shoppingCartService.getShoppingCartProducts(activeCart);
+			} else {
+
+			}
 		}
 		mapper.writeValue(response.getOutputStream(), jsonResponse);
 	}

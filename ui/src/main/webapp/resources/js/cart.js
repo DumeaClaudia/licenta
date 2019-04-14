@@ -8,7 +8,6 @@ $(document).ready(function() {
 		var addProductRequest = new Object();
 
 		addProductRequest.idProduct = productId;
-		addProductRequest.idUser = 1;
 		addProductToCartAjaxRequest(addProductRequest);
 
 		return false;
@@ -24,7 +23,6 @@ $(document).ready(function() {
 function addProductToCartAjaxRequest(request) {
 	var cartProductsRequest = new Object();
 
-	cartProductsRequest.idUser = request.idUser;
 
 	$.ajax({
 		url : "../jsonservlet/add_product_to_cart",

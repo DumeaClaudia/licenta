@@ -103,6 +103,7 @@ public class CartSummaryItem {
 				item.setCategory(product.getCategory());
 				item.setDescription(product.getDescription());
 				item.setDiscount(product.getDiscount());
+				item.setPrice(product.getPrice());
 				item.setImage(product.getImage());
 				item.setName(product.getName());
 

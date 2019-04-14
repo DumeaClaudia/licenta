@@ -26,7 +26,12 @@ public class CartListBean {
 	private RestaurantService restaurantService;
 
 	public CartDetailsItem getCartDetails() {
-		if (cartId != null) {
+		List<Long> cartIdsUser = null;
+		if (userId != null) {
+			cartIdsUser = shoppingCartService.getAllShoppingCartsForUser(userId);
+
+		}
+		if (userId != null && cartId != null && cartIdsUser.contains(cartId)) {
 			return CartDetailsItem.getCartDetailsItem(shoppingCartService, restaurantService, cartId);
 		}
 
@@ -36,17 +41,21 @@ public class CartListBean {
 	public List<CartSummaryItem> getCartList() {
 		FacesContext context = FacesContext.getCurrentInstance();
 		userId = (Long) context.getExternalContext().getSessionMap().get("userId");
+
 		List<CartSummaryItem> carts;
 		if (userId != null) {
 			carts = CartSummaryItem.getCartsSummary(shoppingCartService, restaurantService, userId.intValue());
+
+			if (cartId == null && carts.size() != 0) {
+
+				cartId = carts.get(0).getIdCart();
+			}
+
 		} else {
 			carts = new ArrayList<CartSummaryItem>();
-		
+
 		}
-		if (cartId != null && carts.size() != 0) {
-			cartId = carts.get(0).getIdCart();
-		}
-	
+
 		return carts;
 	}
 

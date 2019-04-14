@@ -24,7 +24,7 @@ public class AddProductToCartServlet extends HttpServlet {
 
 	@EJB
 	private ShoppingCartService shoppingCartService;
-	
+
 	/***************************************************
 	 * URL: /jsonservlet doPost(): receives JSON data, parse it, map it and send
 	 * back as JSON
@@ -38,6 +38,7 @@ public class AddProductToCartServlet extends HttpServlet {
 		if (br != null) {
 			json = br.readLine();
 		}
+		long idUser = (Long)request.getSession().getAttribute("userId");
 
 		// un fel de deserializare
 
@@ -50,25 +51,25 @@ public class AddProductToCartServlet extends HttpServlet {
 
 		// 4. Set response type to JSON
 		response.setContentType("application/json");
-		
+
 		ShoppingCartResponse jsonResponse = new ShoppingCartResponse();
 
 		// get active shopping cart for user
 		// if not active shopping cart create shopping cart
 		// insert into shopping cart
 
-		List<Long> activeCartList = shoppingCartService.getActiveShoppingCartForUser(jsonRequest.getIdUser());
-		
+		List<Long> activeCartList = shoppingCartService.getActiveShoppingCartForUser(idUser);
+
 		Product product = shoppingCartService.getProduct(jsonRequest.getIdProduct());
 		long activeCart = 0;
 		if (activeCartList.size() != 0) {
 			activeCart = activeCartList.get(0);
 		} else {
 
-			activeCart = shoppingCartService.createShoppingCartService(jsonRequest.getIdUser(),
-					product.getIdRestaurant());
+			activeCart = shoppingCartService.createShoppingCartService(idUser, product.getIdRestaurant());
 		}
-		shoppingCartService.addProductToCart(jsonRequest.getIdUser(), jsonRequest.getIdProduct(), activeCart);
+		shoppingCartService.addProductToCart(idUser, jsonRequest.getIdProduct(), activeCart);
+		
 		jsonResponse.setProduct(product);
 
 		// serializare

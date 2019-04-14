@@ -11,73 +11,83 @@
 
 <ui:composition template="../template/template.xhtml">
 	<ui:define name="content">
-		<div class="container" style="margin-top: 50px;">
+		<div class="container style-font" style="margin-top: 50px;">
 
 			<div class="row">
-				<div id="sidebar-left" class="col-3  col-lg-3 col-md-3 col-sm-12 col-xs-12">
+				<div id="sidebar-left" class="col-2  col-lg-2 col-md-2 col-sm-12 col-xs-12">
 					<ui:repeat value="#{cartListBean.cartList}" var="cart" outcome="cart">
 						<ul class="nav">
-							<li><a href="history.xhtml?cartId=#{cart.idCart}"> <small>#{cart.createdDate}</small> <br /> <big>#{cart.cartDescription}</big>
+							<li><a href="history.xhtml?cartId=#{cart.idCart}"> <small>#{cart.createdDate}</small> <br /> <ui:fragment
+										rendered="#{cart.idCart == cartListBean.cartId}">
+									>
+								</ui:fragment> <big>#{cart.cartDescription}</big>
 							</a></li>
 						</ul>
 					</ui:repeat>
 				</div>
 
-				<div id="content-right" class="col-9 col-lg-9 col-md-9 col-sm-12 col-xs-12 container">
+				<div id="content-right" class="col-10 col-lg-10 col-md-10 col-sm-12 col-xs-12 container well">
 					<div class="marketing">
-						<ui:fragment rendered="#{cartListBean.cartList.size()==0}">Nu exista un istoric al comenzilor.</ui:fragment>
+						<div class="row">
+							<div class="col-md-12">
+								<ui:fragment rendered="#{cartListBean.cartList.size()==0}">
+									<h3>Nu exista un istoric al comenzilor.</h3>
+								</ui:fragment>
+								<ui:fragment rendered="#{cartListBean.cartList.size()!=0}">
 
-						<ui:fragment rendered="#{cartListBean.cartId!=0}">
-							<div class="well row">
-								<div class="col-md-12">
-									<h3>Comanda din data de #{cartListBean.getCartDetails().cartSummary.createdDate}:</h3>
+									<h3 class="style-font">
+										Comanda din data de: <b>#{cartListBean.getCartDetails().cartSummary.createdDate}</b>
+									</h3>
 									<!-- <h3>pret </h3>
 								<h3>status</h3>
 								<h3>Adresa livrare</h3>
 								sau
 								<h3>Adresa restaurant</h3> -->
-								</div>
-
+								</ui:fragment>
 							</div>
-						</ui:fragment>
+						</div>
 					</div>
 
-
-					<div class="well restaurant-well-content">
-						<ui:repeat value="#{cartListBean.getCartDetails().restaurantProducts}" var="restaurant" outcome="restaurant">
-							<div class="row">
-
-								<div class="col-12">
+					<ui:repeat value="#{cartListBean.getCartDetails().restaurantProducts}" var="restaurant" outcome="restaurant">
+						<div class="well restaurant-well-content well-lg ">
+							<div class="row col-12">
+								<div class="col-md-10 col-sm-9 col-xs-8">
 									<h4>
-										<b><span class="rest-name">#{restaurant.restaurantName}</span></b>
+										<b><a href="restaurant.xhtml?id=#{restaurant.restaurantId}" class="rest-name">#{restaurant.restaurantName}</a></b>
 									</h4>
-
 								</div>
-								<div class="row">
-									<div class="col-md-1 col-sm-3 col-xs-4">
-										<img class="img-rounded" src="../resources/images/#{restaurant.restaurantId}/#{restaurant.restaurantImage}"
-											alt="#{restaurant.restaurantImage}" width="50" height="50" />
-									</div>
-
-									<ui:repeat value="#{restaurant.products}" var="product">
-										<div class=" col-md-8 col-sm-7 col-xs-8 size-description">
-											<div>
-												<b>#{restaurant.name}</b>
-												<br/>
-												<p>(#{restaurant.description})</p>
-											</div>
-										</div>
-										<div class=" col-md-2 col-sm-2 col-xs-12">
-											<div class="row">
-												<div class="pull-right">#{restaurant.price}</div>
-											</div>
-										</div>
-									</ui:repeat>
-								</div>
-
 							</div>
-						</ui:repeat>
-					</div>
+
+							<div class="row">
+								<br></br>
+								<ui:repeat value="#{restaurant.products}" var="product">
+									<div class="col-12 row">
+										<div>
+
+											<ui:fragment rendered="#{not empty product.image}">
+												<div class="col-md-1 col-sm-3 col-xs-4">
+													<img class="" src="../resources/images/#{restaurant.restaurantId}/#{product.image}" alt="#{product.image}"
+														width="50" height="50" />
+												</div>
+											</ui:fragment>
+
+											<div>
+												<b>#{product.name}</b>
+											</div>
+											<div class="pull-right">
+												<b><small> #{product.price} RON </small></b>
+											</div>
+											<div>(#{product.description})</div>
+										</div>
+										<br></br>
+									</div>
+								</ui:repeat>
+							</div>
+
+
+						</div>
+					</ui:repeat>
+
 				</div>
 
 			</div>

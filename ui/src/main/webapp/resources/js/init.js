@@ -18,7 +18,6 @@ $(document).ready(function() {
 	};
 
 	var carProductsRequest = new Object();
-	carProductsRequest.idUser = 1;
 	getCartProductsAjaxRequest(carProductsRequest);
 });
 
@@ -77,7 +76,6 @@ function getCartProductsAjaxRequest(request) {
 								var removedProductRequest = new Object();
 
 								removedProductRequest.idProduct = productId;
-								removedProductRequest.idUser = 1;
 
 								removeProductFromCartAjaxRequest(
 										removedProductRequest, productName);
@@ -99,7 +97,6 @@ function getCartProductsAjaxRequest(request) {
 function removeProductFromCartAjaxRequest(request, product_name) {
 	var cartProductsRequest = new Object();
 
-	cartProductsRequest.idUser = request.idUser;
 
 	$.ajax({
 		url : "../jsonservlet/remove_product_from_cart",

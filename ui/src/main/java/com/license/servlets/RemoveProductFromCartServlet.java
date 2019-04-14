@@ -32,7 +32,7 @@ public class RemoveProductFromCartServlet extends HttpServlet {
 		if (br != null) {
 			json = br.readLine();
 		}
-
+		long idUser = (Long)request.getSession().getAttribute("userId");
 		ObjectMapper mapper = new ObjectMapper();
 
 		AddProductRequest jsonRequest = mapper.readValue(json, AddProductRequest.class);
@@ -41,13 +41,13 @@ public class RemoveProductFromCartServlet extends HttpServlet {
 
 		ShoppingCartResponse jsonResponse = new ShoppingCartResponse();
 
-		List<Long> activeCartList = shoppingCartService.getActiveShoppingCartForUser(jsonRequest.getIdUser());
+		List<Long> activeCartList = shoppingCartService.getActiveShoppingCartForUser(idUser);
 		
 		Product product = shoppingCartService.getProduct(jsonRequest.getIdProduct());
 		long activeCart = 0;
 		if (activeCartList.size() != 0) {
 			activeCart = activeCartList.get(0);
-				shoppingCartService.removeProductFromCart(jsonRequest.getIdUser(), jsonRequest.getIdProduct(), activeCart);
+				shoppingCartService.removeProductFromCart(idUser, jsonRequest.getIdProduct(), activeCart);
 		} else {
 
 			/*activeCart = shoppingCartService.createShoppingCartService(jsonRequest.getIdUser(),

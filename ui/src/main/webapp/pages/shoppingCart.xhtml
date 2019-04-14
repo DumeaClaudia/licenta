@@ -11,61 +11,43 @@
 
 <ui:composition template="../template/template.xhtml">
 	<ui:define name="content">
-		<div class="container" style="margin-top: 50px;">
-		
+		<div class="container style-font" style="margin-top: 50px;">
+
 			<div class="row">
-				<div id="sidebar-left" class="col-3  col-lg-3 col-md-3 col-sm-12 col-xs-12">
-					<ul class="nav">
-						<li><a href="#dropdowns-example"> <big>3 restaurante, 2 produse </big> <small>21.54.4564</small></a></li>
-					</ul>
+				<div class="well col-md-8 ">
+
+					<div class="output-group">
+						<div class="output" id="basic-addon1">
+							Utilizator:
+							<h:outputLabel value="#{sessionBean.username}">
+							</h:outputLabel>
+						</div>
+					</div>
+
+					<div>
+						<div class="col-md-5 mb-3">
+							<label for="firstName">Nume</label> <input type="text" class="form-control" id="firstName" />
+						</div>
+
+						<div class="col-md-5 mb-3">
+							<label for="firstName">Prenume</label> <input type="text" class="form-control" id="firstName" placeholder=""
+								value="" required="" />
+						</div>
+					</div>
 				</div>
+				<div class="well col-md-4 ">
 
-				<div id="content-right" class="col-9 col-lg-9 col-md-9 col-sm-12 col-xs-12 container">
-					<div class="marketing">
-						<div class="well row">
-							<div class="col-md-12">
-								<h3>Comanda din data de</h3>
-							</div>
-						</div>
-					</div>
+					<ui:repeat value="#{cartListBean.getCartDetails().restaurantProducts}" var="restaurant" outcome="restaurant">
+						<ui:repeat value="#{restaurant.products}" var="product">
+							<div id="idProductName">
 
-					<div class="well restaurant-well-content">
-						<div class="row">
-							<div class="col-12">
-								<h4>
-									<b><span class="rest-name">Pizzeria di Mattia</span></b>
-								</h4>
-
-								<div class="pull-right" style="position: inherit;">
-									<span class="glyphicon glyphicon-star" aria-hidden="true"></span> <span class="glyphicon glyphicon-star-empty"
-										aria-hidden="true"></span> <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> <span
-										class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> <span class="glyphicon glyphicon-star-empty"
-										aria-hidden="true"></span>
+								<b>#{product.name}</b> (<i>#{restaurant.restaurantName}</i>)
+								<div class="pull-right">
+									<small>#{product.price} RON</small>
 								</div>
 							</div>
-
-							<div class="row">
-								<div class="col-md-1 col-sm-3 col-xs-4">
-									<img class="img-rounded" src="../resources/images/1/SupaCremaDeCiuperci.jpg" alt="SupaCremaDeCiuperci.jpg"
-										width="50" height="50" />
-								</div>
-
-								<div class=" col-md-8 col-sm-7 col-xs-8 size-description">
-									<div>
-										<b>Supa crema de ciuperci</b>
-										<p>(250 g)</p>
-									</div>
-								</div>
-								<div class=" col-md-2 col-sm-2 col-xs-12">
-									<div class="row">
-										<div class="pull-right">13.9 RON</div>
-									</div>
-								</div>
-
-							</div>
-						</div>
-					</div>
-
+						</ui:repeat>
+					</ui:repeat>
 				</div>
 			</div>
 		</div>
