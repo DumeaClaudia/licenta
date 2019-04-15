@@ -21,4 +21,6 @@ public interface ShoppingCartRepository {
 	public long addProductToCart(long idUser, long idProduct, long idShoppingCart);
 
 	public void removeProductFromCart(long idUser, long idProduct, long idShoppingCart);
+
+	public int retrieveNrCartProducts(long idUser, long idProduct, long idShoppingCart);
 }

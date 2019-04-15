@@ -47,7 +47,13 @@ public class RemoveProductFromCartServlet extends HttpServlet {
 		long activeCart = 0;
 		if (activeCartList.size() != 0) {
 			activeCart = activeCartList.get(0);
-				shoppingCartService.removeProductFromCart(idUser, jsonRequest.getIdProduct(), activeCart);
+			//int nrProd = getNrProductFromCart
+			//if (nr == 0)
+			shoppingCartService.removeProductFromCart(idUser, jsonRequest.getIdProduct(), activeCart);
+			//else {
+			//	updateNrProductFromCart (idUser, jsonRequest.getIdProduct(), activeCart, nrProdu - 1);
+			//}
+				
 		} else {
 
 			/*activeCart = shoppingCartService.createShoppingCartService(jsonRequest.getIdUser(),

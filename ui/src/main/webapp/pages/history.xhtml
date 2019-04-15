@@ -6,7 +6,7 @@
 	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <f:metadata>
-	<f:viewParam name="cartId" value="#{cartListBean.cartId}"></f:viewParam>
+	<f:viewParam name="cartId" value="#{historyCartListBean.cartId}"></f:viewParam>
 </f:metadata>
 
 <ui:composition template="../template/template.xhtml">
@@ -15,10 +15,10 @@
 
 			<div class="row">
 				<div id="sidebar-left" class="col-2  col-lg-2 col-md-2 col-sm-12 col-xs-12">
-					<ui:repeat value="#{cartListBean.cartList}" var="cart" outcome="cart">
+					<ui:repeat value="#{historyCartListBean.cartList}" var="cart" outcome="cart">
 						<ul class="nav">
 							<li><a href="history.xhtml?cartId=#{cart.idCart}"> <small>#{cart.createdDate}</small> <br /> <ui:fragment
-										rendered="#{cart.idCart == cartListBean.cartId}">
+										rendered="#{cart.idCart == historyCartListBean.cartId}">
 									>
 								</ui:fragment> <big>#{cart.cartDescription}</big>
 							</a></li>
@@ -30,13 +30,13 @@
 					<div class="marketing">
 						<div class="row">
 							<div class="col-md-12">
-								<ui:fragment rendered="#{cartListBean.cartList.size()==0}">
+								<ui:fragment rendered="#{historyCartListBean.cartList.size()==0}">
 									<h3>Nu exista un istoric al comenzilor.</h3>
 								</ui:fragment>
-								<ui:fragment rendered="#{cartListBean.cartList.size()!=0}">
+								<ui:fragment rendered="#{historyCartListBean.cartList.size()!=0}">
 
 									<h3 class="style-font">
-										Comanda din data de: <b>#{cartListBean.getCartDetails().cartSummary.createdDate}</b>
+										Comanda din data de: <b>#{historyCartListBean.getCartDetails().cartSummary.createdDate}</b>
 									</h3>
 									<!-- <h3>pret </h3>
 								<h3>status</h3>
@@ -48,7 +48,7 @@
 						</div>
 					</div>
 
-					<ui:repeat value="#{cartListBean.getCartDetails().restaurantProducts}" var="restaurant" outcome="restaurant">
+					<ui:repeat value="#{historyCartListBean.getCartDetails().restaurantProducts}" var="restaurant" outcome="restaurant">
 						<div class="well restaurant-well-content well-lg ">
 							<div class="row col-12">
 								<div class="col-md-10 col-sm-9 col-xs-8">

@@ -16,7 +16,8 @@ import com.license.shoppingCart.ShoppingCartService;
 
 @ManagedBean
 @SessionScoped
-public class CartListBean {
+public class ShoppingCartBean {
+	private Boolean activeCart;
 	private Long cartId;
 	private Long userId;
 
@@ -24,6 +25,16 @@ public class CartListBean {
 	private ShoppingCartService shoppingCartService;
 	@EJB
 	private RestaurantService restaurantService;
+	
+	@PostConstruct
+	public void setNewCartId() {
+		
+		FacesContext context = FacesContext.getCurrentInstance();
+		userId = (Long) context.getExternalContext().getSessionMap().get("userId");
+		
+		//Long idCart = shoppingCartService.createShoppingCartService(userId, idRestaurant)
+		
+	}
 
 	public CartDetailsItem getCartDetails() {
 		List<Long> cartIdsUser = null;

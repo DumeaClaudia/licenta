@@ -48,4 +48,8 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
 	public Cart getCartById(long idCart) {
 		return repository.retrieveCartById(idCart);
 	}
+	
+	public int getNrCartProducts(long idUser, long idProduct, long idShoppingCart) {
+		return repository.retrieveNrCartProducts(idUser, idProduct, idShoppingCart);
+	}
 }

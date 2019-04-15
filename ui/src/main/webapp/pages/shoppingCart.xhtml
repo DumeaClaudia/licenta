@@ -11,43 +11,88 @@
 
 <ui:composition template="../template/template.xhtml">
 	<ui:define name="content">
-		<div class="container style-font" style="margin-top: 50px;">
+		<div class="container marketing style-font well" style="margin-top: 50px; height:1000px">
 
-			<div class="row">
-				<div class="well col-md-8 ">
+			<div class="row" style="margin-right: 30px; margin-left:10px;">
+				<div class="col-md-8">
+					<h:form>
 
-					<div class="output-group">
-						<div class="output" id="basic-addon1">
-							Utilizator:
-							<h:outputLabel value="#{sessionBean.username}">
-							</h:outputLabel>
+						<div class="output-group col-md-12 mb-3">
+						<br></br>
+							<div class="output" id="basic-addon1">
+								<h:outputText value="Utilizator: "></h:outputText>
+								<h:outputLabel value="#{sessionBean.username}">
+								</h:outputLabel>
+							</div>
+							<br />
 						</div>
-					</div>
+						<div>
+							<div class="col-md-5 mb-3">
+								<h:outputText value="Nume: "></h:outputText>
+								<h:inputText type="text" class="form-control" id="firstName" value="" />
+							</div>
 
-					<div>
-						<div class="col-md-5 mb-3">
-							<label for="firstName">Nume</label> <input type="text" class="form-control" id="firstName" />
+							<div class="col-md-5 mb-3">
+								<h:outputText value="Prenume: "></h:outputText>
+								<h:inputText type="text" class="form-control" id="lastName" value="" />
+
+							</div>
 						</div>
 
-						<div class="col-md-5 mb-3">
-							<label for="firstName">Prenume</label> <input type="text" class="form-control" id="firstName" placeholder=""
-								value="" required="" />
+						<div>
+							<br />
+							<div class="col-md-5 mb-6">
+								<h:outputText value="Email:  "></h:outputText>
+								<h:inputText type="text" class="form-control" id="email" value="" />
+							</div>
+
+							<div class="col-md-5 mb-6">
+								<h:outputText value="Adresa:  "></h:outputText>
+								<h:inputText type="text" class="form-control" id="adresa" value="" />
+							</div>
 						</div>
-					</div>
+						<div class="col-md-10 mb-6">
+							<br></br>
+							<h:outputText value="Plata:  "></h:outputText>
+							<div class="custom-control custom-radio">
+								<input id="paypal" name="paymentMethod" type="radio" class="custom-control-input" checked="" required="" /> <label
+									class="custom-control-label" for="paypal">Ramburs</label>
+							</div>
+							<div class="custom-control custom-radio">
+								<input id="debit" name="paymentMethod" type="radio" class="custom-control-input" required="" /> <label
+									class="custom-control-label" for="debit">Card debit</label>
+							</div>
+							<div class="custom-control custom-radio">
+								<input id="credit" name="paymentMethod" type="radio" class="custom-control-input" required="" /> <label
+									class="custom-control-label" for="credit">Card credit</label>
+							</div>
+						</div>
+
+						<div class="col-md-6 mb-6">
+							<br /> <br />
+							<button class="btn btn-primary" type="submit">Trimite comanda</button>
+						</div>
+					</h:form>
 				</div>
-				<div class="well col-md-4 ">
 
-					<ui:repeat value="#{cartListBean.getCartDetails().restaurantProducts}" var="restaurant" outcome="restaurant">
+				<div class="well col-md-4 ">
+					<h5>
+						Lista produse:
+					</h5>
+					<br></br>
+					<ui:repeat value="#{historyCartListBean.getCartDetails().restaurantProducts}" var="restaurant" outcome="restaurant">
 						<ui:repeat value="#{restaurant.products}" var="product">
 							<div id="idProductName">
 
 								<b>#{product.name}</b> (<i>#{restaurant.restaurantName}</i>)
 								<div class="pull-right">
-									<small>#{product.price} RON</small>
+									<small><b>#{product.price}</b> RON</small>
 								</div>
 							</div>
 						</ui:repeat>
 					</ui:repeat>
+					<br /> 
+					<h5>Total:</h5>
 				</div>
 			</div>
 		</div>

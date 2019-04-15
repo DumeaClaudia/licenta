@@ -66,10 +66,14 @@ public class AddProductToCartServlet extends HttpServlet {
 			activeCart = activeCartList.get(0);
 		} else {
 
-			activeCart = shoppingCartService.createShoppingCartService(idUser, product.getIdRestaurant());
+			activeCart = shoppingCartService.createShoppingCartService(idUser, product.getIdRestaurant()); //sa nu schimb aici logica..
 		}
+		//int nrProd = getNrProductFromCart
+		//if (nr == 0)
 		shoppingCartService.addProductToCart(idUser, jsonRequest.getIdProduct(), activeCart);
-		
+		//else {
+		//	updateNrProductFromCart (idUser, jsonRequest.getIdProduct(), activeCart, nrProdu + 1);
+		//}
 		jsonResponse.setProduct(product);
 
 		// serializare

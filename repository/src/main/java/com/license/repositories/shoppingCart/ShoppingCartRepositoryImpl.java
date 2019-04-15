@@ -103,6 +103,17 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 		em.getTransaction().commit();
 		return idCart;
 	}
+	
+	public int getNrProductFromCart(long idUser, long idProduct, long idShoppingCart) {
+	
+		return 0;
+	}
+	
+	public int updateNrProductFromCart(long idUser, long idProduct, long idShoppingCart, int nrProducts) {
+		//update table
+		return 0;
+	}
+
 
 	public long addProductToCart(long idUser, long idProduct, long idShoppingCart) {
 		ShoppingCartProductsEntity cartProductsEntity = new ShoppingCartProductsEntity();
@@ -186,5 +197,11 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 		}
 
 		return cart;
+	}
+
+	
+	public int retrieveNrCartProducts(long idUser, long idProduct, long idShoppingCart) {
+		
+		return 0;
 	}
 }
