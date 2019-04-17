@@ -29,8 +29,14 @@ public class ShoppingCartBean {
 	@PostConstruct
 	public void setNewCartId() {
 		
-		FacesContext context = FacesContext.getCurrentInstance();
-		userId = (Long) context.getExternalContext().getSessionMap().get("userId");
+		FacesContext context = FacesContext.getCurrentInstance();	
+		//TODO de luat id-ul ok....
+		this.userId = new Long(1); //by default, sa nu mai crape. 
+		
+		if(context.getExternalContext().getSessionMap().get("userId")!=null) {
+			this.userId = (Long) context.getExternalContext().getSessionMap().get("userId");
+		}
+		
 		
 		//Long idCart = shoppingCartService.createShoppingCartService(userId, idRestaurant)
 		
@@ -43,8 +49,8 @@ public class ShoppingCartBean {
 
 		}
 		if (userId != null && cartId != null && cartIdsUser.contains(cartId)) {
-			return CartDetailsItem.getCartDetailsItem(shoppingCartService, restaurantService, cartId);
-		}
+			return CartDetailsItem.getCartDetailsItem(shoppingCartService, restaurantService, userId, cartId);
+		} 
 
 		return new CartDetailsItem();
 	}
@@ -59,7 +65,7 @@ public class ShoppingCartBean {
 
 			if (cartId == null && carts.size() != 0) {
 
-				cartId = carts.get(0).getIdCart();
+				cartId = carts.get(0).getIdCart(); ////?????
 			}
 
 		} else {
@@ -79,7 +85,7 @@ public class ShoppingCartBean {
 	}
 
 	public long getUserId() {
-		return userId;
+		return this.userId;
 	}
 
 	public void setUserId(long userId) {

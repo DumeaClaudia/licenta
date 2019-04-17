@@ -23,8 +23,10 @@ public class GetCartDetailsServlet extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		
         long cartId = Long.parseLong(request.getParameter("cartId"));
+        
+        long userId = 1;// Long.parseLong(request.getParameter("userId")); /// ??????
 		
-		CartDetailsItem cartDetailsItem = CartDetailsItem.getCartDetailsItem(shoppingCartService, restaurantService, cartId);
+		CartDetailsItem cartDetailsItem = CartDetailsItem.getCartDetailsItem(shoppingCartService, restaurantService, userId, cartId);
 
 		response.setContentType("application/json");
 		ObjectMapper write_mapper = new ObjectMapper();

@@ -31,7 +31,7 @@ public class HistoryCartListBean {
 
 		}
 		if (userId != null && cartId != null && cartIdsUser.contains(cartId)) {
-			return CartDetailsItem.getCartDetailsItem(shoppingCartService, restaurantService, cartId);
+			return CartDetailsItem.getCartDetailsItem(shoppingCartService, restaurantService, userId, cartId);
 		}
 
 		return new CartDetailsItem();

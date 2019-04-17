@@ -20,7 +20,6 @@ import com.license.shoppingCart.ShoppingCartService;
 public class AddProductToCartServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	private long idProduct;
 
 	@EJB
 	private ShoppingCartService shoppingCartService;
@@ -38,7 +37,7 @@ public class AddProductToCartServlet extends HttpServlet {
 		if (br != null) {
 			json = br.readLine();
 		}
-		long idUser = (Long)request.getSession().getAttribute("userId");
+		long idUser = (Long) request.getSession().getAttribute("userId");
 
 		// un fel de deserializare
 
@@ -60,20 +59,25 @@ public class AddProductToCartServlet extends HttpServlet {
 
 		List<Long> activeCartList = shoppingCartService.getActiveShoppingCartForUser(idUser);
 
-		Product product = shoppingCartService.getProduct(jsonRequest.getIdProduct());
+		// TODO change logic for activeCart
+		Long productID = jsonRequest.getIdProduct();
+		Product product = shoppingCartService.getProduct(productID);
 		long activeCart = 0;
 		if (activeCartList.size() != 0) {
 			activeCart = activeCartList.get(0);
 		} else {
-
-			activeCart = shoppingCartService.createShoppingCartService(idUser, product.getIdRestaurant()); //sa nu schimb aici logica..
+			activeCart = shoppingCartService.createShoppingCartService(idUser, product.getIdRestaurant());
 		}
-		//int nrProd = getNrProductFromCart
-		//if (nr == 0)
-		shoppingCartService.addProductToCart(idUser, jsonRequest.getIdProduct(), activeCart);
-		//else {
-		//	updateNrProductFromCart (idUser, jsonRequest.getIdProduct(), activeCart, nrProdu + 1);
-		//}
+		
+		int nrProducts = shoppingCartService.getNumberOfProducts(idUser, productID, activeCart);
+
+		if (nrProducts == 0) {
+			shoppingCartService.addProductToCart(idUser, productID, activeCart);
+		} else {
+			shoppingCartService.updateNumberOfProducts(idUser, productID, activeCart, nrProducts + 1);
+		}
+		
+		
 		jsonResponse.setProduct(product);
 
 		// serializare

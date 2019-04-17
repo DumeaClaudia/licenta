@@ -9,6 +9,7 @@ import java.util.Set;
 import com.license.Cart;
 import com.license.Product;
 import com.license.Restaurant;
+import com.license.ShoppingCartProducts;
 import com.license.restaurant.RestaurantService;
 import com.license.shoppingCart.ShoppingCartService;
 
@@ -34,13 +35,20 @@ public class CartDetailsItem {
 	}
 
 	public static CartDetailsItem getCartDetailsItem(ShoppingCartService shoppingCartService,
-			RestaurantService restaurantService, long cartId) {
+			RestaurantService restaurantService, long userId, long cartId) {
+		
 		List<RestaurantProductsItem> cartItemsGrouped = new ArrayList<RestaurantProductsItem>();
 		Map<Long, List<ProductDetailsItem>> restaurantProductsMap = new HashMap<Long, List<ProductDetailsItem>>();
+		List<ShoppingCartProducts> cartProductsForUser = shoppingCartService.getCartProductsForUser(userId, cartId);
+		int nrTotalProductsFromCart = 0;
+		double totalPrice = 0.00;
 
-		List<Product> products = shoppingCartService.getShoppingCartProducts(cartId);
+		for (ShoppingCartProducts productFromCart : cartProductsForUser) {
+			long productId = productFromCart.getIdProduct();
+			int nrProducts = productFromCart.getNrProducts();
+			nrTotalProductsFromCart += nrProducts;
 
-		for (Product product : products) {
+			Product product = shoppingCartService.getProduct(productId);
 			ProductDetailsItem item = new ProductDetailsItem();
 
 			item.setIdRestaurant(product.getIdRestaurant());
@@ -49,8 +57,11 @@ public class CartDetailsItem {
 			item.setDescription(product.getDescription());
 			item.setDiscount(product.getDiscount());
 			item.setPrice(product.getPrice());
-			item.setImage(product.getImage());
+			item.setImage(product.getImage()); 
 			item.setName(product.getName());
+
+			item.setNrProducts(nrProducts);
+			totalPrice += nrProducts*(item.getPrice());
 
 			Long restaurantId = product.getIdRestaurant();
 
@@ -76,18 +87,17 @@ public class CartDetailsItem {
 		}
 
 		Cart cart = shoppingCartService.getCartById(cartId);
-		if (cart != null) {
+		if (cart != null && !cartProductsForUser.isEmpty()) {
 			String description = restaurantsIds.size() + " restaurante ";
-			String nrProducts = products.size() + " produs";
-			if (products.size() > 1) {
+			String nrProducts = nrTotalProductsFromCart + " produs";
+			if (nrTotalProductsFromCart > 1) {
 				nrProducts = nrProducts + "e";
 			}
 			CartSummaryItem item = new CartSummaryItem(cart.getIdCart(), cart.isActive(), cart.getCreatedDate(),
-					description, nrProducts, image);
+					description, nrProducts, image, totalPrice);
 			CartDetailsItem cartDetailsItem = new CartDetailsItem(item, cartItemsGrouped);
 			return cartDetailsItem;
-		}
-		else {
+		} else {
 			return new CartDetailsItem();
 		}
 	}

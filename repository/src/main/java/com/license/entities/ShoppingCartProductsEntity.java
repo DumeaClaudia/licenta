@@ -12,8 +12,19 @@ import javax.persistence.NamedQuery;
 
 @Entity(name = "shopping_cart_products")
 @NamedQueries({
-		@NamedQuery(name = "shopping_cart_products.getProductsForCart", query = "Select p FROM shopping_cart_products p where p.idShoppingCart = :idShoppingCart"),
-		@NamedQuery(name = "shopping_cart_products.selectForDeleteProductForCart", query = "select p FROM shopping_cart_products p where p.idUser=:idUser and p.idProduct = :idProduct and p.idShoppingCart = :idShoppingCart") })
+		@NamedQuery(name = "shopping_cart_products.getProductsFromCart", 
+			query = "Select p FROM shopping_cart_products p where p.idShoppingCart = :idShoppingCart"),
+		
+		@NamedQuery(name = "shopping_cart_products.deleteProductFromCart",
+			query = "select p FROM shopping_cart_products p where p.idUser=:idUser and p.idProduct = :idProduct and p.idShoppingCart = :idShoppingCart"),
+		
+		@NamedQuery(name = "shopping_cart_products.getNrOfProducts",
+			query = "select p.nrProducts FROM shopping_cart_products p where p.idUser=:idUser and p.idProduct = :idProduct and p.idShoppingCart = :idShoppingCart"),
+		
+		@NamedQuery(name = "shopping_cart_products.getCartProductsForUser",
+		query = "select p FROM shopping_cart_products p where p.idUser=:idUser and p.idShoppingCart = :idShoppingCart")
+		
+})
 
 public class ShoppingCartProductsEntity implements Serializable{
 	/**

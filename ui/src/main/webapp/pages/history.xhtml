@@ -15,18 +15,35 @@
 
 			<div class="row">
 				<div id="sidebar-left" class="col-2  col-lg-2 col-md-2 col-sm-12 col-xs-12">
+					<h4>Comenzi finalizate:</h4>
 					<ui:repeat value="#{historyCartListBean.cartList}" var="cart" outcome="cart">
-						<ul class="nav">
-							<li><a href="history.xhtml?cartId=#{cart.idCart}"> <small>#{cart.createdDate}</small> <br /> <ui:fragment
-										rendered="#{cart.idCart == historyCartListBean.cartId}">
+						<ui:fragment rendered="#{cart.cartActive==false}">
+							<ul class="nav">
+								<li><a href="history.xhtml?cartId=#{cart.idCart}"> <small>#{cart.createdDate}</small> <br /> <ui:fragment
+											rendered="#{cart.idCart == historyCartListBean.cartId}">
 									>
 								</ui:fragment> <big>#{cart.cartDescription}</big>
-							</a></li>
-						</ul>
+								</a></li>
+							</ul>
+						</ui:fragment>
+					</ui:repeat>
+
+					<h4>Comenzi nefinalizate:</h4>
+					<ui:repeat value="#{historyCartListBean.cartList}" var="cart" outcome="cart">
+						<ui:fragment rendered="#{cart.cartActive}">
+							<ul class="nav">
+
+								<li><a href="history.xhtml?cartId=#{cart.idCart}"> <small>#{cart.createdDate}</small> <br /> <ui:fragment
+											rendered="#{cart.idCart == historyCartListBean.cartId}">
+									>
+								</ui:fragment> <big>#{cart.cartDescription}</big>
+								</a></li>
+							</ul>
+						</ui:fragment>
 					</ui:repeat>
 				</div>
 
-				<div id="content-right" class="col-10 col-lg-10 col-md-10 col-sm-12 col-xs-12 container well">
+				<div id="content-right" class="col-10 col-lg-10 col-md-10 col-sm-12 col-xs-12 container well" style="height:1250px ;">
 					<div class="marketing">
 						<div class="row">
 							<div class="col-md-12">
@@ -36,7 +53,13 @@
 								<ui:fragment rendered="#{historyCartListBean.cartList.size()!=0}">
 
 									<h3 class="style-font">
-										Comanda din data de: <b>#{historyCartListBean.getCartDetails().cartSummary.createdDate}</b>
+										Comanda din data de <b>#{historyCartListBean.getCartDetails().cartSummary.createdDate}</b>
+										<ui:fragment rendered="#{historyCartListBean.getCartDetails().cartSummary.cartActive==false}">
+										, care a fost finalizata.
+										</ui:fragment>
+										<ui:fragment rendered="#{historyCartListBean.getCartDetails().cartSummary.cartActive}">
+										, care nu a fost finalizata.
+										</ui:fragment>
 									</h3>
 									<!-- <h3>pret </h3>
 								<h3>status</h3>
@@ -72,10 +95,10 @@
 											</ui:fragment>
 
 											<div>
-												<b>#{product.name}</b>
+												#{product.nrProducts}x <b>#{product.name}</b>
 											</div>
 											<div class="pull-right">
-												<b><small> #{product.price} RON </small></b>
+												<small>#{product.nrProducts}x <b> #{product.price} RON </b></small>
 											</div>
 											<div>(#{product.description})</div>
 										</div>

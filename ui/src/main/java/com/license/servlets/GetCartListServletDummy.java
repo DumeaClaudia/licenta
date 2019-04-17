@@ -1,6 +1,5 @@
 package com.license.servlets;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.license.data.CartItem;
-import com.license.data.CartSummaryItem;
 
 public class GetCartListServletDummy extends HttpServlet {
 	 /**

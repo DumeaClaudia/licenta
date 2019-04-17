@@ -34,6 +34,7 @@ function getCartProductsAjaxRequest(request) {
 			success : function(data) {
 				$("#cart-products-list").empty();
 				var total = 0;
+				var nrCartProducts = 0;
 				$.each(	data,
 						function(index, product) {
 						
@@ -41,12 +42,14 @@ function getCartProductsAjaxRequest(request) {
 							var span1 = $("<span class='product-list-name  ' />");
 							var span2 = $("<span class='product-list-price  ' />");
 
-							span1.text(product.name);
-							span2.text(product.price + " RON");
-							total = total + +product.price;
+							span1.text(product.nrProducts+ "x "+  product.nameProduct + " ("+product.nameRestaurant+")");
+							span2.text(product.nrProducts + "x "+ product.price + " RON");
 							
-							var minus = $("<a class='glyphicon glyphicon-minus product-list-delete'  data-product-id='" + product.id
-										+ "' data-product-name='" + product.name + "' />");
+							nrCartProducts = nrCartProducts + + (product.nrProducts);
+							total = total + +(product.price*product.nrProducts);
+							
+							var minus = $("<a class='glyphicon glyphicon-minus product-list-delete'  data-product-id='" + product.idProduct
+										+ "' data-product-name='" + product.nameProduct + "' />");
 
 							div1.append(span1);
 							div1.append(minus);
@@ -64,15 +67,17 @@ function getCartProductsAjaxRequest(request) {
 					else{
 						$("#delivery-price").text(zero + " RON");
 					}
-					// $("#total-price").text( Number.parseFloat(total).toFixed(2) + " RON");
+
 					$("#total-price").text(total.toFixed(2) + " RON");
-					$("#nr-products-cart").text(data.length);
+					
+					$("#nr-products-cart").text(nrCartProducts);
 
 					$(".product-list-delete").click(
 							function() {
 
 								var productId = this.dataset.productId;
-								var productName = this.dataset.productName;
+								var productName = this.dataset.productName;								
+								
 								var removedProductRequest = new Object();
 
 								removedProductRequest.idProduct = productId;
@@ -82,8 +87,6 @@ function getCartProductsAjaxRequest(request) {
 
 								return false;
 							});
-
-					// console.log(data);
 				},
 				error : function(data, status, er) {
 					toastr.error("Getting cart products ");

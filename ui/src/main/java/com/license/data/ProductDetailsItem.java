@@ -9,6 +9,7 @@ public class ProductDetailsItem {
 	private String description;
 	private double price;
 	private int discount;
+	private int nrProducts;
 	
 	public String getImage() {
 		return image;
@@ -58,5 +59,10 @@ public class ProductDetailsItem {
 	public void setIdProduct(long idProduct) {
 		this.idProduct = idProduct;
 	}
-	
+	public int getNrProducts() {
+		return nrProducts;
+	}
+	public void setNrProducts(int nrProducts) {
+		this.nrProducts = nrProducts;
+	}
 }

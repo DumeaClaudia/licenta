@@ -15,10 +15,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.license.AddProductRequest;
 import com.license.Product;
-import com.license.ShoppingCartResponse;
-import com.license.UserIdRequest;
+import com.license.Restaurant;
+import com.license.ShoppingCartProducts;
+import com.license.data.CartDetailsItem;
+import com.license.data.CurrentCartDetails;
+import com.license.restaurant.RestaurantService;
 import com.license.shoppingCart.ShoppingCartService;
 
 public class GetCartProductsServlet extends HttpServlet {
@@ -28,6 +30,9 @@ public class GetCartProductsServlet extends HttpServlet {
 	@EJB
 	private ShoppingCartService shoppingCartService;
 
+	@EJB
+	RestaurantService restaurantService;
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -36,28 +41,60 @@ public class GetCartProductsServlet extends HttpServlet {
 		if (br != null) {
 			json = br.readLine();
 		}
-		
+
 		ObjectMapper mapper = new ObjectMapper();
 
 		response.setContentType("application/json");
 		List<Product> jsonResponse = new ArrayList<Product>();
-		
+		CartDetailsItem jsonResponse2 = new CartDetailsItem();
+
+		List<ShoppingCartProducts> cartProducts = new ArrayList<ShoppingCartProducts>();
+		List<CurrentCartDetails> cartDetailsProduct = new ArrayList<>();
 
 		HttpSession session = request.getSession(false);
 		Object idObj = session.getAttribute("userId");
-
+		
 		if (idObj != null) {
 			long idUser = (Long) idObj;
-
 			List<Long> activeCartList = shoppingCartService.getActiveShoppingCartForUser(idUser);
-			long activeCart = 0;
-			if (activeCartList.size() != 0) {
-				activeCart = activeCartList.get(0);
-				jsonResponse = shoppingCartService.getShoppingCartProducts(activeCart);
-			} else {
 
+			long lastActiveCart = 0;
+
+			if (activeCartList.size() != 0) {
+				lastActiveCart = activeCartList.get(0);
+			} else {
+				
+				//FacesContext context = FacesContext.getCurrentInstance();
+				lastActiveCart = shoppingCartService.createNewCartForUser(idUser);
+			//	context.getExternalContext().getSessionMap().put("activeCartId", lastActiveCart);			
 			}
+			cartProducts = shoppingCartService.getCartProductsForUser(idUser, lastActiveCart);
+
+			for (ShoppingCartProducts shoppingCartProduct : cartProducts) {
+
+				CurrentCartDetails cartDetails = new CurrentCartDetails();
+				Product product = shoppingCartService.getProduct(shoppingCartProduct.getIdProduct());
+				Restaurant restaurant = restaurantService.getRestaurantById(product.getIdRestaurant());
+
+				cartDetails.setIdProduct(product.getId());
+				cartDetails.setNrProducts(shoppingCartProduct.getNrProducts());
+				cartDetails.setNameProduct(product.getName());
+				cartDetails.setNameRestaurant(restaurant.getName());
+				cartDetails.setPrice(product.getPrice());
+
+				cartDetailsProduct.add(cartDetails);
+			}
+
+			// aici ar fi toate produsele din cos... gen si ale altor useri....
+			// jsonResponse = shoppingCartService.getShoppingCartProducts(activeCart);
+
+			// jsonResponse2 =
+			// CartDetailsItem.getCartDetailsItem(shoppingCartService,restaurantService,
+			// idUser, activeCart);
+
 		}
-		mapper.writeValue(response.getOutputStream(), jsonResponse);
+		mapper.writeValue(response.getOutputStream(), cartDetailsProduct);
+		// mapper.writeValue(response.getOutputStream(), jsonResponse);
+		// mapper.writeValue(response.getOutputStream(), jsonResponse2);
 	}
 }

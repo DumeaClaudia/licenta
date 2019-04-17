@@ -6,7 +6,6 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -16,6 +15,7 @@ import javax.persistence.Query;
 
 import com.license.Cart;
 import com.license.Product;
+import com.license.ShoppingCartProducts;
 import com.license.entities.CartForUserEntity;
 import com.license.entities.ProductEntity;
 import com.license.entities.ShoppingCartEntity;
@@ -30,10 +30,11 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 	private EntityManagerFactory emf = Persistence.createEntityManagerFactory("myPU");
 	private EntityManager em = emf.createEntityManager();
 
+	@SuppressWarnings("unchecked")
 	public List<Product> retrieveShoppingCartProductsById(long id) {
 
 		List<Product> scList = new ArrayList<>();
-		Query query = em.createNamedQuery("shopping_cart_products.getProductsForCart");
+		Query query = em.createNamedQuery("shopping_cart_products.getProductsFromCart");
 		query.setParameter("idShoppingCart", id);
 		List<ShoppingCartProductsEntity> qResult = query.getResultList();
 		if (qResult == null) {
@@ -46,6 +47,7 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 		return scList;
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Long> retrieveActiveShoppingCartForUserId(long idUser) {
 
 		List<Long> idSc = new ArrayList<Long>();
@@ -103,17 +105,6 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 		em.getTransaction().commit();
 		return idCart;
 	}
-	
-	public int getNrProductFromCart(long idUser, long idProduct, long idShoppingCart) {
-	
-		return 0;
-	}
-	
-	public int updateNrProductFromCart(long idUser, long idProduct, long idShoppingCart, int nrProducts) {
-		//update table
-		return 0;
-	}
-
 
 	public long addProductToCart(long idUser, long idProduct, long idShoppingCart) {
 		ShoppingCartProductsEntity cartProductsEntity = new ShoppingCartProductsEntity();
@@ -131,11 +122,12 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 		return id;
 	}
 
+	@SuppressWarnings("unchecked")
 	public void removeProductFromCart(long idUser, long idProduct, long idShoppingCart) {
 
 		List<ShoppingCartProductsEntity> shoppingCartProductsEntity = new ArrayList<ShoppingCartProductsEntity>();
 
-		Query query = em.createNamedQuery("shopping_cart_products.selectForDeleteProductForCart");
+		Query query = em.createNamedQuery("shopping_cart_products.deleteProductFromCart");
 		query.setParameter("idUser", idUser);
 		query.setParameter("idProduct", idProduct);
 		query.setParameter("idShoppingCart", idShoppingCart);
@@ -153,6 +145,59 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 
 	}
 
+	public void removeProductFromCurrentCart(long idUser, long idProduct, long idShoppingCart) {
+
+		ShoppingCartProductsEntity shoppingCartProductsEntity = new ShoppingCartProductsEntity();
+
+		Query query = em.createNamedQuery("shopping_cart_products.deleteProductFromCart");
+		query.setParameter("idUser", idUser);
+		query.setParameter("idProduct", idProduct);
+		query.setParameter("idShoppingCart", idShoppingCart);
+
+		shoppingCartProductsEntity = (ShoppingCartProductsEntity) query.getResultList().get(0);
+
+		int nrProducts = shoppingCartProductsEntity.getNrProducts();
+
+		em.getTransaction().begin();
+		em.remove(shoppingCartProductsEntity);
+
+		if (nrProducts > 1) {
+			ShoppingCartProductsEntity cartProductsEntity = new ShoppingCartProductsEntity();
+
+			cartProductsEntity.setNrProducts(nrProducts - 1);
+			cartProductsEntity.setIdUser(idUser);
+			cartProductsEntity.setIdProduct(idProduct);
+			cartProductsEntity.setIdShoppingCart(idShoppingCart);
+			em.persist(cartProductsEntity);
+		}
+
+		em.getTransaction().commit();
+
+	}
+
+	public void removeProductFromCartDetails(long idUser, long idProduct, long idShoppingCart) {
+
+		List<ShoppingCartProductsEntity> shoppingCartProductsEntity = new ArrayList<ShoppingCartProductsEntity>();
+
+		Query query = em.createNamedQuery("shopping_cart_products.deleteProductFromCart");
+		query.setParameter("idUser", idUser);
+		query.setParameter("idProduct", idProduct);
+		query.setParameter("idShoppingCart", idShoppingCart);
+
+		shoppingCartProductsEntity = query.getResultList();
+
+		for (ShoppingCartProductsEntity product : shoppingCartProductsEntity) {
+			em.getTransaction().begin();
+			em.remove(product);
+			em.getTransaction().commit();
+			// sterge doar un produs
+			break;
+		}
+		// em.persist(shoppingCartProductsEntity);
+
+	}
+
+	@SuppressWarnings("unchecked")
 	public List<Long> retrieveAllShoppingCartForUser(long idUser) {
 
 		List<ShoppingCartUserEntity> shoppingCartsUsersEntity = new ArrayList<ShoppingCartUserEntity>();
@@ -171,6 +216,7 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 		return cartIds;
 	}
 
+	@SuppressWarnings("unchecked")
 	public Cart retrieveCartById(long idCart) {
 		Cart cart = new Cart();
 
@@ -199,9 +245,82 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 		return cart;
 	}
 
-	
-	public int retrieveNrCartProducts(long idUser, long idProduct, long idShoppingCart) {
-		
-		return 0;
+	public int retrieveNumberOfProducts(long idUser, long idProduct, long idShoppingCart) {
+
+		Query query = em.createNamedQuery("shopping_cart_products.getNrOfProducts");
+		query.setParameter("idUser", idUser);
+		query.setParameter("idProduct", idProduct);
+		query.setParameter("idShoppingCart", idShoppingCart);
+
+		int nrProducts = 0;
+
+		if (!query.getResultList().isEmpty()) {
+			nrProducts = (int) query.getResultList().get(0);
+		}
+
+		return nrProducts;
+
 	}
+
+	public void updateNrOfProducts(long idUser, long idProduct, long idShoppingCart, int nrProducts) {
+		em.getTransaction().begin();
+		Query query = em.createQuery("UPDATE shopping_cart_products p SET p.nrProducts = :nrProducts "
+				+ "WHERE p.idUser=:idUser and p.idProduct = :idProduct and p.idShoppingCart = :idShoppingCart");
+
+		query.setParameter("idUser", idUser);
+		query.setParameter("idProduct", idProduct);
+		query.setParameter("idShoppingCart", idShoppingCart);
+		query.setParameter("nrProducts", nrProducts);
+
+		query.executeUpdate();
+		em.getTransaction().commit();
+
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<ShoppingCartProducts> retrieveShoppingCartProductIds(long idUser, long idCart) {
+
+		List<ShoppingCartProducts> cartProductsForUser = new ArrayList<ShoppingCartProducts>();
+		Query query = em.createNamedQuery("shopping_cart_products.getCartProductsForUser");
+		query.setParameter("idUser", idUser);
+		query.setParameter("idShoppingCart", idCart);
+
+		List<ShoppingCartProductsEntity> shoppingCartEntities = query.getResultList();
+
+		for (ShoppingCartProductsEntity cartProductsEntity : shoppingCartEntities) {
+
+			ShoppingCartProducts cartProducts = new ShoppingCartProducts();
+			cartProducts.setIdProduct(cartProductsEntity.getIdProduct());
+			cartProducts.setNrProducts(cartProductsEntity.getNrProducts());
+			cartProducts.setIdUser(idUser);
+			cartProducts.setIdShoppingCart(idCart);
+
+			cartProductsForUser.add(cartProducts);
+		}
+
+		return cartProductsForUser;
+	}
+
+	public long createCartForUser(long idUser) {
+
+		ShoppingCartEntity entity = new ShoppingCartEntity();
+		entity.setCreatedDate(Date.from(Instant.now()));
+
+		em.getTransaction().begin();
+		em.persist(entity);
+		em.getTransaction().commit();
+
+		long idCart = entity.getId();
+
+		ShoppingCartUserEntity userCartEntity = new ShoppingCartUserEntity();
+		userCartEntity.setIdShoppingCart(idCart);
+		userCartEntity.setIdUser(idUser);
+
+		em.getTransaction().begin();
+		em.persist(userCartEntity);
+		em.getTransaction().commit();
+
+		return idCart;
+	}
+
 }

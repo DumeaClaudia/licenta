@@ -11,10 +11,10 @@
 
 <ui:composition template="../template/template.xhtml">
 	<ui:define name="content">
-		<div class="container marketing style-font well" style="margin-top: 50px; height:1000px">
+		<div class="container marketing style-font well" style="margin-top: 50px; height:600px">
 
 			<div class="row" style="margin-right: 30px; margin-left:10px;">
-				<div class="col-md-8">
+				<div class="col-md-7">
 					<h:form>
 
 						<div class="output-group col-md-12 mb-3">
@@ -75,7 +75,7 @@
 					</h:form>
 				</div>
 
-				<div class="well col-md-4 ">
+				<div class="well col-md-5 ">
 					<h5>
 						Lista produse:
 					</h5>
@@ -84,15 +84,15 @@
 						<ui:repeat value="#{restaurant.products}" var="product">
 							<div id="idProductName">
 
-								<b>#{product.name}</b> (<i>#{restaurant.restaurantName}</i>)
+								#{product.nrProducts}x <b>#{product.name}</b> (<i>#{restaurant.restaurantName}</i>)
 								<div class="pull-right">
-									<small><b>#{product.price}</b> RON</small>
+									<small>#{product.nrProducts}x <b>#{product.price}</b> RON</small>
 								</div>
 							</div>
 						</ui:repeat>
 					</ui:repeat>
 					<br /> 
-					<h5>Total:</h5>
+					<h5>Total: #{historyCartListBean.getCartDetails().cartSummary.totalPrice} RON</h5>
 				</div>
 			</div>
 		</div>

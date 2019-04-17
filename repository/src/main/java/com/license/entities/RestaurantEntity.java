@@ -13,7 +13,9 @@ import javax.persistence.NamedQuery;
 @Entity(name = "restaurant")
 @NamedQueries({
 		@NamedQuery(name = "restaurant.display", query = "SELECT r FROM restaurant r"),
-		@NamedQuery(name = "restaurant.searchForRestaurant", query = "SELECT r FROM restaurant r where r.id=:findId") })
+		@NamedQuery(name = "restaurant.searchForRestaurant", query = "SELECT r FROM restaurant r where r.id=:findId") 
+		//restaurant.getRestaurantById
+})
 
 public class RestaurantEntity implements Serializable{
 

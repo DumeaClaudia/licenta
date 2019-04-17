@@ -23,7 +23,7 @@ public class RemoveProductFromCartServlet extends HttpServlet {
 
 	@EJB
 	private ShoppingCartService shoppingCartService;
-	
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -32,7 +32,7 @@ public class RemoveProductFromCartServlet extends HttpServlet {
 		if (br != null) {
 			json = br.readLine();
 		}
-		long idUser = (Long)request.getSession().getAttribute("userId");
+		long idUser = (Long) request.getSession().getAttribute("userId");
 		ObjectMapper mapper = new ObjectMapper();
 
 		AddProductRequest jsonRequest = mapper.readValue(json, AddProductRequest.class);
@@ -42,24 +42,37 @@ public class RemoveProductFromCartServlet extends HttpServlet {
 		ShoppingCartResponse jsonResponse = new ShoppingCartResponse();
 
 		List<Long> activeCartList = shoppingCartService.getActiveShoppingCartForUser(idUser);
-		
-		Product product = shoppingCartService.getProduct(jsonRequest.getIdProduct());
+
 		long activeCart = 0;
+
+		Long productId = jsonRequest.getIdProduct();
+		Product product = shoppingCartService.getProduct(productId);
+
+		int nrProducts = shoppingCartService.getNumberOfProducts(idUser, productId, activeCart);
+
 		if (activeCartList.size() != 0) {
 			activeCart = activeCartList.get(0);
-			//int nrProd = getNrProductFromCart
-			//if (nr == 0)
-			shoppingCartService.removeProductFromCart(idUser, jsonRequest.getIdProduct(), activeCart);
-			//else {
-			//	updateNrProductFromCart (idUser, jsonRequest.getIdProduct(), activeCart, nrProdu - 1);
-			//}
-				
+			
+			shoppingCartService.removeAProductFromCurrentCart(idUser, productId, activeCart);
+					
+			/*
+			if (nrProducts == 1) {
+				shoppingCartService.removeProductFromCart(idUser, productId, activeCart);
+			} else {
+				if(nrProducts > 1) {					
+					shoppingCartService.updateNumberOfProducts(idUser, productId, activeCart, nrProducts - 1);
+				}
+			}*/
+
 		} else {
 
-			/*activeCart = shoppingCartService.createShoppingCartService(jsonRequest.getIdUser(),
-					product.getIdRestaurant());*/
+			/*
+			 * activeCart =
+			 * shoppingCartService.createShoppingCartService(jsonRequest.getIdUser(),
+			 * product.getIdRestaurant());
+			 */
 		}
-	
+
 		jsonResponse.setProduct(product);
 
 		mapper.writeValue(response.getOutputStream(), jsonResponse);
