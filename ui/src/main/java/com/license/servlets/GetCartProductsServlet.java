@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
-import javax.faces.context.FacesContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +17,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.license.Product;
 import com.license.Restaurant;
 import com.license.ShoppingCartProducts;
-import com.license.data.CartDetailsItem;
 import com.license.data.CurrentCartDetails;
 import com.license.restaurant.RestaurantService;
 import com.license.shoppingCart.ShoppingCartService;
@@ -43,30 +41,24 @@ public class GetCartProductsServlet extends HttpServlet {
 		}
 
 		ObjectMapper mapper = new ObjectMapper();
-
 		response.setContentType("application/json");
-		List<Product> jsonResponse = new ArrayList<Product>();
-		CartDetailsItem jsonResponse2 = new CartDetailsItem();
 
 		List<ShoppingCartProducts> cartProducts = new ArrayList<ShoppingCartProducts>();
 		List<CurrentCartDetails> cartDetailsProduct = new ArrayList<>();
 
 		HttpSession session = request.getSession(false);
 		Object idObj = session.getAttribute("userId");
-		
+
 		if (idObj != null) {
 			long idUser = (Long) idObj;
-			List<Long> activeCartList = shoppingCartService.getActiveShoppingCartForUser(idUser);
+			Long activeCartList = shoppingCartService.getActiveShoppingCartForUser(idUser);
 
 			long lastActiveCart = 0;
 
-			if (activeCartList.size() != 0) {
-				lastActiveCart = activeCartList.get(0);
+			if (activeCartList != 0) {
+				lastActiveCart = activeCartList;
 			} else {
-				
-				//FacesContext context = FacesContext.getCurrentInstance();
 				lastActiveCart = shoppingCartService.createNewCartForUser(idUser);
-			//	context.getExternalContext().getSessionMap().put("activeCartId", lastActiveCart);			
 			}
 			cartProducts = shoppingCartService.getCartProductsForUser(idUser, lastActiveCart);
 
@@ -84,17 +76,7 @@ public class GetCartProductsServlet extends HttpServlet {
 
 				cartDetailsProduct.add(cartDetails);
 			}
-
-			// aici ar fi toate produsele din cos... gen si ale altor useri....
-			// jsonResponse = shoppingCartService.getShoppingCartProducts(activeCart);
-
-			// jsonResponse2 =
-			// CartDetailsItem.getCartDetailsItem(shoppingCartService,restaurantService,
-			// idUser, activeCart);
-
 		}
 		mapper.writeValue(response.getOutputStream(), cartDetailsProduct);
-		// mapper.writeValue(response.getOutputStream(), jsonResponse);
-		// mapper.writeValue(response.getOutputStream(), jsonResponse2);
 	}
 }

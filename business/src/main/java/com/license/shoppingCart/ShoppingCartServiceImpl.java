@@ -22,7 +22,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 		return repository.retrieveShoppingCartProductsById(idShoppingCart);
 	}
 
-	public List<Long> getActiveShoppingCartForUser(long idUser) {
+	public Long getActiveShoppingCartForUser(long idUser) {
 		return repository.retrieveActiveShoppingCartForUserId(idUser);
 	}
 
@@ -69,5 +69,9 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
 	public long createNewCartForUser(long idUser) {
 		return repository.createCartForUser(idUser);
+	}
+
+	public void updateDateForCartAfterCheckout(long idUser, long idCart) {
+		repository.updateCartAfterCheckout(idUser, idCart);
 	}
 }

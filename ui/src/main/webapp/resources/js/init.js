@@ -43,7 +43,7 @@ function getCartProductsAjaxRequest(request) {
 							var span2 = $("<span class='product-list-price  ' />");
 
 							span1.text(product.nrProducts+ "x "+  product.nameProduct + " ("+product.nameRestaurant+")");
-							span2.text(product.nrProducts + "x "+ product.price + " RON");
+							span2.text(product.nrProducts + "x "+ (product.price).toFixed(2) + " RON");
 							
 							nrCartProducts = nrCartProducts + + (product.nrProducts);
 							total = total + +(product.price*product.nrProducts);
@@ -58,7 +58,7 @@ function getCartProductsAjaxRequest(request) {
 							$("#cart-products-list").append(div1);
 						});
 					
-					var minSum = 15;
+					var minSum = 15.00;
 					var zero = 0;
 					if(total<30 && total!=0){
 						$("#delivery-price").text(minSum + " RON");
@@ -89,7 +89,7 @@ function getCartProductsAjaxRequest(request) {
 							});
 				},
 				error : function(data, status, er) {
-					toastr.error("Getting cart products ");
+					/*toastr.error("Getting cart products ");*/
 					console.log(data);
 					console.log(status);
 					console.log(er);

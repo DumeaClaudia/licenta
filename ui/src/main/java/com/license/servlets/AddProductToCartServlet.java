@@ -57,14 +57,16 @@ public class AddProductToCartServlet extends HttpServlet {
 		// if not active shopping cart create shopping cart
 		// insert into shopping cart
 
-		List<Long> activeCartList = shoppingCartService.getActiveShoppingCartForUser(idUser);
-
+		// List<Long> activeCartList = shoppingCartService.getActiveShoppingCartForUser(idUser);
+		Long activeCartList = shoppingCartService.getActiveShoppingCartForUser(idUser);
+		
 		// TODO change logic for activeCart
 		Long productID = jsonRequest.getIdProduct();
 		Product product = shoppingCartService.getProduct(productID);
+		
 		long activeCart = 0;
-		if (activeCartList.size() != 0) {
-			activeCart = activeCartList.get(0);
+		if (activeCartList != 0) {
+			activeCart = activeCartList;
 		} else {
 			activeCart = shoppingCartService.createShoppingCartService(idUser, product.getIdRestaurant());
 		}

@@ -3,7 +3,7 @@
      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui"
-	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
 <f:metadata>
 	<f:viewParam name="userId" value="#{shoppingCartBean.userId}"></f:viewParam>
@@ -29,12 +29,12 @@
 						<div>
 							<div class="col-md-5 mb-3">
 								<h:outputText value="Nume: "></h:outputText>
-								<h:inputText type="text" class="form-control" id="firstName" value="" />
+								<h:inputText type="text" class="form-control" id="firstName" value="#{shoppingCartBean.firstName}" />
 							</div>
 
 							<div class="col-md-5 mb-3">
 								<h:outputText value="Prenume: "></h:outputText>
-								<h:inputText type="text" class="form-control" id="lastName" value="" />
+								<h:inputText type="text" class="form-control" id="lastName" value="#{shoppingCartBean.lastName}" />
 
 							</div>
 						</div>
@@ -43,12 +43,19 @@
 							<br />
 							<div class="col-md-5 mb-6">
 								<h:outputText value="Email:  "></h:outputText>
-								<h:inputText type="text" class="form-control" id="email" value="" />
+								<h:inputText type="text" class="form-control" id="email" value="#{shoppingCartBean.email}" />
 							</div>
 
 							<div class="col-md-5 mb-6">
+								<h:outputText value="Telefon:  "></h:outputText>
+								<h:inputText type="text" class="form-control" id="telefon" value="#{shoppingCartBean.telephone}" />
+							</div>
+						</div>
+						<div>
+							<br />
+							<div class="col-md-10 mb-6">
 								<h:outputText value="Adresa:  "></h:outputText>
-								<h:inputText type="text" class="form-control" id="adresa" value="" />
+								<h:inputText type="text" class="form-control" id="adresa" value="#{shoppingCartBean.address}" />
 							</div>
 						</div>
 						<div class="col-md-10 mb-6">
@@ -70,7 +77,9 @@
 
 						<div class="col-md-6 mb-6">
 							<br /> <br />
-							<button class="btn btn-primary" type="submit">Trimite comanda</button>
+							<!-- <button class="btn btn-primary" type="submit">Trimite comanda</button> -->
+							<h:commandButton id="sendButton" class="btn btn-primary" type="submit" value="Trimite comanda"  required="true"  action="#{shoppingCartBean.continueCheckout()}" />
+							
 						</div>
 					</h:form>
 				</div>
@@ -80,7 +89,7 @@
 						Lista produse:
 					</h5>
 					<br></br>
-					<ui:repeat value="#{historyCartListBean.getCartDetails().restaurantProducts}" var="restaurant" outcome="restaurant">
+					<ui:repeat value="#{shoppingCartBean.getCartDetails().restaurantProducts}" var="restaurant" outcome="restaurant">
 						<ui:repeat value="#{restaurant.products}" var="product">
 							<div id="idProductName">
 
@@ -92,7 +101,13 @@
 						</ui:repeat>
 					</ui:repeat>
 					<br /> 
-					<h5>Total: #{historyCartListBean.getCartDetails().cartSummary.totalPrice} RON</h5>
+					
+					<c:set var = "totalPrice" scope = "session" value = "#{shoppingCartBean.getCartDetails().cartSummary.totalPrice-15}"/>
+					<c:if test="${totalPrice lt 30}">
+					<small>*Taxa livrare: 15.00 RON*</small> 			
+					</c:if>
+					
+					<h5>Total: <b>#{shoppingCartBean.getCartDetails().cartSummary.totalPrice} RON</b></h5>
 				</div>
 			</div>
 		</div>

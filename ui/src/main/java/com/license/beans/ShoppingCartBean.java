@@ -1,87 +1,49 @@
 package com.license.beans;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import com.license.data.CartDetailsItem;
-import com.license.data.CartSummaryItem;
 import com.license.restaurant.RestaurantService;
 import com.license.shoppingCart.ShoppingCartService;
 
 @ManagedBean
 @SessionScoped
 public class ShoppingCartBean {
-	private Boolean activeCart;
-	private Long cartId;
 	private Long userId;
+
+	private String firstName;
+	private String lastName;
+	private String email;
+	private String telephone;
+	private String address;
+	private String payment;
 
 	@EJB
 	private ShoppingCartService shoppingCartService;
 	@EJB
 	private RestaurantService restaurantService;
-	
-	@PostConstruct
-	public void setNewCartId() {
-		
-		FacesContext context = FacesContext.getCurrentInstance();	
-		//TODO de luat id-ul ok....
-		this.userId = new Long(1); //by default, sa nu mai crape. 
-		
-		if(context.getExternalContext().getSessionMap().get("userId")!=null) {
-			this.userId = (Long) context.getExternalContext().getSessionMap().get("userId");
-		}
-		
-		
-		//Long idCart = shoppingCartService.createShoppingCartService(userId, idRestaurant)
-		
-	}
 
 	public CartDetailsItem getCartDetails() {
 		List<Long> cartIdsUser = null;
-		if (userId != null) {
-			cartIdsUser = shoppingCartService.getAllShoppingCartsForUser(userId);
 
-		}
-		if (userId != null && cartId != null && cartIdsUser.contains(cartId)) {
-			return CartDetailsItem.getCartDetailsItem(shoppingCartService, restaurantService, userId, cartId);
-		} 
-
-		return new CartDetailsItem();
-	}
-
-	public List<CartSummaryItem> getCartList() {
 		FacesContext context = FacesContext.getCurrentInstance();
 		userId = (Long) context.getExternalContext().getSessionMap().get("userId");
 
-		List<CartSummaryItem> carts;
+		long currentCartId = 0;
 		if (userId != null) {
-			carts = CartSummaryItem.getCartsSummary(shoppingCartService, restaurantService, userId.intValue());
-
-			if (cartId == null && carts.size() != 0) {
-
-				cartId = carts.get(0).getIdCart(); ////?????
-			}
-
-		} else {
-			carts = new ArrayList<CartSummaryItem>();
-
+			cartIdsUser = shoppingCartService.getAllShoppingCartsForUser(userId);
+			currentCartId = shoppingCartService.getActiveShoppingCartForUser(userId);	
+		}
+		if (userId != null && currentCartId != 0 && cartIdsUser.contains(currentCartId)) {
+			return CartDetailsItem.getCartDetailsItem(shoppingCartService, restaurantService, userId, currentCartId);
 		}
 
-		return carts;
-	}
-
-	public Long getCartId() {
-		return cartId;
-	}
-
-	public void setCartId(Long cartId) {
-		this.cartId = cartId;
+		return new CartDetailsItem();
 	}
 
 	public long getUserId() {
@@ -92,4 +54,70 @@ public class ShoppingCartBean {
 		this.userId = userId;
 	}
 
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getTelephone() {
+		return telephone;
+	}
+
+	public void setTelephone(String telephone) {
+		this.telephone = telephone;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getPayment() {
+		return payment;
+	}
+
+	public void setPayment(String payment) {
+		this.payment = payment;
+	}
+
+	public String checkout() {
+		return "shoppingCart?faces-redirect=true";
+	}
+
+	public String continueCheckout() {
+		// TODO aici ar trebui sa setez sendDate si abia acum sa apara in history
+		// page
+
+		Long activeCartList = shoppingCartService.getActiveShoppingCartForUser(userId);
+
+		if (activeCartList != null) {
+			shoppingCartService.updateDateForCartAfterCheckout(userId, activeCartList);
+		}
+		// si sa resetez cosul..
+
+		return "home?faces-redirect=true";
+
+	}
 }

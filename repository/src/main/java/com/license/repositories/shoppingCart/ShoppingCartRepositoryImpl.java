@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.List;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
+import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -48,7 +49,7 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Long> retrieveActiveShoppingCartForUserId(long idUser) {
+	public Long retrieveActiveShoppingCartForUserId(long idUser) {
 
 		List<Long> idSc = new ArrayList<Long>();
 		Query query = em.createNamedQuery("shoppingCartProducts.getNativeShoppingCartForUser");
@@ -57,10 +58,13 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 		if (shoppingCartIdUsers == null) {
 			System.out.println("se pare ca nu au fost gasite sc in baza de date ha ha ha");
 		}
-		for (CartForUserEntity e : shoppingCartIdUsers) {
-			idSc.add(e.getIdShoppingCart());
+
+		if (shoppingCartIdUsers != null && !shoppingCartIdUsers.isEmpty()) {
+			return shoppingCartIdUsers.get(0).getIdShoppingCart();
+
 		}
-		return idSc;
+		return createCartForUser(idUser);
+
 	}
 
 	public Product getProductById(long idProduct) {
@@ -321,6 +325,20 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 		em.getTransaction().commit();
 
 		return idCart;
+	}
+
+	public void updateCartAfterCheckout(long idUser, long idCart) {
+		em.getTransaction().begin();
+		Query query = em
+				.createQuery("UPDATE shopping_cart p SET p.sendDate = :currentDate " + "WHERE p.id = :idShoppingCart");
+
+		query.setParameter("idShoppingCart", idCart);
+		query.setParameter("currentDate", new Date());
+
+		// TODO cred ca ar trebui si user in shoppingCart ???
+		query.executeUpdate();
+		em.getTransaction().commit();
+
 	}
 
 }

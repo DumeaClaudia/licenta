@@ -10,7 +10,7 @@ public interface ShoppingCartRepository {
 
 	public List<Product> retrieveShoppingCartProductsById(long id);
 
-	public List<Long> retrieveActiveShoppingCartForUserId(long idUser);
+	public Long retrieveActiveShoppingCartForUserId(long idUser);
 
 	public List<Long> retrieveAllShoppingCartForUser(long idUser);
 	
@@ -31,4 +31,6 @@ public interface ShoppingCartRepository {
 	public List<ShoppingCartProducts> retrieveShoppingCartProductIds(long idUser, long idCart);
 	
 	public long createCartForUser(long idUser);
+
+	public void updateCartAfterCheckout(long idUser, long idCart);
 }

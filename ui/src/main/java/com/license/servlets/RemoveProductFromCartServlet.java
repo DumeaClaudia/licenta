@@ -41,7 +41,7 @@ public class RemoveProductFromCartServlet extends HttpServlet {
 
 		ShoppingCartResponse jsonResponse = new ShoppingCartResponse();
 
-		List<Long> activeCartList = shoppingCartService.getActiveShoppingCartForUser(idUser);
+		Long activeCartList = shoppingCartService.getActiveShoppingCartForUser(idUser); 
 
 		long activeCart = 0;
 
@@ -50,8 +50,8 @@ public class RemoveProductFromCartServlet extends HttpServlet {
 
 		int nrProducts = shoppingCartService.getNumberOfProducts(idUser, productId, activeCart);
 
-		if (activeCartList.size() != 0) {
-			activeCart = activeCartList.get(0);
+		if (activeCartList != 0) {
+			activeCart = activeCartList;
 			
 			shoppingCartService.removeAProductFromCurrentCart(idUser, productId, activeCart);
 					

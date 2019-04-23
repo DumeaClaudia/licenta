@@ -27,7 +27,16 @@ public class CartDetailsItem {
 	}
 
 	public CartSummaryItem getCartSummary() {
-		return cartSummary;
+
+		if (cartSummary != null) {
+			double price = 0;
+			price = cartSummary.getTotalPrice();
+			if (price != 0 && price < 30) {
+				cartSummary.setTotalPrice(price + 15);
+			}
+			return cartSummary;
+		}
+		return new CartSummaryItem();
 	}
 
 	public List<RestaurantProductsItem> getRestaurantProducts() {
@@ -36,7 +45,7 @@ public class CartDetailsItem {
 
 	public static CartDetailsItem getCartDetailsItem(ShoppingCartService shoppingCartService,
 			RestaurantService restaurantService, long userId, long cartId) {
-		
+
 		List<RestaurantProductsItem> cartItemsGrouped = new ArrayList<RestaurantProductsItem>();
 		Map<Long, List<ProductDetailsItem>> restaurantProductsMap = new HashMap<Long, List<ProductDetailsItem>>();
 		List<ShoppingCartProducts> cartProductsForUser = shoppingCartService.getCartProductsForUser(userId, cartId);
@@ -57,11 +66,11 @@ public class CartDetailsItem {
 			item.setDescription(product.getDescription());
 			item.setDiscount(product.getDiscount());
 			item.setPrice(product.getPrice());
-			item.setImage(product.getImage()); 
+			item.setImage(product.getImage());
 			item.setName(product.getName());
 
 			item.setNrProducts(nrProducts);
-			totalPrice += nrProducts*(item.getPrice());
+			totalPrice += nrProducts * (item.getPrice());
 
 			Long restaurantId = product.getIdRestaurant();
 

@@ -24,7 +24,7 @@ public class CartSummaryItem {
 	String cartDescription;
 	String nrProducts;
 	String imageRestaurant;
-	double totalPrice;
+	double totalPrice = 0.00;
 
 	public CartSummaryItem(long idCart, boolean cartActive, String createdDate, String cartDescription,
 			String nrProducts, String imageRestaurant, double totalPrice) {
@@ -36,6 +36,10 @@ public class CartSummaryItem {
 		this.imageRestaurant = imageRestaurant;
 		this.totalPrice = totalPrice;
 
+	}
+
+	public CartSummaryItem() {
+		// TODO Auto-generated constructor stub
 	}
 
 	public boolean getCartActive() {
@@ -98,10 +102,11 @@ public class CartSummaryItem {
 			RestaurantService restaurantService, int userId) {
 		List<CartSummaryItem> carts = new ArrayList<CartSummaryItem>();
 		List<Long> allCartList = shoppingCartService.getAllShoppingCartsForUser(userId);
-		int nrTotalProductsFromCart = 0;
+		
 		double totalPrice = 0.00;
 
 		for (long idCart : allCartList) {
+			int nrTotalProductsFromCart = 0;
 			List<ProductDetailsItem> productItems = new ArrayList<ProductDetailsItem>();
 			String description = new String();
 			Set<Long> restaurantsIds = new HashSet<Long>();

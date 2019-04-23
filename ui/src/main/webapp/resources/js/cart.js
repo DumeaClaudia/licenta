@@ -47,4 +47,11 @@ function addProductToCartAjaxRequest(request) {
 	});
 }
 
+$(document).ready(function() {
+	/*toastr.info('Page Loaded!');*/
+    $('#sendButton').click(function() {
+       toastr.success('Comanda a fost trimisa cu succes. In scurt timp va fi preluata si vei primi detaliile necesare.');
 
+    });
+
+});

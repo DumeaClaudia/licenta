@@ -25,10 +25,13 @@ public class HistoryCartListBean {
 	private RestaurantService restaurantService;
 
 	public CartDetailsItem getCartDetails() {
+		
+	//	FacesContext context = FacesContext.getCurrentInstance();
+	//	Long currentCartId = (Long) context.getExternalContext().getSessionMap().get("currentCartId");
+	
 		List<Long> cartIdsUser = null;
 		if (userId != null) {
 			cartIdsUser = shoppingCartService.getAllShoppingCartsForUser(userId);
-
 		}
 		if (userId != null && cartId != null && cartIdsUser.contains(cartId)) {
 			return CartDetailsItem.getCartDetailsItem(shoppingCartService, restaurantService, userId, cartId);
