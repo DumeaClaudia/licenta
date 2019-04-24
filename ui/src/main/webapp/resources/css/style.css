@@ -197,6 +197,13 @@ a:hover {
     text-color: black;
 }
 
+a:link{
+	text-decoration: none;
+}
+a:active{
+	background-color: silver;
+}
+
 #idCategory {
 	background-color: transparent;
     text-decoration: underline;

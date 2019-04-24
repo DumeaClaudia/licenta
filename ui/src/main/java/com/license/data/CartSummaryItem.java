@@ -101,11 +101,11 @@ public class CartSummaryItem {
 	public static List<CartSummaryItem> getCartsSummary(ShoppingCartService shoppingCartService,
 			RestaurantService restaurantService, int userId) {
 		List<CartSummaryItem> carts = new ArrayList<CartSummaryItem>();
-		List<Long> allCartList = shoppingCartService.getAllShoppingCartsForUser(userId);
+		List<Long> cartsList = shoppingCartService.getAllShoppingCartsForUser(userId);
 		
 		double totalPrice = 0.00;
 
-		for (long idCart : allCartList) {
+		for (long idCart : cartsList) {
 			int nrTotalProductsFromCart = 0;
 			List<ProductDetailsItem> productItems = new ArrayList<ProductDetailsItem>();
 			String description = new String();

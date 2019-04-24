@@ -1,12 +1,16 @@
 package com.license.beans;
 
+import java.io.Serializable;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 @ManagedBean
 @SessionScoped
-public class SessionBean {
+public class SessionBean  implements Serializable{
+
+	private static final long serialVersionUID = -5849490265447792901L;
 	Long userId;
 	String username = "";
 	

@@ -1,5 +1,6 @@
 package com.license.beans;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +16,9 @@ import com.license.shoppingCart.ShoppingCartService;
 
 @ManagedBean
 @SessionScoped
-public class HistoryCartListBean {
+public class HistoryCartListBean  implements Serializable{
+	
+	private static final long serialVersionUID = -2420714267303092129L;
 	private Long cartId;
 	private Long userId;
 
@@ -25,10 +28,6 @@ public class HistoryCartListBean {
 	private RestaurantService restaurantService;
 
 	public CartDetailsItem getCartDetails() {
-		
-	//	FacesContext context = FacesContext.getCurrentInstance();
-	//	Long currentCartId = (Long) context.getExternalContext().getSessionMap().get("currentCartId");
-	
 		List<Long> cartIdsUser = null;
 		if (userId != null) {
 			cartIdsUser = shoppingCartService.getAllShoppingCartsForUser(userId);
@@ -43,21 +42,17 @@ public class HistoryCartListBean {
 	public List<CartSummaryItem> getCartList() {
 		FacesContext context = FacesContext.getCurrentInstance();
 		userId = (Long) context.getExternalContext().getSessionMap().get("userId");
+		Long currentCartId = shoppingCartService.getCurrentCart(userId);
+		context.getExternalContext().getSessionMap().put("currentCartId", currentCartId);
 
-		List<CartSummaryItem> carts;
+		List<CartSummaryItem> carts = new ArrayList<CartSummaryItem>();
 		if (userId != null) {
 			carts = CartSummaryItem.getCartsSummary(shoppingCartService, restaurantService, userId.intValue());
 
 			if (cartId == null && carts.size() != 0) {
-
 				cartId = carts.get(0).getIdCart();
 			}
-
-		} else {
-			carts = new ArrayList<CartSummaryItem>();
-
 		}
-
 		return carts;
 	}
 

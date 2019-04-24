@@ -33,7 +33,6 @@ public class CheckLoginServlet extends HttpServlet {
 		ObjectMapper mapper = new ObjectMapper();
 		LoginRequest jsonRequest = mapper.readValue(json, LoginRequest.class);
 		
-		//response.sendRedirect("/ui/");
 		response.setContentType("application/json");
 		User user =  userService.login(jsonRequest.getUsername(), jsonRequest.getPassword());	
 		

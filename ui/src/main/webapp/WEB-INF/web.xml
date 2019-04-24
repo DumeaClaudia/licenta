@@ -1,52 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://java.sun.com/xml/ns/javaee"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
-	version="3.0"
->
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
 	<display-name>Servlet 3.0 Web Application</display-name>
-	
+
 	<error-page>
-       <exception-type>java.lang.Exception</exception-type>
-       <location>/ui/pages/home.xhtml</location>
-     </error-page>
-     
-     <error-page>
-        <error-code>404</error-code>
-       <location>/ui/pages/home.xhtml</location>
-     </error-page>
-     
-     
+		<exception-type>java.lang.Exception</exception-type>
+		<location>/ui/pages/home.xhtml</location>
+	</error-page>
+
+	<error-page>
+		<error-code>404</error-code>
+		<location>/ui/pages/home.xhtml</location>
+	</error-page>
+
+
 	<welcome-file-list>
-        <welcome-file>home.xhtml</welcome-file>
+		<welcome-file>home.xhtml</welcome-file>
 	</welcome-file-list>
-	
+
 	<context-param>
 		<param-name>com.sun.faces.enableRestoreViewCompatibility</param-name>
 		<param-value>true</param-value>
 	</context-param>
-	
+
+	<context-param>
+		<param-name>com.sun.faces.enableRestoreView11Compatibility</param-name>
+		<param-value>true</param-value>
+	</context-param>
+
 	<!-- AJAX -->
 	<servlet>
 		<servlet-name>jsonservlet_login</servlet-name>
 		<servlet-class>com.license.servlets.CheckLoginServlet</servlet-class>
-	</servlet>	
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>jsonservlet_login</servlet-name>
 		<url-pattern>/jsonservlet/login_servlet</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>jsonservlet_add_product_to_cart</servlet-name>
 		<servlet-class>com.license.servlets.AddProductToCartServlet</servlet-class>
-	</servlet>	
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>jsonservlet_add_product_to_cart</servlet-name>
 		<url-pattern>/jsonservlet/add_product_to_cart</url-pattern>
 	</servlet-mapping>
-	
-	<servlet>	
+
+	<servlet>
 		<servlet-name>jsonservlet_remove_product_from_cart</servlet-name>
 		<servlet-class>com.license.servlets.RemoveProductFromCartServlet</servlet-class>
 	</servlet>
@@ -62,19 +63,19 @@
 		<servlet-name>jsonservlet_get_cart_products</servlet-name>
 		<url-pattern>/jsonservlet/get_cart_products</url-pattern>
 	</servlet-mapping>
-	
+
 	<!-- Android authenticated -->
-	
+
 	<filter>
-        <filter-name>AndroidAuthenticationFilter</filter-name>
-        <filter-class>com.license.servlets.AndroidAuthenticationFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>AndroidAuthenticationFilter</filter-name>
-        <url-pattern>/android_auth/*</url-pattern>
-    </filter-mapping>
-	
-	
+		<filter-name>AndroidAuthenticationFilter</filter-name>
+		<filter-class>com.license.servlets.AndroidAuthenticationFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>AndroidAuthenticationFilter</filter-name>
+		<url-pattern>/android_auth/*</url-pattern>
+	</filter-mapping>
+
+
 	<servlet>
 		<servlet-name>androidservlet_get_cart_list</servlet-name>
 		<servlet-class>com.license.servlets.GetCartSummaryListServlet</servlet-class>
@@ -83,7 +84,7 @@
 		<servlet-name>androidservlet_get_cart_list</servlet-name>
 		<url-pattern>/android_auth/get_cart_list</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>androidservlet_get_cart_details</servlet-name>
 		<servlet-class>com.license.servlets.GetCartDetailsServlet</servlet-class>
@@ -92,7 +93,7 @@
 		<servlet-name>androidservlet_get_cart_details</servlet-name>
 		<url-pattern>/android_auth/get_cart_details</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>androidservlet_get_users</servlet-name>
 		<servlet-class>com.license.servlets.GetUsersServlet</servlet-class>
@@ -101,7 +102,7 @@
 		<servlet-name>androidservlet_get_users</servlet-name>
 		<url-pattern>/android_auth/get_users</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>androidservlet_logout</servlet-name>
 		<servlet-class>com.license.servlets.AndroidLogoutServlet</servlet-class>
@@ -110,7 +111,7 @@
 		<servlet-name>androidservlet_logout</servlet-name>
 		<url-pattern>/android_auth/logout</url-pattern>
 	</servlet-mapping>
-	
+
 	<!-- Android not authenticated -->
 	<servlet>
 		<servlet-name>androidservlet_login</servlet-name>
@@ -120,7 +121,9 @@
 		<servlet-name>androidservlet_login</servlet-name>
 		<url-pattern>/android/login</url-pattern>
 	</servlet-mapping>
-	
-	
-	<!-- <servlet> <servlet-name>Faces Servlet</servlet-name> <servlet-class>javax.faces.webapp.FacesServlet</servlet-class> <load-on-startup>1</load-on-startup> </servlet> <servlet-mapping> <servlet-name>Faces Servlet</servlet-name> <url-pattern>*.xhtml</url-pattern> </servlet-mapping> -->
+
+
+	<!-- <servlet> <servlet-name>Faces Servlet</servlet-name> <servlet-class>javax.faces.webapp.FacesServlet</servlet-class> 
+		<load-on-startup>1</load-on-startup> </servlet> <servlet-mapping> <servlet-name>Faces Servlet</servlet-name> <url-pattern>*.xhtml</url-pattern> 
+		</servlet-mapping> -->
 </web-app>

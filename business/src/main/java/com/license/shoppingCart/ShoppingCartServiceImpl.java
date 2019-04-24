@@ -74,4 +74,9 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 	public void updateDateForCartAfterCheckout(long idUser, long idCart) {
 		repository.updateCartAfterCheckout(idUser, idCart);
 	}
+
+	public Long getCurrentCart(long idUser) {
+		return repository.retrieveCurrentCartForUser(idUser);
+	}
+	
 }

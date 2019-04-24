@@ -12,7 +12,13 @@ import javax.persistence.NamedQuery;
 @Entity(name = "shopping_cart_users")
 @IdClass(ShoppingCartUserEntityId.class)
 @NamedQueries({
-		@NamedQuery(name = "shopping_cart_users.getAllShoppingCartsForUser", query = "Select sc FROM shopping_cart_users sc where sc.idUser=:idUser" )})
+		@NamedQuery(name = "shopping_cart_users.getAllShoppingCartsForUser", 
+			query = "Select sc FROM shopping_cart_users sc where sc.idUser=:idUser" ),
+		@NamedQuery(name = "shopping_cart_users.getCurrentCartForUser", 
+			query = "Select sc.idShoppingCart FROM shopping_cart_users sc where sc.idUser=:idUser and sc.currentCart=:isCurrentCart" )
+		
+		
+})
 public class ShoppingCartUserEntity implements Serializable{
 	/**
 	 * 
@@ -24,6 +30,9 @@ public class ShoppingCartUserEntity implements Serializable{
 	
 	@Id @Column(name = "idShoppingCart")
 	private long idShoppingCart;
+	
+	@Column(name = "currentCart")
+	private boolean currentCart;
 
 	public long getIdUser() {
 		return idUser;
@@ -40,4 +49,13 @@ public class ShoppingCartUserEntity implements Serializable{
 	public void setIdShoppingCart(long idShoppingCart) {
 		this.idShoppingCart = idShoppingCart;
 	}
+
+	public boolean isCurrentCart() {
+		return currentCart;
+	}
+
+	public void setCurrentCart(boolean currentCart) {
+		this.currentCart = currentCart;
+	}	
+	
 }

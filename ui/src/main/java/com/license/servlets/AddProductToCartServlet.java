@@ -3,8 +3,6 @@ package com.license.servlets;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.List;
-
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -53,38 +51,29 @@ public class AddProductToCartServlet extends HttpServlet {
 
 		ShoppingCartResponse jsonResponse = new ShoppingCartResponse();
 
-		// get active shopping cart for user
-		// if not active shopping cart create shopping cart
-		// insert into shopping cart
+		Long currentCart = shoppingCartService.getCurrentCart(idUser);
 
-		// List<Long> activeCartList = shoppingCartService.getActiveShoppingCartForUser(idUser);
-		Long activeCartList = shoppingCartService.getActiveShoppingCartForUser(idUser);
-		
 		// TODO change logic for activeCart
 		Long productID = jsonRequest.getIdProduct();
 		Product product = shoppingCartService.getProduct(productID);
-		
-		long activeCart = 0;
-		if (activeCartList != 0) {
-			activeCart = activeCartList;
-		} else {
-			activeCart = shoppingCartService.createShoppingCartService(idUser, product.getIdRestaurant());
+
+		if (currentCart == 0) {
+			currentCart = shoppingCartService.createNewCartForUser(idUser);
 		}
-		
-		int nrProducts = shoppingCartService.getNumberOfProducts(idUser, productID, activeCart);
+
+		int nrProducts = shoppingCartService.getNumberOfProducts(idUser, productID, currentCart);
 
 		if (nrProducts == 0) {
-			shoppingCartService.addProductToCart(idUser, productID, activeCart);
+			shoppingCartService.addProductToCart(idUser, productID, currentCart);
 		} else {
-			shoppingCartService.updateNumberOfProducts(idUser, productID, activeCart, nrProducts + 1);
+			shoppingCartService.updateNumberOfProducts(idUser, productID, currentCart, nrProducts + 1);
 		}
-		
-		
+
 		jsonResponse.setProduct(product);
 
 		// serializare
 
-		// 6. Send List<Article> as JSON to client
+		// 6. Send List<> as JSON to client
 		mapper.writeValue(response.getOutputStream(), jsonResponse);
 	}
 }

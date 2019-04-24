@@ -1,5 +1,6 @@
 package com.license.beans;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +14,9 @@ import com.license.restaurant.RestaurantService;
 
 @ManagedBean
 @SessionScoped
-public class HomeRestaurantsListBean {
+public class HomeRestaurantsListBean implements Serializable{
+
+	private static final long serialVersionUID = 3295764833014521330L;
 
 	public List<Restaurant> restaurants  = new ArrayList<Restaurant>();
 	

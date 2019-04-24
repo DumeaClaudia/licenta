@@ -1,5 +1,7 @@
 package com.license.beans;
 
+import java.io.Serializable;
+
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -10,8 +12,10 @@ import com.license.user.UserService;
 
 @ManagedBean
 @SessionScoped
-public class UserBean {
+public class UserBean implements Serializable{
 
+	
+	private static final long serialVersionUID = 443927824496176933L;
 	private String username;
 	private String password;
 	private long idUser;

@@ -51,16 +51,13 @@ public class GetCartProductsServlet extends HttpServlet {
 
 		if (idObj != null) {
 			long idUser = (Long) idObj;
-			Long activeCartList = shoppingCartService.getActiveShoppingCartForUser(idUser);
+			Long currentCartId = shoppingCartService.getCurrentCart(idUser);
 
-			long lastActiveCart = 0;
-
-			if (activeCartList != 0) {
-				lastActiveCart = activeCartList;
-			} else {
-				lastActiveCart = shoppingCartService.createNewCartForUser(idUser);
+			if (currentCartId == 0) {
+				currentCartId = shoppingCartService.createNewCartForUser(idUser);
 			}
-			cartProducts = shoppingCartService.getCartProductsForUser(idUser, lastActiveCart);
+			
+			cartProducts = shoppingCartService.getCartProductsForUser(idUser, currentCartId);
 
 			for (ShoppingCartProducts shoppingCartProduct : cartProducts) {
 

@@ -17,12 +17,12 @@
 						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
 							<span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
 						</button>
-			
+
 					</div>
 					<div class="collapse navbar-collapse" id="myNavbar">
 						<ul class="nav navbar-nav">
 							<!-- <li><a href="adminPage.xhtml">AdminPage</a></li> -->
-							<li><a href="home.xhtml"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"/> Restaurante</a></li>
+							<li><a href="home.xhtml"><span class="glyphicon glyphicon-list-alt" aria-hidden="true" /> Restaurante</a></li>
 							<c:if test="#{not empty sessionBean.username}">
 								<li><a href="history.xhtml">Istoric comenzi</a></li>
 								<li><a href="shoppingCart.xhtml">Comanda curenta</a></li>
@@ -99,12 +99,12 @@
 										<span class="glyphicon glyphicon-remove"></span> Cancel
 									</button>
 									<p>
-										Nu ai cont inca? <a href="#">Sign Up</a>
+										Nu ai cont inca? <a href="#myRegisterModal">Sign Up</a>
 									</p>
-									<!-- 	<p>
+										<p>
 										Ai uitat parola <a href="#">Password?</a>
 									</p>
-								 -->
+								
 								</div>
 							</div>
 
@@ -210,7 +210,8 @@
 									<div class="modal-footer">
 
 										<h:commandButton type="submit" class="btn btn-primary
-									btn-block" value="CHECKOUT" required="true" action="#{shoppingCartBean.checkout()}"></h:commandButton>
+									btn-block" value="CHECKOUT" required="true"
+											action="#{shoppingCartBean.checkout()}"></h:commandButton>
 									</div>
 
 

@@ -5,7 +5,6 @@ import java.io.Serializable;
 public class Cart implements Serializable{
 		
 	private static final long serialVersionUID = 4456771367569011086L;
-	//`totalPrice`, `createdDate`, `sendDate`, `idRestaurant`)
 	private Long idCart;
 	private boolean isActive;
 	private double totalPrice;

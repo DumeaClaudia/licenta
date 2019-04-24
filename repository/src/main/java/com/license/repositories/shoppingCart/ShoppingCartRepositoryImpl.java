@@ -8,7 +8,6 @@ import java.util.Date;
 import java.util.List;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
-import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -51,7 +50,6 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 	@SuppressWarnings("unchecked")
 	public Long retrieveActiveShoppingCartForUserId(long idUser) {
 
-		List<Long> idSc = new ArrayList<Long>();
 		Query query = em.createNamedQuery("shoppingCartProducts.getNativeShoppingCartForUser");
 		query.setParameter(1, idUser);
 		List<CartForUserEntity> shoppingCartIdUsers = query.getResultList();
@@ -64,6 +62,20 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 
 		}
 		return createCartForUser(idUser);
+
+	}
+	
+	@SuppressWarnings("unchecked")
+	public Long retrieveCurrentCartForUser(long idUser) {
+		Query query = em.createNamedQuery("shopping_cart_users.getCurrentCartForUser");
+		query.setParameter("idUser", idUser);
+		query.setParameter("isCurrentCart", true);
+		List<Long> cartIds = query.getResultList();
+		if(cartIds.size()>0) { // nu e bine daca sunt mai multe cart-uri cu 1..
+			return cartIds.get(0);
+		}
+
+		return (Long) createCartForUser(idUser);
 
 	}
 
@@ -103,6 +115,7 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 		ShoppingCartUserEntity userCartEntity = new ShoppingCartUserEntity();
 		userCartEntity.setIdShoppingCart(idCart);
 		userCartEntity.setIdUser(idUser);
+		userCartEntity.setCurrentCart(true);
 
 		em.getTransaction().begin();
 		em.persist(userCartEntity);
@@ -179,6 +192,7 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 
 	}
 
+	@SuppressWarnings("unchecked")
 	public void removeProductFromCartDetails(long idUser, long idProduct, long idShoppingCart) {
 
 		List<ShoppingCartProductsEntity> shoppingCartProductsEntity = new ArrayList<ShoppingCartProductsEntity>();
@@ -214,9 +228,10 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 		List<Long> cartIds = new ArrayList<Long>();
 
 		for (ShoppingCartUserEntity cart : shoppingCartsUsersEntity) {
-			cartIds.add(cart.getIdShoppingCart());
+			if(!cart.isCurrentCart()) {
+				cartIds.add(cart.getIdShoppingCart());
+			}		
 		}
-
 		return cartIds;
 	}
 
@@ -319,6 +334,7 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 		ShoppingCartUserEntity userCartEntity = new ShoppingCartUserEntity();
 		userCartEntity.setIdShoppingCart(idCart);
 		userCartEntity.setIdUser(idUser);
+		userCartEntity.setCurrentCart(true);
 
 		em.getTransaction().begin();
 		em.persist(userCartEntity);
@@ -330,12 +346,23 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 	public void updateCartAfterCheckout(long idUser, long idCart) {
 		em.getTransaction().begin();
 		Query query = em
-				.createQuery("UPDATE shopping_cart p SET p.sendDate = :currentDate " + "WHERE p.id = :idShoppingCart");
+				.createQuery("UPDATE shopping_cart p SET p.sendDate = :currentDate WHERE p.id = :idShoppingCart");
 
 		query.setParameter("idShoppingCart", idCart);
 		query.setParameter("currentDate", new Date());
 
 		// TODO cred ca ar trebui si user in shoppingCart ???
+		query.executeUpdate();
+		em.getTransaction().commit();
+
+		em.getTransaction().begin();
+		query = em
+				.createQuery("UPDATE shopping_cart_users p SET p.currentCart=:isCurrentCart WHERE p.idShoppingCart = :idShoppingCart and p.idUser=:idUser");
+
+		query.setParameter("isCurrentCart", false);
+		query.setParameter("idShoppingCart", idCart);
+		query.setParameter("idUser", idUser);
+
 		query.executeUpdate();
 		em.getTransaction().commit();
 

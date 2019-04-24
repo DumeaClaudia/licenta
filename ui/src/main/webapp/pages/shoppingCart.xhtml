@@ -3,7 +3,8 @@
      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui"
-	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
 <f:metadata>
 	<f:viewParam name="userId" value="#{shoppingCartBean.userId}"></f:viewParam>
@@ -11,14 +12,14 @@
 
 <ui:composition template="../template/template.xhtml">
 	<ui:define name="content">
-		<div class="container marketing style-font well" style="margin-top: 50px; height:600px">
+		<div class="container marketing style-font well" style="margin-top: 50px; height: 600px">
 
-			<div class="row" style="margin-right: 30px; margin-left:10px;">
+			<div class="row" style="margin-right: 30px; margin-left: 10px;">
 				<div class="col-md-7">
 					<h:form>
 
 						<div class="output-group col-md-12 mb-3">
-						<br></br>
+							<br></br>
 							<div class="output" id="basic-addon1">
 								<h:outputText value="Utilizator: "></h:outputText>
 								<h:outputLabel value="#{sessionBean.username}">
@@ -29,12 +30,14 @@
 						<div>
 							<div class="col-md-5 mb-3">
 								<h:outputText value="Nume: "></h:outputText>
-								<h:inputText type="text" class="form-control" id="firstName" value="#{shoppingCartBean.firstName}" />
+								<h:inputText type="text" class="form-control" id="firstName" value="#{shoppingCartBean.firstName}">
+									<f:validateRequired />
+								</h:inputText>
 							</div>
 
 							<div class="col-md-5 mb-3">
 								<h:outputText value="Prenume: "></h:outputText>
-								<h:inputText type="text" class="form-control" id="lastName" value="#{shoppingCartBean.lastName}" />
+								<h:inputText type="text" class="form-control" id="lastName" value="#{shoppingCartBean.lastName}" required="true" />
 
 							</div>
 						</div>
@@ -43,19 +46,19 @@
 							<br />
 							<div class="col-md-5 mb-6">
 								<h:outputText value="Email:  "></h:outputText>
-								<h:inputText type="text" class="form-control" id="email" value="#{shoppingCartBean.email}" />
+								<h:inputText type="text" class="form-control" id="email" value="#{shoppingCartBean.email}" required="true"/>
 							</div>
 
 							<div class="col-md-5 mb-6">
 								<h:outputText value="Telefon:  "></h:outputText>
-								<h:inputText type="text" class="form-control" id="telefon" value="#{shoppingCartBean.telephone}" />
+								<h:inputText type="text" class="form-control" id="telefon" value="#{shoppingCartBean.telephone}" required="true"/>
 							</div>
 						</div>
 						<div>
 							<br />
 							<div class="col-md-10 mb-6">
 								<h:outputText value="Adresa:  "></h:outputText>
-								<h:inputText type="text" class="form-control" id="adresa" value="#{shoppingCartBean.address}" />
+								<h:inputText type="text" class="form-control" id="adresa" value="#{shoppingCartBean.address}" required="true" />
 							</div>
 						</div>
 						<div class="col-md-10 mb-6">
@@ -75,19 +78,21 @@
 							</div>
 						</div>
 
+						<div class="col-md-10 mb-6">
+							<br /> <i>*Toate campurile sunt obligatorii. Va rugam sa le completati.* </i>
+						</div>
 						<div class="col-md-6 mb-6">
 							<br /> <br />
 							<!-- <button class="btn btn-primary" type="submit">Trimite comanda</button> -->
-							<h:commandButton id="sendButton" class="btn btn-primary" type="submit" value="Trimite comanda"  required="true"  action="#{shoppingCartBean.continueCheckout()}" />
-							
+							<h:commandButton id="sendButton" class="btn btn-primary" type="submit" value="Trimite comanda" required="true"
+								action="#{shoppingCartBean.continueCheckout()}" />
+
 						</div>
 					</h:form>
 				</div>
 
 				<div class="well col-md-5 ">
-					<h5>
-						Lista produse:
-					</h5>
+					<h5>Lista produse:</h5>
 					<br></br>
 					<ui:repeat value="#{shoppingCartBean.getCartDetails().restaurantProducts}" var="restaurant" outcome="restaurant">
 						<ui:repeat value="#{restaurant.products}" var="product">
@@ -95,19 +100,22 @@
 
 								#{product.nrProducts}x <b>#{product.name}</b> (<i>#{restaurant.restaurantName}</i>)
 								<div class="pull-right">
-									<small>#{product.nrProducts}x <b>#{product.price}</b> RON</small>
+									<small>#{product.nrProducts}x <b>#{product.price}</b> RON
+									</small>
 								</div>
 							</div>
 						</ui:repeat>
 					</ui:repeat>
-					<br /> 
-					
-					<c:set var = "totalPrice" scope = "session" value = "#{shoppingCartBean.getCartDetails().cartSummary.totalPrice-15}"/>
+					<br />
+
+					<c:set var="totalPrice" scope="session" value="#{shoppingCartBean.getCartDetails().cartSummary.totalPrice-15}" />
 					<c:if test="${totalPrice lt 30}">
-					<small>*Taxa livrare: 15.00 RON*</small> 			
+						<small>*Taxa livrare: 15.00 RON*</small>
 					</c:if>
-					
-					<h5>Total: <b>#{shoppingCartBean.getCartDetails().cartSummary.totalPrice} RON</b></h5>
+
+					<h5>
+						Total: <b>#{shoppingCartBean.getCartDetails().cartSummary.totalPrice} RON</b>
+					</h5>
 				</div>
 			</div>
 		</div>

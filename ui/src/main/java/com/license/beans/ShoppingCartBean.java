@@ -1,5 +1,6 @@
 package com.license.beans;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -13,7 +14,10 @@ import com.license.shoppingCart.ShoppingCartService;
 
 @ManagedBean
 @SessionScoped
-public class ShoppingCartBean {
+public class ShoppingCartBean implements Serializable{
+	
+	private static final long serialVersionUID = 8618627595602029032L;
+
 	private Long userId;
 
 	private String firstName;
@@ -37,9 +41,9 @@ public class ShoppingCartBean {
 		long currentCartId = 0;
 		if (userId != null) {
 			cartIdsUser = shoppingCartService.getAllShoppingCartsForUser(userId);
-			currentCartId = shoppingCartService.getActiveShoppingCartForUser(userId);	
+			currentCartId = shoppingCartService.getCurrentCart(userId);	
 		}
-		if (userId != null && currentCartId != 0 && cartIdsUser.contains(currentCartId)) {
+		if (userId != null && currentCartId != 0 ) {//&& cartIdsUser.contains(currentCartId)) {
 			return CartDetailsItem.getCartDetailsItem(shoppingCartService, restaurantService, userId, currentCartId);
 		}
 
@@ -110,10 +114,10 @@ public class ShoppingCartBean {
 		// TODO aici ar trebui sa setez sendDate si abia acum sa apara in history
 		// page
 
-		Long activeCartList = shoppingCartService.getActiveShoppingCartForUser(userId);
+		Long currentCartId = shoppingCartService.getCurrentCart(userId);
 
-		if (activeCartList != null) {
-			shoppingCartService.updateDateForCartAfterCheckout(userId, activeCartList);
+		if (currentCartId != null) {
+			shoppingCartService.updateDateForCartAfterCheckout(userId, currentCartId);
 		}
 		// si sa resetez cosul..
 

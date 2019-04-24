@@ -21,7 +21,8 @@ import com.license.restaurant.RestaurantService;
 @RequestScoped
 // @SessionScoped
 public class RestaurantBean implements Serializable {
-	private static final long serialVersionUID = 1L;
+	
+	private static final long serialVersionUID = -4675047847986822520L;
 	private Restaurant restaurant = null;
 	private List<Product> products = new ArrayList<Product>();
 	private long id;	
