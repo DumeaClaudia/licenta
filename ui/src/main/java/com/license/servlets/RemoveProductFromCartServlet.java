@@ -19,8 +19,10 @@ import com.license.shoppingCart.ShoppingCartService;
 
 public class RemoveProductFromCartServlet extends HttpServlet {
 
-	private static final long serialVersionUID = 1L;
-
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2688133393619193419L;
 	@EJB
 	private ShoppingCartService shoppingCartService;
 

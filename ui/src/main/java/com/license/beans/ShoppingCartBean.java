@@ -1,10 +1,13 @@
 package com.license.beans;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
@@ -14,8 +17,9 @@ import com.license.shoppingCart.ShoppingCartService;
 
 @ManagedBean
 @SessionScoped
-public class ShoppingCartBean implements Serializable{
-	
+/*@RequestScoped*/
+public class ShoppingCartBean implements Serializable {
+
 	private static final long serialVersionUID = 8618627595602029032L;
 
 	private Long userId;
@@ -25,7 +29,16 @@ public class ShoppingCartBean implements Serializable{
 	private String email;
 	private String telephone;
 	private String address;
-	private String payment;
+	private String payment = new String("Ramburs");
+	private List<String> paymentList = new ArrayList<>();
+
+    @PostConstruct
+    public void init() {
+    	paymentList.add("Ramburs");
+    	paymentList.add("Card Debit");
+    	paymentList.add("Card Credit");
+    }
+
 
 	@EJB
 	private ShoppingCartService shoppingCartService;
@@ -33,18 +46,16 @@ public class ShoppingCartBean implements Serializable{
 	private RestaurantService restaurantService;
 
 	public CartDetailsItem getCartDetails() {
-		List<Long> cartIdsUser = null;
-
 		FacesContext context = FacesContext.getCurrentInstance();
 		userId = (Long) context.getExternalContext().getSessionMap().get("userId");
 
 		long currentCartId = 0;
 		if (userId != null) {
-			cartIdsUser = shoppingCartService.getAllShoppingCartsForUser(userId);
-			currentCartId = shoppingCartService.getCurrentCart(userId);	
-		}
-		if (userId != null && currentCartId != 0 ) {//&& cartIdsUser.contains(currentCartId)) {
-			return CartDetailsItem.getCartDetailsItem(shoppingCartService, restaurantService, userId, currentCartId);
+			currentCartId = shoppingCartService.getCurrentCart(userId);
+			if (currentCartId != 0) {
+				return CartDetailsItem.getCartDetailsItem(shoppingCartService, restaurantService, userId,
+						currentCartId);
+			}
 		}
 
 		return new CartDetailsItem();
@@ -106,22 +117,15 @@ public class ShoppingCartBean implements Serializable{
 		this.payment = payment;
 	}
 
-	public String checkout() {
-		return "shoppingCart?faces-redirect=true";
+	public List<String> getPaymentList() {
+		return paymentList;
 	}
 
-	public String continueCheckout() {
-		// TODO aici ar trebui sa setez sendDate si abia acum sa apara in history
-		// page
+	public void setPaymentList(List<String> paymentList) {
+		this.paymentList = paymentList;
+	}
 
-		Long currentCartId = shoppingCartService.getCurrentCart(userId);
-
-		if (currentCartId != null) {
-			shoppingCartService.updateDateForCartAfterCheckout(userId, currentCartId);
-		}
-		// si sa resetez cosul..
-
-		return "home?faces-redirect=true";
-
+	public String checkout() {
+		return "shoppingCart?faces-redirect=true";
 	}
 }

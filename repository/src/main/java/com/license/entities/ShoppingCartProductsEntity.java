@@ -27,10 +27,8 @@ import javax.persistence.NamedQuery;
 })
 
 public class ShoppingCartProductsEntity implements Serializable{
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+	
+	private static final long serialVersionUID = -3899669995600852798L;
 
 	@Id
 	@Column(name = "id")

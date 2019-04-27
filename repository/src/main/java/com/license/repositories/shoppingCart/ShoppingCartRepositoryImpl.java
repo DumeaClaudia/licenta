@@ -8,8 +8,12 @@ import java.util.Date;
 import java.util.List;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
+import javax.persistence.Cache;
+import javax.persistence.CacheRetrieveMode;
+import javax.persistence.CacheStoreMode;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.FlushModeType;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
@@ -71,7 +75,7 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 		query.setParameter("idUser", idUser);
 		query.setParameter("isCurrentCart", true);
 		List<Long> cartIds = query.getResultList();
-		if(cartIds.size()>0) { // nu e bine daca sunt mai multe cart-uri cu 1..
+		if(cartIds.size()>0) { // nu e bine daca sunt mai multe cart-uri cu 1 pt acelasi user..
 			return cartIds.get(0);
 		}
 
@@ -219,13 +223,12 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 	public List<Long> retrieveAllShoppingCartForUser(long idUser) {
 
 		List<ShoppingCartUserEntity> shoppingCartsUsersEntity = new ArrayList<ShoppingCartUserEntity>();
+		List<Long> cartIds = new ArrayList<Long>();
 
 		Query query = em.createNamedQuery("shopping_cart_users.getAllShoppingCartsForUser");
 		query.setParameter("idUser", idUser);
 
 		shoppingCartsUsersEntity = query.getResultList();
-
-		List<Long> cartIds = new ArrayList<Long>();
 
 		for (ShoppingCartUserEntity cart : shoppingCartsUsersEntity) {
 			if(!cart.isCurrentCart()) {
@@ -247,12 +250,14 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 			ShoppingCartEntity shoppingCartEntity = shoppingCartEntities.get(0);
 			DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
 			cart.setIdCart(idCart);
+			cart.setIdRestaurant(shoppingCartEntity.getIdRestaurant());
+			cart.setTotalPrice(shoppingCartEntity.getTotalPrice());
+
 			cart.setCreatedDate(df.format(shoppingCartEntity.getCreatedDate()));
+			
 			if (shoppingCartEntity.getSendDate() != null) {
 				cart.setSendDate(df.format(shoppingCartEntity.getSendDate()));
 			}
-			cart.setTotalPrice(shoppingCartEntity.getTotalPrice());
-			cart.setIdRestaurant(shoppingCartEntity.getIdRestaurant());
 
 			if (shoppingCartEntity.getSendDate() == null) {
 				cart.setActive(true);
@@ -293,18 +298,18 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 
 		query.executeUpdate();
 		em.getTransaction().commit();
-
+		em.clear();
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<ShoppingCartProducts> retrieveShoppingCartProductIds(long idUser, long idCart) {
-
+	
 		List<ShoppingCartProducts> cartProductsForUser = new ArrayList<ShoppingCartProducts>();
 		Query query = em.createNamedQuery("shopping_cart_products.getCartProductsForUser");
 		query.setParameter("idUser", idUser);
 		query.setParameter("idShoppingCart", idCart);
-
 		List<ShoppingCartProductsEntity> shoppingCartEntities = query.getResultList();
+		
 
 		for (ShoppingCartProductsEntity cartProductsEntity : shoppingCartEntities) {
 
@@ -365,6 +370,7 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 
 		query.executeUpdate();
 		em.getTransaction().commit();
+		em.clear();
 
 	}
 

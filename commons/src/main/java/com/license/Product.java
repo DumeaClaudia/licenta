@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Product implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -7806479188518932436L;
 	//TODO in android:
 	// am de trimis id-urile, gen cand dau click.
 	// de adaugat idRestaurant in restaurantDetails..sau cum era.. si in Product

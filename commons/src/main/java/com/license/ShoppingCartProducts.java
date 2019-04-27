@@ -4,8 +4,11 @@ import java.io.Serializable;
 
 public class ShoppingCartProducts implements Serializable {
 
-	private static final long serialVersionUID = 1L;
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5614911322935237185L;
 	private long idProduct;
 	private long idUser;
 	private long idShoppingCart;

@@ -101,10 +101,10 @@
 									<p>
 										Nu ai cont inca? <a href="#myRegisterModal">Sign Up</a>
 									</p>
-										<p>
+									<p>
 										Ai uitat parola <a href="#">Password?</a>
 									</p>
-								
+
 								</div>
 							</div>
 
@@ -206,21 +206,52 @@
 										</div>
 
 									</div>
-
-									<div class="modal-footer">
-
-										<h:commandButton type="submit" class="btn btn-primary
-									btn-block" value="CHECKOUT" required="true"
-											action="#{shoppingCartBean.checkout()}"></h:commandButton>
-									</div>
-
-
+									<h:form>
+										<div class="modal-footer">
+											<h:commandButton id="checkout" class="btn btn-primary btn-block" type="submit" value="CHECKOUT"
+												required="true" action="#{shoppingCartBean.checkout()}"></h:commandButton>
+										</div>
+									</h:form>
 								</div>
+
 							</div>
 						</div>
 					</div>
+					
+					<!-- After checkout -->
+					
+					<div class="container style-font">
+						<div class="modal fade" id="checkoutModal" role="dialog">
+							<div class="modal-dialog">
 
+								<!-- Modal content-->
+								<div class="modal-content">
+
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+										<h4 class="modal-title">Comanda ta a fost trimisa!</h4>
+									</div>
+
+									
+									<h:form>
+										<div class="modal-footer">
+											<h:commandButton id="checkout" class="btn btn-primary btn-block" type="submit" value="vezi bla bla"
+												required="true" action="#{shoppingCartBean.checkout()}"></h:commandButton>
+										</div>
+									</h:form>
+								</div>
+
+							</div>
+						</div>
+					</div>
+					
+					
+					
+					
 				</div>
+
 			</div>
 		</div>
 	</ui:composition>

@@ -12,7 +12,10 @@
 		<error-code>404</error-code>
 		<location>/ui/pages/home.xhtml</location>
 	</error-page>
-
+	<error-page>
+		<exception-type>javax.faces.application.ViewExpiredException</exception-type>
+		<location>/ui/pages/home.xhtml</location>
+	</error-page>
 
 	<welcome-file-list>
 		<welcome-file>home.xhtml</welcome-file>
@@ -36,6 +39,15 @@
 	<servlet-mapping>
 		<servlet-name>jsonservlet_login</servlet-name>
 		<url-pattern>/jsonservlet/login_servlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>jsonservlet_checkout_cart</servlet-name>
+		<servlet-class>com.license.servlets.CheckoutCartServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>jsonservlet_checkout_cart</servlet-name>
+		<url-pattern>/jsonservlet/current_cart_servlet</url-pattern>
 	</servlet-mapping>
 
 	<servlet>
@@ -126,4 +138,9 @@
 	<!-- <servlet> <servlet-name>Faces Servlet</servlet-name> <servlet-class>javax.faces.webapp.FacesServlet</servlet-class> 
 		<load-on-startup>1</load-on-startup> </servlet> <servlet-mapping> <servlet-name>Faces Servlet</servlet-name> <url-pattern>*.xhtml</url-pattern> 
 		</servlet-mapping> -->
+
+
+	<session-config>
+		<session-timeout>1200</session-timeout>
+	</session-config>
 </web-app>

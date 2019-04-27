@@ -17,8 +17,10 @@ import com.license.shoppingCart.ShoppingCartService;
 
 public class AddProductToCartServlet extends HttpServlet {
 
-	private static final long serialVersionUID = 1L;
-
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1295554876626694255L;
 	@EJB
 	private ShoppingCartService shoppingCartService;
 
@@ -68,6 +70,7 @@ public class AddProductToCartServlet extends HttpServlet {
 		} else {
 			shoppingCartService.updateNumberOfProducts(idUser, productID, currentCart, nrProducts + 1);
 		}
+		System.out.println(product);
 
 		jsonResponse.setProduct(product);
 

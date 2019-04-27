@@ -12,8 +12,11 @@ import com.license.User;
 import com.license.user.UserService;
 
 public class AndroidLoginServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5468859485287773354L;
 	@EJB
     private UserService userService;
 

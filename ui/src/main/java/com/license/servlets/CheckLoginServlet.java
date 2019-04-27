@@ -16,9 +16,10 @@ import com.license.ValidationResponse;
 import com.license.user.UserService;
 
 public class CheckLoginServlet extends HttpServlet {
-
-	private static final long serialVersionUID = 1L;
-
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5338857500513591614L;
 	@EJB
 	private UserService userService;
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

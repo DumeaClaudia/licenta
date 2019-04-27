@@ -30,14 +30,16 @@
 						<div>
 							<div class="col-md-5 mb-3">
 								<h:outputText value="Nume: "></h:outputText>
-								<h:inputText type="text" class="form-control" id="firstName" value="#{shoppingCartBean.firstName}">
+								<h:inputText type="text" class="form-control user-first-name" id="firstName"
+									value="#{shoppingCartBean.firstName}">
 									<f:validateRequired />
 								</h:inputText>
 							</div>
 
 							<div class="col-md-5 mb-3">
 								<h:outputText value="Prenume: "></h:outputText>
-								<h:inputText type="text" class="form-control" id="lastName" value="#{shoppingCartBean.lastName}" required="true" />
+								<h:inputText type="text" class="form-control user-last-name" id="lastName" value="#{shoppingCartBean.lastName}"
+									required="true" />
 
 							</div>
 						</div>
@@ -46,47 +48,53 @@
 							<br />
 							<div class="col-md-5 mb-6">
 								<h:outputText value="Email:  "></h:outputText>
-								<h:inputText type="text" class="form-control" id="email" value="#{shoppingCartBean.email}" required="true"/>
+								<h:inputText type="text" class="form-control user-email" id="email" value="#{shoppingCartBean.email}"
+									required="true" />
 							</div>
 
 							<div class="col-md-5 mb-6">
 								<h:outputText value="Telefon:  "></h:outputText>
-								<h:inputText type="text" class="form-control" id="telefon" value="#{shoppingCartBean.telephone}" required="true"/>
+								<h:inputText type="text" class="form-control user-telephone" id="telefon" value="#{shoppingCartBean.telephone}"
+									required="true" />
 							</div>
 						</div>
 						<div>
 							<br />
 							<div class="col-md-10 mb-6">
 								<h:outputText value="Adresa:  "></h:outputText>
-								<h:inputText type="text" class="form-control" id="adresa" value="#{shoppingCartBean.address}" required="true" />
+								<h:inputText type="text" class="form-control user-address" id="adresa" value="#{shoppingCartBean.address}"
+									required="true" />
 							</div>
 						</div>
 						<div class="col-md-10 mb-6">
 							<br></br>
-							<h:outputText value="Plata:  "></h:outputText>
-							<div class="custom-control custom-radio">
-								<input id="paypal" name="paymentMethod" type="radio" class="custom-control-input" checked="" required="" /> <label
-									class="custom-control-label" for="paypal">Ramburs</label>
-							</div>
-							<div class="custom-control custom-radio">
-								<input id="debit" name="paymentMethod" type="radio" class="custom-control-input" required="" /> <label
-									class="custom-control-label" for="debit">Card debit</label>
-							</div>
-							<div class="custom-control custom-radio">
-								<input id="credit" name="paymentMethod" type="radio" class="custom-control-input" required="" /> <label
-									class="custom-control-label" for="credit">Card credit</label>
-							</div>
+							<h:form>
+								<h:outputText value="Plata:  "></h:outputText>
+								<!-- <h:selectOneRadio value="#{shoppingCartBean.payment}" layout="pageDirection" class="user-payment">
+									<f:selectItem itemValue=" Ramburs " itemLabel=" Ramburs" class="user-payment" />
+									<f:selectItem itemValue=" Card debit " itemLabel=" Card debit" class="user-payment" />
+									<f:selectItem itemValue=" Card credit " itemLabel=" Card credit" class="user-payment" />
+									<f:ajax execute="@form" listener="#{shoppingCartBean.checkout()}" render="@form" />
+								</h:selectOneRadio> -->
+
+								<h:selectOneRadio value="#{shoppingCartBean.payment}" layout="pageDirection">
+									<f:selectItems value="#{shoppingCartBean.paymentList}" class="user-payment" var="value" itemLabel="#{value}"
+										itemValue="{value}" />
+								</h:selectOneRadio>
+							</h:form>
 						</div>
 
 						<div class="col-md-10 mb-6">
-							<br /> <i>*Toate campurile sunt obligatorii. Va rugam sa le completati.* </i>
+							<br />
+							<p id="cart-validation-message" style="color: #FF0000" />
 						</div>
-						<div class="col-md-6 mb-6">
-							<br /> <br />
-							<!-- <button class="btn btn-primary" type="submit">Trimite comanda</button> -->
-							<h:commandButton id="sendButton" class="btn btn-primary" type="submit" value="Trimite comanda" required="true"
-								action="#{shoppingCartBean.continueCheckout()}" />
-
+						<div class="col-md-6 mb-6" id="validate-cart">
+							<br />
+							<h:form>
+								<h:commandButton id="sendCart" class="btn btn-primary send-cart-details" type="submit" value="Trimite comanda"
+									required="true" />
+						
+							</h:form>
 						</div>
 					</h:form>
 				</div>

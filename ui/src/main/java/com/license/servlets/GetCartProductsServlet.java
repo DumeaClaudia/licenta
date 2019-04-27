@@ -23,7 +23,10 @@ import com.license.shoppingCart.ShoppingCartService;
 
 public class GetCartProductsServlet extends HttpServlet {
 
-	private static final long serialVersionUID = 1L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4099624866563027619L;
 
 	@EJB
 	private ShoppingCartService shoppingCartService;
@@ -70,6 +73,7 @@ public class GetCartProductsServlet extends HttpServlet {
 				cartDetails.setNameProduct(product.getName());
 				cartDetails.setNameRestaurant(restaurant.getName());
 				cartDetails.setPrice(product.getPrice());
+				cartDetails.setIdShoppingCart(currentCartId);
 
 				cartDetailsProduct.add(cartDetails);
 			}
