@@ -6,24 +6,26 @@ import java.util.Date;
 public class Comment implements Serializable {
 
 	private static final long serialVersionUID = 133161657895309927L;
-	private String description;
-	private String username;
+	
+	private long idUser;
+	private long isCart;
 	private Date date;
-
-	public String getDescription() {
-		return description;
+	private String description;
+	
+	public long getIdUser() {
+		return idUser;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setIdUser(long idUser) {
+		this.idUser = idUser;
 	}
 
-	public String getUsername() {
-		return username;
+	public long getIsCart() {
+		return isCart;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setIsCart(long isCart) {
+		this.isCart = isCart;
 	}
 
 	public Date getDate() {
@@ -33,4 +35,13 @@ public class Comment implements Serializable {
 	public void setDate(Date date) {
 		this.date = date;
 	}
+	
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 }

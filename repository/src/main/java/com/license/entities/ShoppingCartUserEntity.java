@@ -15,7 +15,9 @@ import javax.persistence.NamedQuery;
 		@NamedQuery(name = "shopping_cart_users.getAllShoppingCartsForUser", 
 			query = "Select sc FROM shopping_cart_users sc where sc.idUser=:idUser" ),
 		@NamedQuery(name = "shopping_cart_users.getCurrentCartForUser", 
-			query = "Select sc.idShoppingCart FROM shopping_cart_users sc where sc.idUser=:idUser and sc.currentCart=:isCurrentCart" )
+			query = "Select sc.idShoppingCart FROM shopping_cart_users sc where sc.idUser=:idUser and sc.currentCart=:isCurrentCart" ),
+		@NamedQuery(name = "shopping_cart_users.getAllUsersForCart", 
+			query = "Select sc.idUser FROM shopping_cart_users sc where sc.idShoppingCart=:idShoppingCart" ),
 		
 		
 })

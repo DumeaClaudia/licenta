@@ -15,7 +15,6 @@ public class Restaurant implements Serializable {
 	private String address;
 	private String geolocation;
 	private List<Product> products;
-	private List<Comment> comments;
 
 	public String getName() {
 		return name;
@@ -63,14 +62,6 @@ public class Restaurant implements Serializable {
 
 	public void setProducts(List<Product> products) {
 		this.products = products;
-	}
-
-	public List<Comment> getComments() {
-		return comments;
-	}
-
-	public void setComments(List<Comment> comments) {
-		this.comments = comments;
 	}
 
 	public long getId() {

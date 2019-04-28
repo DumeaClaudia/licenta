@@ -27,4 +27,19 @@ public class UserServiceImpl implements UserService {
 	public List<User> getUsers() {
 		return repository.retrieveUsers();
 	}
+	
+	public List<Long> getUsersIds(long currentCart) {
+		return repository.retrieveUsers(currentCart);
+	}
+	
+	public User getUserById(long idUser) {
+		return repository.retrieveUserById(idUser);
+	}
+
+	public List<User> getAllUsers(List<Long> activeUsers) {
+		return repository.retrieveRemainingUsers(activeUsers);
+	}
+	public 	User getUserByName(String username) {
+		return repository.retrieveUserByName(username);
+	}
 }

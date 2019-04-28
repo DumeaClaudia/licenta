@@ -36,4 +36,9 @@ public interface ShoppingCartService {
 	void updateNumberOfProducts(long idUser, long idProduct, long idShoppingCart, int nrProducts);
 
 	void updateDateForCartAfterCheckout(long idUser, long idCart);
+
+	void addUserToCart(long id, long currentCartId);
+
+	void updatePreviousCartForNewUser(long idNewUser, long currentCartId);
+
 }

@@ -8,12 +8,8 @@ import java.util.Date;
 import java.util.List;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
-import javax.persistence.Cache;
-import javax.persistence.CacheRetrieveMode;
-import javax.persistence.CacheStoreMode;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.FlushModeType;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
@@ -68,14 +64,14 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 		return createCartForUser(idUser);
 
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public Long retrieveCurrentCartForUser(long idUser) {
 		Query query = em.createNamedQuery("shopping_cart_users.getCurrentCartForUser");
 		query.setParameter("idUser", idUser);
 		query.setParameter("isCurrentCart", true);
 		List<Long> cartIds = query.getResultList();
-		if(cartIds.size()>0) { // nu e bine daca sunt mai multe cart-uri cu 1 pt acelasi user..
+		if (cartIds.size() > 0) { // nu e bine daca sunt mai multe cart-uri cu 1 pt acelasi user..
 			return cartIds.get(0);
 		}
 
@@ -231,9 +227,9 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 		shoppingCartsUsersEntity = query.getResultList();
 
 		for (ShoppingCartUserEntity cart : shoppingCartsUsersEntity) {
-			if(!cart.isCurrentCart()) {
+			if (!cart.isCurrentCart()) {
 				cartIds.add(cart.getIdShoppingCart());
-			}		
+			}
 		}
 		return cartIds;
 	}
@@ -254,7 +250,7 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 			cart.setTotalPrice(shoppingCartEntity.getTotalPrice());
 
 			cart.setCreatedDate(df.format(shoppingCartEntity.getCreatedDate()));
-			
+
 			if (shoppingCartEntity.getSendDate() != null) {
 				cart.setSendDate(df.format(shoppingCartEntity.getSendDate()));
 			}
@@ -303,13 +299,12 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 
 	@SuppressWarnings("unchecked")
 	public List<ShoppingCartProducts> retrieveShoppingCartProductIds(long idUser, long idCart) {
-	
+
 		List<ShoppingCartProducts> cartProductsForUser = new ArrayList<ShoppingCartProducts>();
 		Query query = em.createNamedQuery("shopping_cart_products.getCartProductsForUser");
 		query.setParameter("idUser", idUser);
 		query.setParameter("idShoppingCart", idCart);
 		List<ShoppingCartProductsEntity> shoppingCartEntities = query.getResultList();
-		
 
 		for (ShoppingCartProductsEntity cartProductsEntity : shoppingCartEntities) {
 
@@ -361,12 +356,41 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 		em.getTransaction().commit();
 
 		em.getTransaction().begin();
-		query = em
-				.createQuery("UPDATE shopping_cart_users p SET p.currentCart=:isCurrentCart WHERE p.idShoppingCart = :idShoppingCart and p.idUser=:idUser");
+		query = em.createQuery(
+				"UPDATE shopping_cart_users p SET p.currentCart=:isCurrentCart WHERE p.idShoppingCart = :idShoppingCart and p.idUser=:idUser");
 
 		query.setParameter("isCurrentCart", false);
 		query.setParameter("idShoppingCart", idCart);
 		query.setParameter("idUser", idUser);
+
+		query.executeUpdate();
+		em.getTransaction().commit();
+		em.clear();
+
+	}
+
+	public void addUserToCurrentCart(long idUser, long currentCartId) {
+		ShoppingCartUserEntity cartUserEntity = new ShoppingCartUserEntity();
+
+		cartUserEntity.setIdUser(idUser);
+		cartUserEntity.setIdShoppingCart(currentCartId);
+		cartUserEntity.setCurrentCart(true);
+
+		em.getTransaction().begin();
+		em.persist(cartUserEntity);
+		em.getTransaction().commit();
+		em.clear();
+
+	}
+
+	public void updateLastCartForNewUser(long idNewUser, long currentCartId) {
+		em.getTransaction().begin();
+		Query query = em.createQuery(
+				"UPDATE shopping_cart_users p SET p.currentCart=:previousCart WHERE p.idShoppingCart not in (:idShoppingCart) and p.idUser=:idUser");
+
+		query.setParameter("previousCart", false);
+		query.setParameter("idShoppingCart", currentCartId);
+		query.setParameter("idUser", idNewUser);
 
 		query.executeUpdate();
 		em.getTransaction().commit();

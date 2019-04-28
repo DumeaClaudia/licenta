@@ -67,6 +67,7 @@
 		<servlet-name>jsonservlet_remove_product_from_cart</servlet-name>
 		<url-pattern>/jsonservlet/remove_product_from_cart</url-pattern>
 	</servlet-mapping>
+	
 	<servlet>
 		<servlet-name>jsonservlet_get_cart_products</servlet-name>
 		<servlet-class>com.license.servlets.GetCartProductsServlet</servlet-class>
@@ -74,6 +75,16 @@
 	<servlet-mapping>
 		<servlet-name>jsonservlet_get_cart_products</servlet-name>
 		<url-pattern>/jsonservlet/get_cart_products</url-pattern>
+	</servlet-mapping>
+	
+	
+	<servlet>
+		<servlet-name>jsonservlet_get_selected_user</servlet-name>
+		<servlet-class>com.license.servlets.GetSelectedUser</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>jsonservlet_get_selected_user</servlet-name>
+		<url-pattern>/jsonservlet/get_selected_user</url-pattern>
 	</servlet-mapping>
 
 	<!-- Android authenticated -->

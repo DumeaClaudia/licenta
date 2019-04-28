@@ -24,17 +24,17 @@ public class UserRepositoryImpl implements UserRepository {
 	private EntityManagerFactory emf = Persistence.createEntityManagerFactory("myPU");
 	private EntityManager em = emf.createEntityManager();
 
-	
 	private static String bytesToHex(byte[] hash) {
-	    StringBuffer hexString = new StringBuffer();
-	    for (int i = 0; i < hash.length; i++) {
-	    String hex = Integer.toHexString(0xff & hash[i]);
-	    if(hex.length() == 1) hexString.append('0');
-	        hexString.append(hex);
-	    }
-	    return hexString.toString();
+		StringBuffer hexString = new StringBuffer();
+		for (int i = 0; i < hash.length; i++) {
+			String hex = Integer.toHexString(0xff & hash[i]);
+			if (hex.length() == 1)
+				hexString.append('0');
+			hexString.append(hex);
+		}
+		return hexString.toString();
 	}
-	
+
 	public User find(String username, String password) {
 		UserEntity user = new UserEntity();
 		User userResponse = new User();
@@ -44,20 +44,20 @@ public class UserRepositoryImpl implements UserRepository {
 		try {
 			digest = MessageDigest.getInstance("SHA-256");
 			byte[] encodedhash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
-			
+
 			query.setParameter("prm_username", username);
 			query.setParameter("prm_password", bytesToHex(encodedhash));
-			
+
+			@SuppressWarnings("unchecked")
 			List<UserEntity> results = query.getResultList();
-	        if (results.isEmpty()) 
-	        	return null;
-	        else if (results.size() == 1) 	
-	        	user = results.get(0);
-		
+			if (results.isEmpty())
+				return null;
+			else if (results.size() == 1)
+				user = results.get(0);
+
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		}
-
 
 		userResponse.setId(user.getId());
 		userResponse.setFirstName(user.getFirstName());
@@ -65,7 +65,7 @@ public class UserRepositoryImpl implements UserRepository {
 		userResponse.setUsername(user.getUsername());
 		userResponse.setEmail(user.getEmail());
 		userResponse.setPassword(user.getPassword().toString());
-		
+
 		return userResponse;
 
 	}
@@ -81,7 +81,7 @@ public class UserRepositoryImpl implements UserRepository {
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		}
-		
+
 		entity.setId(user.getId());
 		entity.setFirstName(user.getFirstName());
 		entity.setLastName(user.getLastName());
@@ -92,17 +92,17 @@ public class UserRepositoryImpl implements UserRepository {
 		em.getTransaction().begin();
 		em.persist(entity);
 		em.getTransaction().commit();
-		
+
 	}
 
-	
+	@SuppressWarnings("unchecked")
 	public List<User> retrieveUsers() {
-		
+
 		Query query = em.createNamedQuery("user.getUsers");
 		List<UserEntity> users = query.getResultList();
-		
+
 		List<User> usersResponse = new ArrayList<User>();
-		for(UserEntity userEntity: users) {
+		for (UserEntity userEntity : users) {
 			User user = new User();
 			user.setId(userEntity.getId());
 			user.setEmail(userEntity.getEmail());
@@ -110,9 +110,79 @@ public class UserRepositoryImpl implements UserRepository {
 			user.setLastName(userEntity.getLastName());
 			user.setPassword(userEntity.getPassword());
 			user.setUsername(userEntity.getUsername());
-			
-			usersResponse.add(user);	
-		}	
+
+			usersResponse.add(user);
+		}
 		return usersResponse;
 	}
+
+	@SuppressWarnings("unchecked")
+	public List<Long> retrieveUsers(long currentCart) {
+		List<Long> userIds = new ArrayList<>();
+
+		Query query = em.createNamedQuery("shopping_cart_users.getAllUsersForCart");
+		query.setParameter("idShoppingCart", currentCart);
+
+		userIds = query.getResultList();
+		return userIds;
+
+	}
+
+	public User retrieveUserById(long idUser) {
+		User user = new User();
+		UserEntity userEntity = new UserEntity();
+
+		Query query = em.createNamedQuery("user.getUserById");
+		query.setParameter("idUser", idUser);
+		userEntity = (UserEntity) query.getResultList().get(0);
+
+		user.setId(userEntity.getId());
+		user.setFirstName(userEntity.getFirstName());
+		user.setLastName(userEntity.getLastName());
+		user.setUsername(userEntity.getUsername());
+		user.setEmail(userEntity.getEmail());
+		user.setPassword(userEntity.getPassword().toString());
+
+		return user;
+	}
+
+	public List<User> retrieveRemainingUsers(List<Long> activeUsers) {
+		Query query = em.createNamedQuery("user.getRemainingUsers");
+		query.setParameter("listUsers", activeUsers);
+		@SuppressWarnings("unchecked")
+		List<UserEntity> users = query.getResultList();
+		List<User> usersResponse = new ArrayList<User>();
+		
+		for (UserEntity userEntity : users) {
+			User user = new User();
+			user.setId(userEntity.getId());
+			user.setEmail(userEntity.getEmail());
+			user.setFirstName(userEntity.getFirstName());
+			user.setLastName(userEntity.getLastName());
+			user.setPassword(userEntity.getPassword());
+			user.setUsername(userEntity.getUsername());
+
+			usersResponse.add(user);
+		}
+		return usersResponse;
+	}
+
+	public User retrieveUserByName(String username) {
+		User user = new User();
+		UserEntity userEntity = new UserEntity();
+
+		Query query = em.createNamedQuery("user.getUserByName");
+		query.setParameter("username", username);
+		userEntity = (UserEntity) query.getResultList().get(0);
+
+		user.setId(userEntity.getId());
+		user.setFirstName(userEntity.getFirstName());
+		user.setLastName(userEntity.getLastName());
+		user.setUsername(userEntity.getUsername());
+		user.setEmail(userEntity.getEmail());
+		user.setPassword(userEntity.getPassword().toString());
+
+		return user;
+	}
+
 }

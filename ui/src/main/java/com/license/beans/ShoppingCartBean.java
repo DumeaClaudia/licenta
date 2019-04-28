@@ -7,43 +7,36 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
+import com.license.User;
 import com.license.data.CartDetailsItem;
+import com.license.data.UserOrderItem;
+import com.license.data.UsersCartItem;
 import com.license.restaurant.RestaurantService;
 import com.license.shoppingCart.ShoppingCartService;
+import com.license.user.UserService;
 
 @ManagedBean
 @SessionScoped
-/*@RequestScoped*/
+/* @RequestScoped */
 public class ShoppingCartBean implements Serializable {
 
 	private static final long serialVersionUID = 8618627595602029032L;
 
 	private Long userId;
 
-	private String firstName;
-	private String lastName;
-	private String email;
-	private String telephone;
-	private String address;
-	private String payment = new String("Ramburs");
-	private List<String> paymentList = new ArrayList<>();
-
-    @PostConstruct
-    public void init() {
-    	paymentList.add("Ramburs");
-    	paymentList.add("Card Debit");
-    	paymentList.add("Card Credit");
-    }
-
+	private double cartTotalPrice;
+	
+	private List<String> remainingUsers;
 
 	@EJB
 	private ShoppingCartService shoppingCartService;
 	@EJB
 	private RestaurantService restaurantService;
+	@EJB
+	private UserService userService;
 
 	public CartDetailsItem getCartDetails() {
 		FacesContext context = FacesContext.getCurrentInstance();
@@ -59,6 +52,64 @@ public class ShoppingCartBean implements Serializable {
 		}
 
 		return new CartDetailsItem();
+	}
+
+	public List<UsersCartItem> getUserOrderDetails() {
+		Long currentCart = (shoppingCartService.getCurrentCart(userId));
+
+		List<UsersCartItem> orderDetails = new ArrayList<UsersCartItem>();
+
+		List<Long> usersIds = userService.getUsersIds(currentCart);
+		
+		remainingUsers = getUsersName(usersIds);
+		cartTotalPrice = 0.00;
+
+		for (Long idUser : usersIds) {
+			UsersCartItem usersCartItem = new UsersCartItem();
+			User user = userService.getUserById(idUser);
+			Double price = CartDetailsItem
+					.getCartDetailsItem(shoppingCartService, restaurantService, idUser, currentCart).getCartSummary()
+					.getTotalPrice();
+			UserOrderItem userOrderItem = new UserOrderItem(user.getUsername(), price);
+			CartDetailsItem cartDetailsItem = CartDetailsItem.getCartDetailsItem(shoppingCartService, restaurantService,
+					idUser, currentCart);
+			usersCartItem.setUserDetails(userOrderItem);
+			usersCartItem.setCartDetails(cartDetailsItem);
+
+			cartTotalPrice += cartDetailsItem.getCartSummary().getTotalPrice();
+			orderDetails.add(usersCartItem);
+		}
+
+		return orderDetails;
+	}
+
+	private List<String> getUsersName(List<Long> usersIds) {
+		List<User> users = userService.getAllUsers(usersIds);
+		List<String> usersNames = new ArrayList<>();
+		for(User user:users) {
+			usersNames.add(user.getUsername());
+		}
+		return usersNames;
+	}
+	
+	public void addUserToCart(String value) {
+		System.out.println(value);
+		
+	}
+
+	private String firstName;
+	private String lastName;
+	private String email;
+	private String telephone;
+	private String address;
+	private String payment = new String("Ramburs");
+	private List<String> paymentList = new ArrayList<>();
+
+	@PostConstruct
+	public void init() {
+		paymentList.add("Ramburs");
+		paymentList.add("Card Debit");
+		paymentList.add("Card Credit");
 	}
 
 	public long getUserId() {
@@ -128,4 +179,21 @@ public class ShoppingCartBean implements Serializable {
 	public String checkout() {
 		return "shoppingCart?faces-redirect=true";
 	}
+
+	public double getCartTotalPrice() {
+		return cartTotalPrice;
+	}
+
+	public void setCartTotalPrice(double cartTotalPrice) {
+		this.cartTotalPrice = cartTotalPrice;
+	}
+
+	public List<String> getRemainingUsers() {
+		return remainingUsers;
+	}
+
+	public void setRemainingUsers(List<String> remainingUsers) {
+		this.remainingUsers = remainingUsers;
+	}
+
 }

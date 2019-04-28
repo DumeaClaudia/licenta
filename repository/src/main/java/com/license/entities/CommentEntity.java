@@ -12,26 +12,28 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 @Entity(name = "comment")
 @NamedQueries({
-		@NamedQuery(name = "comment.display", query = "Select comm FROM comment comm where comm.username=:p1") })
+		@NamedQuery(name = "comment.display", query = "Select c FROM comment c where c.idUser=:idUser") })
 public class CommentEntity implements Serializable{
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+	
+	private static final long serialVersionUID = -8210015606459450333L;
 
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-
-	@Column(name = "description")
-	private String description;
-
-	@Column(name = "username")
-	private String username;
+	
+	@Column(name = "idUser")
+	private long idUser;
+	
+	@Column(name = "idCart")
+	private long idCart;
 
 	@Column(name = "date")
 	private Date date;
+	
+	@Column(name = "description")
+	private String description;
+
 
 	public long getId() {
 		return id;
@@ -49,20 +51,28 @@ public class CommentEntity implements Serializable{
 		this.description = description;
 	}
 
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
 	public Date getDate() {
 		return date;
 	}
 
 	public void setDate(Date date) {
 		this.date = date;
+	}
+
+	public long getIdUser() {
+		return idUser;
+	}
+
+	public void setIdUser(long idUser) {
+		this.idUser = idUser;
+	}
+
+	public long getIdCart() {
+		return idCart;
+	}
+
+	public void setIdCart(long idCart) {
+		this.idCart = idCart;
 	}
 
 }

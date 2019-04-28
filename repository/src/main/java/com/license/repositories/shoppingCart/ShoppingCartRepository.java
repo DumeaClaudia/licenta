@@ -35,4 +35,9 @@ public interface ShoppingCartRepository {
 	public long createCartForUser(long idUser);
 
 	public void updateCartAfterCheckout(long idUser, long idCart);
+
+	public void addUserToCurrentCart(long idUser, long currentCartId);
+
+	public void updateLastCartForNewUser(long idNewUser, long currentCartId);
 }
+

@@ -15,115 +15,97 @@
 		<div class="container marketing style-font well" style="margin-top: 50px; height: 600px">
 
 			<div class="row" style="margin-right: 30px; margin-left: 10px;">
-				<div class="col-md-7">
-					<h:form>
+				<div class="well col-md-6 ">
+					<h5>Lista tutror produselor din cos :</h5>
 
-						<div class="output-group col-md-12 mb-3">
-							<br></br>
-							<div class="output" id="basic-addon1">
-								<h:outputText value="Utilizator: "></h:outputText>
-								<h:outputLabel value="#{sessionBean.username}">
-								</h:outputLabel>
-							</div>
-							<br />
-						</div>
-						<div>
-							<div class="col-md-5 mb-3">
-								<h:outputText value="Nume: "></h:outputText>
-								<h:inputText type="text" class="form-control user-first-name" id="firstName"
-									value="#{shoppingCartBean.firstName}">
-									<f:validateRequired />
-								</h:inputText>
-							</div>
-
-							<div class="col-md-5 mb-3">
-								<h:outputText value="Prenume: "></h:outputText>
-								<h:inputText type="text" class="form-control user-last-name" id="lastName" value="#{shoppingCartBean.lastName}"
-									required="true" />
-
-							</div>
-						</div>
-
-						<div>
-							<br />
-							<div class="col-md-5 mb-6">
-								<h:outputText value="Email:  "></h:outputText>
-								<h:inputText type="text" class="form-control user-email" id="email" value="#{shoppingCartBean.email}"
-									required="true" />
-							</div>
-
-							<div class="col-md-5 mb-6">
-								<h:outputText value="Telefon:  "></h:outputText>
-								<h:inputText type="text" class="form-control user-telephone" id="telefon" value="#{shoppingCartBean.telephone}"
-									required="true" />
-							</div>
-						</div>
-						<div>
-							<br />
-							<div class="col-md-10 mb-6">
-								<h:outputText value="Adresa:  "></h:outputText>
-								<h:inputText type="text" class="form-control user-address" id="adresa" value="#{shoppingCartBean.address}"
-									required="true" />
-							</div>
-						</div>
-						<div class="col-md-10 mb-6">
-							<br></br>
-							<h:form>
-								<h:outputText value="Plata:  "></h:outputText>
-								<!-- <h:selectOneRadio value="#{shoppingCartBean.payment}" layout="pageDirection" class="user-payment">
-									<f:selectItem itemValue=" Ramburs " itemLabel=" Ramburs" class="user-payment" />
-									<f:selectItem itemValue=" Card debit " itemLabel=" Card debit" class="user-payment" />
-									<f:selectItem itemValue=" Card credit " itemLabel=" Card credit" class="user-payment" />
-									<f:ajax execute="@form" listener="#{shoppingCartBean.checkout()}" render="@form" />
-								</h:selectOneRadio> -->
-
-								<h:selectOneRadio value="#{shoppingCartBean.payment}" layout="pageDirection">
-									<f:selectItems value="#{shoppingCartBean.paymentList}" class="user-payment" var="value" itemLabel="#{value}"
-										itemValue="{value}" />
-								</h:selectOneRadio>
-							</h:form>
-						</div>
-
-						<div class="col-md-10 mb-6">
-							<br />
-							<p id="cart-validation-message" style="color: #FF0000" />
-						</div>
-						<div class="col-md-6 mb-6" id="validate-cart">
-							<br />
-							<h:form>
-								<h:commandButton id="sendCart" class="btn btn-primary send-cart-details" type="submit" value="Trimite comanda"
-									required="true" />
-						
-							</h:form>
-						</div>
-					</h:form>
-				</div>
-
-				<div class="well col-md-5 ">
-					<h5>Lista produse:</h5>
 					<br></br>
-					<ui:repeat value="#{shoppingCartBean.getCartDetails().restaurantProducts}" var="restaurant" outcome="restaurant">
-						<ui:repeat value="#{restaurant.products}" var="product">
-							<div id="idProductName">
+					<!-- getCartDetails().restaurantProducts}"  -->
+					<ui:repeat value="#{shoppingCartBean.getUserOrderDetails()}" var="cartUser" outcome="restaurant">
+						<ui:repeat value="#{cartUser.cartDetails.restaurantProducts}" var="restaurant">
+							<ui:repeat value="#{restaurant.products}" var="product">
+								<div id="idProductName">
 
-								#{product.nrProducts}x <b>#{product.name}</b> (<i>#{restaurant.restaurantName}</i>)
-								<div class="pull-right">
-									<small>#{product.nrProducts}x <b>#{product.price}</b> RON
-									</small>
+									#{product.nrProducts}x <b>#{product.name}</b> (<i>#{restaurant.restaurantName}</i>)
+									<div class="pull-right">
+										<small>#{product.nrProducts}x <b>#{product.price}</b> RON
+										</small>
+									</div>
 								</div>
-							</div>
+							</ui:repeat>
 						</ui:repeat>
 					</ui:repeat>
 					<br />
+				</div>
+				<div class=" col-md-2 "></div>
+				<div class="well col-md-4 ">
 
-					<c:set var="totalPrice" scope="session" value="#{shoppingCartBean.getCartDetails().cartSummary.totalPrice-15}" />
-					<c:if test="${totalPrice lt 30}">
-						<small>*Taxa livrare: 15.00 RON*</small>
-					</c:if>
+					<div class="col-md-12">
+						<p>(Add a new user to cart)</p>
+						<div>
+							<div class="col-md-8">
+								<select class="form-control" id="selectedUser">
+									<ui:repeat var="username" value="#{shoppingCartBean.remainingUsers}">
+										<option value="#{username}">#{username}</option>
+									</ui:repeat>
+								</select>
+							</div>
+							<div class="col-md-2">
+								<button id="addUser">AddUser</button>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-12">
+						<br />
+						<h5>Utilizatori:</h5>
+						<ui:repeat value="#{shoppingCartBean.getUserOrderDetails()}" var="item" outcome="restaurant">
+							<ui:repeat value="#{item.userDetails}" var="userDetails">
+								<div id="idUser">
 
-					<h5>
-						Total: <b>#{shoppingCartBean.getCartDetails().cartSummary.totalPrice} RON</b>
-					</h5>
+									<b>#{userDetails.username}</b>
+									<div class="pull-right">
+										<small>#{userDetails.price} RON </small>
+									</div>
+								</div>
+							</ui:repeat>
+						</ui:repeat>
+						<br />
+
+						<c:set var="totalPrice" scope="session" value="#{shoppingCartBean.getCartDetails().cartSummary.totalPrice-15}" />
+						<c:if test="${totalPrice lt 30}">
+							<small>*Taxa livrare: 15.00 RON*</small>
+						</c:if>
+
+						<h5>
+							Total: <b>#{shoppingCartBean.cartTotalPrice} RON</b>
+						</h5>
+					</div>
+				</div>
+
+				<div class="">
+					<div class="col-md-8 col-sm-8">
+						<div class="panel panel-default arrow left">
+							<div class="panel-body">
+								<header class="text-left">
+								<div class="comment-user">
+									<i class="fa fa-user"></i> That Guy
+								</div>
+								<time class="comment-date" datetime="16-12-2014 01:05"> <i class="fa fa-clock-o"></i> Dec 16, 2014</time> </header>
+								<div class="comment-post">
+									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+										dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+										commodo consequat.</p>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-lg-8">
+						<div class="input-group">
+							<input type="text" class="form-control" placeholder="..." /> <span class="input-group-btn">
+								<button class="btn btn-default" type="button">Send</button>
+							</span>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

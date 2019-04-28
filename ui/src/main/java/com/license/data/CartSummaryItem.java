@@ -103,6 +103,7 @@ public class CartSummaryItem {
 		List<CartSummaryItem> carts = new ArrayList<CartSummaryItem>();
 		List<Long> cartsList = shoppingCartService.getAllShoppingCartsForUser(userId);
 		
+		
 		double totalPrice = 0.00;
 
 		for (long idCart : cartsList) {

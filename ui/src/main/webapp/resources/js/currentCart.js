@@ -44,3 +44,29 @@ function validateAjaxRequest(request) {
 		}
 	});
 }
+
+$(document).ready(function() {
+	$('#addUser').click(function() {
+		var selectedText = $("#selectedUser").val();
+		sendValue(selectedText);
+	});
+});
+
+function sendValue(value) {
+	$.ajax({
+		url : "../jsonservlet/get_selected_user",
+		type : 'POST',
+		dataType : 'json',
+		data : JSON.stringify(value),
+		contentType : 'application/json',
+		mimeType : 'application/json',
+
+		success : function(result) {
+		},
+		error : function(data, status, er) {
+			console.log(data);
+			console.log(status);
+			console.log(er);
+		}
+	});
+}
