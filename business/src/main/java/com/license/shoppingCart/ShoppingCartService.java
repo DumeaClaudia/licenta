@@ -1,8 +1,10 @@
 package com.license.shoppingCart;
 
+import java.util.Date;
 import java.util.List;
 
 import com.license.Cart;
+import com.license.Comment;
 import com.license.Product;
 import com.license.ShoppingCartProducts;
 
@@ -40,5 +42,9 @@ public interface ShoppingCartService {
 	void addUserToCart(long id, long currentCartId);
 
 	void updatePreviousCartForNewUser(long idNewUser, long currentCartId);
+
+	List<Comment> getAllCommentsForCart(Long currentCart);
+
+	void addNewComment(long idUser, long idCart, String description, Date date);
 
 }

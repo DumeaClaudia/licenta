@@ -1,6 +1,10 @@
 $(document).ready(function() {
-	toastr.options = { onclick: function () { $("#myCartModal").modal() } }
-	
+	toastr.options = {
+		onclick : function() {
+			$("#myCartModal").modal()
+		}
+	}
+
 	$(".cart-add-button").click(function() {
 
 		var productId = this.dataset.productId;
@@ -12,17 +16,17 @@ $(document).ready(function() {
 
 		return false;
 	});
-	
+
 	$(".cart-add-error").click(function() {
 		toastr.error("You have to login before added to cart...");
 		return false;
-	});	
-});
+	});
 
+	
+});
 
 function addProductToCartAjaxRequest(request) {
 	var cartProductsRequest = new Object();
-
 
 	$.ajax({
 		url : "../jsonservlet/add_product_to_cart",
@@ -37,7 +41,7 @@ function addProductToCartAjaxRequest(request) {
 
 			getCartProductsAjaxRequest(cartProductsRequest);
 			console.log(data);
-		
+
 		},
 		error : function(data, status, er) {
 			console.log(data);
@@ -46,5 +50,3 @@ function addProductToCartAjaxRequest(request) {
 		}
 	});
 }
-
-

@@ -39,10 +39,10 @@ html, body {
 	-o-transition: margin 0.3s ease;
 	transition: margin 0.3s ease;
 }
-
+/* 
 .collapsed {
-	display: none; /* hide it for small displays */
-}
+	display: none; hide it for small displays
+} */
 /* 
 @media ( min-width : 992px) {
 	.collapsed {
@@ -52,4 +52,9 @@ html, body {
 } */
 body {
 	position: relative;
+}
+
+.scrollable {
+	height: 200px;
+	overflow-y: scroll;
 }

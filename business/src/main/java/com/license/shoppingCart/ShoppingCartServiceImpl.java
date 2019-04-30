@@ -1,5 +1,6 @@
 package com.license.shoppingCart;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -7,6 +8,7 @@ import javax.ejb.Remote;
 import javax.ejb.Stateless;
 
 import com.license.Cart;
+import com.license.Comment;
 import com.license.Product;
 import com.license.ShoppingCartProducts;
 import com.license.repositories.shoppingCart.ShoppingCartRepository;
@@ -84,7 +86,15 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 	}
 
 	public void updatePreviousCartForNewUser(long idNewUser, long currentCartId) {
-		repository.updateLastCartForNewUser(idNewUser, currentCartId);	
+		repository.updateLastCartForNewUser(idNewUser, currentCartId);
+	}
+
+	public List<Comment> getAllCommentsForCart(Long currentCart) {
+		return repository.retrieveAllCommentsForCart(currentCart);
+	}
+
+	public void addNewComment(long idUser, long idCart, String description, Date date) {
+		repository.addComment(idUser, idCart, description, date);
 	}
 
 }

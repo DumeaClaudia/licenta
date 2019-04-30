@@ -11,61 +11,68 @@
 </f:metadata>
 
 <ui:composition template="../template/template.xhtml">
+	<ui:define name="head">
+		<script src="../resources/js/currentCart.js"></script>
+	</ui:define>>
 	<ui:define name="content">
 		<div class="container marketing style-font well" style="margin-top: 50px; height: 600px">
 
 			<div class="row" style="margin-right: 30px; margin-left: 10px;">
 				<div class="well col-md-6 ">
-					<h5>Lista tutror produselor din cos :</h5>
+					<h5>Lista tuturor produselor din cos :</h5>
 
 					<br></br>
-					<!-- getCartDetails().restaurantProducts}"  -->
-					<ui:repeat value="#{shoppingCartBean.getUserOrderDetails()}" var="cartUser" outcome="restaurant">
-						<ui:repeat value="#{cartUser.cartDetails.restaurantProducts}" var="restaurant">
-							<ui:repeat value="#{restaurant.products}" var="product">
-								<div id="idProductName">
-
-									#{product.nrProducts}x <b>#{product.name}</b> (<i>#{restaurant.restaurantName}</i>)
-									<div class="pull-right">
-										<small>#{product.nrProducts}x <b>#{product.price}</b> RON
-										</small>
+					<ui:repeat value="#{shoppingCartBean.getUserOrderDetails().keySet().toArray()}" var="keyUser" outcome="restaurant">
+						<!-- <b>#{keyUser}</b> -->
+						<ui:repeat value="#{shoppingCartBean.getUserOrderDetails()[keyUser]}" var="cart">
+							<ui:repeat value="#{cart.cartDetails.restaurantProducts}" var="restaurant">
+								<ui:repeat value="#{restaurant.products}" var="product">
+									<div id="idProductName">
+										<b>(#{keyUser})</b> #{product.nrProducts}x <b>#{product.name}</b> (<i>#{restaurant.restaurantName}</i>)
+										<div class="pull-right">
+											<small>#{product.nrProducts}x <b>#{product.price}</b> RON
+											</small>
+										</div>
 									</div>
-								</div>
+								</ui:repeat>
 							</ui:repeat>
 						</ui:repeat>
+
 					</ui:repeat>
 					<br />
 				</div>
-				<div class=" col-md-2 "></div>
-				<div class="well col-md-4 ">
+				<div class="col-md-6 well">
 
-					<div class="col-md-12">
-						<p>(Add a new user to cart)</p>
-						<div>
-							<div class="col-md-8">
-								<select class="form-control" id="selectedUser">
-									<ui:repeat var="username" value="#{shoppingCartBean.remainingUsers}">
-										<option value="#{username}">#{username}</option>
-									</ui:repeat>
-								</select>
-							</div>
-							<div class="col-md-2">
-								<button id="addUser">AddUser</button>
-							</div>
+					<button data-toggle="collapse" data-target="#collapseAddUser" aria-expanded="false" aria-controls="collapseAddUser"
+						class="btn-block">Add a new user to cart</button>
+
+					<div class="row collapse" id="collapseAddUser">
+						<br></br>
+						<div class="col-md-8">
+							<select class="form-control" id="selectedUser">
+								<ui:repeat var="username" value="#{shoppingCartBean.remainingUsers}">
+									<option value="#{username}">#{username}</option>
+								</ui:repeat>
+							</select>
+						</div>
+						<div class="col-md-2">
+							<button id="addUser">AddUser</button>
 						</div>
 					</div>
-					<div class="col-md-12">
+					<div>
 						<br />
 						<h5>Utilizatori:</h5>
-						<ui:repeat value="#{shoppingCartBean.getUserOrderDetails()}" var="item" outcome="restaurant">
-							<ui:repeat value="#{item.userDetails}" var="userDetails">
-								<div id="idUser">
+						<ui:repeat value="#{shoppingCartBean.getUserOrderDetails().keySet().toArray()}" var="keyUser">
+							<ui:repeat value="#{shoppingCartBean.getUserOrderDetails()[keyUser]}" var="item" outcome="cart">
+								<ui:repeat value="#{item.userDetails}" var="userDetails">
+									<div id="idUser">
 
-									<b>#{userDetails.username}</b>
-									<div class="pull-right">
-										<small>#{userDetails.price} RON </small>
+										<b>#{userDetails.username}</b>
+										<div class="pull-right">
+											<small>#{userDetails.price} RON </small>
+										</div>
 									</div>
-								</div>
+								</ui:repeat>
 							</ui:repeat>
 						</ui:repeat>
 						<br />
@@ -80,29 +87,45 @@
 						</h5>
 					</div>
 				</div>
+			</div>
+			<!-- comment list -->
+			<div class=" well">
+				<div class="row">
+					<div id="comment-list" class="scrollable  col-md-8">
+						<ui:repeat value="#{shoppingCartBean.allComments}" var="comment">
+							<div class="row">
+								<div class="col-md-8 col-sm-8 panel panel-default arrow #{comment.ownComment ? 'col-md-offset-2' : 'left'}">
+									<div class="panel-body">
 
-				<div class="">
-					<div class="col-md-8 col-sm-8">
-						<div class="panel panel-default arrow left">
-							<div class="panel-body">
-								<header class="text-left">
-								<div class="comment-user">
-									<i class="fa fa-user"></i> That Guy
-								</div>
-								<time class="comment-date" datetime="16-12-2014 01:05"> <i class="fa fa-clock-o"></i> Dec 16, 2014</time> </header>
-								<div class="comment-post">
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-										dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-										commodo consequat.</p>
+										<header class="text-left">
+										<div class="row">
+											<div class="comment-user">
+												<i class="fa fa-user"></i><small>#{comment.username}</small>
+											</div>
+
+											<div class="comment-post">
+												<p>#{comment.description}.</p>
+											</div>
+
+											<div class="comment-date">
+												<small>#{comment.date}</small>
+											</div>
+										</div>
+
+										</header>
+									</div>
 								</div>
 							</div>
-						</div>
+						</ui:repeat>
+
 					</div>
 
-					<div class="col-lg-8">
-						<div class="input-group">
-							<input type="text" class="form-control" placeholder="..." /> <span class="input-group-btn">
-								<button class="btn btn-default" type="button">Send</button>
+				</div>
+				<div class="row">
+					<div class="col-md-8">
+						<div class="input-group commentBox">
+							<input type="text" id="textComment" class=""/> <span class="">
+								<button class="btn btn-default" id="sendComment" type="button">Send</button>
 							</span>
 						</div>
 					</div>

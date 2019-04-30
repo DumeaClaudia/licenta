@@ -8,8 +8,8 @@ public class Comment implements Serializable {
 	private static final long serialVersionUID = 133161657895309927L;
 	
 	private long idUser;
-	private long isCart;
-	private Date date;
+	private long idCart;
+	private String date;
 	private String description;
 	
 	public long getIdUser() {
@@ -20,19 +20,19 @@ public class Comment implements Serializable {
 		this.idUser = idUser;
 	}
 
-	public long getIsCart() {
-		return isCart;
+	public long getIdCart() {
+		return idCart;
 	}
 
-	public void setIsCart(long isCart) {
-		this.isCart = isCart;
+	public void setIdCart(long idCart) {
+		this.idCart = idCart;
 	}
 
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 	

@@ -14,9 +14,11 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 import com.license.Cart;
+import com.license.Comment;
 import com.license.Product;
 import com.license.ShoppingCartProducts;
 import com.license.entities.CartForUserEntity;
+import com.license.entities.CommentEntity;
 import com.license.entities.ProductEntity;
 import com.license.entities.ShoppingCartEntity;
 import com.license.entities.ShoppingCartProductsEntity;
@@ -396,6 +398,44 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 		em.getTransaction().commit();
 		em.clear();
 
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Comment> retrieveAllCommentsForCart(Long idCart) {
+
+		List<Comment> comments = new ArrayList<Comment>();
+		Query query = em.createNamedQuery("comment.getAllCommentsForCart");
+		query.setParameter("idCart", idCart);
+		List<CommentEntity> commentEntities = query.getResultList();
+
+		for (CommentEntity commentEntity : commentEntities) {
+
+			Comment comment = new Comment();
+
+			comment.setIdCart(commentEntity.getIdCart());
+			comment.setIdUser(commentEntity.getIdUser());
+			DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
+			comment.setDate(df.format(commentEntity.getDate()));
+			comment.setDescription(commentEntity.getDescription());
+
+			comments.add(comment);
+		}
+
+		return comments;
+	}
+
+	public void addComment(long idUser, long idCart, String description, Date date) {
+		CommentEntity commentEntity = new CommentEntity();
+
+		commentEntity.setIdUser(idUser);
+		commentEntity.setIdCart(idCart);
+		commentEntity.setDate(date);
+		commentEntity.setDescription(description);
+
+		em.getTransaction().begin();
+		em.persist(commentEntity);
+		em.getTransaction().commit();
+		em.clear();
 	}
 
 }

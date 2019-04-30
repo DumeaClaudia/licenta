@@ -12,7 +12,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 @Entity(name = "comment")
 @NamedQueries({
-		@NamedQuery(name = "comment.display", query = "Select c FROM comment c where c.idUser=:idUser") })
+		@NamedQuery(name = "comment.display", query = "Select c FROM comment c where c.idUser=:idUser"),
+		@NamedQuery(name = "comment.getAllCommentsForCart", query = "Select c FROM comment c where c.idCart=:idCart order by c.date ")})
 public class CommentEntity implements Serializable{
 	
 	private static final long serialVersionUID = -8210015606459450333L;
