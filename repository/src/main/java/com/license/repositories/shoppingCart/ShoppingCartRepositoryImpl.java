@@ -414,7 +414,7 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 
 			comment.setIdCart(commentEntity.getIdCart());
 			comment.setIdUser(commentEntity.getIdUser());
-			DateFormat df = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+			DateFormat df = new SimpleDateFormat("HH:mm dd.MM.yyyy");
 			comment.setDate(df.format(commentEntity.getDate()));
 			comment.setDescription(commentEntity.getDescription());
 

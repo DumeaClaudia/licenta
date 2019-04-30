@@ -4,6 +4,35 @@ html, body {
 	height: 100%;
 }
 
+#shopping-cart-content {
+	margin-top: 30px;
+	max-width: 	800px;
+}
+
+#cart-products-list {
+	margin-top: 40px;
+}
+
+#comment-list {
+	padding: 20px;
+	overflow: auto;
+	max-height: 500px;
+	margin-bottom: 10px;
+}
+
+#textComment {
+	margin-left: 10px;
+	width: 86%;
+}
+
+#sendComment {
+	margin-left: 10px;
+}
+
+#cart-comments {
+	margin-top: 30px;
+}
+
 .jumbotron {
 	margin-top: 20px;
 }
@@ -17,7 +46,7 @@ html, body {
 }
 
 #show-content {
-	background-color: lightyellow;
+	/* background-color: lightyellow; */
 	-webkit-transition: width 0.3s ease;
 	-moz-transition: width 0.3s ease;
 	-o-transition: width 0.3s ease;

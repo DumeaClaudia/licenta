@@ -148,7 +148,7 @@ public class ShoppingCartBean implements Serializable {
 	}
 
 	public long getUserId() {
-		if(this.userId != null && this.userId!=0) {
+		if (this.userId != null && this.userId != 0) {
 			return this.userId;
 		}
 		FacesContext context = FacesContext.getCurrentInstance();
@@ -159,8 +159,8 @@ public class ShoppingCartBean implements Serializable {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} 
-		return 0; 
+		}
+		return 0;
 	}
 
 	public void setUserId(long userId) {
@@ -223,10 +223,6 @@ public class ShoppingCartBean implements Serializable {
 		this.paymentList = paymentList;
 	}
 
-	public String checkout() {
-		return "shoppingCart?faces-redirect=true";
-	}
-
 	public double getCartTotalPrice() {
 		return cartTotalPrice;
 	}
@@ -241,6 +237,10 @@ public class ShoppingCartBean implements Serializable {
 
 	public void setRemainingUsers(List<String> remainingUsers) {
 		this.remainingUsers = remainingUsers;
+	}
+
+	public String checkout() {
+		return "shoppingCart?faces-redirect=true";
 	}
 
 }

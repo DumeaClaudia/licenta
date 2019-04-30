@@ -55,6 +55,8 @@ public class CheckoutCartServlet extends HttpServlet {
 			long idUser = (Long) request.getSession().getAttribute("userId");
 			Long currentCart = shoppingCartService.getCurrentCart(idUser);
 
+			//TODO de adaugat pt toti userii din cart....
+			
 			shoppingCartService.updateDateForCartAfterCheckout(idUser, currentCart);
 		}
 

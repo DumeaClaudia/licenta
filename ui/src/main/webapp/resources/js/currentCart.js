@@ -54,8 +54,8 @@ function displayComments(){
 			$.each(	result,
 				function(index, comment) {					
 										
-					var comment_panel = $("<div class='col-md-8 col-sm-8 panel panel-default arrow  comment.ownComment ? 'col-md-offset-2': 'left'' />");
-					var div_details_comm = $("<div class='panel-body'/>");				
+					var comment_panel = $("<div class='col-md-8 col-sm-10 panel panel-default arrow " +   (comment.ownComment ? 'col-md-offset-4 col-sm-offset-2': 'left') + "' />");
+					/*var div_details_comm = $("<div class='panel-body'/>");*/				
 					var header = $("<header class='text-left'/>");
 					var div_row = $("<div class='row'/>");
 					
@@ -63,7 +63,7 @@ function displayComments(){
 					var div_description = $("<div class='comment-post'><p> " + comment.description + "</p></div>");
 					var div_time = $("<div class='comment-date'><small>" + comment.date +  "</small></div>");
 		
-					comment_panel.append(div_details_comm);
+					/*comment_panel.append(div_details_comm);*/
 					comment_panel.append(header);
 					comment_panel.append(div_row);
 

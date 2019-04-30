@@ -1,5 +1,29 @@
 @CHARSET "ISO-8859-1";
 
+.cart {
+	background-color: #fff;
+	background-clip: border-box;
+	border: 1px solid rgba(0, 0, 0, .125);
+	border-radius: .25rem;
+	margin-bottom: 10px;
+}
+
+.cart-header {
+	padding: 5px;
+	font-size: 18px;
+	text-align: center;
+	margin-right: 0px;
+	margin-left: 0px;
+	background-color: rgba(0, 0, 0, .03);
+}
+
+.cart-item {
+	padding: 10px;
+	border-top: 1px solid rgba(0, 0, 0, .125);
+	margin-right: 0px;
+	margin-left: 0px;
+}
+
 .modal-header {
 	background-color: #5cb85c;
 	color: white !important;
@@ -32,7 +56,7 @@
 
 .restaurant-thumbnail {
 	max-height: 120px;
-	width:100%;
+	width: 100%;
 	max-width: 220px;
 	object-fit: cover;
 	text-align: center;
@@ -44,14 +68,14 @@
 }
 
 .top-carousel-img {
-	max-height: 250px; 
-	width: 100%; 
+	max-height: 250px;
+	width: 100%;
 	object-fit: cover;
 	border: 0px;
 }
 
 .restaurant-well-content {
-	margin: 10px 0px ;
+	margin: 10px 0px;
 	padding: 10px 50px;
 }
 
@@ -61,75 +85,79 @@
 	border-radius: 0;
 }
 
-li { 
-    display: inline;
-    list-style-type: none;
+li {
+	display: inline;
+	list-style-type: none;
 }
 
-.top-carousel-indicators{
+.top-carousel-indicators {
 	top: 220px;
 	bottom: auto;
 }
-.list-restaurant-img-thumbnail{
+
+.list-restaurant-img-thumbnail {
 	width: 100%;
-	 margin-left: auto;
-	 margin-right: auto;
-	 max-height: 160px;
-	 height: 160px;
+	margin-left: auto;
+	margin-right: auto;
+	max-height: 160px;
+	height: 160px;
 }
-.restaurant-img-thumbnail{
-	 width: 90%;
-	 margin-left: auto;
-	 margin-right: auto;
-	 max-height: 250px;
-	
+
+.restaurant-img-thumbnail {
+	width: 90%;
+	margin-left: auto;
+	margin-right: auto;
+	max-height: 250px;
 }
-.glyphicon-plus{
+
+.glyphicon-plus {
 	margin-right: 30px;
-	
 }
-.product-style{
+
+.product-style {
 	/* border-style:inset;
-    border-width:5px;  */ 
-    border-color: white;
-    border-bottom-style: solid;
-    /* font-family: fantasy; */
+    border-width:5px;  */
+	border-color: white;
+	border-bottom-style: solid;
+	/* font-family: fantasy; */
 }
 
-.size-description{
+.size-description {
 	margin-top: 10px;
 }
 
-.size-plus{
-	margin-top: 30px;
-}
-.position-next-page{
-	text-align:right:
-}
-.container-top{
-	margin-top: 10px;
-	
-}
-.marginTop{
+.size-plus {
 	margin-top: 30px;
 }
 
-.style-font{
-	font-family: fantasy; 
+.position-next-page {
+	text-align: right:
+}
+
+.container-top {
+	margin-top: 10px;
+}
+
+.marginTop {
+	margin-top: 30px;
+}
+
+.style-font {
+	font-family: fantasy;
 	font-family: serif;
 }
 
-.product-list-name{
-	color:black; 
+.product-list-name {
+	color: black;
 }
 
-.product-list-price{
-	color:black; 
+.product-list-price {
+	color: black;
 	float: right;
 }
 
-.product-list-delete{ 
-	color:black; 
+.product-list-delete {
+	color: black;
 	float: right;
 }
 
@@ -137,7 +165,7 @@ li {
 	top: 0;
 	width: 100%;
 	top: 50px;
-	background: #ddd; 
+	background: #ddd;
 	z-index: 500 !important;
 	opacity: 0.90;
 }
@@ -166,51 +194,52 @@ li {
 	max-width: 960px;
 }
 
-span.category-style{
+span.category-style {
 	padding: 5px 20px;
 	/* margin-left: 10px; */
 	font-size: 18px;
 	text-align: center;
 }
 
-a.category-style{
+a.category-style {
 	/*  padding: 20px;
 	margin-left: 10px; */
 	font-size: 18px;
 	text-align: center;
 }
 
-.content-category{
+.content-category {
 	/* margin-left: 10px; */
 	min-height: auto;
 	max-width: 1150px;
 	padding: 0px 5px;
-	background-color: white;
 	-webkit-transition: width 0.3s ease;
 	-moz-transition: width 0.3s ease;
 	-o-transition: width 0.3s ease;
 	transition: width 0.3s ease;
 	margin-top: 0px;
 }
+
 a:hover {
-    text-decoration: none;
-    text-color: black;
+	text-decoration: none;
+	text-color: black;
 }
 
-a:link{
+a:link {
 	text-decoration: none;
 }
-a:active{
+
+a:active {
 	background-color: silver;
 }
 
 #idCategory {
 	background-color: transparent;
-    text-decoration: underline;
-    text-decoration: none;
-    font-size: 18px;
-    /* color: black; */
-    font-family: fantasy; 
+	text-decoration: underline;
+	text-decoration: none;
+	font-size: 18px;
+	/* color: black; */
+	font-family: fantasy;
 	font-family: serif;
 	padding: 0px 20px;
 }

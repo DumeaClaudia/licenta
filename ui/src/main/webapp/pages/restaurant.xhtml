@@ -43,7 +43,7 @@
 					});
 				});
 			</script>
-			
+
 		</ui:define>
 
 		<ui:define name="content">
@@ -54,7 +54,8 @@
 						<div class="col-md-12" style="margin-top: 10px;">
 							<div class="col-md-8 col-sm-6 col-xs-12">
 								<a class="btn glyphicon glyphicon-chevron-left" href="home.xhtml"> Inapoi la restaurante</a> <img
-									class="img-thumbnail restaurant-img-thumbnail" src="../resources/images/#{restaurantBean.restaurant.id}/#{restaurantBean.restaurant.image}"
+									class="img-thumbnail restaurant-img-thumbnail"
+									src="../resources/images/#{restaurantBean.restaurant.id}/#{restaurantBean.restaurant.image}"
 									alt="#{restaurantBean.restaurant.name}"></img> <br></br>
 							</div>
 							<div class=" col-md-4 col-sm-6 col-xs-12">
@@ -66,12 +67,11 @@
 									</div>
 
 									<div class="pull-left">
-									
-										<span class="glyphicon glyphicon-star" aria-hidden="true"/>
-										<span class="glyphicon glyphicon-star-empty" aria-hidden="true"/>
-										<span class="glyphicon glyphicon-star-empty" aria-hidden="true"/> 
-										<span class="glyphicon glyphicon-star-empty" aria-hidden="true"/> 
-										<span class="glyphicon glyphicon-star-empty" aria-hidden="true"/>
+
+										<span class="glyphicon glyphicon-star" aria-hidden="true" /> <span class="glyphicon glyphicon-star-empty"
+											aria-hidden="true" /> <span class="glyphicon glyphicon-star-empty" aria-hidden="true" /> <span
+											class="glyphicon glyphicon-star-empty" aria-hidden="true" /> <span class="glyphicon glyphicon-star-empty"
+											aria-hidden="true" />
 									</div>
 									<div>
 										<div>
@@ -103,73 +103,78 @@
 					<div class="well col-md-12" id="show-content">
 
 						<ui:repeat value="#{restaurantBean.categories}" var="category">
-							<b> <span class="container col-xs-12 category-style content-category" id="#{category}">--- #{category}
-									---</span></b>
+							<div class="cart">
+								<div class="cart-header">
+								
+								<b> <span class="  category-style content-category" id="#{category}">
+										#{category} </span></b>
+</div>
+								<ui:repeat value="#{restaurantBean.products}" var="product">
+									<ui:fragment rendered="#{product.category == category}">
 
-							<ui:repeat value="#{restaurantBean.products}" var="product">
-								<ui:fragment rendered="#{product.category == category}">
-									<div class="row product-style" id="category">
-										<ui:fragment rendered="#{not empty product.image}">
-											<div class="col-md-2 col-sm-3 col-xs-4">
-												<img class="img-rounded" src="../resources/images/#{restaurantBean.restaurant.id}/#{product.image}" alt="#{product.image}" width="130"
-													height="100"></img>
-											</div>
-										</ui:fragment>
+										<div class="row cart-item" id="category">
+											<ui:fragment rendered="#{not empty product.image}">
+												<div class="col-md-2 col-sm-3 col-xs-4">
+													<img class="img-rounded" src="../resources/images/#{restaurantBean.restaurant.id}/#{product.image}"
+														alt="#{product.image}" width="130" height="100"></img>
+												</div>
+											</ui:fragment>
 
-										<div class=" col-md-8 col-sm-7 col-xs-8 size-description">
-											<div id="idProductName">
-												<h4>
-													<b>#{product.name}</b>
-												</h4>
+											<div class=" col-md-8 col-sm-7 col-xs-8 size-description">
+												<div id="idProductName">
+													<h4>
+														<b>#{product.name}</b>
+													</h4>
+												</div>
+												<div id="idProductDescription">
+													<p>(#{product.description})</p>
+												</div>
 											</div>
-											<div id="idProductDescription">
-												<p>(#{product.description})</p>
-											</div>
+
+											<ui:fragment rendered="#{not empty product.image}">
+												<div class=" col-md-2 col-sm-2 col-xs-12">
+													<div class="row">
+														<div class="pull-right">
+															#{product.price} RON
+															<ui:fragment rendered="#{not empty sessionBean.username}">
+																<a class="cart-add-button glyphicon glyphicon-plus size-plus" data-product-id="#{product.id}"
+																	data-product-name="#{product.name}" value="#{product.id}"> </a>
+															</ui:fragment>
+															<ui:fragment rendered="#{empty sessionBean.username}">
+																<a class="cart-add-error glyphicon glyphicon-plus size-plus"> </a>
+															</ui:fragment>
+														</div>
+													</div>
+												</div>
+											</ui:fragment>
+
+											<ui:fragment rendered="#{empty product.image}">
+												<div class=" col-md-4 col-sm-5 col-xs-12">
+													<div class="row">
+
+														<div class="pull-right">
+															#{product.price} RON
+															<ui:fragment rendered="#{not empty sessionBean.username}">
+																<a class="cart-add-button glyphicon glyphicon-plus size-plus" data-product-id="#{product.id}"
+																	data-product-name="#{product.name}" value="#{restaurantBean.productId}"> </a>
+															</ui:fragment>
+															<ui:fragment rendered="#{empty sessionBean.username}">
+																<a class="cart-add-error glyphicon glyphicon-plus size-plus"> </a>
+															</ui:fragment>
+														</div>
+													</div>
+												</div>
+											</ui:fragment>
+
 										</div>
-
-										<ui:fragment rendered="#{not empty product.image}">
-											<div class=" col-md-2 col-sm-2 col-xs-12">
-												<div class="row">
-													<div class="pull-right">
-														#{product.price} RON
-														<ui:fragment rendered="#{not empty sessionBean.username}">
-															<a class="cart-add-button glyphicon glyphicon-plus size-plus" data-product-id="#{product.id}"
-																data-product-name="#{product.name}" value="#{product.id}"> </a>
-														</ui:fragment>
-														<ui:fragment rendered="#{empty sessionBean.username}">
-															<a class="cart-add-error glyphicon glyphicon-plus size-plus"> </a>
-														</ui:fragment>
-													</div>
-												</div>
-											</div>
-										</ui:fragment>
-
-										<ui:fragment rendered="#{empty product.image}">
-											<div class=" col-md-4 col-sm-5 col-xs-12">
-												<div class="row">
-
-													<div class="pull-right">
-														#{product.price} RON
-														<ui:fragment rendered="#{not empty sessionBean.username}">
-															<a class="cart-add-button glyphicon glyphicon-plus size-plus" data-product-id="#{product.id}"
-																data-product-name="#{product.name}" value="#{restaurantBean.productId}"> </a>
-														</ui:fragment>
-														<ui:fragment rendered="#{empty sessionBean.username}">
-															<a class="cart-add-error glyphicon glyphicon-plus size-plus"> </a>
-														</ui:fragment>
-													</div>
-												</div>
-											</div>
-										</ui:fragment>
-
-									</div>
-								</ui:fragment>
-							</ui:repeat>
-
+									</ui:fragment>
+								</ui:repeat>
+							</div>
 						</ui:repeat>
 					</div>
-
 				</div>
+
+
 			</div>
 		</ui:define>
 

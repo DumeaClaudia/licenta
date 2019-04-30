@@ -14,7 +14,7 @@
 		<div class="container style-font" style="margin-top: 50px;">
 
 			<div class="row">
-				<div id="sidebar-left" class="col-2  col-lg-2 col-md-2 col-sm-12 col-xs-12">
+				<div id="sidebar-left" class="col-3  col-lg-3 col-md-3 col-sm-12 col-xs-12">
 					<h4>Comenzi finalizate:</h4>
 					<ui:repeat value="#{historyCartListBean.cartList}" var="cart" outcome="cart">
 						<ui:fragment rendered="#{cart.cartActive==false}">
@@ -43,7 +43,7 @@
 					</ui:repeat>
 				</div>
 
-				<div id="content-right" class="col-10 col-lg-10 col-md-10 col-sm-12 col-xs-12 container well" style="height:1250px ;">
+				<div id="content-right" class="col-9 col-lg-9 col-md-9 col-sm-12 col-xs-12 container well">
 					<div class="marketing">
 						<div class="row">
 							<div class="col-md-12">
@@ -72,40 +72,39 @@
 					</div>
 
 					<ui:repeat value="#{historyCartListBean.getCartDetails().restaurantProducts}" var="restaurant" outcome="restaurant">
-						<div class="well restaurant-well-content well-lg ">
-							<div class="row col-12">
-								<div class="col-md-10 col-sm-9 col-xs-8">
-									<h4>
-										<b><a href="restaurant.xhtml?id=#{restaurant.restaurantId}" class="rest-name">#{restaurant.restaurantName}</a></b>
-									</h4>
-								</div>
+						<div class="cart ">
+
+							<div class="cart-header row col-12">
+								<b><a href="restaurant.xhtml?id=#{restaurant.restaurantId}" class="rest-name">#{restaurant.restaurantName}</a></b>
 							</div>
 
-							<div class="row">
-								<br></br>
-								<ui:repeat value="#{restaurant.products}" var="product">
-									<div class="col-12 row">
-										<div>
+							<ui:repeat value="#{restaurant.products}" var="product">
+								<div class="cart-item">
+									<div class="row">
 
-											<ui:fragment rendered="#{not empty product.image}">
-												<div class="col-md-1 col-sm-3 col-xs-4">
-													<img class="" src="../resources/images/#{restaurant.restaurantId}/#{product.image}" alt="#{product.image}"
-														width="50" height="50" />
-												</div>
-											</ui:fragment>
-
-											<div>
-												#{product.nrProducts}x <b>#{product.name}</b>
+										<ui:fragment rendered="#{not empty product.image}">
+											<div class="col-md-1 col-sm-3 col-xs-4">
+												<img class="" src="../resources/images/#{restaurant.restaurantId}/#{product.image}" alt="#{product.image}"
+													width="50" height="50" />
 											</div>
+										</ui:fragment>
+										<div class="col-md-11 col-sm-9 col-xs-8">
 											<div class="pull-right">
 												<small>#{product.nrProducts}x <b> #{product.price} RON </b></small>
 											</div>
+											<div>
+												#{product.nrProducts}x <b>#{product.name}</b>
+											</div>
+
 											<div>(#{product.description})</div>
+
 										</div>
-										<br></br>
 									</div>
-								</ui:repeat>
-							</div>
+
+								</div>
+
+							</ui:repeat>
+
 
 
 						</div>
