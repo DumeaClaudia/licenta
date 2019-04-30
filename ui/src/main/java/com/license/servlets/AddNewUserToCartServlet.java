@@ -16,7 +16,7 @@ import com.license.User;
 import com.license.shoppingCart.ShoppingCartService;
 import com.license.user.UserService;
 
-public class GetSelectedUser extends HttpServlet {
+public class AddNewUserToCartServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 6101240663830324856L;
 	@EJB

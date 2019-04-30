@@ -19,10 +19,17 @@ $(document).ready(function() {
 
 	setInterval(function() {
 		displayComments();
+		displayUsers();
 	}, 1000);
 	
 	$("#comment-list").scrollTop($("#comment-list")[0].scrollHeight);
 });
+
+
+/*
+ * $(document).ready(function() { toastr.options = { onclick : function() {
+ * $("#sendCartModal").modal() } } });
+ */
 
 function displayComments(){
 	
@@ -81,6 +88,57 @@ function displayComments(){
 		}
 	});
 }
+
+
+function displayUsers(){
+	
+	$.ajax({
+		url : "../jsonservlet/get_users_cart",
+		type : 'GET',
+		dataType : 'json',
+		data : {},
+		contentType : 'application/json',
+		mimeType : 'application/json',
+
+		success : function(result) {
+
+				
+			/*
+			 * var scrollBottom = false; if (($("#comment-list")[0].scrollHeight -
+			 * $("#comment-list")[0].scrollTop) < 210) { scrollBottom = true; }
+			 * 
+			 * $("#comment-list").empty();
+			 */
+			$("#listUsers").empty();
+			$.each(	result,
+				function(index, user) {					
+										
+					var user_panel = $("<div />");
+					var div_list = $("<div/>");				
+					var div_username = $("<span><b>"+user.username+"</b></span>");
+					var div_price = $("<div class='pull-right'><small>"+user.price+" RON</small>");
+					
+					user_panel.append(div_list);
+					user_panel.append(div_username);
+					user_panel.append(div_price);
+					
+					$("#listUsers").append(user_panel);
+				
+			});
+			/*	
+			if (scrollBottom) {
+				$("#comment-list").scrollTop($("#comment-list")[0].scrollHeight);
+			}*/
+				
+		
+		},
+		error : function(data, status, er) {
+			console.log(data);
+			console.log(status);
+			console.log(er);
+		}
+	});
+}
 function validateAjaxRequest(request) {
 	$.ajax({
 		url : "../jsonservlet/current_cart_servlet",
@@ -95,7 +153,7 @@ function validateAjaxRequest(request) {
 				$("#cart-validation-message").text(result.message);
 			} else {
 				$("#cart-validation-message").text("");
-				$("#checkoutModal").modal('show');
+				/* $("#checkoutModal").modal('show'); */
 
 			}
 		},
@@ -125,6 +183,8 @@ function sendValue(value) {
 		mimeType : 'application/json',
 
 		success : function(result) {
+			displayUsers();
+			$('#addUser').val("");
 		},
 		error : function(data, status, er) {
 			console.log(data);

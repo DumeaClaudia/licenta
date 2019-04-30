@@ -28,7 +28,6 @@ public class GetAllCommentsServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-
 		response.setContentType("application/json");
 		ObjectMapper mapper = new ObjectMapper();
 
@@ -42,7 +41,6 @@ public class GetAllCommentsServlet extends HttpServlet {
 			jsonResponse = new ArrayList<CommentItem>();
 		}
 	
-
 		mapper.writeValue(response.getOutputStream(), jsonResponse);
 
 	}

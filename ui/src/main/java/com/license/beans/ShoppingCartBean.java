@@ -1,5 +1,6 @@
 package com.license.beans;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,6 +11,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
 import com.license.Comment;
@@ -146,10 +148,19 @@ public class ShoppingCartBean implements Serializable {
 	}
 
 	public long getUserId() {
-		if(this.userId!=0) {
+		if(this.userId != null && this.userId!=0) {
 			return this.userId;
 		}
-		return 0;
+		FacesContext context = FacesContext.getCurrentInstance();
+
+		ExternalContext extContext = context.getExternalContext();
+		try {
+			extContext.redirect(extContext.getRequestContextPath() + "/pages/home.xhtml");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		return 0; 
 	}
 
 	public void setUserId(long userId) {

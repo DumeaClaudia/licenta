@@ -13,7 +13,8 @@
 <ui:composition template="../template/template.xhtml">
 	<ui:define name="head">
 		<script src="../resources/js/currentCart.js"></script>
-	</ui:define>>
+	</ui:define>
+
 	<ui:define name="content">
 		<div class="container marketing style-font well" style="margin-top: 50px; height: 600px">
 
@@ -37,10 +38,14 @@
 								</ui:repeat>
 							</ui:repeat>
 						</ui:repeat>
-
 					</ui:repeat>
-					<br />
+					<br /> <br />
+
+					<button type="button" class="btn btn-block" data-toggle="modal" data-target="#sendCartModal">Trimite
+						Comanda</button>
+
 				</div>
+
 				<div class="col-md-6 well">
 
 					<button data-toggle="collapse" data-target="#collapseAddUser" aria-expanded="false" aria-controls="collapseAddUser"
@@ -59,7 +64,7 @@
 							<button id="addUser">AddUser</button>
 						</div>
 					</div>
-					<div>
+					<div id="listUsers">
 						<br />
 						<h5>Utilizatori:</h5>
 						<ui:repeat value="#{shoppingCartBean.getUserOrderDetails().keySet().toArray()}" var="keyUser">
@@ -67,7 +72,7 @@
 								<ui:repeat value="#{item.userDetails}" var="userDetails">
 									<div id="idUser">
 
-										<b>#{userDetails.username}</b>
+										<span><b>#{userDetails.username}</b></span>
 										<div class="pull-right">
 											<small>#{userDetails.price} RON </small>
 										</div>
@@ -86,8 +91,110 @@
 							Total: <b>#{shoppingCartBean.cartTotalPrice} RON</b>
 						</h5>
 					</div>
+
 				</div>
+
+
+				<!-- Modal checkout  -->
+				<div class="container style-font row">
+					<div class="modal fade" id="sendCartModal" role="dialog">
+						<div class="modal-dialog ">
+
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+								<h4 class="modal-title">Detalii livrare:</h4>
+							</div>
+
+							<div class="modal-content">
+								<div class="col- col-md-12">
+									<h:form>
+										<div class="output-group col-md-12 mb-3">
+											<br></br>
+											<div class="output" id="basic-addon1">
+												<h:outputText value="Utilizator: "></h:outputText>
+												<h:outputLabel value="#{sessionBean.username}">
+												</h:outputLabel>
+											</div>
+											<br />
+										</div>
+										<div>
+											<div class="col-md-5 mb-3">
+												<h:outputText value="Nume: "></h:outputText>
+												<h:inputText type="text" class="form-control user-first-name" id="firstName"
+													value="#{shoppingCartBean.firstName}">
+													<f:validateRequired />
+												</h:inputText>
+											</div>
+
+											<div class="col-md-5 mb-3">
+												<h:outputText value="Prenume: "></h:outputText>
+												<h:inputText type="text" class="form-control user-last-name" id="lastName"
+													value="#{shoppingCartBean.lastName}" required="true" />
+
+											</div>
+										</div>
+
+										<div>
+											<br />
+											<div class="col-md-5 mb-6">
+												<h:outputText value="Email:  "></h:outputText>
+												<h:inputText type="text" class="form-control user-email" id="email" value="#{shoppingCartBean.email}"
+													required="true" />
+											</div>
+
+											<div class="col-md-5 mb-6">
+												<h:outputText value="Telefon:  "></h:outputText>
+												<h:inputText type="text" class="form-control user-telephone" id="telefon"
+													value="#{shoppingCartBean.telephone}" required="true" />
+											</div>
+										</div>
+										<div>
+											<br />
+											<div class="col-md-10 mb-6">
+												<h:outputText value="Adresa:  "></h:outputText>
+												<h:inputText type="text" class="form-control user-address" id="adresa" value="#{shoppingCartBean.address}"
+													required="true" />
+											</div>
+										</div>
+										<div class="col-md-10 mb-6">
+											<br></br>
+											<h:form>
+												<h:outputText value="Plata:  "></h:outputText>
+
+												<h:selectOneRadio value="#{shoppingCartBean.payment}" layout="pageDirection">
+													<f:selectItems value="#{shoppingCartBean.paymentList}" class="user-payment" var="value"
+														itemLabel="#{value}" itemValue="{value}" />
+												</h:selectOneRadio>
+											</h:form>
+										</div>
+
+										<div class="col-md-10 mb-6">
+											<br />
+											<p id="cart-validation-message" style="color: #FF0000" />
+										</div>
+
+									</h:form>
+								</div>
+
+							</div>
+							<h:form>
+								<div class="modal-footer">
+									<div class="" id="validate-cart">
+										<br />
+										<button id="checkoutModal" class="btn btn-primary btn-block send-cart-details">Trimite comanda</button>
+
+									</div>
+								</div>
+							</h:form>
+
+						</div>
+					</div>
+				</div>
+
 			</div>
+
 			<!-- comment list -->
 			<div class=" well">
 				<div class="row">
@@ -122,9 +229,9 @@
 
 				</div>
 				<div class="row">
-					<div class="col-md-8">
-						<div class="input-group commentBox">
-							<input type="text" id="textComment" class=""/> <span class="">
+					<div class="col-md-8 ">
+						<div class="input-group comment-box">
+							<input type="text" id="textComment" class="" /> <span class="">
 								<button class="btn btn-default" id="sendComment" type="button">Send</button>
 							</span>
 						</div>

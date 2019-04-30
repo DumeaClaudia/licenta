@@ -80,7 +80,7 @@
 
 	<servlet>
 		<servlet-name>jsonservlet_get_selected_user</servlet-name>
-		<servlet-class>com.license.servlets.GetSelectedUser</servlet-class>
+		<servlet-class>com.license.servlets.AddNewUserToCartServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>jsonservlet_get_selected_user</servlet-name>
@@ -104,6 +104,17 @@
 		<servlet-name>jsonservlet_get_comments</servlet-name>
 		<url-pattern>/jsonservlet/get_comments</url-pattern>
 	</servlet-mapping>
+
+
+	<servlet>
+		<servlet-name>jsonservlet_get_users_cart</servlet-name>
+		<servlet-class>com.license.servlets.GetAllUsersForCartServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>jsonservlet_get_users_cart</servlet-name>
+		<url-pattern>/jsonservlet/get_users_cart</url-pattern>
+	</servlet-mapping>
+
 
 	<!-- Android authenticated -->
 
