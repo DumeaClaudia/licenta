@@ -18,7 +18,20 @@
 }
 
 .cart-item {
-	padding: 10px;
+	padding: 5px 10px 5px 25px;
+	margin-right: 0px;
+	margin-left: 0px;
+}
+
+.price-item{
+	padding-left: 20px;
+	padding-top: 10px;
+	margin-right: 0px;
+	margin-left: 0px;
+}
+.user-item {
+	padding-left: 20px;
+	padding-top: 10px;
 	border-top: 1px solid rgba(0, 0, 0, .125);
 	margin-right: 0px;
 	margin-left: 0px;

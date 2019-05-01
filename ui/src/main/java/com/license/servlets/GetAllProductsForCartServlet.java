@@ -67,13 +67,12 @@ public class GetAllProductsForCartServlet extends HttpServlet {
 
 				UsersCartItem usersCartItem = new UsersCartItem();
 				User user = userService.getUserById(idUser);
-			/*	Double price = CartDetailsItem
+				Double price = CartDetailsItem
 						.getCartDetailsItem(shoppingCartService, restaurantService, idUser, currentCart)
-						.getCartSummary().getTotalPrice();*/
-				/*UserOrderItem userOrderItem = new UserOrderItem(user.getUsername(), price);*/
+						.getCartSummary().getTotalPrice();
+
 				CartDetailsItem cartDetailsItem = CartDetailsItem.getCartDetailsItem(shoppingCartService,
 						restaurantService, idUser, currentCart);
-			/*	usersCartItem.setUserDetails(userOrderItem);*/
 				usersCartItem.setCartDetails(cartDetailsItem);
 
 				UserProductsItem usersProducts = new UserProductsItem();
@@ -94,12 +93,13 @@ public class GetAllProductsForCartServlet extends HttpServlet {
 						}
 					}
 					usersProducts.setUsername(user.getUsername());
+					usersProducts.setTotalPrice(price);
 					usersProducts.setCartDetails(productCartDetails);
 					usersCart.add(usersProducts);
 				}
 			}
 		}
-//		System.out.println("Servlet: GetAllProductsForCart: " + usersCart);
+		// System.out.println("Servlet: GetAllProductsForCart: " + usersCart);
 		return usersCart;
 	}
 }

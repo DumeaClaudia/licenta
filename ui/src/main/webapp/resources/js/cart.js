@@ -1,47 +1,258 @@
 $(document).ready(function() {
-	toastr.options = {
-		onclick : function() {
-			$("#myCartModal").modal()
-		}
-	}
+	$("#validate-cart").click(function() {
+		var validateCartRequest = new Object();
 
-	$(".cart-add-button").click(function() {
+		validateCartRequest.firstName = $(".user-first-name").val();
+		validateCartRequest.lastName = $(".user-last-name").val();
+		validateCartRequest.email = $(".user-email").val();
+		validateCartRequest.telephone = $(".user-telephone").val();
+		validateCartRequest.address = $(".user-address").val();
+		validateCartRequest.payment = $(".user-payment").val();
 
-		var productId = this.dataset.productId;
-		var productName = this.dataset.productName;
-		var addProductRequest = new Object();
-
-		addProductRequest.idProduct = productId;
-		addProductToCartAjaxRequest(addProductRequest);
-
+		validateAjaxRequest(validateCartRequest);
 		return false;
 	});
 
-	$(".cart-add-error").click(function() {
-		toastr.error("You have to login before added to cart...");
-		return false;
+	$('#checkoutModal').on('hide.bs.modal', function(e) {
+		location.assign("home.xhtml");
 	});
 
-	
+	setInterval(function() {
+		displayComments();
+		displayUsers();
+		displayProductsFromCart();
+	}, 1000);
+		
+	$("#comment-list").scrollTop($("#comment-list")[0].scrollHeight);
 });
 
-function addProductToCartAjaxRequest(request) {
-	var cartProductsRequest = new Object();
 
+function displayComments(){
+	
 	$.ajax({
-		url : "../jsonservlet/add_product_to_cart",
+		url : "../jsonservlet/get_comments",
+		type : 'GET',
+		dataType : 'json',
+		data : {},
+		contentType : 'application/json',
+		mimeType : 'application/json',
+
+		success : function(result) {
+
+				
+			var scrollBottom = false;
+			if (($("#comment-list")[0].scrollHeight - $("#comment-list")[0].scrollTop) < 210) {
+				scrollBottom = true;
+			}	
+				
+			$("#comment-list").empty();
+				
+			$.each(	result,
+				function(index, comment) {					
+										
+					var comment_panel = $("<div class='col-md-8 col-sm-10 panel panel-default arrow " +   (comment.ownComment ? 'col-md-offset-4 col-sm-offset-2': 'left') + "' />");
+					var header = $("<header class='text-left'/>");
+					var div_row = $("<div class='row'/>");
+					
+					var div_username = $("<div class='comment-user'><i class='fa fa-user'></i><small> " + comment.username +" </small></div>"); 
+					var div_description = $("<div class='comment-post'><p> " + comment.description + "</p></div>");
+					var div_time = $("<div class='comment-date'><small>" + comment.date +  "</small></div>");
+		
+					comment_panel.append(header);
+					comment_panel.append(div_row);
+
+					comment_panel.append(div_username);
+					comment_panel.append(div_description);
+					comment_panel.append(div_time);
+					
+					$("#comment-list").append(comment_panel);
+				
+			});
+				
+			if (scrollBottom) {
+				$("#comment-list").scrollTop($("#comment-list")[0].scrollHeight);
+			}
+				
+		
+		},
+		error : function(data, status, er) {
+			console.log(data);
+			console.log(status);
+			console.log(er);
+		}
+	});
+}
+
+
+function displayUsers(){
+	
+	$.ajax({
+		url : "../jsonservlet/get_users_cart",
+		type : 'GET',
+		dataType : 'json',
+		data : {},
+		contentType : 'application/json',
+		mimeType : 'application/json',
+
+		success : function(result) {
+
+			$("#listUsers").empty();
+			$.each(	result,
+				function(index, user) {					
+										
+					var user_panel = $("<div />");
+					var div_list = $("<div/>");				
+					var div_username = $("<span><b>"+user.username+"</b></span>");
+				/*	var div_price = $("<div class='pull-right'><small>"+(user.price).toFixed(2)+" RON</small>");*/
+					
+					user_panel.append(div_list);
+					user_panel.append(div_username);
+				/*	user_panel.append(div_price);*/
+					
+					$("#listUsers").append(user_panel);
+				
+			});		
+		},
+		error : function(data, status, er) {
+			console.log(data);
+			console.log(status);
+			console.log(er);
+		}
+	});
+}
+
+
+function displayProductsFromCart(){
+	
+	$.ajax({
+		url : "../jsonservlet/get_products_cart",
+		type : 'GET',
+		dataType : 'json',
+		data : {},
+		contentType : 'application/json',
+		mimeType : 'application/json',
+
+		success : function(result) {
+
+			$("#cartProductsList").empty();
+			var total = 0;
+			$.each(	result,
+				function(index, user) {					
+					var div_username = $("<div class='user-item'><b>"+user.username+"</b></div>");
+					$("#cartProductsList").append(div_username);
+					
+					$.each(	user.cartDetails,
+							function(index, product) {	
+				
+						var products_panel = $("<div class='cart-item'>");
+						var item_list = $("<span>"+product.nrProducts+"x "+product.productName+" <i> ("+product.restaurantName+" )</i></span>");				
+
+						var div_price = $("<span class='pull-right'>"+product.nrProducts+"x "+(product.price).toFixed(2)+" RON</span>");
+					
+						products_panel.append(item_list);
+						products_panel.append(div_price);
+					
+					$("#cartProductsList").append(products_panel);
+					});
+					
+					var div_user_price = $("<div class='price-item'>Subtotal: "+(user.totalPrice).toFixed(2)+" RON</div>");
+					total = total + +(user.totalPrice).toFixed(2);
+					$("#cartProductsList").append(div_user_price);
+			});
+			
+			var total_price = $("<div class='user-item cart-item'><b> Total: "+total.toFixed(2)+" RON</b></div>");
+			$("#priceTotalCart").append(total_price);
+		},
+		error : function(data, status, er) {
+			console.log(data);
+			console.log(status);
+			console.log(er);
+		}
+	});
+}
+
+function validateAjaxRequest(request) {
+	$.ajax({
+		url : "../jsonservlet/current_cart_servlet",
 		type : 'POST',
 		dataType : 'json',
 		data : JSON.stringify(request),
 		contentType : 'application/json',
 		mimeType : 'application/json',
 
-		success : function(data) {
-			toastr.info("Added to cart: " + data.product.name + ".");
+		success : function(result) {
+			if (result.valid == false) {
+				$("#cart-validation-message").text(result.message);
+			} else {
+				$("#cart-validation-message").text("");
 
-			getCartProductsAjaxRequest(cartProductsRequest);
+			}
+		},
+		error : function(data, status, er) {
 			console.log(data);
+			console.log(status);
+			console.log(er);
+		}
+	});
+}
 
+$(document).ready(function() {
+	$('#addUser').click(function() {
+		var selectedText = $("#selectedUser").val();
+				
+		$.ajax({
+			url : "../jsonservlet/get_selected_user",
+			type : 'POST',
+			dataType : 'json',
+			data : JSON.stringify(selectedText),
+			contentType : 'application/json',
+			mimeType : 'application/json',
+
+			success : function(result) {
+				displayUsers();
+				$('#addUser').val("");
+			},
+			error : function(data, status, er) {
+				console.log(data);
+				console.log(status);
+				console.log(er);
+			}
+		});
+	});
+});
+
+
+/* Add Comment */
+
+$(document).ready(function() {
+	$("#sendComment").click(addComment);
+	$("#textComment").keypress(function (e){
+		if ( e.keyCode == 13 ) {  // detect the enter key
+			addComment();
+		}
+	});
+});
+
+function addComment() {
+	var comment = $("#textComment").val();
+	$("#textComment").val("");
+	if (comment.trim() != "") {
+
+		sendCommentAjaxRequest(comment);
+	}
+	return false;
+}
+function sendCommentAjaxRequest(request) {
+	$.ajax({
+		url : "../jsonservlet/add_comment",
+		type : 'POST',
+		dataType : 'json',
+		data : JSON.stringify(request),
+		contentType : 'application/json',
+		mimeType : 'application/json',
+
+		success : function(result) {
+			displayComments();
 		},
 		error : function(data, status, er) {
 			console.log(data);

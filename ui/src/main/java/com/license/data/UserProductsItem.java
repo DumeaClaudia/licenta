@@ -5,6 +5,8 @@ import java.util.List;
 public class UserProductsItem {
 
 	private String username;
+	private Double totalPrice;
+	
 	List<ProductDetailsCartItem> cartDetails;
 
 	public String getUsername() {
@@ -21,6 +23,15 @@ public class UserProductsItem {
 
 	public void setCartDetails(List<ProductDetailsCartItem> cartDetails) {
 		this.cartDetails = cartDetails;
+	}
+	
+
+	public Double getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(Double totalPrice) {
+		this.totalPrice = totalPrice;
 	}
 
 	@Override

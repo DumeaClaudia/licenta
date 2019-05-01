@@ -18,7 +18,10 @@ $(document).ready(function() {
 	};
 
 	var carProductsRequest = new Object();
+	
 	getCartProductsAjaxRequest(carProductsRequest);
+	displayProductsFromCart();
+
 });
 
 function getCartProductsAjaxRequest(request) {
@@ -57,31 +60,17 @@ function getCartProductsAjaxRequest(request) {
 
 							$("#cart-products-list").append(div1);
 						});
-					
-					var minSum = 15.00;
-					var zero = 0;
-					if(total<30 && total!=0){
-						$("#delivery-price").text(minSum + " RON");
-						total = total + 15;
-					}
-					else{
-						$("#delivery-price").text(zero + " RON");
-					}
-
-					$("#total-price").text(total.toFixed(2) + " RON");
-					
+										
+					$("#total-price").text(total.toFixed(2) + " RON");					
 					$("#nr-products-cart").text(nrCartProducts);
 
 					$(".product-list-delete").click(
 							function() {
-
 								var productId = this.dataset.productId;
 								var productName = this.dataset.productName;								
 								
 								var removedProductRequest = new Object();
-
 								removedProductRequest.idProduct = productId;
-
 								removeProductFromCartAjaxRequest(
 										removedProductRequest, productName);
 
@@ -112,8 +101,66 @@ function removeProductFromCartAjaxRequest(request, product_name) {
 		success : function(data) {
 			toastr.info("Removed from cart: " + product_name + ".");
 
-			getCartProductsAjaxRequest(cartProductsRequest);
+			getCartProductsAjaxRequest(carProductsRequest);
+			displayProductsFromCart();//
+
 			console.log(data);
+		},
+		error : function(data, status, er) {
+			console.log(data);
+			console.log(status);
+			console.log(er);
+		}
+	});
+}
+
+
+$(document).ready(function() {
+	toastr.options = {
+		onclick : function() {
+			$("#myCartModal").modal()
+		}
+	}
+
+	$(".cart-add-button").click(function() {
+
+		var productId = this.dataset.productId;
+		var productName = this.dataset.productName;
+		var addProductRequest = new Object();
+
+		addProductRequest.idProduct = productId;
+		addProductToCartAjaxRequest(addProductRequest);
+
+		return false;
+	});
+
+	$(".cart-add-error").click(function() {
+		toastr.error("You have to login before added to cart...");
+		return false;
+	});
+
+	
+});
+
+function addProductToCartAjaxRequest(request) {
+	var cartProductsRequest = new Object();
+
+	$.ajax({
+		url : "../jsonservlet/add_product_to_cart",
+		type : 'POST',
+		dataType : 'json',
+		data : JSON.stringify(request),
+		contentType : 'application/json',
+		mimeType : 'application/json',
+
+		success : function(data) {
+			toastr.info("Added to cart: " + data.product.name + ".");
+		
+			getCartProductsAjaxRequest(carProductsRequest);
+			displayProductsFromCart();//
+		
+			console.log(data);
+
 		},
 		error : function(data, status, er) {
 			console.log(data);

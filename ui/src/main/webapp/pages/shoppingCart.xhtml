@@ -12,7 +12,7 @@
 
 <ui:composition template="../template/template.xhtml">
 	<ui:define name="head">
-		<script src="../resources/js/currentCart.js"></script>
+		<script src="../resources/js/cart.js"></script>
 	</ui:define>
 
 	<ui:define name="content">
@@ -39,10 +39,29 @@
 							</ui:repeat>
 						</ui:repeat> -->
 
+						<ui:repeat value="#{shoppingCartBean.getCartProductDetails()}" var="userDetails">
+							<div class="user-item">
+								<b>#{userDetails.username}</b>
+							</div>
+
+							<ui:repeat value="#{userDetails.cartDetails}" var="product">
+								<div class="cart-item">
+									<span>#{product.nrProducts}x #{product.productName} <i> (#{product.restaurantName} )</i></span> <span
+										class="pull-right">#{product.nrProducts}x #{product.price} RON</span>
+								</div>
+							</ui:repeat>
+
+							<div class="price-item">Subtotal: #{userDetails.totalPrice} RON</div>
+						</ui:repeat>
+
 					</div>
+					<div class="user-item cart-item">
+						<b>Total: #{shoppingCartBean.cartTotalPrice} RON</b>
+					</div>
+
+
 					<div class="row">
-						<br></br>
-						<br></br>
+						<br></br> <br></br>
 						<div class="col-sm-4">
 							<button data-toggle="collapse" data-target="#collapseAddUser" aria-expanded="false"
 								aria-controls="collapseAddUser" class="btn btn-block">Adauga persoana la comanda</button>
@@ -74,13 +93,13 @@
 								</ui:repeat>
 								<br />
 
-								<c:set var="totalPrice" scope="session" value="#{shoppingCartBean.getCartDetails().cartSummary.totalPrice-15}" />
+								<!-- <c:set var="totalPrice" scope="session" value="#{shoppingCartBean.getCartDetails().cartSummary.totalPrice-15}" />
 								<c:if test="${totalPrice lt 30}">
 									<small>*Taxa livrare: 15.00 RON*</small>
-								</c:if>
+								</c:if> -->
 
 								<h5>
-									Total: <b>#{shoppingCartBean.cartTotalPrice} RON</b>
+									Total: <b>#{shoppingCartBean.totalPrice} RON</b>
 								</h5>
 							</div>
 

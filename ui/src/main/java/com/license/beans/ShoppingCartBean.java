@@ -18,7 +18,11 @@ import com.license.Comment;
 import com.license.User;
 import com.license.data.CartDetailsItem;
 import com.license.data.CommentItem;
+import com.license.data.ProductDetailsCartItem;
+import com.license.data.ProductDetailsItem;
+import com.license.data.RestaurantProductsItem;
 import com.license.data.UserOrderItem;
+import com.license.data.UserProductsItem;
 import com.license.data.UsersCartItem;
 import com.license.restaurant.RestaurantService;
 import com.license.shoppingCart.ShoppingCartService;
@@ -31,9 +35,8 @@ public class ShoppingCartBean implements Serializable {
 	private static final long serialVersionUID = 8618627595602029032L;
 
 	private Long userId;
-
+	private double totalPrice;
 	private double cartTotalPrice;
-
 	private List<String> remainingUsers;
 
 	@EJB
@@ -66,7 +69,7 @@ public class ShoppingCartBean implements Serializable {
 			List<Long> usersIds = userService.getUsersIds(currentCart);
 
 			remainingUsers = getUsersName(usersIds);
-			cartTotalPrice = 0.00;
+			totalPrice = 0.00;
 
 			for (Long idUser : usersIds) {
 				UsersCartItem usersCartItem = new UsersCartItem();
@@ -80,13 +83,61 @@ public class ShoppingCartBean implements Serializable {
 				usersCartItem.setUserDetails(userOrderItem);
 				usersCartItem.setCartDetails(cartDetailsItem);
 
-				cartTotalPrice += cartDetailsItem.getCartSummary().getTotalPrice();
+				totalPrice += cartDetailsItem.getCartSummary().getTotalPrice();
 
 				usersCart.put(user.getUsername(), usersCartItem);
 
 			}
 		}
 
+		return usersCart;
+	}
+
+	public List<UserProductsItem> getCartProductDetails() {
+		List<UserProductsItem> usersCart = new ArrayList<UserProductsItem>();
+		cartTotalPrice = 0.00;
+		if (userId != null) {
+			Long currentCart = (shoppingCartService.getCurrentCart(userId));
+			List<Long> usersIds = userService.getUsersIds(currentCart);
+
+			for (Long idUser : usersIds) {
+
+				UsersCartItem usersCartItem = new UsersCartItem();
+				User user = userService.getUserById(idUser);
+				Double price = CartDetailsItem
+						.getCartDetailsItem(shoppingCartService, restaurantService, idUser, currentCart)
+						.getCartSummary().getTotalPrice();
+
+				CartDetailsItem cartDetailsItem = CartDetailsItem.getCartDetailsItem(shoppingCartService,
+						restaurantService, idUser, currentCart);
+				usersCartItem.setCartDetails(cartDetailsItem);
+
+				UserProductsItem usersProducts = new UserProductsItem();
+				List<RestaurantProductsItem> restaurantItems = cartDetailsItem.getRestaurantProducts();
+
+				if (cartDetailsItem != null && restaurantItems != null) {
+					List<ProductDetailsCartItem> productCartDetails = new ArrayList<ProductDetailsCartItem>();
+
+					for (RestaurantProductsItem restaurantProducts : restaurantItems) {
+						for (ProductDetailsItem product : restaurantProducts.getProducts()) {
+							ProductDetailsCartItem productDetails = new ProductDetailsCartItem();
+
+							productDetails.setProductName(product.getName());
+							productDetails.setNrProducts(product.getNrProducts());
+							productDetails.setPrice(product.getPrice());
+							productDetails.setRestaurantName(restaurantProducts.getRestaurantName());
+							productCartDetails.add(productDetails);
+						}
+					}
+					usersProducts.setUsername(user.getUsername());
+					usersProducts.setTotalPrice(price);
+					usersProducts.setCartDetails(productCartDetails);
+					usersCart.add(usersProducts);
+
+					cartTotalPrice += price;
+				}
+			}
+		}
 		return usersCart;
 	}
 
@@ -221,6 +272,14 @@ public class ShoppingCartBean implements Serializable {
 
 	public void setPaymentList(List<String> paymentList) {
 		this.paymentList = paymentList;
+	}
+
+	public double getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(double totalPrice) {
+		this.totalPrice = totalPrice;
 	}
 
 	public double getCartTotalPrice() {

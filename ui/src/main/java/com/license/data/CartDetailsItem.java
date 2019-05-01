@@ -31,9 +31,9 @@ public class CartDetailsItem {
 		if (cartSummary != null) {
 			double price = 0;
 			price = cartSummary.getTotalPrice();
-			if (price != 0 && price < 30) {
+			/*if (price != 0 && price < 30) {
 				cartSummary.setTotalPrice(price + 15);
-			}
+			}*/
 			return cartSummary;
 		}
 		return new CartSummaryItem();
