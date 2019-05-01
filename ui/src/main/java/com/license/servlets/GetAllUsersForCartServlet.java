@@ -55,9 +55,6 @@ public class GetAllUsersForCartServlet extends HttpServlet {
 	public List<UserOrderItem> getUserOrderDetails(Long userId) {
 		List<UserOrderItem> userDetails = new ArrayList<>();
 
-
-		
-
 		if (userId != null) {
 			Long currentCart = (shoppingCartService.getCurrentCart(userId));
 			List<Long> usersIds = userService.getUsersIds(currentCart);

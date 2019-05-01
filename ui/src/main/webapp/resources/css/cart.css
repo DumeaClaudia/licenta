@@ -9,7 +9,7 @@ html, body {
 	max-width: 	800px;
 }
 
-#cart-products-list {
+.product-list-cart {
 	margin-top: 40px;
 }
 

@@ -136,7 +136,7 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 		em.getTransaction().begin();
 		em.persist(cartProductsEntity);
 		em.getTransaction().commit();
-
+		em.clear();
 		long id = cartProductsEntity.getId();
 		return id;
 	}
@@ -161,7 +161,7 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 			break;
 		}
 		// em.persist(shoppingCartProductsEntity);
-
+		em.clear();
 	}
 
 	public void removeProductFromCurrentCart(long idUser, long idProduct, long idShoppingCart) {
@@ -191,6 +191,7 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 		}
 
 		em.getTransaction().commit();
+		em.clear();
 
 	}
 
@@ -214,6 +215,7 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 			break;
 		}
 		// em.persist(shoppingCartProductsEntity);
+		em.clear();
 
 	}
 

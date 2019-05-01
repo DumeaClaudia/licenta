@@ -5,9 +5,6 @@ import java.io.Serializable;
 public class Product implements Serializable {
 
 	private static final long serialVersionUID = -7806479188518932436L;
-	//TODO in android:
-	// am de trimis id-urile, gen cand dau click.
-	// de adaugat idRestaurant in restaurantDetails..sau cum era.. si in Product
 	
 	private long id;
 	private long idRestaurant;
@@ -137,7 +134,16 @@ public class Product implements Serializable {
 		if (Double.doubleToLongBits(price) != Double.doubleToLongBits(other.price))
 			return false;
 		return true;
-	}	
-	
-	
+	}
+
+	@Override
+	public String toString() {
+		return "Product [id=" + id + ", idRestaurant=" + idRestaurant + ", image=" + image + ", name=" + name
+				+ ", category=" + category + ", description=" + description + ", price=" + price + ", discount="
+				+ discount + ", getName()=" + getName() + ", getDescription()=" + getDescription() + ", getPrice()="
+				+ getPrice() + ", getDiscount()=" + getDiscount() + ", getId()=" + getId() + ", getCategory()="
+				+ getCategory() + ", getImage()=" + getImage() + ", getIdRestaurant()=" + getIdRestaurant()
+				+ ", toString()=" + super.toString() + "]";
+	}
+
 }

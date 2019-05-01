@@ -116,6 +116,16 @@
 	</servlet-mapping>
 
 
+	<servlet>
+		<servlet-name>jsonservlet_get_products_cart</servlet-name>
+		<servlet-class>com.license.servlets.GetAllProductsForCartServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>jsonservlet_get_products_cart</servlet-name>
+		<url-pattern>/jsonservlet/get_products_cart</url-pattern>
+	</servlet-mapping>
+
+
 	<!-- Android authenticated -->
 
 	<filter>

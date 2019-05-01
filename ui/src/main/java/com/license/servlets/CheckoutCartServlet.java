@@ -3,6 +3,7 @@ package com.license.servlets;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -14,15 +15,15 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.license.CurrentCartRequest;
 import com.license.ValidationResponse;
 import com.license.shoppingCart.ShoppingCartService;
+import com.license.user.UserService;
 
 public class CheckoutCartServlet extends HttpServlet {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -741385148657302336L;
 	@EJB
 	ShoppingCartService shoppingCartService;
+	@EJB
+	UserService userService;
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -51,13 +52,17 @@ public class CheckoutCartServlet extends HttpServlet {
 		} else {
 			jsonResponse.setMessage("ok");
 			jsonResponse.setValid(true);
-			
+
 			long idUser = (Long) request.getSession().getAttribute("userId");
 			Long currentCart = shoppingCartService.getCurrentCart(idUser);
 
-			//TODO de adaugat pt toti userii din cart....
-			
-			shoppingCartService.updateDateForCartAfterCheckout(idUser, currentCart);
+			// TODO de adaugat pt toti userii din cart....
+			List<Long> usersIds = userService.getUsersIds(currentCart);
+
+			for (Long userId : usersIds) {
+				// TODO de verificat daca idUser se afla in lista de usersIds
+				shoppingCartService.updateDateForCartAfterCheckout(userId, currentCart);
+			}
 		}
 
 		mapper.writeValue(response.getOutputStream(), jsonResponse);

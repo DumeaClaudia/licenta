@@ -20,16 +20,12 @@ $(document).ready(function() {
 	setInterval(function() {
 		displayComments();
 		displayUsers();
+		displayProductsFromCart();
 	}, 1000);
 	
 	$("#comment-list").scrollTop($("#comment-list")[0].scrollHeight);
 });
 
-
-/*
- * $(document).ready(function() { toastr.options = { onclick : function() {
- * $("#sendCartModal").modal() } } });
- */
 
 function displayComments(){
 	
@@ -102,13 +98,6 @@ function displayUsers(){
 
 		success : function(result) {
 
-				
-			/*
-			 * var scrollBottom = false; if (($("#comment-list")[0].scrollHeight -
-			 * $("#comment-list")[0].scrollTop) < 210) { scrollBottom = true; }
-			 * 
-			 * $("#comment-list").empty();
-			 */
 			$("#listUsers").empty();
 			$.each(	result,
 				function(index, user) {					
@@ -124,13 +113,7 @@ function displayUsers(){
 					
 					$("#listUsers").append(user_panel);
 				
-			});
-			/*	
-			if (scrollBottom) {
-				$("#comment-list").scrollTop($("#comment-list")[0].scrollHeight);
-			}*/
-				
-		
+			});		
 		},
 		error : function(data, status, er) {
 			console.log(data);
@@ -139,6 +122,49 @@ function displayUsers(){
 		}
 	});
 }
+
+
+function displayProductsFromCart(){
+	
+	$.ajax({
+		url : "../jsonservlet/get_products_cart",
+		type : 'GET',
+		dataType : 'json',
+		data : {},
+		contentType : 'application/json',
+		mimeType : 'application/json',
+
+		success : function(result) {
+
+			$("#cartProductsList").empty();
+			$.each(	result,
+				function(index, user) {					
+					var div_username = $("<div><b>"+user.username+"</b></div>");
+					$("#cartProductsList").append(div_username);
+					
+					$.each(	user.cartDetails,
+							function(index, product) {	
+				
+						var products_panel = $("<div class='cart-item'>");
+						var item_list = $("<span>"+product.nrProducts+"x <b>"+product.productName+"</b><i> ("+product.restaurantName+" )</i></span>");				
+						var div_price = $("<span class='pull-right'><small>"+product.nrProducts+"x <b>"+product.price+"</b> RON</small></span>");
+					
+						products_panel.append(item_list);
+						products_panel.append(div_price);
+					
+					$("#cartProductsList").append(products_panel);
+					});
+				
+			});		
+		},
+		error : function(data, status, er) {
+			console.log(data);
+			console.log(status);
+			console.log(er);
+		}
+	});
+}
+
 function validateAjaxRequest(request) {
 	$.ajax({
 		url : "../jsonservlet/current_cart_servlet",
@@ -153,7 +179,6 @@ function validateAjaxRequest(request) {
 				$("#cart-validation-message").text(result.message);
 			} else {
 				$("#cart-validation-message").text("");
-				/* $("#checkoutModal").modal('show'); */
 
 			}
 		},

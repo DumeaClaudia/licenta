@@ -20,12 +20,10 @@
 
 			<div class="row">
 				<div class=" col-sm-12">
-					<div id="cart-products-list" class="cart">
-						<div class="cart-header">Lista produselor din cos:</div>
-
-
-						<ui:repeat value="#{shoppingCartBean.getUserOrderDetails().keySet().toArray()}" var="keyUser" outcome="restaurant">
-							<!-- <b>#{keyUser}</b> -->
+					<div class="cart-header product-list-cart">Lista produselor din cos:</div>
+					<div id="cartProductsList" class="cart">
+						<!-- <ui:repeat value="#{shoppingCartBean.getUserOrderDetails().keySet().toArray()}" var="keyUser" outcome="restaurant">
+							<b>#{keyUser}</b>
 							<ui:repeat value="#{shoppingCartBean.getUserOrderDetails()[keyUser]}" var="cart">
 								<ui:repeat value="#{cart.cartDetails.restaurantProducts}" var="restaurant">
 									<ui:repeat value="#{restaurant.products}" var="product">
@@ -39,11 +37,12 @@
 									</ui:repeat>
 								</ui:repeat>
 							</ui:repeat>
-						</ui:repeat>
+						</ui:repeat> -->
 
 					</div>
 					<div class="row">
-					<br></br><br></br>
+						<br></br>
+						<br></br>
 						<div class="col-sm-4">
 							<button data-toggle="collapse" data-target="#collapseAddUser" aria-expanded="false"
 								aria-controls="collapseAddUser" class="btn btn-block">Adauga persoana la comanda</button>

@@ -3,6 +3,8 @@ package com.license.servlets;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Date;
+
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -55,7 +57,6 @@ public class AddProductToCartServlet extends HttpServlet {
 
 		Long currentCart = shoppingCartService.getCurrentCart(idUser);
 
-		// TODO change logic for activeCart
 		Long productID = jsonRequest.getIdProduct();
 		Product product = shoppingCartService.getProduct(productID);
 
@@ -64,13 +65,12 @@ public class AddProductToCartServlet extends HttpServlet {
 		}
 
 		int nrProducts = shoppingCartService.getNumberOfProducts(idUser, productID, currentCart);
-
+		
 		if (nrProducts == 0) {
 			shoppingCartService.addProductToCart(idUser, productID, currentCart);
 		} else {
 			shoppingCartService.updateNumberOfProducts(idUser, productID, currentCart, nrProducts + 1);
 		}
-		System.out.println(product);
 
 		jsonResponse.setProduct(product);
 

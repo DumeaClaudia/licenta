@@ -56,4 +56,15 @@ public class CurrentCartDetails {
 	public void setPrice(double price) {
 		this.price = price;
 	}
+
+	@Override
+	public String toString() {
+		return "CurrentCartDetails [idProduct=" + idProduct + ", idShoppingCart=" + idShoppingCart + ", nameProduct="
+				+ nameProduct + ", nameRestaurant=" + nameRestaurant + ",\n NR_PRODUCTS=" + nrProducts + "\n, price=" + price
+				+ ", getIdProduct()=" + getIdProduct() + ", getIdShoppingCart()=" + getIdShoppingCart()
+				+ ", getNameProduct()=" + getNameProduct() + ", getNameRestaurant()=" + getNameRestaurant()
+				+ ", getNrProducts()=" + getNrProducts() + ", getPrice()=" + getPrice() + ", toString()=" + super.toString() + "]";
+	}
+	
+	
 }
