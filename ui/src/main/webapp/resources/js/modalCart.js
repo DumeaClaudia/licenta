@@ -20,10 +20,11 @@ $(document).ready(function() {
 	var carProductsRequest = new Object();
 	
 	getCartProductsAjaxRequest(carProductsRequest);
-	displayProductsFromCart();
+	/*displayProductsFromCart();*/
 
 });
 
+	/*Products from modal cart*/
 function getCartProductsAjaxRequest(request) {
 
 	$.ajax({
@@ -99,9 +100,9 @@ function removeProductFromCartAjaxRequest(request, product_name) {
 		mimeType : 'application/json',
 
 		success : function(data) {
-			toastr.info("Removed from cart: " + product_name + ".");
+			toastr.success("Removed from cart: " + product_name + ".");
 
-			getCartProductsAjaxRequest(carProductsRequest);
+			getCartProductsAjaxRequest(data);
 			displayProductsFromCart();//
 
 			console.log(data);
@@ -154,9 +155,9 @@ function addProductToCartAjaxRequest(request) {
 		mimeType : 'application/json',
 
 		success : function(data) {
-			toastr.info("Added to cart: " + data.product.name + ".");
+			toastr.success("Added to cart: " + data.product.name + ".");
 		
-			getCartProductsAjaxRequest(carProductsRequest);
+			getCartProductsAjaxRequest(data);
 			displayProductsFromCart();//
 		
 			console.log(data);

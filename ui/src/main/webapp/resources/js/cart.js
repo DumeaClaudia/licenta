@@ -1,4 +1,26 @@
 $(document).ready(function() {
+
+	toastr.options = {
+		"closeButton" : true,
+		"debug" : true,
+		"newestOnTop" : true,
+		"progressBar" : true,
+		"positionClass" : "toast-top-right",
+		"preventDuplicates" : true,
+		"showDuration" : "80000",
+		"hideDuration" : "2000",
+		"timeOut" : "5000",
+		"extendedTimeOut" : "1000",
+		"showEasing" : "swing",
+		"hideEasing" : "linear",
+		"showMethod" : "fadeIn",
+		"hideMethod" : "fadeOut"
+	};
+
+});
+
+
+$(document).ready(function() {
 	$("#validate-cart").click(function() {
 		var validateCartRequest = new Object();
 
@@ -9,7 +31,7 @@ $(document).ready(function() {
 		validateCartRequest.address = $(".user-address").val();
 		validateCartRequest.payment = $(".user-payment").val();
 
-		validateAjaxRequest(validateCartRequest);
+		validateUserDataBeforeCheckout(validateCartRequest);
 		return false;
 	});
 
@@ -20,12 +42,37 @@ $(document).ready(function() {
 	setInterval(function() {
 		displayComments();
 		displayUsers();
-		displayProductsFromCart();
+		/*displayProductsFromCart();*/
 	}, 1000);
+	
 		
 	$("#comment-list").scrollTop($("#comment-list")[0].scrollHeight);
 });
 
+function validateUserDataBeforeCheckout(request) {
+	$.ajax({
+		url : "../jsonservlet/current_cart_servlet",
+		type : 'POST',
+		dataType : 'json',
+		data : JSON.stringify(request),
+		contentType : 'application/json',
+		mimeType : 'application/json',
+
+		success : function(result) {
+			if (result.valid == false) {
+				$("#cart-validation-message").text(result.message);
+			} else {
+				$("#cart-validation-message").text("");
+
+			}
+		},
+		error : function(data, status, er) {
+			console.log(data);
+			console.log(status);
+			console.log(er);
+		}
+	});
+}
 
 function displayComments(){
 	
@@ -50,14 +97,14 @@ function displayComments(){
 			$.each(	result,
 				function(index, comment) {					
 										
-					var comment_panel = $("<div class='col-md-8 col-sm-10 panel panel-default arrow " +   (comment.ownComment ? 'col-md-offset-4 col-sm-offset-2': 'left') + "' />");
+					var comment_panel = $("<div class='col-md-8 col-sm-10 box-color panel panel-default arrow " +   (comment.ownComment ? 'col-md-offset-4 col-sm-offset-2': 'left') + "' />");
 					var header = $("<header class='text-left'/>");
 					var div_row = $("<div class='row'/>");
 					
 					var div_username = $("<div class='comment-user'><i class='fa fa-user'></i><small> " + comment.username +" </small></div>"); 
 					var div_description = $("<div class='comment-post'><p> " + comment.description + "</p></div>");
 					var div_time = $("<div class='comment-date'><small>" + comment.date +  "</small></div>");
-		
+					
 					comment_panel.append(header);
 					comment_panel.append(div_row);
 
@@ -100,14 +147,14 @@ function displayUsers(){
 			$.each(	result,
 				function(index, user) {					
 										
-					var user_panel = $("<div />");
+					var user_panel = $("<div class='user-row'/>");
 					var div_list = $("<div/>");				
 					var div_username = $("<span><b>"+user.username+"</b></span>");
-				/*	var div_price = $("<div class='pull-right'><small>"+(user.price).toFixed(2)+" RON</small>");*/
+					var div_price = $("<div class='pull-right'><b>"+(user.price).toFixed(2)+" RON</b>");
 					
 					user_panel.append(div_list);
 					user_panel.append(div_username);
-				/*	user_panel.append(div_price);*/
+					user_panel.append(div_price);
 					
 					$("#listUsers").append(user_panel);
 				
@@ -144,7 +191,7 @@ function displayProductsFromCart(){
 					$.each(	user.cartDetails,
 							function(index, product) {	
 				
-						var products_panel = $("<div class='cart-item'>");
+						var products_panel = $("<div class='cart-row'>");
 						var item_list = $("<span>"+product.nrProducts+"x "+product.productName+" <i> ("+product.restaurantName+" )</i></span>");				
 
 						var div_price = $("<span class='pull-right'>"+product.nrProducts+"x "+(product.price).toFixed(2)+" RON</span>");
@@ -152,7 +199,8 @@ function displayProductsFromCart(){
 						products_panel.append(item_list);
 						products_panel.append(div_price);
 					
-					$("#cartProductsList").append(products_panel);
+
+						$("#cartProductsList").append(products_panel);
 					});
 					
 					var div_user_price = $("<div class='price-item'>Subtotal: "+(user.totalPrice).toFixed(2)+" RON</div>");
@@ -160,7 +208,7 @@ function displayProductsFromCart(){
 					$("#cartProductsList").append(div_user_price);
 			});
 			
-			var total_price = $("<div class='user-item cart-item'><b> Total: "+total.toFixed(2)+" RON</b></div>");
+			var total_price = $("<div class='user-item cart-row'><b> Total: "+total.toFixed(2)+" RON</b></div>");
 			$("#priceTotalCart").append(total_price);
 		},
 		error : function(data, status, er) {
@@ -171,30 +219,7 @@ function displayProductsFromCart(){
 	});
 }
 
-function validateAjaxRequest(request) {
-	$.ajax({
-		url : "../jsonservlet/current_cart_servlet",
-		type : 'POST',
-		dataType : 'json',
-		data : JSON.stringify(request),
-		contentType : 'application/json',
-		mimeType : 'application/json',
 
-		success : function(result) {
-			if (result.valid == false) {
-				$("#cart-validation-message").text(result.message);
-			} else {
-				$("#cart-validation-message").text("");
-
-			}
-		},
-		error : function(data, status, er) {
-			console.log(data);
-			console.log(status);
-			console.log(er);
-		}
-	});
-}
 
 $(document).ready(function() {
 	$('#addUser').click(function() {
@@ -237,7 +262,7 @@ function addComment() {
 	var comment = $("#textComment").val();
 	$("#textComment").val("");
 	if (comment.trim() != "") {
-
+		toastr.info("Cineva a adaugat un comentariu nou! ");
 		sendCommentAjaxRequest(comment);
 	}
 	return false;
@@ -252,6 +277,7 @@ function sendCommentAjaxRequest(request) {
 		mimeType : 'application/json',
 
 		success : function(result) {
+		
 			displayComments();
 		},
 		error : function(data, status, er) {
@@ -261,3 +287,54 @@ function sendCommentAjaxRequest(request) {
 		}
 	});
 }
+
+/*$(function () {
+	$('[data-toggle="tooltip"]').tooltip()
+})
+	*/
+
+/*--------------------------------------------------------------------------------------------------------------------------------*/
+$('.form').find('input, textarea').on('keyup blur focus', function (e) {
+	  
+	  var $this = $(this),
+	      label = $this.prev('label');
+
+		  if (e.type === 'keyup') {
+				if ($this.val() === '') {
+	          label.removeClass('active highlight');
+	        } else {
+	          label.addClass('active highlight');
+	        }
+	    } else if (e.type === 'blur') {
+	    	if( $this.val() === '' ) {
+	    		label.removeClass('active highlight'); 
+				} else {
+			    label.removeClass('highlight');   
+				}   
+	    } else if (e.type === 'focus') {
+	      
+	      if( $this.val() === '' ) {
+	    		label.removeClass('highlight'); 
+				} 
+	      else if( $this.val() !== '' ) {
+			    label.addClass('highlight');
+				}
+	    }
+
+	});
+
+	$('.tab a').on('click', function (e) {
+	  
+	  e.preventDefault();
+	  
+	  $(this).parent().addClass('active');
+	  $(this).parent().siblings().removeClass('active');
+	  
+	  target = $(this).attr('href');
+
+	  $('.tab-content > div').not(target).hide();
+	  
+	  $(target).fadeIn(600);
+	  
+	});
+	

@@ -61,7 +61,7 @@ public class GetCartProductsServlet extends HttpServlet {
 				currentCartId = shoppingCartService.createNewCartForUser(idUser);
 			}
 			
-			cartProducts = shoppingCartService.getCartProductsForUser(idUser, currentCartId);
+  			cartProducts = shoppingCartService.getCartProductsForUser(idUser, currentCartId);
 
 			for (ShoppingCartProducts shoppingCartProduct : cartProducts) {
 

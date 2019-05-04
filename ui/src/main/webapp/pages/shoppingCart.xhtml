@@ -17,35 +17,18 @@
 
 	<ui:define name="content">
 		<div id="shopping-cart-content" class="container marketing style-font well">
-
+		
 			<div class="row">
-				<div class=" col-sm-12">
+				<div class="col-sm-12">
 					<div class="cart-header product-list-cart">Lista produselor din cos:</div>
 					<div id="cartProductsList" class="cart">
-						<!-- <ui:repeat value="#{shoppingCartBean.getUserOrderDetails().keySet().toArray()}" var="keyUser" outcome="restaurant">
-							<b>#{keyUser}</b>
-							<ui:repeat value="#{shoppingCartBean.getUserOrderDetails()[keyUser]}" var="cart">
-								<ui:repeat value="#{cart.cartDetails.restaurantProducts}" var="restaurant">
-									<ui:repeat value="#{restaurant.products}" var="product">
-										<div class="cart-item" id="idProductName">
-											<b>(#{keyUser})</b> #{product.nrProducts}x <b>#{product.name}</b> (<i>#{restaurant.restaurantName}</i>)
-											<div class="pull-right">
-												<small>#{product.nrProducts}x <b>#{product.price}</b> RON
-												</small>
-											</div>
-										</div>
-									</ui:repeat>
-								</ui:repeat>
-							</ui:repeat>
-						</ui:repeat> -->
-
 						<ui:repeat value="#{shoppingCartBean.getCartProductDetails()}" var="userDetails">
 							<div class="user-item">
 								<b>#{userDetails.username}</b>
 							</div>
 
 							<ui:repeat value="#{userDetails.cartDetails}" var="product">
-								<div class="cart-item">
+								<div class="cart-row">
 									<span>#{product.nrProducts}x #{product.productName} <i> (#{product.restaurantName} )</i></span> <span
 										class="pull-right">#{product.nrProducts}x #{product.price} RON</span>
 								</div>
@@ -55,126 +38,73 @@
 						</ui:repeat>
 
 					</div>
-					<div class="user-item cart-item">
+					<div class="user-item cart-row">
 						<b>Total: #{shoppingCartBean.cartTotalPrice} RON</b>
 					</div>
 
 
 					<div class="row">
 						<br></br> <br></br>
-						<div class="col-sm-4">
-							<button data-toggle="collapse" data-target="#collapseAddUser" aria-expanded="false"
-								aria-controls="collapseAddUser" class="btn btn-block">Adauga persoana la comanda</button>
+
+						<div class="col-sm-12">
+							<button type="button" class="btn btn-block" data-toggle="modal" data-target="#sendCartModal">
+								<h4>Trimite Comanda</h4>
+							</button>
 						</div>
-						<div class="col-sm-8">
-
-							<button type="button" class="btn btn-block" data-toggle="modal" data-target="#sendCartModal">Trimite
-								Comanda</button>
-						</div>
-
-
-
-						<div class="col-sm-8  row collapse" id="collapseAddUser">
-							<div id="listUsers" class="col-sm-12">
-								<br />
-								<h5>Utilizatori:</h5>
-								<ui:repeat value="#{shoppingCartBean.getUserOrderDetails().keySet().toArray()}" var="keyUser">
-									<ui:repeat value="#{shoppingCartBean.getUserOrderDetails()[keyUser]}" var="item" outcome="cart">
-										<ui:repeat value="#{item.userDetails}" var="userDetails">
-											<div id="idUser">
-
-												<span><b>#{userDetails.username}</b></span>
-												<div class="pull-right">
-													<small>#{userDetails.price} RON </small>
-												</div>
-											</div>
-										</ui:repeat>
-									</ui:repeat>
-								</ui:repeat>
-								<br />
-
-								<!-- <c:set var="totalPrice" scope="session" value="#{shoppingCartBean.getCartDetails().cartSummary.totalPrice-15}" />
-								<c:if test="${totalPrice lt 30}">
-									<small>*Taxa livrare: 15.00 RON*</small>
-								</c:if> -->
-
-								<h5>
-									Total: <b>#{shoppingCartBean.totalPrice} RON</b>
-								</h5>
-							</div>
-
-							<br></br>
-							<div class="col-sm-8">
-								<select class="form-control" id="selectedUser">
-									<ui:repeat var="username" value="#{shoppingCartBean.remainingUsers}">
-										<option value="#{username}">#{username}</option>
-									</ui:repeat>
-								</select>
-							</div>
-							<div class="col-sm-2">
-								<button class="btn" id="addUser">AddUser</button>
-							</div>
-						</div>
-
-
 					</div>
 
-				</div>
+					<!-- comment list -->
+					<div id="cart-comments" class="cart-item col-md-7 col-sm-7">
+						<div class="panel panel-default">
+							<div class="panel-heading">Comentarii cos:</div>
+							<div class="row panel-body">
+								<div id="comment-list" class="scrollable">
+									<ui:repeat value="#{shoppingCartBean.allComments}" var="comment">
+										<div class="row">
+											<div
+												class="col-md-8 col-sm-8 box-color panel panel-default arrow #{comment.ownComment ? 'col-md-offset-2' : 'left'}">
+												<div class="panel-body">
 
+													<header class="text-left">
+													<div class="row">
+														<div class="comment-user">
+															<i class="fa fa-user"></i><small>#{comment.username}</small>
+														</div>
 
+														<div class="comment-post">
+															<p>#{comment.description}.</p>
+														</div>
 
+														<div class="comment-date">
+															<small>#{comment.date}</small>
+														</div>
+													</div>
 
-
-			</div>
-
-			<!-- comment list -->
-			<div id="cart-comments" class="">
-				<div class="panel panel-default">
-					<div class="panel-heading">Comentarii cos:</div>
-					<div class="row panel-body">
-						<div id="comment-list" class="scrollable">
-							<ui:repeat value="#{shoppingCartBean.allComments}" var="comment">
-								<div class="row">
-									<div class="col-md-8 col-sm-8 panel panel-default arrow #{comment.ownComment ? 'col-md-offset-2' : 'left'}">
-										<div class="panel-body">
-
-											<header class="text-left">
-											<div class="row">
-												<div class="comment-user">
-													<i class="fa fa-user"></i><small>#{comment.username}</small>
-												</div>
-
-												<div class="comment-post">
-													<p>#{comment.description}.</p>
-												</div>
-
-												<div class="comment-date">
-													<small>#{comment.date}</small>
+													</header>
 												</div>
 											</div>
-
-											</header>
 										</div>
+									</ui:repeat>
+
+								</div>
+								<div>
+									<div class="input-group comment-box">
+										<input class="form-control" type="text" id="textComment" />
+
+										<button class="btn btn-default" id="sendComment" type="button">Send</button>
 									</div>
 								</div>
-							</ui:repeat>
-
-						</div>
-						<div>
-							<div class="input-group comment-box">
-								<input class="form-control" type="text" id="textComment" />
-
-								<button class="btn btn-default" id="sendComment" type="button">Send</button>
 							</div>
+
 						</div>
 					</div>
-
 				</div>
-
-
-
 			</div>
-
+			
+			
+			
+			
+			
 			<!-- Modal checkout  -->
 			<div class="container style-font row">
 				<div class="modal fade" id="sendCartModal" role="dialog">
@@ -188,8 +118,9 @@
 						</div>
 
 						<div class="modal-content">
-							<div class="col- col-md-12">
-								<h:form>
+							<div class=" col-md-12">
+								<p:growl id="growl" sticky="false" showDetail="true" life="3000" />
+								<form data-toggle="validator" role="form">
 									<div class="output-group col-md-12 mb-3">
 										<br></br>
 										<div class="output" id="basic-addon1">
@@ -199,41 +130,49 @@
 										</div>
 										<br />
 									</div>
+
 									<div>
-										<div class="col-md-5 mb-3">
-											<h:outputText value="Nume: "></h:outputText>
-											<h:inputText type="text" class="form-control user-first-name" id="firstName"
-												value="#{shoppingCartBean.firstName}">
-												<f:validateRequired />
+										<div class="form-group col-md-5 mb-3">
+											<h:outputText for="inputFirstName" class="control-label" value="Nume:"></h:outputText>
+											<h:inputText id="firstName" type="text" class="form-control user-first-name"
+												pattern="^([- \w\d\u00c0-\u024f]+)$" value="#{shoppingCartBean.firstName}" required="true"
+												requiredMessage="Firstname field can't be empty!">
 											</h:inputText>
 										</div>
 
-										<div class="col-md-5 mb-3">
-											<h:outputText value="Prenume: "></h:outputText>
-											<h:inputText type="text" class="form-control user-last-name" id="lastName"
-												value="#{shoppingCartBean.lastName}" required="true" />
-
+										<div class="form-group col-md-5 mb-3">
+											<h:outputText for="inputLastName" class="control-label" value="Prenume:"></h:outputText>
+											<h:inputText id="lastName" type="text" class="form-control user-last-name"
+												pattern="^([- \w\d\u00c0-\u024f]+)$" value="#{shoppingCartBean.lastName}" required="true"
+												requiredMessage="Lastname field can't be empty!" />
 										</div>
 									</div>
 
 									<div>
 										<br />
-										<div class="col-md-5 mb-6">
-											<h:outputText value="Email:  "></h:outputText>
-											<h:inputText type="text" class="form-control user-email" id="email" value="#{shoppingCartBean.email}"
-												required="true" />
+										<div class="form-group col-md-5 mb-6">
+											<h:outputText for="inputEmail" class="control-label" value="Email:"></h:outputText>
+											<h:inputText type="email" class="form-control user-email" value="#{shoppingCartBean.email}" required="true"
+												validatorMessage="emailul nu e valid">
+												<f:validateRegex
+													pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+												<p:ajax event="blur" update="growl" listener="#{checkoutValidatioBean.isEmailValid}" />
+											</h:inputText>
 										</div>
 
-										<div class="col-md-5 mb-6">
-											<h:outputText value="Telefon:  "></h:outputText>
-											<h:inputText type="text" class="form-control user-telephone" id="telefon"
-												value="#{shoppingCartBean.telephone}" required="true" />
+										<div class="form-group col-md-5 mb-6">
+											<h:outputText for="inputTelephone" class="control-label" value="Telefon:"></h:outputText>
+											<h:inputText type="number" class="form-control user-telephone" pattern="07[0-9]" maxlength="10"
+												minlength="10" id="telefon" value="#{shoppingCartBean.telephone}" required="true">
+												<p:ajax event="blur" update="growl" listener="#{checkoutValidatioBean.isTelephoneValid}" />
+											</h:inputText>
+
 										</div>
 									</div>
 									<div>
 										<br />
-										<div class="col-md-10 mb-6">
-											<h:outputText value="Adresa:  "></h:outputText>
+										<div class="form-group col-md-10 mb-6">
+											<h:outputText for="inputAddress" class="control-label" value="Adresa:"></h:outputText>
 											<h:inputText type="text" class="form-control user-address" id="adresa" value="#{shoppingCartBean.address}"
 												required="true" />
 										</div>
@@ -241,9 +180,9 @@
 									<div class="col-md-10 mb-6">
 										<br></br>
 										<h:form>
-											<h:outputText value="Plata:  "></h:outputText>
+											<h:outputText for="inputPayment" class="control-label" value="Plata:"></h:outputText>
 
-											<h:selectOneRadio value="#{shoppingCartBean.payment}" layout="pageDirection">
+											<h:selectOneRadio value="#{shoppingCartBean.payment}" layout="pageDirection" required="true">
 												<f:selectItems value="#{shoppingCartBean.paymentList}" class="user-payment" var="value" itemLabel="#{value}"
 													itemValue="{value}" />
 											</h:selectOneRadio>
@@ -255,13 +194,14 @@
 										<p id="cart-validation-message" style="color: #FF0000" />
 									</div>
 
-								</h:form>
+								</form>
 							</div>
 							<h:form>
 								<div class="modal-footer">
 									<div class="" id="validate-cart">
 										<br />
-										<button id="checkoutModal" class="btn btn-primary btn-block send-cart-details">Trimite comanda</button>
+										<button id="checkoutModal" class="btn btn-primary btn-block send-cart-details" update="growl">Trimite
+											comanda</button>
 
 									</div>
 								</div>

@@ -47,7 +47,7 @@ public class CheckoutCartServlet extends HttpServlet {
 				|| jsonRequest.getPayment() == null || jsonRequest.getPayment().isEmpty()) {
 
 			jsonResponse.setMessage(
-					"*Toate campurile sunt obligatorii. Va rugam sa le completati pentru a putea trimite comanda.*");
+					"*Toate campurile sunt obligatorii. \n Va rugam sa le completati pentru a putea trimite comanda.*");
 			jsonResponse.setValid(false);
 		} else {
 			jsonResponse.setMessage("ok");

@@ -22,7 +22,7 @@
 
 			<link rel="stylesheet" href="../resources/css/cart.css"></link>
 
-
+<!-- 
 			<script src="../resources/distribution/datepicker/js/moment.js"></script>
 			<script src="../resources/distribution/datepicker/js/bootstrap-datetimepicker.min.js"></script>
 			<script src="../resources/js/cart.js"></script>
@@ -42,7 +42,7 @@
 					return false;
 					});
 				});
-			</script>
+			</script> -->
 
 		</ui:define>
 
@@ -105,10 +105,9 @@
 						<ui:repeat value="#{restaurantBean.categories}" var="category">
 							<div class="cart">
 								<div class="cart-header">
-								
-								<b> <span class="  category-style content-category" id="#{category}">
-										#{category} </span></b>
-</div>
+
+									<b> <span class="category-style content-category" id="#{category}"> #{category} </span></b>
+								</div>
 								<ui:repeat value="#{restaurantBean.products}" var="product">
 									<ui:fragment rendered="#{product.category == category}">
 

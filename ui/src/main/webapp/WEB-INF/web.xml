@@ -184,12 +184,6 @@
 		<url-pattern>/android/login</url-pattern>
 	</servlet-mapping>
 
-
-	<!-- <servlet> <servlet-name>Faces Servlet</servlet-name> <servlet-class>javax.faces.webapp.FacesServlet</servlet-class> 
-		<load-on-startup>1</load-on-startup> </servlet> <servlet-mapping> <servlet-name>Faces Servlet</servlet-name> <url-pattern>*.xhtml</url-pattern> 
-		</servlet-mapping> -->
-
-
 	<session-config>
 		<session-timeout>1200</session-timeout>
 	</session-config>

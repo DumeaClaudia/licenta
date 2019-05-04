@@ -12,9 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.license.AddProductRequest;
-import com.license.Product;
-import com.license.ShoppingCartResponse;
 import com.license.shoppingCart.ShoppingCartService;
 
 public class AddCommentServlet extends HttpServlet {

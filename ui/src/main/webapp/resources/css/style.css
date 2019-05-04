@@ -17,18 +17,38 @@
 	background-color: rgba(0, 0, 0, .03);
 }
 
-.cart-item {
-	padding: 5px 10px 5px 25px;
+.cart-row {
+	padding: 5px 10px 5px 25px; .
 	margin-right: 0px;
 	margin-left: 0px;
 }
 
-.price-item{
+.cart-item {
+	padding: 10px;
+	border-top: 1px solid rgba(0, 0, 0, .125);
+	margin-right: 0px;
+	margin-left: 0px;
+}
+
+.user-row {
+	padding: 5px;
+	border-bottom: 1px solid rgba(0, 0, 0, .125);
+	border-top: 1px solid rgba(0, 0, 0, .125);
+	margin-right: 0px;
+	margin-left: 0px;
+}
+
+.box-color {
+	background-color: rgb(204, 255, 204);
+}
+
+.price-item {
 	padding-left: 20px;
 	padding-top: 10px;
 	margin-right: 0px;
 	margin-left: 0px;
 }
+
 .user-item {
 	padding-left: 20px;
 	padding-top: 10px;
