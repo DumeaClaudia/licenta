@@ -1,0 +1,136 @@
+#page-body {
+	padding-right: 0px;
+	width: 100%;
+	-webkit-transition: all 0.5s ease;
+	-moz-transition: all 0.5s ease;
+	-o-transition: all 0.5s ease;
+	transition: all 0.5s ease;
+	-webkit-transition: all 0.5s ease
+}
+
+#page-sidebar {
+	top: auto;
+	bottom: 0px;
+	border-width: 0px;
+	background: #eeee;
+	border-color: #30694a;
+	border-radius: 3px;
+	border-width: 1px;
+	border-style: solid;
+	width: 0%;
+	z-index: 1000;
+	position: fixed;
+	right: 0px;
+	width: 0px;
+	height: 0px;
+	bottom: 0px;
+	-webkit-transition: all 0.2s ease;
+	-moz-transition: all 0.2s ease;
+	-o-transition: all 0.2s ease;
+	transition: all 0.2s ease;
+	width: 0%;
+	border-width: 0px;
+}
+
+#page-body.sidebar-toggled #page-sidebar {
+	width: 400px;
+	height: 100%;
+	top: 50px;
+	border-width: 1px;
+}
+
+@media ( min-height : 700px) {
+	#page-body.sidebar-toggled #page-sidebar {
+		height: 600px;
+		top: auto;
+	}
+}
+
+.page-container {
+	margin-right: auto;
+	margin-left: auto;
+}
+
+#page-sidebar-header {
+	background-color: #28583d;
+	height: 40px;
+	color: white;
+	padding: 10px;
+}
+
+#sidebar-minimize, #sidebar-maximize {
+	float: right;
+	color: white;
+}
+
+@media ( min-width : 768px) {
+	.page-container {
+		width: 750px;
+	}
+}
+
+@media ( min-width : 992px) {
+	.page-container {
+		width: 970px;
+	}
+}
+
+@media ( min-width : 1200px) {
+	.page-container {
+		width: 1170px;
+	}
+	#page-body.sidebar-toggled .page-container {
+		width: 820px;
+	}
+	#page-body.sidebar-toggled {
+		padding-right: 400px;
+	}
+	#page-sidebar {
+		border-width: 0px;
+		top: 50px;
+		right: 0px;
+		width: 0px;
+		height: 100%;
+		margin-left: -250px;
+		overflow-y: auto;
+		-webkit-transition: all 0.5s ease;
+		-moz-transition: all 0.5s ease;
+		-o-transition: all 0.5s ease;
+		transition: all 0.5s ease;
+		right: 0px;
+	}
+	#page-body.sidebar-toggled #page-sidebar {
+		width: 400px;
+		height: 100%;
+		top: 50px;
+		border-width: 1px;
+	}
+}
+
+@media ( min-width : 1400px) {
+	.page-container {
+		width: 1170px;
+	}
+	#page-body.sidebar-toggled .page-container {
+		width: 970px;
+	}
+	#page-body.sidebar-toggled {
+		padding-right: 400px;
+	}
+}
+
+#page-body.sidebar-toggled #page-sidebar.sidebar-minimized {
+	height: 40px;
+	bottom: 0px;
+	top: auto;
+}
+
+#page-body.sidebar-toggled #page-sidebar.sidebar-minimized #page-sidebar-header {
+	height: 40px;
+	bottom: 0px;
+	top: auto;
+}
+
+#page-sidebar-content {
+	padding: 10px;
+}

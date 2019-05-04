@@ -54,57 +54,11 @@
 					</div>
 
 					<!-- comment list -->
-					<div id="cart-comments" class="cart-item col-md-7 col-sm-7">
-						<div class="panel panel-default">
-							<div class="panel-heading">Comentarii cos:</div>
-							<div class="row panel-body">
-								<div id="comment-list" class="scrollable">
-									<ui:repeat value="#{shoppingCartBean.allComments}" var="comment">
-										<div class="row">
-											<div
-												class="col-md-8 col-sm-8 box-color panel panel-default arrow #{comment.ownComment ? 'col-md-offset-2' : 'left'}">
-												<div class="panel-body">
-
-													<header class="text-left">
-													<div class="row">
-														<div class="comment-user">
-															<i class="fa fa-user"></i><small>#{comment.username}</small>
-														</div>
-
-														<div class="comment-post">
-															<p>#{comment.description}.</p>
-														</div>
-
-														<div class="comment-date">
-															<small>#{comment.date}</small>
-														</div>
-													</div>
-
-													</header>
-												</div>
-											</div>
-										</div>
-									</ui:repeat>
-
-								</div>
-								<div>
-									<div class="input-group comment-box">
-										<input class="form-control" type="text" id="textComment" />
-
-										<button class="btn btn-default" id="sendComment" type="button">Send</button>
-									</div>
-								</div>
-							</div>
-
-						</div>
-					</div>
+					
 				</div>
 			</div>
 			
-			
-			
-			
-			
+		
 			<!-- Modal checkout  -->
 			<div class="container style-font row">
 				<div class="modal fade" id="sendCartModal" role="dialog">

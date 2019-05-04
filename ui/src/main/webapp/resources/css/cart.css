@@ -6,7 +6,7 @@ html, body {
 
 #shopping-cart-content {
 	margin-top: 30px;
-	max-width: 	800px;
+	max-width: 800px;
 }
 
 .product-list-cart {
@@ -16,23 +16,23 @@ html, body {
 #comment-list {
 	padding: 20px;
 	overflow: auto;
-	max-height: 500px;
 	margin-bottom: 10px;
 }
 
-#textComment {
-	margin-left: 10px;
-	width: 86%;
-}
-
 #sendComment {
-	margin-left: 10px;
+	/* margin-left: 10px; */
+	margin-right: 50px;
 }
 
 #cart-comments {
-	margin-top: 30px;
+	bottom: 20px;
+	position: absolute;
+	top: auto;
 }
-
+.scrollable {
+	max-height: 300px;
+	overflow-y: scroll;
+}
 .jumbotron {
 	margin-top: 20px;
 }
@@ -83,7 +83,3 @@ body {
 	position: relative;
 }
 
-.scrollable {
-	height: 200px;
-	overflow-y: scroll;
-}

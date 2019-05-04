@@ -13,14 +13,16 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="../resources/distribution/toastr/js/toastr.min.js"></script>
+	<link rel="stylesheet" href="../resources/css/custom_bootstrap.css"></link>
 
 	<link rel="stylesheet" href="../resources/css/style.css"></link>
 	<link rel="stylesheet" href="../resources/css/comment.css"></link>
 	<link rel="stylesheet" href="../resources/css/cart.css"></link>
+	<link rel="stylesheet" href="../resources/css/sidebar.css"></link>
 
 	<script src="../resources/js/modalCart.js"></script>
 	<script src="../resources/js/user.js"></script>
-	
+
 
 	<ui:insert name="head">
 		<title>Restaurant Project</title>
@@ -35,10 +37,29 @@
 			</ui:insert>
 		</div>
 
-		<div id="content">
-			<ui:insert name="content">
-				<ui:include src="/template/content.xhtml" />
-			</ui:insert>
+		<div id="page-body">
+			<div id="page-content" class="page-container">
+				<div>
+					<ui:insert name="content">
+						<ui:include src="/template/content.xhtml" />
+					</ui:insert>
+				</div>
+			</div>
+
+
+			<div id="page-sidebar" class="">
+				<div id="page-sidebar-header">
+					<span>4 produse - 3 users : 30 lei</span> <a id="sidebar-minimize"><span
+						class="glyphicon glyphicon-menu-down pull-right" aria-hidden="true"></span></a> <a id="sidebar-maximize"
+						class="hidden"><span class="glyphicon glyphicon-menu-up pull-right " aria-hidden="true"></span></a>
+				</div>
+				<div id="page-sidebar-content">
+					<ui:insert name="sidebar">
+						<ui:include src="/template/sidebar.xhtml" />
+					</ui:insert>
+
+				</div>
+			</div>
 		</div>
 
 		<!-- <div id="footer">

@@ -4,12 +4,29 @@ $(document).ready(function() {
 
 		loginRequest.username = $(".login-username").val();
 		loginRequest.password = $(".login-password").val();
-				
+
 		loginAjaxRequest(loginRequest);
 		return false;
 	});
-});
 
+	$("#sidebar-toggle-menu").click(function(e) {
+		e.preventDefault();
+		$("#page-body").toggleClass("sidebar-toggled");
+	});
+
+	$("#sidebar-minimize").click(function(e) {
+		e.preventDefault();
+		$("#page-sidebar").toggleClass("sidebar-minimized");
+		$("#sidebar-minimize").toggleClass("hidden");
+		$("#sidebar-maximize").toggleClass("hidden");
+	});
+	$("#sidebar-maximize").click(function(e) {
+		e.preventDefault();
+		$("#page-sidebar").toggleClass("sidebar-minimized");
+		$("#sidebar-minimize").toggleClass("hidden");
+		$("#sidebar-maximize").toggleClass("hidden");
+	});
+});
 
 function loginAjaxRequest(request) {
 	$.ajax({
@@ -35,5 +52,3 @@ function loginAjaxRequest(request) {
 		}
 	});
 }
-
-

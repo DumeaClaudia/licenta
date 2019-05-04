@@ -1,0 +1,69 @@
+.navbar-inverse, .navbar-inverse .navbar-toggle {
+	background-color: #28583d;
+	border-color: #30694a;
+}
+
+/* 
+#30694a
+#367753
+
+#28583d 
+
+#00574b
+*/
+.navbar-inverse .navbar-toggle:focus, .navbar-inverse .navbar-toggle:hover {
+	background-color: #30694a;
+}
+
+.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
+	border-color: #367753;
+}
+
+.navbar-inverse .navbar-nav>li>a {
+	color: white;
+}
+
+.navbar-inverse .navbar-nav>li>a:hover {
+	color: #a8d7b7;
+}
+
+a {
+	color: #00574b;
+}
+
+a:focus, a:hover {
+	color: #102319;
+}
+
+.form-control:focus {
+	border-color: #367753;
+}
+
+.badge {
+	background-color: #30694a;
+}
+
+.btn-success, .btn-success:active, .btn-success:focus {
+	color: #fff;
+	background-color: #367753;
+	border-color: #367753;
+}
+
+.btn-success:active:hover {
+	color: #fff;
+	background-color: #27593d;
+	border-color: #367753;
+}
+
+.btn-success:hover {
+	color: #fff;
+	background-color: #30694a;
+	border-color: #367753;
+}
+
+
+
+.navbar-brand {
+	height: 50px;
+	padding: 3px;
+}

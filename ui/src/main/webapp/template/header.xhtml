@@ -16,17 +16,22 @@
 			<p:growl id="messages"></p:growl>
 			<div class="navbar-wrapper">
 				<nav class="navbar navbar-inverse navbar-fixed-top">
-				<div class="container-fluid">
+				<div class="">
 					<div class="navbar-header">
 						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
 							<span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
 						</button>
 
+						<img class="navbar-brand" src="../resources/images/logo.png" height="40px"></img>
+
 					</div>
 					<div class="collapse navbar-collapse" id="myNavbar">
+
 						<ul class="nav navbar-nav">
 							<!-- <li><a href="adminPage.xhtml">AdminPage</a></li> -->
-							<li><a href="home.xhtml"><span class="glyphicon glyphicon-list-alt" aria-hidden="true" /> Restaurante</a></li>
+							<li><a href="home.xhtml"> <!-- <span class="glyphicon glyphicon-list-alt" aria-hidden="true" /> -->
+									Restaurante
+							</a></li>
 							<c:if test="#{not empty sessionBean.username}">
 								<li><a href="history.xhtml">Istoric comenzi</a></li>
 								<li><a href="shoppingCart.xhtml">Comanda curenta</a></li>
@@ -35,12 +40,14 @@
 						<c:if test="#{not empty sessionBean.username}">
 							<h:form>
 								<ul class="nav navbar-nav navbar-right">
-									<li><a data-toggle="modal" href="#usersModal">Participanti la comanda</a></li>
+								<!-- 	<li><a data-toggle="modal" href="#usersModal">Participanti la comanda</a></li> -->
 									<li><a data-toggle="modal" href="#myCartModal"> #{sessionBean.username} <span
 											class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> <span id="nr-products-cart"
 											class="badge">0</span></a></li>
 
 									<li><h:commandLink class="" value="Logout" action="#{sessionBean.logout()}"></h:commandLink></li>
+									<li><a id="sidebar-toggle-menu"><span  class="glyphicon glyphicon-list-alt" aria-hidden="true"></span></a></li>
+
 
 								</ul>
 							</h:form>
@@ -60,60 +67,6 @@
 				</div>
 				</nav>
 
-
-
-
-				<!--  Modal for users -->
-				<div class="container style-font">
-					<div class="modal" id="usersModal" role="dialog">
-						<div class="modal-dialog ">
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal">&times;</button>
-								<h4>Adauga un nou utilizator la comanda:</h4>
-							</div>
-
-							<div class="modal-content">
-								<div class="modal-body row">
-									<div class="col-md-7 col-sm-7 " id="collapseAddUser">
-										<br></br>
-										<div class="col-md-8 col-sm-8">
-											<select class="form-control cart-item" id="selectedUser">
-												<ui:repeat var="username" value="#{shoppingCartBean.remainingUsers}">
-													<option value="#{username}">#{username}</option>
-												</ui:repeat>
-											</select>
-										</div>
-										<div class="col-md-4 col-sm-4">
-											<button class="btn" id="addUser">AddUser</button>
-										</div>
-
-									</div>
-									<div>
-										<div>
-											<h5>Utilizatorii activi la comanda:</h5>
-										</div>
-										<div id="listUsers" class="col-md-5 col-sm-5">
-											<ui:repeat value="#{shoppingCartBean.getUserOrderDetails().keySet().toArray()}" var="keyUser">
-												<ui:repeat value="#{shoppingCartBean.getUserOrderDetails()[keyUser]}" var="item" outcome="cart">
-													<ui:repeat value="#{item.userDetails}" var="userDetails">
-														<div id="idUser" class="user-row">
-															<span><b>#{userDetails.username}</b></span>
-															<div class="pull-right">
-																<b>#{userDetails.price} RON </b>
-															</div>
-														</div>
-													</ui:repeat>
-												</ui:repeat>
-											</ui:repeat>
-											<br />
-
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
 
 
 
