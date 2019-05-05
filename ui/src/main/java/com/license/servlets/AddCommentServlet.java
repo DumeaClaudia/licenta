@@ -35,5 +35,7 @@ public class AddCommentServlet extends HttpServlet {
 		long currentCartId = shoppingCartService.getCurrentCart(idUser);
 		
 		shoppingCartService.addNewComment(idUser, currentCartId, jsonRequest, new Date());
+		
+		mapper.writeValue(response.getOutputStream(), "ok");
 	}
 }

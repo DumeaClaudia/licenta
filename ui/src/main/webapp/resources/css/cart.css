@@ -13,26 +13,6 @@ html, body {
 	margin-top: 40px;
 }
 
-#comment-list {
-	padding: 20px;
-	overflow: auto;
-	margin-bottom: 10px;
-}
-
-#sendComment {
-	/* margin-left: 10px; */
-	margin-right: 50px;
-}
-
-#cart-comments {
-	bottom: 20px;
-	position: absolute;
-	top: auto;
-}
-.scrollable {
-	max-height: 300px;
-	overflow-y: scroll;
-}
 .jumbotron {
 	margin-top: 20px;
 }
@@ -61,13 +41,7 @@ html, body {
 	display: none; /* just hiding labels for demo purposes */
 }
 
-#sidebar {
-	background-color: lightgrey;
-	-webkit-transition: margin 0.3s ease;
-	-moz-transition: margin 0.3s ease;
-	-o-transition: margin 0.3s ease;
-	transition: margin 0.3s ease;
-}
+
 /* 
 .collapsed {
 	display: none; hide it for small displays

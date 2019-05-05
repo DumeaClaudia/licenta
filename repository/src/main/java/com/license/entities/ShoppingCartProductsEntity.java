@@ -15,14 +15,14 @@ import javax.persistence.NamedQuery;
 		@NamedQuery(name = "shopping_cart_products.getProductsFromCart", 
 			query = "Select p FROM shopping_cart_products p where p.idShoppingCart = :idShoppingCart"),
 		
-		@NamedQuery(name = "shopping_cart_products.deleteProductFromCart",
+		@NamedQuery(name = "shopping_cart_products.selectProductFromCart",
 			query = "select p FROM shopping_cart_products p where p.idUser=:idUser and p.idProduct = :idProduct and p.idShoppingCart = :idShoppingCart"),
 		
 		@NamedQuery(name = "shopping_cart_products.getNrOfProducts",
 			query = "select p.nrProducts FROM shopping_cart_products p where p.idUser=:idUser and p.idProduct = :idProduct and p.idShoppingCart = :idShoppingCart"),
 		
 		@NamedQuery(name = "shopping_cart_products.getCartProductsForUser",
-		query = "select p FROM shopping_cart_products p where p.idUser=:idUser and p.idShoppingCart = :idShoppingCart")
+		query = "select p FROM shopping_cart_products p where p.idShoppingCart = :idShoppingCart and p.idUser=:idUser")
 		
 })
 

@@ -168,7 +168,7 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 
 		ShoppingCartProductsEntity shoppingCartProductsEntity = new ShoppingCartProductsEntity();
 
-		Query query = em.createNamedQuery("shopping_cart_products.deleteProductFromCart");
+		Query query = em.createNamedQuery("shopping_cart_products.selectProductFromCart");
 		query.setParameter("idUser", idUser);
 		query.setParameter("idProduct", idProduct);
 		query.setParameter("idShoppingCart", idShoppingCart);
@@ -287,27 +287,56 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 	}
 
 	public void updateNrOfProducts(long idUser, long idProduct, long idShoppingCart, int nrProducts) {
-		em.getTransaction().begin();
-		Query query = em.createQuery("UPDATE shopping_cart_products p SET p.nrProducts = :nrProducts "
-				+ "WHERE p.idUser=:idUser and p.idProduct = :idProduct and p.idShoppingCart = :idShoppingCart");
+		// em.getTransaction().begin();
+		// Query query = em.createQuery("UPDATE shopping_cart_products p SET
+		// p.nrProducts = :nrProducts "
+		// + "WHERE p.idUser=:idUser and p.idProduct = :idProduct and p.idShoppingCart =
+		// :idShoppingCart");
+		//
+		// query.setParameter("idUser", idUser);
+		// query.setParameter("idProduct", idProduct);
+		// query.setParameter("idShoppingCart", idShoppingCart);
+		// query.setParameter("nrProducts", nrProducts);
+		//
+		// query.executeUpdate();
+		// em.getTransaction().commit();
+		// em.flush();
+		//
+		// em.clear();
 
+		ShoppingCartProductsEntity shoppingCartProductsEntity = new ShoppingCartProductsEntity();
+
+		Query query = em.createNamedQuery("shopping_cart_products.selectProductFromCart");
 		query.setParameter("idUser", idUser);
 		query.setParameter("idProduct", idProduct);
 		query.setParameter("idShoppingCart", idShoppingCart);
-		query.setParameter("nrProducts", nrProducts);
 
-		query.executeUpdate();
+		shoppingCartProductsEntity = (ShoppingCartProductsEntity) query.getResultList().get(0);
+
+		em.getTransaction().begin();
+		em.remove(shoppingCartProductsEntity);
+
+		ShoppingCartProductsEntity cartProductsEntity = new ShoppingCartProductsEntity();
+
+		cartProductsEntity.setNrProducts(nrProducts);
+		cartProductsEntity.setIdUser(idUser);
+		cartProductsEntity.setIdProduct(idProduct);
+		cartProductsEntity.setIdShoppingCart(idShoppingCart);
+		em.persist(cartProductsEntity);
+
 		em.getTransaction().commit();
 		em.clear();
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<ShoppingCartProducts> retrieveShoppingCartProductIds(long idUser, long idCart) {
+	public synchronized List<ShoppingCartProducts> retrieveShoppingCartProductIds(long idUser, long idCart) {
 
 		List<ShoppingCartProducts> cartProductsForUser = new ArrayList<ShoppingCartProducts>();
-		Query query = em.createNamedQuery("shopping_cart_products.getCartProductsForUser");
+		Query query = em.createQuery(
+				"select p FROM shopping_cart_products p where p.idShoppingCart = :idShoppingCart and p.idUser=:idUser");
 		query.setParameter("idUser", idUser);
 		query.setParameter("idShoppingCart", idCart);
+
 		List<ShoppingCartProductsEntity> shoppingCartEntities = query.getResultList();
 
 		for (ShoppingCartProductsEntity cartProductsEntity : shoppingCartEntities) {
@@ -317,6 +346,8 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 			cartProducts.setNrProducts(cartProductsEntity.getNrProducts());
 			cartProducts.setIdUser(idUser);
 			cartProducts.setIdShoppingCart(idCart);
+			System.out.println("user: " + idUser + " cart: " + idCart + "produs: " + cartProducts.getIdProduct()
+					+ " nrProduse: " + cartProducts.getNrProducts());
 
 			cartProductsForUser.add(cartProducts);
 		}
@@ -418,6 +449,8 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 			comment.setIdUser(commentEntity.getIdUser());
 			DateFormat df = new SimpleDateFormat("HH:mm dd.MM.yyyy");
 			comment.setDate(df.format(commentEntity.getDate()));
+
+			// commentEntity.getDate().getTime();
 			comment.setDescription(commentEntity.getDescription());
 
 			comments.add(comment);

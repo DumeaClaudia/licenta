@@ -3,8 +3,6 @@ package com.license.servlets;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.List;
-
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -19,9 +17,6 @@ import com.license.shoppingCart.ShoppingCartService;
 
 public class RemoveProductFromCartServlet extends HttpServlet {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -2688133393619193419L;
 	@EJB
 	private ShoppingCartService shoppingCartService;
@@ -43,37 +38,12 @@ public class RemoveProductFromCartServlet extends HttpServlet {
 
 		ShoppingCartResponse jsonResponse = new ShoppingCartResponse();
 
-		Long activeCartList = shoppingCartService.getActiveShoppingCartForUser(idUser); 
-
-		long activeCart = 0;
+		long activeCart = shoppingCartService.getCurrentCart(idUser);
 
 		Long productId = jsonRequest.getIdProduct();
 		Product product = shoppingCartService.getProduct(productId);
 
-		int nrProducts = shoppingCartService.getNumberOfProducts(idUser, productId, activeCart);
-
-		if (activeCartList != 0) {
-			activeCart = activeCartList;
-			
-			shoppingCartService.removeAProductFromCurrentCart(idUser, productId, activeCart);
-					
-			/*
-			if (nrProducts == 1) {
-				shoppingCartService.removeProductFromCart(idUser, productId, activeCart);
-			} else {
-				if(nrProducts > 1) {					
-					shoppingCartService.updateNumberOfProducts(idUser, productId, activeCart, nrProducts - 1);
-				}
-			}*/
-
-		} else {
-
-			/*
-			 * activeCart =
-			 * shoppingCartService.createShoppingCartService(jsonRequest.getIdUser(),
-			 * product.getIdRestaurant());
-			 */
-		}
+		shoppingCartService.removeAProductFromCurrentCart(idUser, productId, activeCart);
 
 		jsonResponse.setProduct(product);
 

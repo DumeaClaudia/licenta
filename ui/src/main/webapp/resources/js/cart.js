@@ -16,9 +16,12 @@ $(document).ready(function() {
 		"showMethod" : "fadeIn",
 		"hideMethod" : "fadeOut"
 	};
+	
+	toastr.options.onHidden = function() { toastr.options.onclick = undefined; }
+	
+	
 
 });
-
 
 $(document).ready(function() {
 	$("#validate-cart").click(function() {
@@ -39,13 +42,15 @@ $(document).ready(function() {
 		location.assign("home.xhtml");
 	});
 
+	displayComments();
+	displayUsers();
+
 	setInterval(function() {
 		displayComments();
 		displayUsers();
-		/*displayProductsFromCart();*/
+		displayProductsFromCart();
 	}, 1000);
-	
-		
+
 	$("#comment-list").scrollTop($("#comment-list")[0].scrollHeight);
 });
 
@@ -74,65 +79,111 @@ function validateUserDataBeforeCheckout(request) {
 	});
 }
 
-function displayComments(){
-	
-	$.ajax({
-		url : "../jsonservlet/get_comments",
-		type : 'GET',
-		dataType : 'json',
-		data : {},
-		contentType : 'application/json',
-		mimeType : 'application/json',
+var user_count = 0;
+var user_comments_count = -1;
 
-		success : function(result) {
+function setSidebarHeader(title) {
+	$("#sidebarTitle").text(title);
+}
+function displayComments() {
 
-				
-			var scrollBottom = false;
-			if (($("#comment-list")[0].scrollHeight - $("#comment-list")[0].scrollTop) < 210) {
-				scrollBottom = true;
-			}	
-				
-			$("#comment-list").empty();
-				
-			$.each(	result,
-				function(index, comment) {					
-										
-					var comment_panel = $("<div class='col-md-8 col-sm-10 box-color panel panel-default arrow " +   (comment.ownComment ? 'col-md-offset-4 col-sm-offset-2': 'left') + "' />");
-					var header = $("<header class='text-left'/>");
-					var div_row = $("<div class='row'/>");
-					
-					var div_username = $("<div class='comment-user'><i class='fa fa-user'></i><small> " + comment.username +" </small></div>"); 
-					var div_description = $("<div class='comment-post'><p> " + comment.description + "</p></div>");
-					var div_time = $("<div class='comment-date'><small>" + comment.date +  "</small></div>");
-					
-					comment_panel.append(header);
-					comment_panel.append(div_row);
+	$
+			.ajax({
+				url : "../jsonservlet/get_comments",
+				type : 'GET',
+				dataType : 'json',
+				data : {},
+				contentType : 'application/json',
+				mimeType : 'application/json',
 
-					comment_panel.append(div_username);
-					comment_panel.append(div_description);
-					comment_panel.append(div_time);
-					
-					$("#comment-list").append(comment_panel);
-				
+				success : function(result) {
+
+					var nr_all_comments = result.length;
+
+					setSidebarHeader(nr_all_comments + " commentarii " + "("
+							+ user_count + " utilizatori)");
+
+					if (nr_all_comments != user_comments_count
+							&& nr_all_comments > 0) {
+
+						if (user_comments_count >= 0) {
+							
+							toastr.options.onclick = function() { if(!$("#page-body").hasClass("sidebar-toggled"))	{
+								$("#page-body").toggleClass("sidebar-toggled"); }
+							};
+							
+							for (var i = user_comments_count; i < nr_all_comments; i++) {
+								if (!result[i].ownComment) {
+									toastr.info(result[i].description,
+											"Mesaj nou de la "
+													+ result[i].username);
+								}
+							}
+							
+						}
+
+						var scrollBottom = false;
+						if (($("#comment-list")[0].scrollHeight - $("#comment-list")[0].scrollTop) < 310) {
+							scrollBottom = true;
+						}
+
+						$("#comment-list").empty();
+
+						$
+								.each(
+										result,
+										function(index, comment) {
+											var div_content = $("<div class='text-left'/>");
+											var div_row = $("<div class='row'/>")
+											var div_align = $("<div class='col-sm-8 comment-content "
+													+ (comment.ownComment ? 'col-sm-offset-4'
+															: 'left') + "' />");
+											var div_color = $("<div class='box-color'/>");
+
+											var div_username = $("<div class='comment-user'><i class='fa fa-user'></i><small> "
+													+ comment.username
+													+ " </small></div>");
+											var div_description = $("<div class='comment-post'><p> "
+													+ comment.description
+													+ "</p></div>");
+											var div_time = $("<div class='text-right'><small>"
+													+ comment.date
+													+ "</small></div>");
+
+											div_content.append(div_row);
+											div_row.append(div_align);
+											div_align.append(div_color);
+
+											div_color.append(div_username);
+											div_color.append(div_description);
+											div_color.append(div_time);
+
+											$("#comment-list").append(
+													div_content);
+
+										});
+
+						if (scrollBottom) {
+							$("#comment-list").scrollTop(
+									$("#comment-list")[0].scrollHeight);
+						}
+					}
+					if (nr_all_comments > 0) {
+						user_comments_count = nr_all_comments;
+					}
+				},
+
+				error : function(data, status, er) {
+
+					console.log(data);
+					console.log(status);
+					console.log(er);
+				}
 			});
-				
-			if (scrollBottom) {
-				$("#comment-list").scrollTop($("#comment-list")[0].scrollHeight);
-			}
-				
-		
-		},
-		error : function(data, status, er) {
-			console.log(data);
-			console.log(status);
-			console.log(er);
-		}
-	});
 }
 
+function displayUsers() {
 
-function displayUsers(){
-	
 	$.ajax({
 		url : "../jsonservlet/get_users_cart",
 		type : 'GET',
@@ -144,21 +195,23 @@ function displayUsers(){
 		success : function(result) {
 
 			$("#listUsers").empty();
-			$.each(	result,
-				function(index, user) {					
-										
-					var user_panel = $("<div class='user-row'/>");
-					var div_list = $("<div/>");				
-					var div_username = $("<span><b>"+user.username+"</b></span>");
-					var div_price = $("<div class='pull-right'><b>"+(user.price).toFixed(2)+" RON</b>");
-					
-					user_panel.append(div_list);
-					user_panel.append(div_username);
-					user_panel.append(div_price);
-					
-					$("#listUsers").append(user_panel);
-				
-			});		
+			user_count = result.length;
+			$.each(result, function(index, user) {
+
+				var user_panel = $("<div class='user-row'/>");
+				var div_list = $("<div/>");
+				var div_username = $("<span><b>" + user.username
+						+ "</b></span>");
+				var div_price = $("<div class='pull-right'><b>"
+						+ (user.price).toFixed(2) + " RON</b>");
+
+				user_panel.append(div_list);
+				user_panel.append(div_username);
+				user_panel.append(div_price);
+
+				$("#listUsers").append(user_panel);
+
+			});
 		},
 		error : function(data, status, er) {
 			console.log(data);
@@ -168,9 +221,8 @@ function displayUsers(){
 	});
 }
 
+function displayProductsFromCart() {
 
-function displayProductsFromCart(){
-	
 	$.ajax({
 		url : "../jsonservlet/get_products_cart",
 		type : 'GET',
@@ -183,33 +235,39 @@ function displayProductsFromCart(){
 
 			$("#cartProductsList").empty();
 			var total = 0;
-			$.each(	result,
-				function(index, user) {					
-					var div_username = $("<div class='user-item'><b>"+user.username+"</b></div>");
-					$("#cartProductsList").append(div_username);
-					
-					$.each(	user.cartDetails,
-							function(index, product) {	
-				
-						var products_panel = $("<div class='cart-row'>");
-						var item_list = $("<span>"+product.nrProducts+"x "+product.productName+" <i> ("+product.restaurantName+" )</i></span>");				
+			$.each(result, function(index, user) {
+				var div_username = $("<div class='user-item'><b>"
+						+ user.username + "</b></div>");
+				$("#cartProductsList").append(div_username);
 
-						var div_price = $("<span class='pull-right'>"+product.nrProducts+"x "+(product.price).toFixed(2)+" RON</span>");
-					
-						products_panel.append(item_list);
-						products_panel.append(div_price);
-					
+				$.each(user.cartDetails, function(index, product) {
 
-						$("#cartProductsList").append(products_panel);
-					});
-					
-					var div_user_price = $("<div class='price-item'>Subtotal: "+(user.totalPrice).toFixed(2)+" RON</div>");
-					total = total + +(user.totalPrice).toFixed(2);
-					$("#cartProductsList").append(div_user_price);
+					var products_panel = $("<div class='cart-row'>");
+					var item_list = $("<span>" + product.nrProducts + "x "
+							+ product.productName + " <i> ("
+							+ product.restaurantName + " )</i></span>");
+
+					var div_price = $("<span class='pull-right'>"
+							+ product.nrProducts + "x "
+							+ (product.price).toFixed(2) + " RON</span>");
+
+					products_panel.append(item_list);
+					products_panel.append(div_price);
+
+					$("#cartProductsList").append(products_panel);
+				});
+
+				var div_user_price = $("<div class='price-item'>Subtotal: "
+						+ (user.totalPrice).toFixed(2) + " RON</div>");
+				total = total + +(user.totalPrice).toFixed(2);
+				$("#cartProductsList").append(div_user_price);
 			});
-			
-			var total_price = $("<div class='user-item cart-row'><b> Total: "+total.toFixed(2)+" RON</b></div>");
-			$("#priceTotalCart").append(total_price);
+
+			/*
+			 * var total_price = $("<div class='user-item cart-row'><b> Total: " +
+			 * total.toFixed(2) + " RON</b></div>"); console.log(total);
+			 */
+			$("#priceTotalCart").text(total.toFixed(2));
 		},
 		error : function(data, status, er) {
 			console.log(data);
@@ -219,12 +277,10 @@ function displayProductsFromCart(){
 	});
 }
 
-
-
 $(document).ready(function() {
 	$('#addUser').click(function() {
 		var selectedText = $("#selectedUser").val();
-				
+
 		$.ajax({
 			url : "../jsonservlet/get_selected_user",
 			type : 'POST',
@@ -246,13 +302,12 @@ $(document).ready(function() {
 	});
 });
 
-
 /* Add Comment */
 
 $(document).ready(function() {
 	$("#sendComment").click(addComment);
-	$("#textComment").keypress(function (e){
-		if ( e.keyCode == 13 ) {  // detect the enter key
+	$("#textComment").keypress(function(e) {
+		if (e.keyCode == 13) { // detect the enter key
 			addComment();
 		}
 	});
@@ -262,7 +317,6 @@ function addComment() {
 	var comment = $("#textComment").val();
 	$("#textComment").val("");
 	if (comment.trim() != "") {
-		toastr.info("Cineva a adaugat un comentariu nou! ");
 		sendCommentAjaxRequest(comment);
 	}
 	return false;
@@ -277,10 +331,11 @@ function sendCommentAjaxRequest(request) {
 		mimeType : 'application/json',
 
 		success : function(result) {
-		
+
 			displayComments();
 		},
 		error : function(data, status, er) {
+			console.log(request);
 			console.log(data);
 			console.log(status);
 			console.log(er);
@@ -288,53 +343,49 @@ function sendCommentAjaxRequest(request) {
 	});
 }
 
-/*$(function () {
-	$('[data-toggle="tooltip"]').tooltip()
-})
-	*/
+/*
+ * $(function () { $('[data-toggle="tooltip"]').tooltip() })
+ */
 
 /*--------------------------------------------------------------------------------------------------------------------------------*/
-$('.form').find('input, textarea').on('keyup blur focus', function (e) {
-	  
-	  var $this = $(this),
-	      label = $this.prev('label');
+$('.form').find('input, textarea').on('keyup blur focus', function(e) {
 
-		  if (e.type === 'keyup') {
-				if ($this.val() === '') {
-	          label.removeClass('active highlight');
-	        } else {
-	          label.addClass('active highlight');
-	        }
-	    } else if (e.type === 'blur') {
-	    	if( $this.val() === '' ) {
-	    		label.removeClass('active highlight'); 
-				} else {
-			    label.removeClass('highlight');   
-				}   
-	    } else if (e.type === 'focus') {
-	      
-	      if( $this.val() === '' ) {
-	    		label.removeClass('highlight'); 
-				} 
-	      else if( $this.val() !== '' ) {
-			    label.addClass('highlight');
-				}
-	    }
+	var $this = $(this), label = $this.prev('label');
 
-	});
+	if (e.type === 'keyup') {
+		if ($this.val() === '') {
+			label.removeClass('active highlight');
+		} else {
+			label.addClass('active highlight');
+		}
+	} else if (e.type === 'blur') {
+		if ($this.val() === '') {
+			label.removeClass('active highlight');
+		} else {
+			label.removeClass('highlight');
+		}
+	} else if (e.type === 'focus') {
 
-	$('.tab a').on('click', function (e) {
-	  
-	  e.preventDefault();
-	  
-	  $(this).parent().addClass('active');
-	  $(this).parent().siblings().removeClass('active');
-	  
-	  target = $(this).attr('href');
+		if ($this.val() === '') {
+			label.removeClass('highlight');
+		} else if ($this.val() !== '') {
+			label.addClass('highlight');
+		}
+	}
 
-	  $('.tab-content > div').not(target).hide();
-	  
-	  $(target).fadeIn(600);
-	  
-	});
-	
+});
+
+$('.tab a').on('click', function(e) {
+
+	e.preventDefault();
+
+	$(this).parent().addClass('active');
+	$(this).parent().siblings().removeClass('active');
+
+	target = $(this).attr('href');
+
+	$('.tab-content > div').not(target).hide();
+
+	$(target).fadeIn(600);
+
+});

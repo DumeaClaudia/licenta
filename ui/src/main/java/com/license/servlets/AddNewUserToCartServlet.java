@@ -46,7 +46,7 @@ public class AddNewUserToCartServlet extends HttpServlet {
 		long idNewUser = user.getId();
 		shoppingCartService.addUserToCart(idNewUser, currentCartId);
 		shoppingCartService.updatePreviousCartForNewUser(idNewUser, currentCartId);
-		
+		mapper.writeValue(response.getOutputStream(), "ok");
 	}
 
 }

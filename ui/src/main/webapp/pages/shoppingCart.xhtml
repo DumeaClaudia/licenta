@@ -38,15 +38,15 @@
 						</ui:repeat>
 
 					</div>
-					<div class="user-item cart-row">
-						<b>Total: #{shoppingCartBean.cartTotalPrice} RON</b>
+					<div  class="user-item cart-row">
+						<b>Total: <span id="priceTotalCart">#{shoppingCartBean.cartTotalPrice}</span> RON</b>
 					</div>
 
 
 					<div class="row">
 						<br></br> <br></br>
 
-						<div class="col-sm-12">
+						<div class="">
 							<button type="button" class="btn btn-block" data-toggle="modal" data-target="#sendCartModal">
 								<h4>Trimite Comanda</h4>
 							</button>
