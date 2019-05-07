@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
-
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -56,12 +55,10 @@ public class CheckoutCartServlet extends HttpServlet {
 			long idUser = (Long) request.getSession().getAttribute("userId");
 			Long currentCart = shoppingCartService.getCurrentCart(idUser);
 
-			// TODO de adaugat pt toti userii din cart....
 			List<Long> usersIds = userService.getUsersIds(currentCart);
 
-			for (Long userId : usersIds) {
-				// TODO de verificat daca idUser se afla in lista de usersIds
-				shoppingCartService.updateDateForCartAfterCheckout(userId, currentCart);
+			for (Long utilizatorId : usersIds) {
+				shoppingCartService.updateDateForCartAfterCheckout(utilizatorId, currentCart);
 			}
 		}
 

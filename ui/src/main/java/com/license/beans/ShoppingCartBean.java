@@ -216,7 +216,6 @@ public class ShoppingCartBean implements Serializable {
 		}
 		
 		FacesContext context = FacesContext.getCurrentInstance();
-
 		ExternalContext extContext = context.getExternalContext();
 		try {
 			extContext.redirect(extContext.getRequestContextPath() + "/pages/home.xhtml");

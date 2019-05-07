@@ -346,9 +346,7 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 			cartProducts.setNrProducts(cartProductsEntity.getNrProducts());
 			cartProducts.setIdUser(idUser);
 			cartProducts.setIdShoppingCart(idCart);
-			System.out.println("user: " + idUser + " cart: " + idCart + "produs: " + cartProducts.getIdProduct()
-					+ " nrProduse: " + cartProducts.getNrProducts());
-
+		
 			cartProductsForUser.add(cartProducts);
 		}
 

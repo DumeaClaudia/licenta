@@ -263,11 +263,13 @@ function displayProductsFromCart() {
 				$("#cartProductsList").append(div_user_price);
 			});
 
-			/*
-			 * var total_price = $("<div class='user-item cart-row'><b> Total: " +
-			 * total.toFixed(2) + " RON</b></div>"); console.log(total);
-			 */
 			$("#priceTotalCart").text(total.toFixed(2));
+			
+			if(total==0){
+				$('#checkoutSendButton').attr('disabled','disabled');
+			}else{
+				$('#checkoutSendButton').removeAttr('disabled');
+			}
 		},
 		error : function(data, status, er) {
 			console.log(data);
