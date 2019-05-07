@@ -60,9 +60,9 @@ public class AddProductToCartServlet extends HttpServlet {
 		Long productID = jsonRequest.getIdProduct();
 		Product product = shoppingCartService.getProduct(productID);
 
-		if (currentCart == 0) {
+	/*	if (currentCart == 0) {
 			currentCart = shoppingCartService.createNewCartForUser(idUser);
-		}
+		}*/
 
 		int nrProducts = shoppingCartService.getNumberOfProducts(idUser, productID, currentCart);
 		

@@ -74,10 +74,10 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 		query.setParameter("isCurrentCart", true);
 		List<Long> cartIds = query.getResultList();
 		if (cartIds.size() > 0) { // nu e bine daca sunt mai multe cart-uri cu 1 pt acelasi user..
-			return cartIds.get(0);
+			return cartIds.get(0); /// se apeleaza de foarte multe ori...
 		}
 
-		return (Long) createCartForUser(idUser);
+		return (long) 0;
 
 	}
 
@@ -99,30 +99,6 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 		productResponse.setId(product.getId());
 
 		return productResponse;
-	}
-
-	public long createShoppingCart(long idUser, long idRestaurant) {
-
-		ShoppingCartEntity entity = new ShoppingCartEntity();
-
-		entity.setIdRestaurant(idRestaurant);
-		entity.setCreatedDate(Date.from(Instant.now()));
-
-		em.getTransaction().begin();
-		em.persist(entity);
-		em.getTransaction().commit();
-
-		long idCart = entity.getId();
-
-		ShoppingCartUserEntity userCartEntity = new ShoppingCartUserEntity();
-		userCartEntity.setIdShoppingCart(idCart);
-		userCartEntity.setIdUser(idUser);
-		userCartEntity.setCurrentCart(true);
-
-		em.getTransaction().begin();
-		em.persist(userCartEntity);
-		em.getTransaction().commit();
-		return idCart;
 	}
 
 	public long addProductToCart(long idUser, long idProduct, long idShoppingCart) {
@@ -287,6 +263,11 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 	}
 
 	public void updateNrOfProducts(long idUser, long idProduct, long idShoppingCart, int nrProducts) {
+
+		/*
+		 * Nu isi face update ok, probabil face cache la unele si din aceasta cauza in
+		 * ui nu aveam valoarea updatata, se schimbau valorile
+		 */
 		// em.getTransaction().begin();
 		// Query query = em.createQuery("UPDATE shopping_cart_products p SET
 		// p.nrProducts = :nrProducts "
@@ -346,7 +327,7 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 			cartProducts.setNrProducts(cartProductsEntity.getNrProducts());
 			cartProducts.setIdUser(idUser);
 			cartProducts.setIdShoppingCart(idCart);
-		
+
 			cartProductsForUser.add(cartProducts);
 		}
 
@@ -355,28 +336,42 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 
 	public long createCartForUser(long idUser) {
 
-		ShoppingCartEntity entity = new ShoppingCartEntity();
-		entity.setCreatedDate(Date.from(Instant.now()));
+		Long id = retrieveCurrentCartForUser(idUser);
 
-		em.getTransaction().begin();
-		em.persist(entity);
-		em.getTransaction().commit();
+		if (id == 0) {
+			ShoppingCartEntity entity = new ShoppingCartEntity();
+			entity.setCreatedDate(Date.from(Instant.now()));
 
-		long idCart = entity.getId();
+			em.getTransaction().begin();
+			em.persist(entity);
+			em.getTransaction().commit();
 
-		ShoppingCartUserEntity userCartEntity = new ShoppingCartUserEntity();
-		userCartEntity.setIdShoppingCart(idCart);
-		userCartEntity.setIdUser(idUser);
-		userCartEntity.setCurrentCart(true);
+			long idCart = entity.getId();
 
-		em.getTransaction().begin();
-		em.persist(userCartEntity);
-		em.getTransaction().commit();
+			ShoppingCartUserEntity userCartEntity = new ShoppingCartUserEntity();
+			userCartEntity.setIdShoppingCart(idCart);
+			userCartEntity.setIdUser(idUser);
+			userCartEntity.setCurrentCart(true);
 
-		return idCart;
+			em.getTransaction().begin();
+			em.persist(userCartEntity);
+			em.getTransaction().commit();
+			return idCart;
+		}else {
+			return id;
+		}
+
 	}
 
-	public void updateCartAfterCheckout(long idUser, long idCart) {
+	public void updateCartAfterCheckout(List<Long> usersIds, long idCart) {
+
+		// for(Long userId: usersIds) {
+		// // ar trebui sa sterg entitatea acum si sa creez alta
+		// ShoppingCartEntity entity = new ShoppingCartEntity();
+		//
+		// entity.setCreatedDate(Date.from(Instant.now())); // sau new Date()
+		// entity.set
+
 		em.getTransaction().begin();
 		Query query = em
 				.createQuery("UPDATE shopping_cart p SET p.sendDate = :currentDate WHERE p.id = :idShoppingCart");
@@ -384,21 +379,25 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 		query.setParameter("idShoppingCart", idCart);
 		query.setParameter("currentDate", new Date());
 
-		// TODO cred ca ar trebui si user in shoppingCart ???
 		query.executeUpdate();
 		em.getTransaction().commit();
 
 		em.getTransaction().begin();
 		query = em.createQuery(
-				"UPDATE shopping_cart_users p SET p.currentCart=:isCurrentCart WHERE p.idShoppingCart = :idShoppingCart and p.idUser=:idUser");
+				"UPDATE shopping_cart_users p SET p.currentCart=:isCurrentCart WHERE p.idShoppingCart = :idShoppingCart and p.idUser in (:usersIds)");
 
 		query.setParameter("isCurrentCart", false);
 		query.setParameter("idShoppingCart", idCart);
-		query.setParameter("idUser", idUser);
+		query.setParameter("usersIds", usersIds);
 
 		query.executeUpdate();
 		em.getTransaction().commit();
 		em.clear();
+		// }
+
+		for (Long userId : usersIds) {
+			createCartForUser(userId);
+		}
 
 	}
 

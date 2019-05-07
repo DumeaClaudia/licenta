@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -24,9 +23,6 @@ import com.license.shoppingCart.ShoppingCartService;
 
 public class GetCartProductsServlet extends HttpServlet {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -4099624866563027619L;
 
 	@EJB
@@ -79,7 +75,6 @@ public class GetCartProductsServlet extends HttpServlet {
 				cartDetailsProduct.add(cartDetails);
 			}
 		}
-//		System.out.println("Servlet: GetCartProductsServlet: " + cartDetailsProduct);
 		mapper.writeValue(response.getOutputStream(), cartDetailsProduct);
 	}
 }

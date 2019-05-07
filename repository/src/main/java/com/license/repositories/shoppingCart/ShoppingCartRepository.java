@@ -20,8 +20,6 @@ public interface ShoppingCartRepository {
 
 	public Product getProductById(long idProduct);
 
-	public long createShoppingCart(long idUser, long idRestaurant);
-
 	public long addProductToCart(long idUser, long idProduct, long idShoppingCart);
 
 	public void removeProductFromCart(long idUser, long idProduct, long idShoppingCart);
@@ -36,7 +34,7 @@ public interface ShoppingCartRepository {
 
 	public long createCartForUser(long idUser);
 
-	public void updateCartAfterCheckout(long idUser, long idCart);
+	public void updateCartAfterCheckout(List<Long> usersIds, long idCart);
 
 	public void addUserToCurrentCart(long idUser, long currentCartId);
 

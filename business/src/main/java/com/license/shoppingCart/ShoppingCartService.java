@@ -23,8 +23,6 @@ public interface ShoppingCartService {
 
 	List<ShoppingCartProducts> getCartProductsForUser(long idUser, long idCart);
 
-	long createShoppingCartService(long idUser, long idRestaurant);
-
 	long createNewCartForUser(long idUser);
 
 	long addProductToCart(long idUser, long idProduct, long idShoppingCart);
@@ -37,7 +35,7 @@ public interface ShoppingCartService {
 
 	void updateNumberOfProducts(long idUser, long idProduct, long idShoppingCart, int nrProducts);
 
-	void updateDateForCartAfterCheckout(long idUser, long idCart);
+	void updateDateForCartAfterCheckout(List<Long> usersIds, long idCart);
 
 	void addUserToCart(long id, long currentCartId);
 

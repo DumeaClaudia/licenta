@@ -57,9 +57,8 @@ public class CheckoutCartServlet extends HttpServlet {
 
 			List<Long> usersIds = userService.getUsersIds(currentCart);
 
-			for (Long utilizatorId : usersIds) {
-				shoppingCartService.updateDateForCartAfterCheckout(utilizatorId, currentCart);
-			}
+			shoppingCartService.updateDateForCartAfterCheckout(usersIds, currentCart);
+
 		}
 
 		mapper.writeValue(response.getOutputStream(), jsonResponse);
