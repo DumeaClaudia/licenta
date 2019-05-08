@@ -12,8 +12,6 @@ public interface ShoppingCartRepository {
 
 	public List<Product> retrieveShoppingCartProductsById(long id);
 
-	public Long retrieveActiveShoppingCartForUserId(long idUser);
-
 	public Long retrieveCurrentCartForUser(long idUser);
 
 	public List<Long> retrieveAllShoppingCartForUser(long idUser);

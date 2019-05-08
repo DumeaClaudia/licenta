@@ -20,8 +20,8 @@ $(document).ready(function() {
 	var carProductsRequest = new Object();
 	
 	getCartProductsAjaxRequest(carProductsRequest);
+	displayUsers(); //hello
 	/*displayProductsFromCart();*/
-
 });
 
 	/*Products from modal cart*/

@@ -19,7 +19,7 @@ $(document).ready(function() {
 	
 	toastr.options.onHidden = function() { toastr.options.onclick = undefined; }
 	
-	
+	displayUsers(); //hello
 
 });
 

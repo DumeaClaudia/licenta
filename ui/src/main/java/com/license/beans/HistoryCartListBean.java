@@ -48,25 +48,56 @@ public class HistoryCartListBean implements Serializable {
 			ExternalContext extContext = context.getExternalContext();
 			try {
 				extContext.redirect(extContext.getRequestContextPath() + "/pages/home.xhtml");
+
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+			return null;// nu cred ca e ok null, sa nu crape in alta parte. 
+		} else {
+
+			if (userId != null) {
+				FacesContext context = FacesContext.getCurrentInstance();
+				Long currentCartId = shoppingCartService.getCurrentCart(userId);
+				context.getExternalContext().getSessionMap().put("currentCartId", currentCartId);
+
+			}
+
+			List<CartSummaryItem> carts = new ArrayList<CartSummaryItem>();
+			if (userId != null) {
+				carts = CartSummaryItem.getCartsSummary(shoppingCartService, restaurantService, userId.intValue());
+
+				if (cartId == null && carts.size() != 0) {
+					cartId = carts.get(0).getIdCart();
+				}
+			}
+			return carts;
 		}
+	}
 
-		FacesContext context = FacesContext.getCurrentInstance();
-		//userId = (Long) context.getExternalContext().getSessionMap().get("userId");
-		Long currentCartId = shoppingCartService.getCurrentCart(userId);
-		context.getExternalContext().getSessionMap().put("currentCartId", currentCartId);
-
+	public List<CartSummaryItem> getActiveCartList() {
 		List<CartSummaryItem> carts = new ArrayList<CartSummaryItem>();
-		if (userId != null) {
-			carts = CartSummaryItem.getCartsSummary(shoppingCartService, restaurantService, userId.intValue());
-
-			if (cartId == null && carts.size() != 0) {
-				cartId = carts.get(0).getIdCart();
+		List<CartSummaryItem> cartsActive = new ArrayList<CartSummaryItem>();
+		carts = getCartList();
+		for (CartSummaryItem cartItem : carts) {
+			if (cartItem.getCartActive() == true) {
+				cartsActive.add(cartItem);
 			}
 		}
-		return carts;
+
+		return cartsActive;
+	}
+
+	public List<CartSummaryItem> getDeliveredCartList() {
+		List<CartSummaryItem> carts = new ArrayList<CartSummaryItem>();
+		List<CartSummaryItem> cartsInactive = new ArrayList<CartSummaryItem>();
+		carts = getCartList();
+		for (CartSummaryItem cartItem : carts) {
+			if (cartItem.getCartActive() == false) {
+				cartsInactive.add(cartItem);
+			}
+		}
+
+		return cartsInactive;
 	}
 
 	private boolean userIsLogged() {

@@ -37,6 +37,9 @@ public class SessionBean  implements Serializable{
 	public String logout() {
 		FacesContext context = FacesContext.getCurrentInstance();
 		context.getExternalContext().getSessionMap().clear();
-		return "home.xhtml?faces-redirect=true";
+		return "home?faces-redirect=true";
+		
+		
+		
 	}
 }

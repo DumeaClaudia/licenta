@@ -24,10 +24,6 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 		return repository.retrieveShoppingCartProductsById(idShoppingCart);
 	}
 
-	public Long getActiveShoppingCartForUser(long idUser) {
-		return repository.retrieveActiveShoppingCartForUserId(idUser);
-	}
-
 	public Product getProduct(long idProduct) {
 		return repository.getProductById(idProduct);
 	}

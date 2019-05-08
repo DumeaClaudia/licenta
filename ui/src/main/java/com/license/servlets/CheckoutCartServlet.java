@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -62,5 +64,11 @@ public class CheckoutCartServlet extends HttpServlet {
 		}
 
 		mapper.writeValue(response.getOutputStream(), jsonResponse);
+		if (jsonResponse.getValid()) {
+			FacesContext context = FacesContext.getCurrentInstance();
+			ExternalContext extContext = context.getExternalContext();
+			extContext.redirect(extContext.getRequestContextPath() + "/pages/home.xhtml");
+		}
+
 	}
 }

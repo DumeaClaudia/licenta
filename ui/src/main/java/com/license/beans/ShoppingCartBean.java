@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -46,28 +45,6 @@ public class ShoppingCartBean implements Serializable {
 	@EJB
 	private UserService userService;
 
-	private String firstName;
-
-	private String lastName;
-
-	private String email;
-
-	private String telephone;
-
-	private String address;
-
-	private String payment = new String("Ramburs");
-
-	private List<String> paymentList = new ArrayList<>();
-
-	@PostConstruct
-	public void init() {
-
-		paymentList.add("Ramburs");
-		paymentList.add("Card Debit");
-		paymentList.add("Card Credit");
-	}
-
 	public void addUserToCart(String value) {
 		System.out.println(value);
 
@@ -75,10 +52,6 @@ public class ShoppingCartBean implements Serializable {
 
 	public String checkout() {
 		return "shoppingCart?faces-redirect=true";
-	}
-
-	public String getAddress() {
-		return address;
 	}
 
 	public List<CommentItem> getAllComments() {
@@ -174,47 +147,11 @@ public class ShoppingCartBean implements Serializable {
 		return usersCart;
 	}
 
-	public double getCartTotalPrice() {
-		return cartTotalPrice;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public String getPayment() {
-		return payment;
-	}
-
-	public List<String> getPaymentList() {
-		return paymentList;
-	}
-
-	public List<String> getRemainingUsers() {
-		return remainingUsers;
-	}
-
-	public String getTelephone() {
-		return telephone;
-	}
-
-	public double getTotalPrice() {
-		return totalPrice;
-	}
-
 	public long getUserId() {
 		if (this.userIsLogged()) {
 			return this.userId;
 		}
-		
+
 		FacesContext context = FacesContext.getCurrentInstance();
 		ExternalContext extContext = context.getExternalContext();
 		try {
@@ -275,40 +212,12 @@ public class ShoppingCartBean implements Serializable {
 		return usersNames;
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
 	public void setCartTotalPrice(double cartTotalPrice) {
 		this.cartTotalPrice = cartTotalPrice;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	public void setPayment(String payment) {
-		this.payment = payment;
-	}
-
-	public void setPaymentList(List<String> paymentList) {
-		this.paymentList = paymentList;
-	}
-
 	public void setRemainingUsers(List<String> remainingUsers) {
 		this.remainingUsers = remainingUsers;
-	}
-
-	public void setTelephone(String telephone) {
-		this.telephone = telephone;
 	}
 
 	public void setTotalPrice(double totalPrice) {
@@ -317,6 +226,18 @@ public class ShoppingCartBean implements Serializable {
 
 	public void setUserId(long userId) {
 		this.userId = userId;
+	}
+
+	public double getCartTotalPrice() {
+		return cartTotalPrice;
+	}
+
+	public List<String> getRemainingUsers() {
+		return remainingUsers;
+	}
+
+	public double getTotalPrice() {
+		return totalPrice;
 	}
 
 }

@@ -19,6 +19,7 @@ public class UserBean implements Serializable{
 	private String username;
 	private String password;
 	private long idUser;
+	
 
 	private User user = new User();
 
@@ -28,13 +29,14 @@ public class UserBean implements Serializable{
 	public String login(){
 		user = userService.login(username, password);		
 		idUser = user.getId();
-			
+		
 		FacesContext context = FacesContext.getCurrentInstance();
 		context.getExternalContext().getSessionMap().put("username", user.getUsername());
 		context.getExternalContext().getSessionMap().put("userId", user.getId());
 		
 		return null;
 	}
+
 
 	public String register() {
 		System.out.println("called register method");
@@ -81,4 +83,7 @@ public class UserBean implements Serializable{
 	public void setUser(User user) {
 		this.user = user;
 	}
+
+	
+	
 }

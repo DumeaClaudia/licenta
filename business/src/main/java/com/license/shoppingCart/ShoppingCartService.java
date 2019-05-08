@@ -13,8 +13,6 @@ public interface ShoppingCartService {
 
 	List<Product> getShoppingCartProducts(long idShoppingCart);
 
-	Long getActiveShoppingCartForUser(long idUser);
-
 	Long getCurrentCart(long idUser);
 
 	List<Long> getAllShoppingCartsForUser(long idUser);

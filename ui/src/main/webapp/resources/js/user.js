@@ -8,7 +8,7 @@ $(document).ready(function() {
 		loginAjaxRequest(loginRequest);
 		return false;
 	});
-
+	
 	$("#sidebar-toggle-menu").click(function(e) {
 		e.preventDefault();
 		$("#page-body").toggleClass("sidebar-toggled");

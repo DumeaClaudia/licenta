@@ -1,5 +1,13 @@
 @CHARSET "ISO-8859-1";
 
+#myNavbar {
+	padding-right: 15px;
+}
+
+.modal-dialog {
+	
+}
+
 .cart {
 	background-color: #fff;
 	background-clip: border-box;
@@ -80,15 +88,15 @@
 }
 
 #sizeLogin {
-	max-width: 450px;
-	width: 90%;
+	margin-left: 80px;
+	margin-right: 80px;
 	height: 400px;
 }
 
 #sizeRegister {
-	max-width: 450px;
-	width: 90%;
-	height: 620px;
+	margin-left: 80px;
+	margin-right: 80px;
+	height: 550px;
 }
 
 .restaurant-thumbnail {
@@ -106,6 +114,7 @@
 
 .top-carousel-img {
 	max-height: 250px;
+	max-width: 100%;
 	width: 100%;
 	object-fit: cover;
 	border: 0px;

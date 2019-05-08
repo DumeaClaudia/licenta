@@ -50,24 +50,6 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 	}
 
 	@SuppressWarnings("unchecked")
-	public Long retrieveActiveShoppingCartForUserId(long idUser) {
-
-		Query query = em.createNamedQuery("shoppingCartProducts.getNativeShoppingCartForUser");
-		query.setParameter(1, idUser);
-		List<CartForUserEntity> shoppingCartIdUsers = query.getResultList();
-		if (shoppingCartIdUsers == null) {
-			System.out.println("se pare ca nu au fost gasite sc in baza de date ha ha ha");
-		}
-
-		if (shoppingCartIdUsers != null && !shoppingCartIdUsers.isEmpty()) {
-			return shoppingCartIdUsers.get(0).getIdShoppingCart();
-
-		}
-		return createCartForUser(idUser);
-
-	}
-
-	@SuppressWarnings("unchecked")
 	public Long retrieveCurrentCartForUser(long idUser) {
 		Query query = em.createNamedQuery("shopping_cart_users.getCurrentCartForUser");
 		query.setParameter("idUser", idUser);
@@ -357,7 +339,7 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 			em.persist(userCartEntity);
 			em.getTransaction().commit();
 			return idCart;
-		}else {
+		} else {
 			return id;
 		}
 
@@ -365,12 +347,26 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 
 	public void updateCartAfterCheckout(List<Long> usersIds, long idCart) {
 
-		// for(Long userId: usersIds) {
-		// // ar trebui sa sterg entitatea acum si sa creez alta
-		// ShoppingCartEntity entity = new ShoppingCartEntity();
+		// Query query = em.createNamedQuery("shopping_cart.getShoppingCart");
+		// query.setParameter("idShoppingCart", idCart);
 		//
-		// entity.setCreatedDate(Date.from(Instant.now())); // sau new Date()
-		// entity.set
+		// ShoppingCartEntity newEntity = new ShoppingCartEntity();
+		// ShoppingCartEntity oldShoppingCartEntity = (ShoppingCartEntity)
+		// query.getResultList().get(0);
+		//
+		// newEntity.setId(idCart);
+		// newEntity.setSendDate(new Date());
+		// newEntity.setCreatedDate(oldShoppingCartEntity.getCreatedDate());
+		// newEntity.setTotalPrice(oldShoppingCartEntity.getTotalPrice());
+		// newEntity.setIdRestaurant(oldShoppingCartEntity.getIdRestaurant());
+		//
+		// em.getTransaction().begin();
+		// em.remove(oldShoppingCartEntity);
+		//
+		// em.persist(newEntity);
+		// em.getTransaction().commit();
+		//
+		// em.clear();
 
 		em.getTransaction().begin();
 		Query query = em
@@ -381,23 +377,45 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 
 		query.executeUpdate();
 		em.getTransaction().commit();
+//
+//		for (Long userId : usersIds) {
+//			// // ar trebui sa sterg entitatea acum si sa creez alta
+//
+//			Query query2 = em.createQuery(
+//					"select p FROM shopping_cart_users p where p.idShoppingCart = :idShoppingCart and p.idUser=:idUser");
+//			query.setParameter("idUser", userId);
+//			query.setParameter("idShoppingCart", idCart);
+//
+//			ShoppingCartUserEntity oldShoppingCartUserEntity = (ShoppingCartUserEntity) query2.getResultList().get(0);
+//			em.getTransaction().begin();
+//			em.remove(oldShoppingCartUserEntity);
+//
+//			ShoppingCartUserEntity newShoppingCartUserEntity = new ShoppingCartUserEntity();
+//			newShoppingCartUserEntity.setCurrentCart(false);
+//			newShoppingCartUserEntity.setIdUser(userId);
+//			newShoppingCartUserEntity.setIdShoppingCart(idCart);
+//
+//			em.persist(newShoppingCartUserEntity);
+//			em.getTransaction().commit();
+//
+//			em.clear();
 
-		em.getTransaction().begin();
-		query = em.createQuery(
-				"UPDATE shopping_cart_users p SET p.currentCart=:isCurrentCart WHERE p.idShoppingCart = :idShoppingCart and p.idUser in (:usersIds)");
+			em.getTransaction().begin();
+			query = em.createQuery(
+					"UPDATE shopping_cart_users p SET p.currentCart=:isCurrentCart WHERE p.idShoppingCart = :idShoppingCart and p.idUser in (:usersIds)");
 
-		query.setParameter("isCurrentCart", false);
-		query.setParameter("idShoppingCart", idCart);
-		query.setParameter("usersIds", usersIds);
+			query.setParameter("isCurrentCart", false);
+			query.setParameter("idShoppingCart", idCart);
+			query.setParameter("usersIds", usersIds);
 
-		query.executeUpdate();
-		em.getTransaction().commit();
-		em.clear();
-		// }
+			query.executeUpdate();
+			em.getTransaction().commit();
+			em.clear();
+			for (Long userId : usersIds) {
+				createCartForUser(userId);
+			}
 
-		for (Long userId : usersIds) {
-			createCartForUser(userId);
-		}
+	//	}
 
 	}
 
