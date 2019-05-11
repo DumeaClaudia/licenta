@@ -9,6 +9,7 @@ import javax.ejb.Stateless;
 
 import com.license.Cart;
 import com.license.Comment;
+import com.license.DeliveryData;
 import com.license.Product;
 import com.license.ShoppingCartProducts;
 import com.license.repositories.shoppingCart.ShoppingCartRepository;
@@ -87,6 +88,22 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
 	public void addNewComment(long idUser, long idCart, String description, Date date) {
 		repository.addComment(idUser, idCart, description, date);
+	}
+
+	public void addDeliveryData(DeliveryData deliveryDetails) {
+		repository.addDeliveryDetails(deliveryDetails);
+	}
+
+	public DeliveryData getDeliveryDataByIdCart(long idCart) {
+		return repository.getDeliveryDetailsByIdCart(idCart);
+	}
+
+	public void deleteFromTablesOldCart(Long currentCart, Long userId) {
+		repository.deleteOldCart(currentCart, userId);
+	}
+	
+	public void updateNewCart(long cartId, long userId) {
+		repository.updateTheNewCart(cartId, userId);
 	}
 
 }

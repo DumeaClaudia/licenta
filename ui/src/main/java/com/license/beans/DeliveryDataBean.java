@@ -23,10 +23,6 @@ public class DeliveryDataBean implements Serializable {
 
 	private static final long serialVersionUID = 5328232620616926269L;
 	private Long userId;
-	/*
-	 * private double totalPrice; private double cartTotalPrice; private
-	 * List<String> remainingUsers;
-	 */
 
 	private CurrentCartRequest userData;
 	private User currentUser;
@@ -38,11 +34,6 @@ public class DeliveryDataBean implements Serializable {
 	private RestaurantService restaurantService;
 	@EJB
 	private UserService userService;
-	/*
-	 * private String firstName; private String lastName; private String email;
-	 * private String telephone; private String address; private String payment =
-	 * new String("Ramburs");
-	 */
 
 	@PostConstruct
 	public void init() {

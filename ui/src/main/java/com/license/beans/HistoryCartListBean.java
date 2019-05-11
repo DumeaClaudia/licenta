@@ -11,6 +11,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
+import com.license.DeliveryData;
 import com.license.data.CartDetailsItem;
 import com.license.data.CartSummaryItem;
 import com.license.restaurant.RestaurantService;
@@ -52,7 +53,7 @@ public class HistoryCartListBean implements Serializable {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			return null;// nu cred ca e ok null, sa nu crape in alta parte. 
+			return null;// nu cred ca e ok null, sa nu crape in alta parte.
 		} else {
 
 			if (userId != null) {
@@ -98,6 +99,10 @@ public class HistoryCartListBean implements Serializable {
 		}
 
 		return cartsInactive;
+	}
+
+	public DeliveryData getDataDeliveryForCart() {
+		return userIsLogged() ? shoppingCartService.getDeliveryDataByIdCart(cartId) : new DeliveryData();
 	}
 
 	private boolean userIsLogged() {

@@ -4,10 +4,13 @@
 	padding-right: 15px;
 }
 
-.modal-dialog {
-	
+.text-color{
+	color: #28583d;
 }
-
+.retake-order{
+	float:right;
+	color:#28583d;
+}
 .cart {
 	background-color: #fff;
 	background-clip: border-box;
@@ -20,6 +23,15 @@
 	padding: 5px;
 	font-size: 18px;
 	text-align: center;
+	margin-right: 0px;
+	margin-left: 0px;
+	background-color: rgba(0, 0, 0, .03);
+}
+.history-cart-header{
+	padding: 5px;
+	padding-left: 15px;
+	font-size: 18px;
+	text-align: left;
 	margin-right: 0px;
 	margin-left: 0px;
 	background-color: rgba(0, 0, 0, .03);
@@ -288,4 +300,8 @@ a:active {
 	font-family: fantasy;
 	font-family: serif;
 	padding: 0px 20px;
+}
+
+#page-carousel{
+	width:100%;
 }

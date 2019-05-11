@@ -18,27 +18,35 @@
 					<div id="sidebar-left" class="col-3  col-lg-3 col-md-3 col-sm-12 col-xs-12">
 
 						<ui:fragment rendered="#{ not empty historyCartListBean.getActiveCartList()}">
-							<div class=""><h4><b>Comenzi nefinalizate:</b></h4></div>
+							<div class="">
+								<h4>
+									<b>Comenzi nefinalizate:</b>
+								</h4>
+							</div>
 						</ui:fragment>
 						<ui:repeat value="#{historyCartListBean.getActiveCartList()}" var="cart" outcome="cart">
 							<ul class="nav">
 								<li><a href="history.xhtml?cartId=#{cart.idCart}"> <small>#{cart.createdDate}</small> <br /> <ui:fragment
 											rendered="#{cart.idCart == historyCartListBean.cartId}">
-									>
-								</ui:fragment> <big>#{cart.cartDescription}</big>
+									> 
+										</ui:fragment> <big>#{cart.cartDescription}</big>
 								</a></li>
 							</ul>
 						</ui:repeat>
 
 						<ui:fragment rendered="#{ not empty historyCartListBean.getDeliveredCartList()}">
-							<div class=""><h4><b>Comenzi finalizate:</b></h4></div>
+							<div class="">
+								<h4>
+									<b>Comenzi finalizate:</b>
+								</h4>
+							</div>
 						</ui:fragment>
 						<ui:repeat value="#{historyCartListBean.getDeliveredCartList()}" var="cart" outcome="cart">
 							<ul class="nav">
-								<li><a href="history.xhtml?cartId=#{cart.idCart}"> <small>#{cart.createdDate}</small> <br /> <ui:fragment
-											rendered="#{cart.idCart == historyCartListBean.cartId}">
+								<li><a href="history.xhtml?cartId=#{cart.idCart}" class="selectedCart"> <small>#{cart.createdDate}</small>
+										<br /> <ui:fragment rendered="#{cart.idCart == historyCartListBean.cartId}">
 									>
-								</ui:fragment> <big>#{cart.cartDescription}</big>
+									</ui:fragment> <big>#{cart.cartDescription}</big>
 								</a></li>
 							</ul>
 						</ui:repeat>
@@ -54,34 +62,44 @@
 										<h3>Nu exista un istoric al comenzilor.</h3>
 									</div>
 								</ui:fragment>
-								<ui:fragment rendered="#{historyCartListBean.cartList.size()!=0}">
 
-									<h4 class="style-font">
-										Comanda din data de <b>#{historyCartListBean.getCartDetails().cartSummary.createdDate}</b>
+								<ui:fragment rendered="#{historyCartListBean.cartList.size()!=0}">
+									<h4 class="style-font text-color">
+										<b> Comanda din data de #{historyCartListBean.getCartDetails().cartSummary.createdDate}</b>
+
 										<ui:fragment rendered="#{historyCartListBean.getCartDetails().cartSummary.cartActive==false}">
-											<!-- , care a fost finalizata. -->
+											<button class="retake-order btn btn-default" id="retakeOrderButton" data-value="#{historyCartListBean.cartId}">Comanda
+												din nou</button>
+											<div>
+												<small>Persoana care a plasat comanda: #{historyCartListBean.dataDeliveryForCart.username}</small>
+											</div>
+											<div>
+												<small> Pretul total: #{historyCartListBean.dataDeliveryForCart.totalPrice} RON </small>
+											</div>
+											<div>
+												<small> Adresa livrarii: #{historyCartListBean.dataDeliveryForCart.address} </small>
+											</div>
 										</ui:fragment>
+
 										<ui:fragment rendered="#{historyCartListBean.getCartDetails().cartSummary.cartActive}">
-										, care nu a fost finalizata.
+											<b>, care nu a fost finalizata.</b>
+											<button class="retake-order btn btn-default" id="retakeOrderButton" data-value="#{historyCartListBean.cartId}">Reia
+												comanda</button>
 										</ui:fragment>
 									</h4>
-									
-									<!-- <p>Detalii livrare.</p>
-									<h3>pret</h3>
-									<h3>status</h3>
-									<h3>Adresa livrare</h3>
-								sau
-								<h3>Adresa restaurant</h3> -->
+									<br />
 								</ui:fragment>
 							</div>
 						</div>
 					</div>
-
+					<h4 class="text-color">
+						<b>Produsele din cos:</b>
+					</h4>
 					<ui:repeat value="#{historyCartListBean.getCartDetails().restaurantProducts}" var="restaurant" outcome="restaurant">
 						<div class="cart ">
 
-							<div class="cart-header row col-12">
-								<b><a href="restaurant.xhtml?id=#{restaurant.restaurantId}" class="rest-name">#{restaurant.restaurantName}</a></b>
+							<div class="history-cart-header row col-12">
+								<a href="restaurant.xhtml?id=#{restaurant.restaurantId}" class="text-left"> #{restaurant.restaurantName}</a>
 							</div>
 
 							<ui:repeat value="#{restaurant.products}" var="product">
@@ -94,27 +112,30 @@
 											</div>
 
 											<div class="col-md-11 col-sm-9 col-xs-8">
-												<div class="pull-right">
+												<!-- <div class="pull-right">
 													<small>#{product.nrProducts}x <b> #{product.price} RON </b></small>
-												</div>
+												</div> 
 												<div>
 													#{product.nrProducts}x <b>#{product.name}</b>
 												</div>
 
-												<div>(#{product.description})</div>
+												<div>(#{product.description})</div> -->
+												<div>#{product.nrProducts}x #{product.name} (#{product.description})</div>
+
+												<div>Pret: #{product.nrProducts}x #{product.price} RON</div>
 											</div>
 										</ui:fragment>
 
 										<ui:fragment rendered="#{empty product.image}">
 											<div class="col-md-12 col-sm-12 col-xs-12">
-												<div class="pull-right">
+												<!-- <div class="pull-right">
 													<small>#{product.nrProducts}x <b> #{product.price} RON </b></small>
-												</div>
-												<div>
-													#{product.nrProducts}x <b>#{product.name}</b>
-												</div>
+												</div> -->
+												<div>#{product.nrProducts}x #{product.name} (#{product.description})</div>
 
-												<div>(#{product.description})</div>
+												<div>
+													Pret: <small>#{product.nrProducts}x #{product.price} RON </small>
+												</div>
 											</div>
 										</ui:fragment>
 

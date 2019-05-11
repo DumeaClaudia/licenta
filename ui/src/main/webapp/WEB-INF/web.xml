@@ -124,7 +124,15 @@
 		<servlet-name>jsonservlet_get_products_cart</servlet-name>
 		<url-pattern>/jsonservlet/get_products_cart</url-pattern>
 	</servlet-mapping>
-
+	
+	<servlet>
+		<servlet-name>jsonservlet_retake_cart</servlet-name>
+		<servlet-class>com.license.servlets.RetakeCartServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>jsonservlet_retake_cart</servlet-name>
+		<url-pattern>/jsonservlet/retake_cart</url-pattern>
+	</servlet-mapping>
 
 	<!-- Android authenticated -->
 
@@ -155,6 +163,17 @@
 		<servlet-name>androidservlet_get_cart_details</servlet-name>
 		<url-pattern>/android_auth/get_cart_details</url-pattern>
 	</servlet-mapping>
+	
+	
+	<servlet>
+		<servlet-name>androidservlet_get_current_cart</servlet-name>
+		<servlet-class>com.license.servlets.GetCurrentCartServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>androidservlet_get_current_cart</servlet-name>
+		<url-pattern>/android_auth/get_current_cart</url-pattern>
+	</servlet-mapping>
+	
 
 	<servlet>
 		<servlet-name>androidservlet_get_users</servlet-name>

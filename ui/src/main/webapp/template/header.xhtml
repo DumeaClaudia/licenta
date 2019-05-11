@@ -9,9 +9,6 @@
 <h:body>
 
 	<ui:composition>
-		<!-- 	<ui:define name="head">
-			<script src="../resources/js/cart.js"></script>
-		</ui:define> -->
 		<div id="header">
 			<p:growl id="messages"></p:growl>
 			<div class="navbar-wrapper">
@@ -41,7 +38,8 @@
 									<li><a data-toggle="modal" href="#myCartModal"> #{sessionBean.username} <span
 											class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> <span id="nr-products-cart"
 											class="badge">0</span></a></li>
-									<li><a id="sidebar-toggle-menu"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span></a></li>
+									<li><a id="sidebar-toggle-menu"><span class="glyphicon glyphicon-user" aria-hidden="true"></span><span
+											class="glyphicon glyphicon-comment" aria-hidden="true"></span></a></li>
 									<li><h:commandLink class="" value="Logout" action="#{sessionBean.logout()}"></h:commandLink></li>
 								</ul>
 							</h:form>
@@ -61,9 +59,6 @@
 
 				</div>
 				</nav>
-
-
-
 
 
 				<!-- Login Menu  -->
@@ -93,7 +88,7 @@
 										<div class="form-group">
 											<h:outputLabel for="psw">
 												<span class="glyphicon glyphicon-eye-open"></span> Parola</h:outputLabel>
-											<h:inputSecret type="password" class="form-control login-password" id="pwd" placeholder="Enter password"
+											<h:inputSecret type="password" class="form-control login-password passwordUser" id="passwordUser" placeholder="Enter password"
 												value="#{userBean.password}"></h:inputSecret>
 										</div>
 

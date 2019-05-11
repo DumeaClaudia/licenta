@@ -26,6 +26,12 @@ $(document).ready(function() {
 		$("#sidebar-minimize").toggleClass("hidden");
 		$("#sidebar-maximize").toggleClass("hidden");
 	});
+	
+	$(".passwordUser").keypress(function(e) {
+		if (e.keyCode == 13) { // detect the enter key
+			$("#login-button").click();
+		}
+	});
 });
 
 function loginAjaxRequest(request) {

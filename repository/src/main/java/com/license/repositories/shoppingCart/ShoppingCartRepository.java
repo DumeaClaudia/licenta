@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 import com.license.Cart;
 import com.license.Comment;
+import com.license.DeliveryData;
 import com.license.Product;
 import com.license.ShoppingCartProducts;
 
@@ -41,4 +42,12 @@ public interface ShoppingCartRepository {
 	public List<Comment> retrieveAllCommentsForCart(Long currentCart);
 
 	public void addComment(long idUser, long idCart, String description, Date date);
+
+	public void addDeliveryDetails(DeliveryData deliveryDetails);
+
+	public DeliveryData getDeliveryDetailsByIdCart(long idCart);
+
+	public void deleteOldCart(Long currentCart, Long userId);
+
+	public void updateTheNewCart(long cartId, long userId);
 }

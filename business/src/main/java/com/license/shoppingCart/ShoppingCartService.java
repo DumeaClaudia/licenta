@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.license.Cart;
 import com.license.Comment;
+import com.license.DeliveryData;
 import com.license.Product;
 import com.license.ShoppingCartProducts;
 
@@ -42,5 +43,12 @@ public interface ShoppingCartService {
 	List<Comment> getAllCommentsForCart(Long currentCart);
 
 	void addNewComment(long idUser, long idCart, String description, Date date);
+	
+	void addDeliveryData(DeliveryData deliveryDetails);
+	
+	DeliveryData getDeliveryDataByIdCart(long idCart);
 
+	void deleteFromTablesOldCart(Long currentCart, Long userId);
+
+	void updateNewCart(long cartId, long userId);
 }

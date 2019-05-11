@@ -3,10 +3,9 @@ package com.license.servlets;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.license.CurrentCartRequest;
+import com.license.DeliveryData;
 import com.license.ValidationResponse;
 import com.license.shoppingCart.ShoppingCartService;
 import com.license.user.UserService;
@@ -45,6 +45,7 @@ public class CheckoutCartServlet extends HttpServlet {
 				|| jsonRequest.getLastName() == null || jsonRequest.getLastName().isEmpty()
 				|| jsonRequest.getEmail() == null || jsonRequest.getEmail().isEmpty()
 				|| jsonRequest.getTelephone() == null || jsonRequest.getTelephone().isEmpty()
+				|| jsonRequest.getAddress() == null || jsonRequest.getAddress().isEmpty()
 				|| jsonRequest.getPayment() == null || jsonRequest.getPayment().isEmpty()) {
 
 			jsonResponse.setMessage(
@@ -61,14 +62,19 @@ public class CheckoutCartServlet extends HttpServlet {
 
 			shoppingCartService.updateDateForCartAfterCheckout(usersIds, currentCart);
 
+			DeliveryData deliveryDetails = new DeliveryData();
+			
+			deliveryDetails.setIdCart(currentCart);
+			deliveryDetails.setTotalPrice(jsonRequest.getTotalPrice());
+			deliveryDetails.setSendDate(new Date());
+			deliveryDetails.setAddress(jsonRequest.getAddress());
+			deliveryDetails.setUsername( jsonRequest.getFirstName()+ " "+ jsonRequest.getLastName());
+
+			shoppingCartService.addDeliveryData(deliveryDetails);
+
 		}
 
 		mapper.writeValue(response.getOutputStream(), jsonResponse);
-		if (jsonResponse.getValid()) {
-			FacesContext context = FacesContext.getCurrentInstance();
-			ExternalContext extContext = context.getExternalContext();
-			extContext.redirect(extContext.getRequestContextPath() + "/pages/home.xhtml");
-		}
 
 	}
 }

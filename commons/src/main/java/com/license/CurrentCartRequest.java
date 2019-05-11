@@ -9,6 +9,8 @@ public class CurrentCartRequest {
 	private String address;
 	private String payment=new String("Ramburs");
 	
+	private double totalPrice;
+	
 	public String getFirstName() {
 		return firstName;
 	}
@@ -44,5 +46,13 @@ public class CurrentCartRequest {
 	}
 	public void setPayment(String payment) {
 		this.payment = payment;
+	}
+	public double getTotalPrice() {
+		return totalPrice;
+	}
+	public void setTotalPrice(double totalPrice) {
+		this.totalPrice = totalPrice;
 	}	
+	
+	
 }

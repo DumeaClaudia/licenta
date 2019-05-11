@@ -15,10 +15,11 @@ import javax.persistence.Query;
 
 import com.license.Cart;
 import com.license.Comment;
+import com.license.DeliveryData;
 import com.license.Product;
 import com.license.ShoppingCartProducts;
-import com.license.entities.CartForUserEntity;
 import com.license.entities.CommentEntity;
+import com.license.entities.DeliveryDataEntity;
 import com.license.entities.ProductEntity;
 import com.license.entities.ShoppingCartEntity;
 import com.license.entities.ShoppingCartProductsEntity;
@@ -377,45 +378,48 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 
 		query.executeUpdate();
 		em.getTransaction().commit();
-//
-//		for (Long userId : usersIds) {
-//			// // ar trebui sa sterg entitatea acum si sa creez alta
-//
-//			Query query2 = em.createQuery(
-//					"select p FROM shopping_cart_users p where p.idShoppingCart = :idShoppingCart and p.idUser=:idUser");
-//			query.setParameter("idUser", userId);
-//			query.setParameter("idShoppingCart", idCart);
-//
-//			ShoppingCartUserEntity oldShoppingCartUserEntity = (ShoppingCartUserEntity) query2.getResultList().get(0);
-//			em.getTransaction().begin();
-//			em.remove(oldShoppingCartUserEntity);
-//
-//			ShoppingCartUserEntity newShoppingCartUserEntity = new ShoppingCartUserEntity();
-//			newShoppingCartUserEntity.setCurrentCart(false);
-//			newShoppingCartUserEntity.setIdUser(userId);
-//			newShoppingCartUserEntity.setIdShoppingCart(idCart);
-//
-//			em.persist(newShoppingCartUserEntity);
-//			em.getTransaction().commit();
-//
-//			em.clear();
+		//
+		// for (Long userId : usersIds) {
+		// // // ar trebui sa sterg entitatea acum si sa creez alta
+		//
+		// Query query2 = em.createQuery(
+		// "select p FROM shopping_cart_users p where p.idShoppingCart = :idShoppingCart
+		// and p.idUser=:idUser");
+		// query.setParameter("idUser", userId);
+		// query.setParameter("idShoppingCart", idCart);
+		//
+		// ShoppingCartUserEntity oldShoppingCartUserEntity = (ShoppingCartUserEntity)
+		// query2.getResultList().get(0);
+		// em.getTransaction().begin();
+		// em.remove(oldShoppingCartUserEntity);
+		//
+		// ShoppingCartUserEntity newShoppingCartUserEntity = new
+		// ShoppingCartUserEntity();
+		// newShoppingCartUserEntity.setCurrentCart(false);
+		// newShoppingCartUserEntity.setIdUser(userId);
+		// newShoppingCartUserEntity.setIdShoppingCart(idCart);
+		//
+		// em.persist(newShoppingCartUserEntity);
+		// em.getTransaction().commit();
+		//
+		// em.clear();
 
-			em.getTransaction().begin();
-			query = em.createQuery(
-					"UPDATE shopping_cart_users p SET p.currentCart=:isCurrentCart WHERE p.idShoppingCart = :idShoppingCart and p.idUser in (:usersIds)");
+		em.getTransaction().begin();
+		query = em.createQuery(
+				"UPDATE shopping_cart_users p SET p.currentCart=:isCurrentCart WHERE p.idShoppingCart = :idShoppingCart and p.idUser in (:usersIds)");
 
-			query.setParameter("isCurrentCart", false);
-			query.setParameter("idShoppingCart", idCart);
-			query.setParameter("usersIds", usersIds);
+		query.setParameter("isCurrentCart", false);
+		query.setParameter("idShoppingCart", idCart);
+		query.setParameter("usersIds", usersIds);
 
-			query.executeUpdate();
-			em.getTransaction().commit();
-			em.clear();
-			for (Long userId : usersIds) {
-				createCartForUser(userId);
-			}
+		query.executeUpdate();
+		em.getTransaction().commit();
+		em.clear();
+		for (Long userId : usersIds) {
+			createCartForUser(userId);
+		}
 
-	//	}
+		// }
 
 	}
 
@@ -486,6 +490,93 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 		em.persist(commentEntity);
 		em.getTransaction().commit();
 		em.clear();
+	}
+
+	public void addDeliveryDetails(DeliveryData deliveryDetails) {
+		DeliveryDataEntity deliveryDataEntity = new DeliveryDataEntity();
+
+		deliveryDataEntity.setIdCart(deliveryDetails.getIdCart());
+		deliveryDataEntity.setUsername(deliveryDetails.getUsername());
+		deliveryDataEntity.setTotalPrice(deliveryDetails.getTotalPrice());
+		deliveryDataEntity.setAddress(deliveryDetails.getAddress());
+		deliveryDataEntity.setSendDate(new Date());
+
+		em.getTransaction().begin();
+		em.persist(deliveryDataEntity);
+		em.getTransaction().commit();
+		em.clear();
+	}
+
+	public DeliveryData getDeliveryDetailsByIdCart(long idCart) {
+
+		Query query = em.createNamedQuery("delivery_data.getDeliveryData");
+		query.setParameter("idCart", idCart);
+		List<DeliveryDataEntity> entities = query.getResultList();
+
+		
+		DeliveryData deliveryData = new DeliveryData();
+		
+		if (entities.size() > 0) {
+			DeliveryDataEntity entity = entities.get(0);
+			
+			deliveryData.setIdCart(entity.getIdCart());
+			deliveryData.setAddress(entity.getAddress());
+			deliveryData.setUsername(entity.getUsername());
+			deliveryData.setSendDate(entity.getSendDate());
+			deliveryData.setTotalPrice(entity.getTotalPrice());
+		}
+
+		return deliveryData;
+	}
+
+	public void deleteOldCart(Long currentCart, Long userId) {
+		Query query = em.createQuery(
+				"select p FROM shopping_cart_users p where p.idShoppingCart = :idShoppingCart and p.idUser=:idUser");
+		query.setParameter("idShoppingCart", currentCart);
+		query.setParameter("idUser", userId);
+		
+		ShoppingCartUserEntity retrievedEntity = (ShoppingCartUserEntity) query.getResultList().get(0);	
+		em.getTransaction().begin();
+		em.remove(retrievedEntity);
+		em.clear();
+		
+		
+		query = em.createQuery(
+				"select p FROM shopping_cart_products p where p.idShoppingCart = :idShoppingCart and p.idUser=:idUser");
+		query.setParameter("idShoppingCart", currentCart);
+		query.setParameter("idUser", userId);
+		
+		ShoppingCartProductsEntity oldEntity = (ShoppingCartProductsEntity) query.getResultList().get(0);
+		em.getTransaction().begin();
+		em.remove(oldEntity);
+		em.clear();
+		
+
+		query = em.createQuery(
+				"select p FROM shopping_cart p where p.idShoppingCart = :idShoppingCart");
+		query.setParameter("idShoppingCart", currentCart);
+		
+		ShoppingCartEntity cartEntity = (ShoppingCartEntity) query.getResultList().get(0);
+		em.getTransaction().begin();
+		em.remove(cartEntity);
+		em.clear();
+		
+		
+	}
+
+	public void updateTheNewCart(long cartId, long userId) {
+		em.getTransaction().begin();
+		Query query = em.createQuery(
+				"UPDATE shopping_cart_users p SET p.currentCart=:newCart WHERE p.idShoppingCart =:idShoppingCart and p.idUser=:idUser");
+
+		query.setParameter("newCart", true);
+		query.setParameter("idShoppingCart", cartId);
+		query.setParameter("idUser", userId);
+
+		query.executeUpdate();
+		em.getTransaction().commit();
+		em.clear();
+		
 	}
 
 }

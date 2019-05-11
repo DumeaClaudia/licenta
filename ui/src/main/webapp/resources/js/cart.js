@@ -16,15 +16,40 @@ $(document).ready(function() {
 		"showMethod" : "fadeIn",
 		"hideMethod" : "fadeOut"
 	};
-	
-	toastr.options.onHidden = function() { toastr.options.onclick = undefined; }
-	
-	displayUsers(); //hello
+
+	toastr.options.onHidden = function() {
+		toastr.options.onclick = undefined;
+	}
+
+	displayUsers();
 
 });
 
 $(document).ready(function() {
-	$("#validate-cart").click(function() {
+	$("#retakeOrderButton").click(function() {
+	var idCart = $("#retakeOrderButton").data("value");
+
+		$.ajax({
+			url : "../jsonservlet/retake_cart",
+			type : 'POST',
+			dataType : 'json',
+			data : JSON.stringify(idCart),
+			contentType : 'application/json',
+			mimeType : 'application/json',
+
+			success : function(result) {
+			},
+			error : function(data, status, er) {
+				console.log(data);
+				console.log(status);
+				console.log(er);
+			}
+		});
+	});
+});
+
+$(document).ready(function() {
+	$("#checkoutSendButton").click(function() {
 		var validateCartRequest = new Object();
 
 		validateCartRequest.firstName = $(".user-first-name").val();
@@ -34,12 +59,11 @@ $(document).ready(function() {
 		validateCartRequest.address = $(".user-address").val();
 		validateCartRequest.payment = $(".user-payment").val();
 
-		validateUserDataBeforeCheckout(validateCartRequest);
-		return false;
-	});
+		validateCartRequest.totalPrice = cartPriceTotal;
 
-	$('#checkoutModal').on('hide.bs.modal', function(e) {
-		location.assign("home.xhtml");
+		validateUserDataBeforeCheckout(validateCartRequest);
+
+		return false;
 	});
 
 	displayComments();
@@ -55,6 +79,7 @@ $(document).ready(function() {
 });
 
 function validateUserDataBeforeCheckout(request) {
+	console.log("in validate cart");
 	$.ajax({
 		url : "../jsonservlet/current_cart_servlet",
 		type : 'POST',
@@ -68,6 +93,26 @@ function validateUserDataBeforeCheckout(request) {
 				$("#cart-validation-message").text(result.message);
 			} else {
 				$("#cart-validation-message").text("");
+
+				// resetez valorile din modal... sau altfel...
+				$("#nr-products-cart").text("0");
+				$("#cart-products-list").empty();
+				$("#total-price").text("0");
+
+				/*
+				 * var modal = document.getElementById('checkoutPopup');
+				 *  // Get the button that opens the modal var btn =
+				 * document.getElementById("validate-cart");
+				 *  // Get the <span> element that closes the modal var span =
+				 * document.getElementsByClassName("close")[0];
+				 *  // When the user clicks the button, open the modal
+				 * btn.onclick = function() { modal.style.display = "block"; }
+				 *  // When the user clicks on <span> (x), close the modal
+				 * span.onclick = function() { modal.style.display = "none"; }
+				 *  // When the user clicks anywhere outside of the modal, close
+				 * it window.onclick = function(event) { if (event.target ==
+				 * modal) { modal.style.display = "none"; } }
+				 */
 
 			}
 		},
@@ -99,19 +144,28 @@ function displayComments() {
 				success : function(result) {
 
 					var nr_all_comments = result.length;
+					var comm = "comentariu";
+					if(nr_all_comments==1){
+						comm="comentarii";
+						
+					}
 
-					setSidebarHeader(nr_all_comments + " commentarii " + "("
+					setSidebarHeader(nr_all_comments + " " + comm + " " + "("
 							+ user_count + " utilizatori)");
 
 					if (nr_all_comments != user_comments_count
 							&& nr_all_comments > 0) {
 
 						if (user_comments_count >= 0) {
-							
-							toastr.options.onclick = function() { if(!$("#page-body").hasClass("sidebar-toggled"))	{
-								$("#page-body").toggleClass("sidebar-toggled"); }
+
+							toastr.options.onclick = function() {
+								if (!$("#page-body")
+										.hasClass("sidebar-toggled")) {
+									$("#page-body").toggleClass(
+											"sidebar-toggled");
+								}
 							};
-							
+
 							for (var i = user_comments_count; i < nr_all_comments; i++) {
 								if (!result[i].ownComment) {
 									toastr.info(result[i].description,
@@ -119,7 +173,7 @@ function displayComments() {
 													+ result[i].username);
 								}
 							}
-							
+
 						}
 
 						var scrollBottom = false;
@@ -221,6 +275,7 @@ function displayUsers() {
 	});
 }
 
+var cartPriceTotal = 0;
 function displayProductsFromCart() {
 
 	$.ajax({
@@ -264,10 +319,12 @@ function displayProductsFromCart() {
 			});
 
 			$("#priceTotalCart").text(total.toFixed(2));
-			
-			if(total==0){
-				$('#checkoutSendButton').attr('disabled','disabled');
-			}else{
+
+			cartPriceTotal = total;
+
+			if (total == 0) {
+				$('#checkoutSendButton').attr('disabled', 'disabled');
+			} else {
 				$('#checkoutSendButton').removeAttr('disabled');
 			}
 		},
@@ -350,44 +407,34 @@ function sendCommentAjaxRequest(request) {
  */
 
 /*--------------------------------------------------------------------------------------------------------------------------------*/
-$('.form').find('input, textarea').on('keyup blur focus', function(e) {
-
-	var $this = $(this), label = $this.prev('label');
-
-	if (e.type === 'keyup') {
-		if ($this.val() === '') {
-			label.removeClass('active highlight');
-		} else {
-			label.addClass('active highlight');
-		}
-	} else if (e.type === 'blur') {
-		if ($this.val() === '') {
-			label.removeClass('active highlight');
-		} else {
-			label.removeClass('highlight');
-		}
-	} else if (e.type === 'focus') {
-
-		if ($this.val() === '') {
-			label.removeClass('highlight');
-		} else if ($this.val() !== '') {
-			label.addClass('highlight');
-		}
-	}
-
-});
-
-$('.tab a').on('click', function(e) {
-
-	e.preventDefault();
-
-	$(this).parent().addClass('active');
-	$(this).parent().siblings().removeClass('active');
-
-	target = $(this).attr('href');
-
-	$('.tab-content > div').not(target).hide();
-
-	$(target).fadeIn(600);
-
-});
+/*
+ * $('.form').find('input, textarea').on('keyup blur focus', function(e) {
+ * 
+ * var $this = $(this), label = $this.prev('label');
+ * 
+ * if (e.type === 'keyup') { if ($this.val() === '') { label.removeClass('active
+ * highlight'); } else { label.addClass('active highlight'); } } else if (e.type
+ * === 'blur') { if ($this.val() === '') { label.removeClass('active
+ * highlight'); } else { label.removeClass('highlight'); } } else if (e.type ===
+ * 'focus') {
+ * 
+ * if ($this.val() === '') { label.removeClass('highlight'); } else if
+ * ($this.val() !== '') { label.addClass('highlight'); } }
+ * 
+ * });
+ * 
+ * $('.tab a').on('click', function(e) {
+ * 
+ * e.preventDefault();
+ * 
+ * $(this).parent().addClass('active');
+ * $(this).parent().siblings().removeClass('active');
+ * 
+ * target = $(this).attr('href');
+ * 
+ * $('.tab-content > div').not(target).hide();
+ * 
+ * $(target).fadeIn(600);
+ * 
+ * });
+ */
