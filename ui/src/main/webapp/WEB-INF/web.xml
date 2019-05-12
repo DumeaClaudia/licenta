@@ -183,6 +183,24 @@
 		<servlet-name>androidservlet_get_users</servlet-name>
 		<url-pattern>/android_auth/get_users</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>androidservlet_get_comments</servlet-name>
+		<servlet-class>com.license.servlets.AndroidGetCommentListServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>androidservlet_get_comments</servlet-name>
+		<url-pattern>/android_auth/get_comments</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>androidservlet_add_comment</servlet-name>
+		<servlet-class>com.license.servlets.AndroidAddCommentServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>androidservlet_add_comment</servlet-name>
+		<url-pattern>/android_auth/add_comment</url-pattern>
+	</servlet-mapping>
 
 	<servlet>
 		<servlet-name>androidservlet_logout</servlet-name>
