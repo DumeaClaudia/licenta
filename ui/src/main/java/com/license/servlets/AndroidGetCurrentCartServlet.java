@@ -13,23 +13,23 @@ import com.license.data.CartDetailsItem;
 import com.license.restaurant.RestaurantService;
 import com.license.shoppingCart.ShoppingCartService;
 
-public class GetCartDetailsServlet extends HttpServlet {
-	private static final long serialVersionUID = 1115909816033418452L;
+public class AndroidGetCurrentCartServlet extends HttpServlet {
+	private static final long serialVersionUID = -4978184052053003912L;
 	@EJB
 	private ShoppingCartService shoppingCartService;
 	@EJB
 	private RestaurantService restaurantService;
-	
+
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-		
-        long cartId = Long.parseLong(request.getParameter("cartId"));
-        
-    	HttpSession session = request.getSession(false); 
+
+		HttpSession session = request.getSession(false);
 		Long s = (Long) session.getAttribute("userId");
 		long userId = s.intValue();
-		
-		CartDetailsItem cartDetailsItem = CartDetailsItem.getCartDetailsItem(shoppingCartService, restaurantService, userId, cartId);
+		long cartId = shoppingCartService.getCurrentCart(userId);
+
+		CartDetailsItem cartDetailsItem = CartDetailsItem.getCartDetailsItem(shoppingCartService, restaurantService,
+				userId, cartId);
 
 		response.setContentType("application/json");
 		ObjectMapper write_mapper = new ObjectMapper();
@@ -37,5 +37,4 @@ public class GetCartDetailsServlet extends HttpServlet {
 
 	}
 
-	
 }

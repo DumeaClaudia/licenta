@@ -216,13 +216,18 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 
 			if (shoppingCartEntity.getSendDate() != null) {
 				cart.setSendDate(df.format(shoppingCartEntity.getSendDate()));
+				cart.setActive(false);
 			}
 
 			if (shoppingCartEntity.getSendDate() == null) {
 				cart.setActive(true);
-			} else if (shoppingCartEntity.getSendDate().before(new Date())) {
-				cart.setActive(false);
+				
+			} else {
+				
 			}
+			/*} else if (shoppingCartEntity.getSendDate().before(new Date())) {
+				cart.setActive(false);
+			}*/
 		}
 
 		return cart;
@@ -415,6 +420,7 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 		query.executeUpdate();
 		em.getTransaction().commit();
 		em.clear();
+		
 		for (Long userId : usersIds) {
 			createCartForUser(userId);
 		}

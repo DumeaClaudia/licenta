@@ -144,14 +144,17 @@ function displayComments() {
 				success : function(result) {
 
 					var nr_all_comments = result.length;
-					var comm = "comentariu";
-					if(nr_all_comments==1){
-						comm="comentarii";
+					var comm = "comentarii";
+					if(nr_all_comments===1){
+						comm="comentariu";
 						
 					}
-
+					var users_name = "utilizatori";
+					if(user_count===1){
+						users_name="utilizator";
+					}
 					setSidebarHeader(nr_all_comments + " " + comm + " " + "("
-							+ user_count + " utilizatori)");
+							+ user_count + "  " + users_name + ")");
 
 					if (nr_all_comments != user_comments_count
 							&& nr_all_comments > 0) {

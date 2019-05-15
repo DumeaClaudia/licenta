@@ -55,7 +55,7 @@ public class AddProductToCartServlet extends HttpServlet {
 
 		ShoppingCartResponse jsonResponse = new ShoppingCartResponse();
 
-		Long currentCart = shoppingCartService.getCurrentCart(idUser);
+		Long currentCart = shoppingCartService.getCurrentCart(idUser); // 598
 
 		Long productID = jsonRequest.getIdProduct();
 		Product product = shoppingCartService.getProduct(productID);

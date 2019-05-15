@@ -148,7 +148,7 @@
 
 	<servlet>
 		<servlet-name>androidservlet_get_cart_list</servlet-name>
-		<servlet-class>com.license.servlets.GetCartSummaryListServlet</servlet-class>
+		<servlet-class>com.license.servlets.AndroidGetCartSummaryListServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>androidservlet_get_cart_list</servlet-name>
@@ -157,17 +157,35 @@
 
 	<servlet>
 		<servlet-name>androidservlet_get_cart_details</servlet-name>
-		<servlet-class>com.license.servlets.GetCartDetailsServlet</servlet-class>
+		<servlet-class>com.license.servlets.AndroidGetCartDetailsServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>androidservlet_get_cart_details</servlet-name>
 		<url-pattern>/android_auth/get_cart_details</url-pattern>
 	</servlet-mapping>
 	
+	<servlet>
+		<servlet-name>androidservlet_get_restaurants</servlet-name>
+		<servlet-class>com.license.servlets.AndroidGetRestaurantListServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>androidservlet_get_restaurants</servlet-name>
+		<url-pattern>/android_auth/get_restaurants</url-pattern>
+	</servlet-mapping>
+	
+	
+	<servlet>
+		<servlet-name>androidservlet_get_restaurant_products</servlet-name>
+		<servlet-class>com.license.servlets.AndroidGetRestaurantProductsServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>androidservlet_get_restaurant_products</servlet-name>
+		<url-pattern>/android_auth/get_restaurant_details</url-pattern>
+	</servlet-mapping>
 	
 	<servlet>
 		<servlet-name>androidservlet_get_current_cart</servlet-name>
-		<servlet-class>com.license.servlets.GetCurrentCartServlet</servlet-class>
+		<servlet-class>com.license.servlets.AndroidGetCurrentCartServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>androidservlet_get_current_cart</servlet-name>

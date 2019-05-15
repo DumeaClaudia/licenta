@@ -67,10 +67,10 @@
 									<h4 class="style-font text-color">
 										<b> Comanda din data de #{historyCartListBean.getCartDetails().cartSummary.createdDate}</b>
 
-										<ui:fragment rendered="#{historyCartListBean.getCartDetails().cartSummary.cartActive==false}">
+									<ui:fragment rendered="#{historyCartListBean.getCartDetails().cartSummary.cartActive==false}">
 											<button class="retake-order btn btn-default" id="retakeOrderButton" data-value="#{historyCartListBean.cartId}">Comanda
-												din nou</button>
-											<div>
+												din nou</button></ui:fragment>
+										<!-- <div>
 												<small>Persoana care a plasat comanda: #{historyCartListBean.dataDeliveryForCart.username}</small>
 											</div>
 											<div>
@@ -79,11 +79,11 @@
 											<div>
 												<small> Adresa livrarii: #{historyCartListBean.dataDeliveryForCart.address} </small>
 											</div>
-										</ui:fragment>
+										</ui:fragment> -->
 
-										<ui:fragment rendered="#{historyCartListBean.getCartDetails().cartSummary.cartActive}">
+										<ui:fragment rendered="#{historyCartListBean.getCartDetails().cartSummary.cartActive==true}">
 											<b>, care nu a fost finalizata.</b>
-											<button class="retake-order btn btn-default" id="retakeOrderButton" data-value="#{historyCartListBean.cartId}">Reia
+											<button class="retake-order btn btn-default disabled" id="retakeOrderButton" data-value="#{historyCartListBean.cartId}">Reia
 												comanda</button>
 										</ui:fragment>
 									</h4>
