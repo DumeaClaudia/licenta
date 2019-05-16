@@ -24,10 +24,12 @@ public class AndroidGetRestaurantProductsServlet extends HttpServlet {
 
 		long restaurantId = Long.parseLong(request.getParameter("restaurantId"));
 
-		Restaurant restaurantResponse = restaurantService.getRestaurantById(restaurantId);
-
-		List<Product> products = restaurantService.getAllProductsForRestaurant(restaurantId);
-		restaurantResponse.setProducts(products);
+		Restaurant restaurantResponse = new Restaurant();
+		if (restaurantId != 0) {
+			restaurantResponse = restaurantService.getRestaurantById(restaurantId);
+			List<Product> products = restaurantService.getAllProductsForRestaurant(restaurantId);
+			restaurantResponse.setProducts(products);
+		}
 
 		response.setContentType("application/json");
 		ObjectMapper write_mapper = new ObjectMapper();

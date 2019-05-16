@@ -124,7 +124,7 @@
 		<servlet-name>jsonservlet_get_products_cart</servlet-name>
 		<url-pattern>/jsonservlet/get_products_cart</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>jsonservlet_retake_cart</servlet-name>
 		<servlet-class>com.license.servlets.RetakeCartServlet</servlet-class>
@@ -163,7 +163,7 @@
 		<servlet-name>androidservlet_get_cart_details</servlet-name>
 		<url-pattern>/android_auth/get_cart_details</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>androidservlet_get_restaurants</servlet-name>
 		<servlet-class>com.license.servlets.AndroidGetRestaurantListServlet</servlet-class>
@@ -172,8 +172,8 @@
 		<servlet-name>androidservlet_get_restaurants</servlet-name>
 		<url-pattern>/android_auth/get_restaurants</url-pattern>
 	</servlet-mapping>
-	
-	
+
+
 	<servlet>
 		<servlet-name>androidservlet_get_restaurant_products</servlet-name>
 		<servlet-class>com.license.servlets.AndroidGetRestaurantProductsServlet</servlet-class>
@@ -182,7 +182,7 @@
 		<servlet-name>androidservlet_get_restaurant_products</servlet-name>
 		<url-pattern>/android_auth/get_restaurant_details</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>androidservlet_get_current_cart</servlet-name>
 		<servlet-class>com.license.servlets.AndroidGetCurrentCartServlet</servlet-class>
@@ -191,7 +191,7 @@
 		<servlet-name>androidservlet_get_current_cart</servlet-name>
 		<url-pattern>/android_auth/get_current_cart</url-pattern>
 	</servlet-mapping>
-	
+
 
 	<servlet>
 		<servlet-name>androidservlet_get_users</servlet-name>
@@ -201,7 +201,7 @@
 		<servlet-name>androidservlet_get_users</servlet-name>
 		<url-pattern>/android_auth/get_users</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>androidservlet_get_comments</servlet-name>
 		<servlet-class>com.license.servlets.AndroidGetCommentListServlet</servlet-class>
@@ -210,7 +210,7 @@
 		<servlet-name>androidservlet_get_comments</servlet-name>
 		<url-pattern>/android_auth/get_comments</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>androidservlet_add_comment</servlet-name>
 		<servlet-class>com.license.servlets.AndroidAddCommentServlet</servlet-class>
@@ -218,6 +218,15 @@
 	<servlet-mapping>
 		<servlet-name>androidservlet_add_comment</servlet-name>
 		<url-pattern>/android_auth/add_comment</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>androidservlet_add_new_product</servlet-name>
+		<servlet-class>com.license.servlets.AndroidAddProductToCartServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>androidservlet_add_new_product</servlet-name>
+		<url-pattern>/android_auth/add_new_product</url-pattern>
 	</servlet-mapping>
 
 	<servlet>
