@@ -80,13 +80,13 @@
 								<div class="modal-body" style="padding: 40px 30px 5px 30px;">
 									<h:form role="form" id="login-form">
 										<div class="form-group">
-											<h:outputLabel for="usrname">
+											<h:outputLabel for="idUsername">
 												<span class="glyphicon glyphicon-user"></span> Nume utilizator</h:outputLabel>
 											<h:inputText type="text" class="form-control login-username" id="idUsername" placeholder="Enter username"
 												name="firstName" value="#{userBean.username}"></h:inputText>
 										</div>
 										<div class="form-group">
-											<h:outputLabel for="psw">
+											<h:outputLabel for="passwordUser">
 												<span class="glyphicon glyphicon-eye-open"></span> Parola</h:outputLabel>
 											<h:inputSecret type="password" class="form-control login-password passwordUser" id="passwordUser" placeholder="Enter password"
 												value="#{userBean.password}"></h:inputSecret>
@@ -134,33 +134,33 @@
 									<div class="modal-body" style="padding: 10px 30px 5px 30px;">
 										<h:form role="form">
 											<div class="form-group">
-												<h:outputLabel for="firstName">
+												<h:outputLabel for="idFirstName">
 													<span class="fa fa-user-circle"></span> First Name</h:outputLabel>
 												<h:inputText type="text" class="form-control" id="idFirstName" placeholder="Enter first name"
 													name="firstName" value="#{userBean.user.firstName}"></h:inputText>
 											</div>
 											<div class="form-group">
-												<h:outputLabel for="lastName">
+												<h:outputLabel for="idLastName">
 													<span class="fa fa-user-circle-o"></span> Last Name</h:outputLabel>
 												<h:inputText type="text" class="form-control" id="idLastName" placeholder="Enter last name" name="lastName"
 													value="#{userBean.user.lastName}"></h:inputText>
 											</div>
 											<div class="form-group">
-												<h:outputLabel for="username">
+												<h:outputLabel for="idUsername">
 													<span class="fa fa-user"></span> Username</h:outputLabel>
 												<h:inputText type="text" class="form-control" id="idUsername" placeholder="Enter username" name="username"
 													value="#{userBean.user.username}"></h:inputText>
 											</div>
 
 											<div class="form-group">
-												<h:outputLabel for="email">
+												<h:outputLabel for="idEmail">
 													<span class="glyphicon glyphicon-envelope"></span> Email</h:outputLabel>
 												<h:inputText type="email" class="form-control" id="idEmail" placeholder="Enter e-mail" name="email"
 													value="#{userBean.user.email}"></h:inputText>
 											</div>
 
 											<div class="form-group">
-												<h:outputLabel for="psw">
+												<h:outputLabel for="pwd">
 													<span class="glyphicon glyphicon-eye-open"></span> Password</h:outputLabel>
 												<h:inputSecret type="password" class="form-control" id="pwd" placeholder="Enter password"
 													value="#{userBean.user.password}"></h:inputSecret>
@@ -214,7 +214,7 @@
 									</div>
 									<h:form>
 										<div class="modal-footer">
-											<h:commandButton id="checkout" class="btn btn-primary btn-block" type="submit" value="CHECKOUT"
+											<h:commandButton id="checkout" class="btn btn-primary btn-block" type="submit" value="Finalizeaza comanda"
 												required="true" action="#{shoppingCartBean.checkout()}"></h:commandButton>
 										</div>
 									</h:form>

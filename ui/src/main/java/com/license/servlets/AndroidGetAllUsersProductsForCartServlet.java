@@ -23,12 +23,9 @@ import com.license.restaurant.RestaurantService;
 import com.license.shoppingCart.ShoppingCartService;
 import com.license.user.UserService;
 
-public class GetAllProductsForCartServlet extends HttpServlet {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 4860353942885489779L;
+public class AndroidGetAllUsersProductsForCartServlet extends HttpServlet {
+	private static final long serialVersionUID = 6534492121358104596L;
+	
 	@EJB
 	private UserService userService;
 	@EJB

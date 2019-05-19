@@ -185,13 +185,12 @@
 
 	<servlet>
 		<servlet-name>androidservlet_get_current_cart</servlet-name>
-		<servlet-class>com.license.servlets.AndroidGetCurrentCartServlet</servlet-class>
+		<servlet-class>com.license.servlets.AndroidGetAllUsersProductsForCartServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>androidservlet_get_current_cart</servlet-name>
 		<url-pattern>/android_auth/get_current_cart</url-pattern>
 	</servlet-mapping>
-
 
 	<servlet>
 		<servlet-name>androidservlet_get_users</servlet-name>
@@ -227,6 +226,16 @@
 	<servlet-mapping>
 		<servlet-name>androidservlet_add_new_product</servlet-name>
 		<url-pattern>/android_auth/add_new_product</url-pattern>
+	</servlet-mapping>
+	
+	
+	<servlet>
+		<servlet-name>androidservlet_checkout_cart</servlet-name>
+		<servlet-class>com.license.servlets.AndroidCheckoutCartServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>androidservlet_checkout_cart</servlet-name>
+		<url-pattern>/android_auth/checkout_cart</url-pattern>
 	</servlet-mapping>
 
 	<servlet>

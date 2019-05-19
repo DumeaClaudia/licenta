@@ -38,7 +38,7 @@ public class AndroidLoginServlet extends HttpServlet {
             }
             //generate a new session
             HttpSession newSession = request.getSession(true);
-            System.out.println("Session = " + newSession.getId());
+            //System.out.println("Session = " + newSession.getId());
             
             newSession.setAttribute("username", userDB.getUsername());
             newSession.setAttribute("userId", userDB.getId());
