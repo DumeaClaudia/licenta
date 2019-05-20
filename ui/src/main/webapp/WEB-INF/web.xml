@@ -228,7 +228,6 @@
 		<url-pattern>/android_auth/add_new_product</url-pattern>
 	</servlet-mapping>
 	
-	
 	<servlet>
 		<servlet-name>androidservlet_checkout_cart</servlet-name>
 		<servlet-class>com.license.servlets.AndroidCheckoutCartServlet</servlet-class>
@@ -236,6 +235,15 @@
 	<servlet-mapping>
 		<servlet-name>androidservlet_checkout_cart</servlet-name>
 		<url-pattern>/android_auth/checkout_cart</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>androidservlet_remove_product</servlet-name>
+		<servlet-class>com.license.servlets.AndroidRemoveProductFromCartServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>androidservlet_remove_product</servlet-name>
+		<url-pattern>/android_auth/remove_product</url-pattern>
 	</servlet-mapping>
 
 	<servlet>

@@ -37,10 +37,9 @@ public class DeliveryDataBean implements Serializable {
 
 	@PostConstruct
 	public void init() {
-
-		paymentList.add("Ramburs");
-		paymentList.add("Card Debit");
 		paymentList.add("Card Credit");
+		paymentList.add("Card Debit");
+		paymentList.add("Ramburs");
 		
 		userData = new CurrentCartRequest();
 	}

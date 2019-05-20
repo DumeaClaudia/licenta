@@ -69,18 +69,19 @@
 
 							<div>
 								<div class="form-group col-md-6 mb-3 col-sm-6 col-8">
-									<h:outputText for="inputFirstName" class="control-label" value="Nume:"></h:outputText>
+									<h:outputText for="inputLastName" class="control-label" value="Nume:"></h:outputText>
+									<h:inputText id="checkoutLastName" type="text" class="form-control user-last-name"
+										value="#{deliveryDataBean.userData.lastName}" />
+								</div>
+
+								<div class="form-group col-md-6 mb-3 col-sm-6 col-8">
+									<h:outputText for="inputFirstName" class="control-label" value="Prenume:"></h:outputText>
 									<h:inputText id="checkoutFirstName" type="text" class="form-control user-first-name"
 										value="#{deliveryDataBean.userData.firstName}">
 										<f:ajax event="change" execute="@this" listener="#{activityDataSource.handleCollectorTypeChange}" />
 									</h:inputText>
 								</div>
 
-								<div class="form-group col-md-6 mb-3 col-sm-6 col-8">
-									<h:outputText for="inputLastName" class="control-label" value="Prenume:"></h:outputText>
-									<h:inputText id="checkoutLastName" type="text" class="form-control user-last-name"
-										value="#{deliveryDataBean.userData.lastName}" />
-								</div>
 							</div>
 
 							<div>

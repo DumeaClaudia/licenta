@@ -79,7 +79,8 @@ public class AndroidGetAllUsersProductsForCartServlet extends HttpServlet {
 					for (RestaurantProductsItem restaurantProducts : restaurantItems) {
 						for (ProductDetailsItem product : restaurantProducts.getProducts()) {
 							ProductDetailsCartItem productDetails = new ProductDetailsCartItem();
-
+							
+							productDetails.setProductId(product.getIdProduct());
 							productDetails.setProductName(product.getName());
 							productDetails.setNrProducts(product.getNrProducts());
 							productDetails.setPrice(product.getPrice());
