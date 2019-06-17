@@ -32,6 +32,7 @@
 
 <h:body>
 	<div id="page">
+
 		<div id="header">
 			<ui:insert name="header">
 				<ui:include src="/template/header.xhtml" />
@@ -39,9 +40,12 @@
 		</div>
 
 		<div id="page-body">
+			<ui:insert name="page-modals">
+			</ui:insert>
+			
 			<div id="page-carousel">
 				<ui:insert name="page-carousel">
-			
+
 				</ui:insert>
 			</div>
 
@@ -53,18 +57,20 @@
 				</div>
 			</div>
 
-
 			<div id="page-sidebar" class="">
 				<div id="page-sidebar-header">
-					<span id="sidebarTitle"> Fara comentarii </span> <a id="sidebar-minimize"><span
-						class="glyphicon glyphicon-menu-down pull-right" aria-hidden="true"></span></a> <a id="sidebar-maximize"
-						class="hidden"><span class="glyphicon glyphicon-menu-up pull-right " aria-hidden="true"></span></a>
+					<span id="sidebarTitle"> Fără comentarii </span> 
+					<a id="sidebar-minimize">
+						<span class="glyphicon glyphicon-menu-down pull-right" aria-hidden="true"></span>
+					</a>
+				    <a id="sidebar-maximize" class="hidden">
+				    	<span class="glyphicon glyphicon-menu-up pull-right " aria-hidden="true"></span>
+				    </a>
 				</div>
 				<div id="page-sidebar-content">
 					<ui:insert name="sidebar">
 						<ui:include src="/template/sidebar.xhtml" />
 					</ui:insert>
-
 				</div>
 			</div>
 		</div>
@@ -75,5 +81,7 @@
 			</ui:insert>
 		</div> -->
 	</div>
+
+
 </h:body>
 </html>

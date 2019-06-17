@@ -18,12 +18,12 @@
 				<div class="col-sm-12">
 					<ui:fragment rendered="#{empty shoppingCartBean.getCartProductDetails()}">
 						<div class="cart-header product-list-cart">
-							<b>Nu aveti produse in cos!</b>
+							<b>Nu aveti produse in coș!</b>
 						</div>
 					</ui:fragment>
 					<ui:fragment rendered="#{not empty shoppingCartBean.getCartProductDetails()}">
 						<div class="cart-header product-list-cart">
-							<b>Lista produselor din cos:</b>
+							<b>Lista produselor din coș:</b>
 						</div>
 					</ui:fragment>
 					<div id="cartProductsList" class="cart">
@@ -125,11 +125,8 @@
 								<h5 id="cart-validation-message" style="color: #FF0000" />
 							</div>
 
-							<!-- 							</h:form>
- -->
 						</div>
-						<!-- 						<h:form>
- -->
+
 						<div class="">
 							<div class="" id="validate-cart">
 								<br />
@@ -137,21 +134,84 @@
 
 							</div>
 						</div>
-						<!-- 						</h:form>
- -->
 					</div>
 
-					<!-- The Modal -->
-					<div id="checkoutPopup" class="modal popup-modal">
 
-						<!-- Modal content -->
-						<div class="modal-content popup-content">
-							<span class="close">&times;</span>
-							<p>Some text in the Modal..</p>
+				</div>
+			</div>
+		</div>
+
+	</ui:define>
+	<ui:define name="page-modals">
+		<!-- The Modal -->
+		<!-- <div class="modal fade bs-example-modal-lg" id="checkoutPopup" tabindex="-1" role="dialog"
+			aria-labelledby="myLargeModalLabel">
+			<div class="modal-dialog modal-lg" role="document">
+				<div class="modal-content">Comanda dumneavoastra a ajuns la noi</div>
+				<div>Si va fi livrata in aproximativ 80 min</div>
+			</div>
+		</div> -->
+
+		<div class="modal fade myPopup" id="checkoutPopup" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">Status livrare</h4>
+					</div>
+					<div class="modal-body">
+						<div>Comanda dumneavoastră a ajuns la noi și va fi livrată in aproximativ 80 de min.</div>
+						<div class="preloader-wrapper big active">
+							<div class="spinner-layer spinner-blue">
+								<div class="circle-clipper left">
+									<div class="circle"></div>
+								</div>
+								<div class="gap-patch">
+									<div class="circle"></div>
+								</div>
+								<div class="circle-clipper right">
+									<div class="circle"></div>
+								</div>
+							</div>
+							<div class="spinner-layer spinner-red">
+								<div class="circle-clipper left">
+									<div class="circle"></div>
+								</div>
+								<div class="gap-patch">
+									<div class="circle"></div>
+								</div>
+								<div class="circle-clipper right">
+									<div class="circle"></div>
+								</div>
+							</div>
+							<div class="spinner-layer spinner-yellow">
+								<div class="circle-clipper left">
+									<div class="circle"></div>
+								</div>
+								<div class="gap-patch">
+									<div class="circle"></div>
+								</div>
+								<div class="circle-clipper right">
+									<div class="circle"></div>
+								</div>
+							</div>
+							<div class="spinner-layer spinner-green">
+								<div class="circle-clipper left">
+									<div class="circle"></div>
+								</div>
+								<div class="gap-patch">
+									<div class="circle"></div>
+								</div>
+								<div class="circle-clipper right">
+									<div class="circle"></div>
+								</div>
+							</div>
 						</div>
-
+						<div>Mulțumim!</div>
 					</div>
-
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal" id="backToHomePage">Close</button>
+					</div>
 				</div>
 			</div>
 		</div>

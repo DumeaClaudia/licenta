@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -90,6 +91,14 @@ public class GetAllProductsForCartServlet extends HttpServlet {
 							productCartDetails.add(productDetails);
 						}
 					}
+					
+
+					productCartDetails.sort(new Comparator<ProductDetailsCartItem>() {
+	                    @Override
+	                    public int compare(ProductDetailsCartItem o1, ProductDetailsCartItem o2) {
+	                        return o1.getProductName().compareTo(o2.getProductName());
+	                    }
+	                });	
 					usersProducts.setUsername(user.getUsername());
 					usersProducts.setTotalPrice(price);
 					usersProducts.setCartDetails(productCartDetails);

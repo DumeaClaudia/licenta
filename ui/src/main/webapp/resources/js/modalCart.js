@@ -100,7 +100,7 @@ function removeProductFromCartAjaxRequest(request, product_name) {
 		mimeType : 'application/json',
 
 		success : function(data) {
-			toastr.success("Removed from cart: " + product_name + ".");
+			toastr.success("A fost șters din coș: " + product_name + ".");
 
 			getCartProductsAjaxRequest(data);
 			displayProductsFromCart();//
@@ -124,7 +124,6 @@ $(document).ready(function() {
 	}
 
 	$(".cart-add-button").click(function() {
-
 		var productId = this.dataset.productId;
 		var productName = this.dataset.productName;
 		var addProductRequest = new Object();
@@ -136,7 +135,7 @@ $(document).ready(function() {
 	});
 
 	$(".cart-add-error").click(function() {
-		toastr.error("You have to login before added to cart...");
+		toastr.error("Trebuie să fiți logat pentru a putea adăuga produse în coș!");
 		return false;
 	});
 
@@ -155,7 +154,7 @@ function addProductToCartAjaxRequest(request) {
 		mimeType : 'application/json',
 
 		success : function(data) {
-			toastr.success("Added to cart: " + data.product.name + ".");
+			toastr.success("A fost adăugat în coș: " + data.product.name + ".");
 		
 			getCartProductsAjaxRequest(data);
 			displayProductsFromCart();//

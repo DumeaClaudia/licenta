@@ -28,7 +28,7 @@
 							<li><a href="home.xhtml"> Restaurante </a></li>
 							<c:if test="#{not empty sessionBean.username}">
 								<li><a href="history.xhtml">Istoric comenzi</a></li>
-								<li><a href="shoppingCart.xhtml">Comanda curenta</a></li>
+								<li><a href="shoppingCart.xhtml">Comanda curentă</a></li>
 							</c:if>
 						</ul>
 						<c:if test="#{not empty sessionBean.username}">
@@ -87,9 +87,9 @@
 										</div>
 										<div class="form-group">
 											<h:outputLabel for="passwordUser">
-												<span class="glyphicon glyphicon-eye-open"></span> Parola</h:outputLabel>
-											<h:inputSecret type="password" class="form-control login-password passwordUser" id="passwordUser" placeholder="Enter password"
-												value="#{userBean.password}"></h:inputSecret>
+												<span class="glyphicon glyphicon-eye-open"></span> Parolă</h:outputLabel>
+											<h:inputSecret type="password" class="form-control login-password passwordUser" id="passwordUser"
+												placeholder="Enter password" value="#{userBean.password}"></h:inputSecret>
 										</div>
 
 										<div class="form-group last">
@@ -101,17 +101,18 @@
 								</div>
 
 								<div class="modal-footer">
-
-									<button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal">
+									<button type="submit" class="btn btn-danger btn-default pull-left cancel-button" data-dismiss="modal">
 										<span class="glyphicon glyphicon-remove"></span> Cancel
 									</button>
-									<p>
-										Nu ai cont inca? <a href="#myRegisterModal">Sign Up</a>
-									</p>
-									<p>
-										Ai uitat parola <a href="#">Password?</a>
-									</p>
 
+									<p>
+										Nu ai cont încă? <a href="#myRegisterModal">Sign Up</a>
+									</p>
+									<!-- <p>
+										Ai uitat parola <a href="#">Password?</a>
+									</p> -->
+
+									<br />
 								</div>
 							</div>
 
@@ -196,7 +197,7 @@
 										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 											<span aria-hidden="true">&times;</span>
 										</button>
-										<h4 class="modal-title">Produsele adaugate de tine in cos:</h4>
+										<h4 class="modal-title">Produsele adăugate de tine în coș:</h4>
 									</div>
 
 									<div class="modal-body">
@@ -214,7 +215,7 @@
 									</div>
 									<h:form>
 										<div class="modal-footer">
-											<h:commandButton id="checkout" class="btn btn-primary btn-block" type="submit" value="Finalizati comanda"
+											<h:commandButton id="checkout" class="btn btn-primary btn-block" type="submit" value="Finalizați comanda"
 												required="true" action="#{shoppingCartBean.checkout()}"></h:commandButton>
 										</div>
 									</h:form>

@@ -68,7 +68,7 @@
 										<b> Comanda din data de #{historyCartListBean.getCartDetails().cartSummary.createdDate}</b>
 
 									<ui:fragment rendered="#{historyCartListBean.getCartDetails().cartSummary.cartActive==false}">
-											<button class="retake-order btn btn-default" id="retakeOrderButton" data-value="#{historyCartListBean.cartId}">Comanda
+											<button class="retake-order btn btn-default disabled " id="retakeOrderButton" data-value="#{historyCartListBean.cartId}">Comanda
 												din nou</button></ui:fragment>
 										<!-- <div>
 												<small>Persoana care a plasat comanda: #{historyCartListBean.dataDeliveryForCart.username}</small>

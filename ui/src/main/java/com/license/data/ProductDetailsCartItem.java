@@ -3,6 +3,8 @@ package com.license.data;
 public class ProductDetailsCartItem {
 	
 	private String restaurantName;
+	private String restaurantGeolocation;
+	private String restaurantAddress;
 	private long productId;
 	private String productName;
 	private double price;
@@ -47,5 +49,22 @@ public class ProductDetailsCartItem {
 	public void setNrProducts(int nrProducts) {
 		this.nrProducts = nrProducts;
 	}
+
+	public String getRestaurantGeolocation() {
+		return restaurantGeolocation;
+	}
+
+	public void setRestaurantGeolocation(String restaurantGeolocation) {
+		this.restaurantGeolocation = restaurantGeolocation;
+	}
+
+	public String getRestaurantAddress() {
+		return restaurantAddress;
+	}
+
+	public void setRestaurantAddress(String restaurantAddress) {
+		this.restaurantAddress = restaurantAddress;
+	}
+	
 
 }
