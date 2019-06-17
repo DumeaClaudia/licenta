@@ -24,7 +24,7 @@ import com.license.restaurant.RestaurantService;
 import com.license.shoppingCart.ShoppingCartService;
 import com.license.user.UserService;
 
-public class AndroidGetAllUsersProductsForCartServlet extends HttpServlet {
+public class AndroidGetProductsForCartServlet extends HttpServlet {
 	private static final long serialVersionUID = 6534492121358104596L;
 	
 	@EJB
@@ -46,17 +46,19 @@ public class AndroidGetAllUsersProductsForCartServlet extends HttpServlet {
 		response.setContentType("application/json");
 
 		Long userId = (Long) request.getSession().getAttribute("userId");
-		List<UserProductsItem> jsonResponse = getUserOrderDetails(userId);
+		
+		Long cartId = Long.parseLong(request.getParameter("cartId"));
+
+		List<UserProductsItem> jsonResponse = getUserOrderDetails(userId,cartId);
 
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.writeValue(response.getOutputStream(), jsonResponse);
 	}
 
-	public List<UserProductsItem> getUserOrderDetails(Long userId) {
+	public List<UserProductsItem> getUserOrderDetails(Long userId, Long currentCart) {
 		List<UserProductsItem> usersCart = new ArrayList<UserProductsItem>();
 
 		if (userId != null) {
-			Long currentCart = (shoppingCartService.getCurrentCart(userId));
 			List<Long> usersIds = userService.getUsersIds(currentCart);
 
 			for (Long idUser : usersIds) {

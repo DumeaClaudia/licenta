@@ -43,7 +43,6 @@ public class AndroidCheckoutCartServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		response.setContentType("application/json");
-		ValidationResponse jsonResponse = new ValidationResponse();
 
 		long idUser = (Long) request.getSession().getAttribute("userId");
 		Long currentCart = shoppingCartService.getCurrentCart(idUser);
@@ -61,8 +60,9 @@ public class AndroidCheckoutCartServlet extends HttpServlet {
 		deliveryDetails.setUsername(""); // jsonRequest.getFirstName() + " " + jsonRequest.getLastName());
 
 		shoppingCartService.addDeliveryData(deliveryDetails);
+		
 
-		mapper.writeValue(response.getOutputStream(), jsonResponse);
+		mapper.writeValue(response.getOutputStream(), currentCart + "");
 
 	}
 }
